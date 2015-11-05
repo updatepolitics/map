@@ -1,6 +1,6 @@
 {
-  "db": {
-    "name": "db",
-    "connector": "memory"
+  "mongodb": {
+    "connector": "mongodb",
+    "url": "mongodb://localhost/update-dev"
   }
 }

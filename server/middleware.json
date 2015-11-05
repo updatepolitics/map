@@ -12,20 +12,29 @@
       }
     }
   },
-  "session": {
-  },
   "auth": {
-  },
-  "parse": {
+    "loopback#token": {
+      "params": {
+        "headers": [
+          "authentication"
+        ]
+      }
+    }
   },
   "routes": {
     "loopback#rest": {
-      "paths": ["${restApiRoot}"]
+      "paths": [
+        "${restApiRoot}"
+      ]
     }
   },
   "files": {
+    "loopback#static": {
+      "params": "$!../client"
+    }
   },
   "final": {
+    "./middleware/client": {},
     "loopback#urlNotFound": {}
   },
   "final:after": {
