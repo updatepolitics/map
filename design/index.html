@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>UPDATE</title>
+
+	<meta name="title" content="UPDATE" />
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="UPDATE :: ###########################" />
+	<meta name="Author" lang="pt" content="UPDATE" />
+	<meta name="Date-Creation-yyyymmdd" content="2015-11-17" lang="pt" />
+	<meta name="Keywords" lang="pt" content="#############################" />
+	<meta name="revisit-after" content="7 Days" />
+	<meta name="copyright" content="UPDATE" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+	<meta property="og:title" content="UPDATE ###########################">
+	<meta property="og:url" content="########################">
+	<meta property="og:description" content="#########################">
+	<meta property="og:image" content="#######################" />
+	<meta property="og:image:type" content="image/jpg">
+	<meta property="og:image:width" content="800">
+	<meta property="og:image:height" content="600">
+
+	<link rel="shortcut icon" href="layout/fav_icon.png" type="ico" />
+	<link rel="image_src" href="#########################" />
+
+	<script type="text/javascript" src="tools/jquery-2.0.2.min.js"></script>
+	<script type="text/javascript" src="tools/d3.min.js"></script>
+	<script type="text/javascript" src="tools/jquery-ui.js"></script>
+	<script type="text/javascript" src="tools/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="tools/jquery.fullscreen-0.4.1.min.js"></script>
+	<script type="text/javascript" src="tools/jquery.scrollTo-min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/update.css">
+
+</head>
+
+<body>
+
+	<div id="home">
+		<img src="layout/update_home.png" id="update_logo"/>
+		<div class="home_bt" id="intro">APRESENTAÇÃO</div>
+		<div class="home_bt" id="explore">EXPLORAR</div>
+		<div id="quotes">"Os problemas não serão resolvidos ao trocar os políticos por outros, mas ao assegurar que<br>o eleitorado seja mais exigente e tome para si o controle do poder político."</div>
+		<div id="credit">
+			<span id="credit_who">Nome do figura</span> <span id="credit_what">Cargo dele</span>
+		</div>
+	</div>
+
+	<div id="menu">
+		<div class="bt" id="menu_close"></div>
+		<ul id="menu_bts">
+			<li class="bt selected">UPDATE</li>
+			<li class="bt">MAPA</li>
+			<li class="bt">SINAIS</li>
+		</ul>
+		<ul id="contact">
+			<li id="email" class="bt"></li>
+			<li id="twitter" class="bt"></li>
+			<li id="github" class="bt"></li>
+			<li id="fbook" class="bt"></li>
+		</ul>
+	</div>
+
+	<div id="header">
+		<div class="bt" id="menu_bt"></div>
+		<img src="layout/update_header.png" id="update_logo"/>
+		<ul id="languages">
+			<li class="lang selected" id="pt">PT</li>
+			<li class="lg_sep"></li>
+			<li class="lang" id="en">EN</li>
+			<li class="lg_sep"></li>
+			<li class="lang" id="es">ES</li>
+		</ul>
+	</div>
+
+	<div id="map_container">
+		<ul id="legend">
+			<div id="title">METODOS</div>
+			<li class="legend">
+				<div class="color"></div>
+				<div class="lb">PEDAGOGIA POLITICA</div>
+			</li>
+		</ul>
+		<div id="zoom">
+			<div class="bt" id="zoom_in"></div>
+			<div class="bt" id="zoom_out"></div>
+		</div>
+		<div id="map"></div>
+	</div>
+
+	<div id="control">
+		<div id="help"></div>
+		<div id="circles"></div>
+		<div class="control" id="control_left">
+			<div id="control_hub">HUBS</div>
+			<div id="control_sig">SINAIS</div>
+		</div>
+		<div class="control" id="control_center">
+			<div id="control_score">
+				<div id="score">412 HUBS</div>
+				<div id="map_bt"></div>
+				<div id="list_bt"></div>
+				<div id="search">
+					<div id="search_input"></div>
+					<div id="search_x"></div>
+				</div>
+			</div>
+		</div>
+		<div class="control" id="control_right">
+			<div id="filters">
+				<ul>
+					<li class="filter1"></li>
+					<li class="filter2"></li>
+					<li class="filter3"></li>
+					<li class="filter4"></li>
+				</ul>
+			</div>
+			<div id="filters_control">
+				<span id="filters_lb">FILTROS</span>
+				<span id="filters_count">3</span>
+				<div id="trash"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="list">
+		<ul id="list_hub">
+			<li class="list_item">
+				<div class="icon"></div>
+				<div class="title"></div>
+				<div class="subtitle"></div>
+			</li>
+		</ul>
+		<ul id="list_sig">
+			<li class="list_item">
+				<div class="icon"></div>
+				<div class="title"></div>
+				<div class="subtitle"></div>
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>
