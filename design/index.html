@@ -29,12 +29,14 @@
 	<link rel="shortcut icon" href="layout/fav_icon.png" type="ico" />
 	<link rel="image_src" href="#########################" />
 
-	<script type="text/javascript" src="tools/jquery-2.0.2.min.js"></script>
-	<script type="text/javascript" src="tools/d3.min.js"></script>
-	<script type="text/javascript" src="tools/jquery-ui.js"></script>
-	<script type="text/javascript" src="tools/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="tools/jquery.fullscreen-0.4.1.min.js"></script>
-	<script type="text/javascript" src="tools/jquery.scrollTo-min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
+	<script type="text/javascript" src="js/d3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="js/jquery.fullscreen-0.4.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.scrollTo-min.js"></script>
+
+	<script type="text/javascript" src="js/update.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -43,16 +45,6 @@
 </head>
 
 <body>
-
-	<div id="home">
-		<img src="layout/update_home.png" id="update_logo"/>
-		<div class="home_bt" id="intro">APRESENTAÇÃO</div>
-		<div class="home_bt" id="explore">EXPLORAR</div>
-		<div id="quotes">"Os problemas não serão resolvidos ao trocar os políticos por outros, mas ao assegurar que<br>o eleitorado seja mais exigente e tome para si o controle do poder político."</div>
-		<div id="credit">
-			<span id="credit_who">Nome do figura</span> <span id="credit_what">Cargo dele</span>
-		</div>
-	</div>
 
 	<div id="menu">
 		<div class="bt" id="menu_close"></div>
@@ -69,84 +61,163 @@
 		</ul>
 	</div>
 
-	<div id="header">
-		<div class="bt" id="menu_bt"></div>
-		<img src="layout/update_header.png" id="update_logo"/>
-		<ul id="languages">
-			<li class="lang selected" id="pt">PT</li>
-			<li class="lg_sep"></li>
-			<li class="lang" id="en">EN</li>
-			<li class="lg_sep"></li>
-			<li class="lang" id="es">ES</li>
-		</ul>
-	</div>
+	<div id="container">
 
-	<div id="map_container">
-		<ul id="legend">
-			<div id="title">METODOS</div>
-			<li class="legend">
-				<div class="color"></div>
-				<div class="lb">PEDAGOGIA POLITICA</div>
-			</li>
-		</ul>
-		<div id="zoom">
-			<div class="bt" id="zoom_in"></div>
-			<div class="bt" id="zoom_out"></div>
+		<div id="home">
+			<img src="layout/update_home.png" id="update_logo_home" />
+			<div class="home_bt" id="intro">APRESENTAÇÃO</div>
+			<div class="home_bt" id="explore">EXPLORAR</div>
+			<div id="quotes">"Os problemas não serão resolvidos ao trocar os políticos por outros, mas ao assegurar que
+				<br>o eleitorado seja mais exigente e tome para si o controle do poder político."</div>
+			<div id="credit">
+				<span id="credit_who">Nome do figura</span>
+				<span id="credit_what">Cargo dele</span>
+			</div>
 		</div>
-		<div id="map"></div>
-	</div>
 
-	<div id="control">
-		<div id="help"></div>
-		<div id="circles"></div>
-		<div class="control" id="control_left">
-			<div id="control_hub">HUBS</div>
-			<div id="control_sig">SINAIS</div>
+		<div id="header">
+			<div class="bt" id="menu_bt"></div>
+			<img src="layout/update_header.png" id="update_logo" />
+			<ul id="language"></ul>
 		</div>
-		<div class="control" id="control_center">
-			<div id="control_score">
-				<div id="score">412 HUBS</div>
-				<div id="map_bt"></div>
-				<div id="list_bt"></div>
-				<div id="search">
-					<div id="search_input"></div>
-					<div id="search_x"></div>
+
+		<div id="map_container">
+			<ul id="legend">
+				<div id="legend_title">MÉTODOS</div>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">PEDAGOGIA POLITICA</div>
+				</li>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">Mecanismos de diálogo</div>
+				</li>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">Controle Social</div>
+				</li>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">Pressão Popular</div>
+				</li>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">Atividades Culturais</div>
+				</li>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">Pedagogia Política</div>
+				</li>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">Index/Indicadores</div>
+				</li>
+				<li class="legend">
+					<div class="color"></div>
+					<div class="lb">Open Data</div>
+				</li>
+			</ul>
+			<div id="zoom">
+				<div class="bt" id="zoom_in"></div>
+				<div class="bt" id="zoom_out"></div>
+			</div>
+			<div id="map"></div>
+		</div>
+
+		<div id="control">
+			<div id="help"></div>
+			<div id="map_help"></div>
+			<div class="control" id="control_left">
+				<div id="control_hub">
+					<div class="flap" id="flap_hub"></div>
+					<span id="control_hub_lb">HUBS</span>
+				</div>
+				<div id="control_sig">
+					<div class="flap" id="flap_sig"></div>
+					<span id="control_sig_lb">SINAIS</span>
 				</div>
 			</div>
-		</div>
-		<div class="control" id="control_right">
-			<div id="filters">
-				<ul>
-					<li class="filter1"></li>
-					<li class="filter2"></li>
-					<li class="filter3"></li>
-					<li class="filter4"></li>
-				</ul>
+			<div class="control" id="control_center">
+				<div id="control_score">
+					<div id="score">
+						<span id="score_nb">412</span>
+						<span id="score_lb">HUBS</span>
+					</div>
+					<div class="pos selected" id="map_bt">MAPA</div>
+					<div class="pos " id="list_bt">LISTA</div>
+					<div id="search">
+						<div id="search_input"></div>
+						<div id="search_x"></div>
+					</div>
+				</div>
 			</div>
-			<div id="filters_control">
-				<span id="filters_lb">FILTROS</span>
-				<span id="filters_count">3</span>
-				<div id="trash"></div>
+			<div class="control" id="control_right">
+				<div id="filters">
+					<div class="title">METODOS</div>
+					<ul class="group">
+						<li class="filter">Parlamento Aberto</li>
+						<li class="filter">Pedagogia Política</li>
+						<li class="filter">Executivo Aberto</li>
+						<li class="filter">Open Knowledge</li>
+					</ul>
+					<div class="title">METODOS <span class="counter">2</span></div>
+					<ul class="group">
+						<li class="filter">Mecanismos de diálogo</li>
+						<li class="filter selected">Artvismo/Revolução Estética</li>
+						<li class="filter selected">Pressão Popular</li>
+						<li class="filter">Atividades Culturais</li>
+						<li class="filter">Pedagogia Política</li>
+						<li class="filter">Open Knowledge</li>
+						<li class="filter">Index/Indicadores</li>
+						<li class="filter ">Open Data</li>
+					</ul>
+					<div class="title">METODOS</div>
+					<ul class="group">
+						<li class="filter">Controle Social</li>
+						<li class="filter">Atividades Culturais</li>
+						<li class="filter">Pedagogia Política</li>
+						<li class="filter">Open Knowledge</li>
+					</ul>
+					<div class="title">METODOS <span class="counter" >1</span></div>
+					<ul class="group">
+						<li class="filter">Pressão Popular</li>
+						<li class="filter">Atividades Culturais</li>
+						<li class="filter selected">Pedagogia Política</li>
+						<li class="filter">Open Knowledge</li>
+						<li class="filter">Index/Indicadores</li>
+						<li class="filter">Pedagogia Política</li>
+						<li class="filter">Executivo Aberto</li>
+						<li class="filter">Open Knowledge</li>
+					</ul>
+				</div>
+				<div id="control_filters">
+					<span id="filters_lb">FILTROS</span>
+					<span class="counter" id="filters_nb">3</span>
+				</div>
+				<div id="trash" class="empty" ></div>
 			</div>
 		</div>
-	</div>
 
-	<div id="list">
-		<ul id="list_hub">
-			<li class="list_item">
-				<div class="icon"></div>
-				<div class="title"></div>
-				<div class="subtitle"></div>
-			</li>
-		</ul>
-		<ul id="list_sig">
-			<li class="list_item">
-				<div class="icon"></div>
-				<div class="title"></div>
-				<div class="subtitle"></div>
-			</li>
-		</ul>
+		<div id="list">
+			<ul id="list_hub">
+				<li class="list_item">
+					<div class="icon"></div>
+					<div class="title"></div>
+					<div class="subtitle"></div>
+				</li>
+			</ul>
+			<ul id="list_sig">
+				<li class="list_item">
+					<div class="icon"></div>
+					<div class="title"></div>
+					<div class="subtitle"></div>
+				</li>
+			</ul>
+		</div>
+
+	<!-- container  -->
 	</div>
 
 </body>
+
 </html>
