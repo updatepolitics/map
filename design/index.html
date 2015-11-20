@@ -82,41 +82,14 @@
 		</div>
 
 		<div id="map_container">
-			<ul id="legend">
-				<div id="legend_title">MÉTODOS</div>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">PEDAGOGIA POLITICA</div>
-				</li>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">Mecanismos de diálogo</div>
-				</li>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">Controle Social</div>
-				</li>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">Pressão Popular</div>
-				</li>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">Atividades Culturais</div>
-				</li>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">Pedagogia Política</div>
-				</li>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">Index/Indicadores</div>
-				</li>
-				<li class="legend">
-					<div class="color"></div>
-					<div class="lb">Open Data</div>
-				</li>
-			</ul>
+			<div id="legends">
+				<ul class="legend_list" id="legend_sig">
+					<div class="legend_title" id="legend_sig_title"></div>
+				</ul>
+				<ul class="legend_list" id="legend_hub">
+					<div class="legend_title" id="legend_hub_title"></div>
+				</ul>
+			</div>
 			<div id="zoom">
 				<div id="zoom_in"></div>
 				<div id="zoom_out"></div>
@@ -130,11 +103,11 @@
 			<div class="control" id="control_left">
 				<div id="control_hub">
 					<div class="flap" id="flap_hub"></div>
-					<span id="control_hub_lb">HUBS</span>
+					<div id="control_hub_lb">HUBS</div>
 				</div>
 				<div id="control_sig">
 					<div class="flap" id="flap_sig"></div>
-					<span id="control_sig_lb">SINAIS</span>
+					<div id="control_sig_lb">SINAIS</div>
 				</div>
 			</div>
 			<div class="control" id="control_center">
@@ -143,10 +116,9 @@
 						<span id="score_nb">412</span>
 						<span id="score_lb">HUBS</span>
 					</div>
-					<div class="pos selected" id="map_bt">MAPA</div>
-					<div class="pos " id="list_bt">LISTA</div>
+					<div id="control_score_pos">MAPA</div>
 					<div id="search">
-						<div id="search_input"></div>
+						<input type="text" id="search_str" placeholder="FILTRAR POR PALAVRAS-CHAVE"/>
 						<div id="search_x"></div>
 					</div>
 				</div>
@@ -200,19 +172,127 @@
 		</div>
 
 		<div id="list">
-			<ul id="list_hub">
-				<li class="list_item">
-					<div class="icon"></div>
-					<div class="title"></div>
-					<div class="subtitle"></div>
+			<ul class="list_itens" id="list_hub">
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Mapas Culturais</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
 				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Política de Boteco</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Circulo de Cidadania </div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Laboratorio para la Ciudad</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Política de Boteco</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Mapas Culturais</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Política de Boteco</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Mapas Culturais</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Política de Boteco</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Mapas Culturais</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+
 			</ul>
-			<ul id="list_sig">
-				<li class="list_item">
-					<div class="icon"></div>
-					<div class="title"></div>
-					<div class="subtitle"></div>
+			<ul class="list_itens" id="list_sig">
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
 				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+				<li class="list_item"><img src="layout/r_arrow.png"/>
+					<div class="title">Titulo do Sinal</div>
+					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
+				</li>
+
 			</ul>
 		</div>
 
