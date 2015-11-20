@@ -13,7 +13,6 @@ var colorScale1 = d3.scale.linear().domain(dom).range(colors).interpolate(d3.int
 var colorScale2 = d3.scale.linear().domain(dom).range(colors2).interpolate(d3.interpolateHcl);
 
 
-
 g.selectAll('rect.hcl1')
 	.data(d3.range(numSteps))
 	.enter().append('rect')

@@ -158,14 +158,12 @@ window.onload = function (){
 
 	function open_menu(){
 		menu.open = true;
-		$(menu_bt).fadeOut(dur/2);
 		$(menu).animate({left:0}, dur, _out);
 		$(container).animate({left:$(menu).width()/5, opacity:.3}, dur, _out);
 	}
 
 	function close_menu(){
 		menu.open = true;
-		$(menu_bt).fadeIn(dur/2);
 		$(menu).animate({left:-1*$(menu).width()}, dur, _out);
 		$(container).animate({left:0, opacity:1}, dur, _out);
 	}
@@ -223,8 +221,10 @@ window.onload = function (){
 			if(win_w < win_h) $(dbody).addClass('port');
 			else $(dbody).addClass('land');
 		}
-		if(filters.open) $(filters).css({height:win_h - 80, top:-win_h + 80});
-		else $(filters).css({height:win_h - 80, top:0 });
+		$(filters).css({height:win_h - 80});
+
+		if(cur_layout == 'home') $(control).css({top:win_h});
+		if(cur_layout == 'map') $(control).css({top:win_h - 80});
 	}
 
 	window.onresize = resize;
@@ -237,29 +237,46 @@ window.onload = function (){
 
 	function set_layout(lay){
 		cur_layout = lay;
-
 		switch(lay){
-
 			case 'home':
 				$(home).delay(dur2/3).fadeIn(dur2/3);
 				$(update_logo).animate({top:-28}, dur2, in_out);
-				$(control).animate({bottom:-80}, dur2, in_out);
+				$(control).animate({top:'100%'}, dur2, in_out);
 				$(legend).animate({left:-400}, dur2, in_out);
 				$(zoom).animate({right:-50}, dur2, in_out);
 				$(map).animate({backgroundSize:'100%', opacity:.2}, dur2, in_out);
 			break;
-
 			case 'map':
 				$(home).delay(dur2/3).fadeOut(dur2/3);
 				$(update_logo).animate({top:28}, dur2, in_out);
-				$(control).animate({bottom:0}, dur2, in_out);
 				$(legend).animate({left:30}, dur2, in_out);
 				$(zoom).animate({right:25}, dur2, in_out);
 				$(map).animate({backgroundSize:'45%', opacity:1}, dur2, in_out);
+				if(filters.open){
+					close_filters();
+					$(control).delay(dur).animate({top:win_h-80}, dur2, in_out, function () {
+						$(filters).css({top:0, height:win_h - 80});
+					});
+				} else {
+					$(control).animate({top:win_h-80}, dur2, in_out);
+					$(filters).css({top:0, height:win_h - 80})
+				}
+				$(map_bt).addClass('selected');
+				$(list_bt).removeClass('selected');
 			break;
-
 			case 'list':
-
+				if(filters.open){
+					close_filters();
+					$(control).delay(dur).animate({top:80}, dur2, in_out, function () {
+						$(filters).css({top:160, height:win_h - 160})
+					});
+				} else {
+					$(control).animate({top:80}, dur2, in_out);
+					$(filters).css({top:160, height:win_h - 160})
+				}
+				$(list_bt).addClass('selected');
+				$(map_bt).removeClass('selected');
+				$(map).animate({ opacity:0}, dur2, in_out);
 			break;
 		}
 	}
@@ -287,16 +304,16 @@ window.onload = function (){
 		console.log(tg);
 		switch(tg){
 			case "hub":
-				$(control_hub).animate({backgroundColor:colors.bg3, opacity:1}, dur/2, _out);
-				$(flap_hub).animate({height:4}, dur/2, _out);
-				$(control_sig).animate({backgroundColor:colors.bg2, opacity:.3}, dur/2, _out);
-				$(flap_sig).animate({height:0}, dur/2, _out);
+				$(control_hub).addClass('selected');
+				$(control_sig).removeClass('selected');
+				$(flap_hub).fadeIn(dur/2);
+				$(flap_sig).fadeOut(dur/2);
 			break;
 			case "sig":
-				$(control_sig).animate({backgroundColor:colors.bg3, opacity:1}, dur/2, _out);
-				$(flap_sig).animate({height:4}, dur/2, _out);
-				$(control_hub).animate({backgroundColor:colors.bg2, opacity:.3}, dur/2, _out);
-				$(flap_hub).animate({height:0}, dur/2, _out);
+				$(control_sig).addClass('selected');
+				$(control_hub).removeClass('selected');
+				$(flap_sig).fadeIn(dur/2);
+				$(flap_hub).fadeOut(dur/2);
 			break;
 		}
 		$(map).fadeOut(dur, function(){ $(map).css({ backgroundImage:'url(layout/bg_map_'+ tg +'.png)' }).fadeIn(dur); })
@@ -316,13 +333,13 @@ window.onload = function (){
 
 	function open_filters() {
 		filters.open = true;
-		$(filters).animate({top:-win_h + 80}, dur, in_out);
+		$(filters).animate({right:0}, dur, in_out);
 		$(control_filters).css({backgroundImage:'url(layout/minus.png)'});
 	}
 
 	function close_filters() {
 		filters.open = false;
-		$(filters).animate({top:0}, dur, in_out);
+		$(filters).animate({right:'-34%'}, dur, in_out);
 		$(control_filters).css({backgroundImage:'url(layout/plus.png)'});
 	}
 
@@ -337,10 +354,14 @@ window.onload = function (){
 
 	//////////////////////////////// LIST ////////////////////////////////
 
+	$(control_score).on(bt_event, function () {
+		if(cur_layout == 'map') set_layout('list');
+		else set_layout('map');
+	})
 
 	//////////////////////////////// INIT ////////////////////////////////
 
-	set_target('sig')
+	set_target('sig');
 
 
 }
