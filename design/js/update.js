@@ -94,8 +94,8 @@ window.onload = function (){
 	reg('score');
 	reg('score_nb');
 	reg('score_lb');
-	reg('map_bt');
-	reg('list_bt');
+	reg('ico_map');
+	reg('ico_list');
 	reg('search');
 	reg('search_str');
 	reg('search_x');
@@ -251,10 +251,11 @@ window.onload = function (){
 				}
 				setTimeout( function(){
 					$(home).delay(dur2/3).fadeIn(dur2/3);
-					$(search).fadeOut(dur2);
 					$(update_logo).animate({top:-32}, dur2, in_out);
 					$(control).animate({top:'100%'}, dur2, in_out);
-					$(control_score).css({backgroundImage:'url(layout/down.png)'});
+					$(control_score).css({backgroundImage:'url(layout/up.png)', backgroundPosition:'top'});
+					$(ico_map).addClass('selected');
+					$(ico_list).removeClass('selected');
 					$(control_score_pos).text('LISTA');
 					$(legends).animate({left:-400}, dur2, in_out);
 					$(zoom).animate({right:-50}, dur2, in_out);
@@ -271,7 +272,6 @@ window.onload = function (){
 				}
 				setTimeout( function(){
 					$(filters).css({top:0, height:win_h - 80});
-					$(search).fadeOut(dur2);
 					$(home).delay(dur2/3).fadeOut(dur2/3);
 					$(update_logo).animate({top:32}, dur2, in_out);
 					$(legends).animate({left:30}, dur2, in_out);
@@ -281,9 +281,9 @@ window.onload = function (){
 					$(filters).css({top:0, height:win_h - 80});
 					$(list).animate({ top:'100%' }, dur2, in_out);
 					setTimeout( function(){
-						$(map_bt).addClass('selected');
-						$(list_bt).removeClass('selected');
-						$(control_score).css({backgroundImage:'url(layout/down.png)'});
+						$(control_score).css({backgroundImage:'url(layout/up.png)', backgroundPosition:'top'});
+						$(ico_map).addClass('selected');
+						$(ico_list).removeClass('selected');
 						$(control_score_pos).text('LISTA');
 					}, dur2/2);
 					$(flap_hub).fadeOut(dur2/2, function(){ $(flap_hub).css({ bottom:'inherit', top:0 })});
@@ -301,14 +301,13 @@ window.onload = function (){
 				}
 				setTimeout( function(){
 					$(filters).css({top:160, height:win_h - 160})
-					$(search).fadeIn(dur2);
 					$(control).animate({top:80}, dur2, in_out);
 					$(filters).css({top:160, height:win_h - 160})
 					$(list).animate({ top:160 }, dur2, in_out);
 					setTimeout( function(){
-						$(list_bt).addClass('selected');
-						$(map_bt).removeClass('selected');
-						$(control_score).css({backgroundImage:'url(layout/up.png)'});
+						$(control_score).css({backgroundImage:'url(layout/down.png)', backgroundPosition:'bottom'});
+						$(ico_map).removeClass('selected');
+						$(ico_list).addClass('selected');
 						$(control_score_pos).text('MAPA');
 					}, dur2/2);
 					$(map).animate({ opacity:0}, dur2, in_out);
