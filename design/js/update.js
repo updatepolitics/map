@@ -12,8 +12,9 @@ window.onload = function (){
 		mobile,
 		delay,
 		cur_layout,
-		cur_target,
+		cur_this,
 		div,
+		ul,
 		li,
 		span;
 
@@ -39,12 +40,11 @@ window.onload = function (){
 		blue:'#6cadd9',
 		wt:'#fff',
 		hub:['#d87d7d','#adcc8f'],
-		sig:['#adcc8f','#9e8fcc'],
-		dom:[0, 8]
+		sig:['#adcc8f','#9e8fcc']
 	}
 
-	var scale_hub = d3.scale.linear().domain(colors.dom).range(colors.hub).interpolate(d3.interpolateHcl);
-	var scale_sig = d3.scale.linear().domain(colors.dom).range(colors.sig).interpolate(d3.interpolateHcl);
+	var scale_hub,
+		scale_sig;
 
 
 	//////////////////////////////// OBJECTS ////////////////////////////////
@@ -72,6 +72,7 @@ window.onload = function (){
 	reg('language');
 	reg('update_logo');
 
+	reg('map_container');
 	reg('map');
 	reg('legends');
 	reg('legend_sig_title');
@@ -94,8 +95,8 @@ window.onload = function (){
 	reg('score');
 	reg('score_nb');
 	reg('score_lb');
-	reg('ico_map');
-	reg('ico_list');
+	// reg('ico_map');
+	// reg('ico_list');
 	reg('search');
 	reg('search_str');
 	reg('search_x');
@@ -174,7 +175,8 @@ window.onload = function (){
 	// LOGO
 
 	$(update_logo).on(bt_event, function(){
-		set_layout('home');
+		if(cur_layout == 'map') set_layout('home');
+		if(cur_layout == 'list') set_layout('map');
 	});
 
 	// LG
@@ -224,11 +226,20 @@ window.onload = function (){
 			if(win_w < win_h) $(dbody).addClass('port');
 			else $(dbody).addClass('land');
 		}
-		$(filters).css({height:win_h - 80});
-		$(list).css({height:win_h - 160});
 
-		if(cur_layout == 'home') $(control).css({top:win_h});
-		if(cur_layout == 'map') $(control).css({top:win_h - 80});
+		$(list).height(win_h - 200);
+		$(filters).height(win_h - 160);
+
+		if(cur_layout == 'home'){
+			$(control).css({top:win_h});
+			$(control).css({top:win_h});
+			$(map_container).height(win_h);
+		}
+		if(cur_layout == 'map'){
+			$(list).css({top:win_h});
+			$(control).css({top:win_h - 80});
+			$(map_container).height(win_h - 80);
+		}
 	}
 
 	window.onresize = resize;
@@ -253,14 +264,13 @@ window.onload = function (){
 					$(home).delay(dur2/3).fadeIn(dur2/3);
 					$(update_logo).animate({top:-32}, dur2, in_out);
 					$(control).animate({top:'100%'}, dur2, in_out);
-					$(control_score).css({backgroundImage:'url(layout/up.png)', backgroundPosition:'top'});
-					$(ico_map).addClass('selected');
-					$(ico_list).removeClass('selected');
-					$(control_score_pos).text('LISTA');
 					$(legends).animate({left:-400}, dur2, in_out);
 					$(zoom).animate({right:-50}, dur2, in_out);
 					$(map).animate({backgroundSize:'100%', opacity:.2}, dur2, in_out);
-					$(list).animate({ top:'100%' }, dur2, in_out);
+					$(map_container).animate({height:win_h, opacity:1}, dur2, in_out);
+					$(list).animate({ top: win_h }, dur2, in_out);
+					$(control_score).css({backgroundImage:'url(layout/up.png)'});
+					$(filters).css({bottom:80, height:win_h - 160});
 				}, delay);
 			break;
 			case 'map':
@@ -271,25 +281,23 @@ window.onload = function (){
 					delay = 0;
 				}
 				setTimeout( function(){
-					$(filters).css({top:0, height:win_h - 80});
 					$(home).delay(dur2/3).fadeOut(dur2/3);
 					$(update_logo).animate({top:32}, dur2, in_out);
 					$(legends).animate({left:30}, dur2, in_out);
 					$(zoom).animate({right:25}, dur2, in_out);
 					$(map).animate({backgroundSize:'45%', opacity:1}, dur2, in_out);
-					$(control).animate({top:win_h-80}, dur2, in_out);
-					$(filters).css({top:0, height:win_h - 80});
-					$(list).animate({ top:'100%' }, dur2, in_out);
-					setTimeout( function(){
-						$(control_score).css({backgroundImage:'url(layout/up.png)', backgroundPosition:'top'});
-						$(ico_map).addClass('selected');
-						$(ico_list).removeClass('selected');
-						$(control_score_pos).text('LISTA');
-					}, dur2/2);
+					$(map_container).animate({height:win_h-120, opacity:1}, dur2, in_out);
+					$(control).animate({top:win_h - 80}, dur2, in_out);
+					$(filters).css({bottom:80, height:win_h - 160});
+					$(list).animate({ top: win_h }, dur2, in_out);
 					$(flap_hub).fadeOut(dur2/2, function(){ $(flap_hub).css({ bottom:'inherit', top:0 })});
 					$(flap_sig).fadeOut(dur2/2, function(){ $(flap_sig).css({ bottom:'inherit', top:0 })});
-					if(cur_target == 'hub') $(flap_hub).fadeIn(dur2/2);
-					if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
+					if(cur_this == 'hub') $(flap_hub).fadeIn(dur2/2);
+					if(cur_this == 'sig') $(flap_sig).fadeIn(dur2/2);
+					setTimeout( function(){
+						$(control_score).css({backgroundImage:'url(layout/up.png)'});
+						$(control_score_lb).html('LISTA');
+					}, dur2/2);
 				}, delay);
 			break;
 			case 'list':
@@ -299,22 +307,19 @@ window.onload = function (){
 				} else {
 					delay = 0;
 				}
-				setTimeout( function(){
-					$(filters).css({top:160, height:win_h - 160})
+				setTimeout( function(){ 
 					$(control).animate({top:80}, dur2, in_out);
-					$(filters).css({top:160, height:win_h - 160})
-					$(list).animate({ top:160 }, dur2, in_out);
-					setTimeout( function(){
-						$(control_score).css({backgroundImage:'url(layout/down.png)', backgroundPosition:'bottom'});
-						$(ico_map).removeClass('selected');
-						$(ico_list).addClass('selected');
-						$(control_score_pos).text('MAPA');
-					}, dur2/2);
-					$(map).animate({ opacity:0}, dur2, in_out);
+					$(filters).css({bottom:0, height:win_h - 160})
+					$(list).animate({ top:200 }, dur2, in_out);
+					$(map_container).animate({height:win_h-240, opacity:0}, dur2, in_out);
 					$(flap_hub).fadeOut(dur2/2, function(){ $(flap_hub).css({ bottom:0, top:'inherit' }) });
 					$(flap_sig).fadeOut(dur2/2, function(){ $(flap_sig).css({ bottom:0, top:'inherit' }) });
-					if(cur_target == 'hub') $(flap_hub).fadeIn(dur2/2);
-					if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
+					if(cur_this == 'hub') $(flap_hub).fadeIn(dur2/2);
+					if(cur_this == 'sig') $(flap_sig).fadeIn(dur2/2);
+					setTimeout( function(){
+						$(control_score).css({backgroundImage:'url(layout/down.png)'});
+						$(control_score_lb).html('MAPA');
+					}, dur2/2);
 				}, delay);
 			break;
 		}
@@ -336,11 +341,11 @@ window.onload = function (){
 
 	// zoom
 
-	// target
+	// this
 
 	function set_target(tg){
-		console.log('target: ' + tg);
-		cur_target = tg;
+		console.log('this: ' + tg);
+		cur_this = tg;
 		switch(tg){
 			case "hub":
 				$(control_hub).addClass('selected');
@@ -371,11 +376,11 @@ window.onload = function (){
 	}
 
 	$(control_hub).on(bt_event, function(){
-		if( cur_target != 'hub') set_target('hub');
+		if( cur_this != 'hub') set_target('hub');
 	});
 
 	$(control_sig).on(bt_event, function(){
-		if( cur_target != 'sig') set_target('sig');
+		if( cur_this != 'sig') set_target('sig');
 	});
 
 	// filters
@@ -409,78 +414,233 @@ window.onload = function (){
 	})
 
 
-
 	//////////////////////////////// LIST ////////////////////////////////
 
-	$(control_score).on(bt_event, function () {
+
+	$(control_center).on(bt_event, function () {
 		if(cur_layout == 'map') set_layout('list');
 		else set_layout('map');
 	})
 
-	//////////////////////////////// INIT ////////////////////////////////
+	//////////////////////////////// FILTERS ////////////////////////////////
 
-	// sig legend
 
-	for( i in json.metodos ){
-		d = json.metodos[i];
-		if(i == 0){
-			$(legend_sig_title).html( d[lg] );
-		}else{
-			li = document.createElement('li');
-			$(li)
-				.addClass('legend')
-			$(legend_sig).append($(li));
+	var filter_h = 25;
+	filters.groups = [];
+	filters.score = 0;
 
-			div = document.createElement('div');
-			$(div)
-				.addClass('color')
-				.css({background:scale_sig(i)})
-			$(li).append($(div));
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('lb')
-				.html( d[lg][0] )
-			$(li).append($(div));
-
+	function reset_filters_score(clear){
+		filters.score = 0;
+		$(filters_nb).css({opacity:.2}).html(0);
+		for(i in filters.groups	){
+			filters.groups[i].score = 0;
+			$(filters.groups[i].nb).css({opacity:.2}).html(0);
+			if(clear){
+				for(b in filters.groups[i].itens){
+					filters.groups[i].itens[b].on = false;
+				}
+			}
 		}
 	}
 
-	// hub legend
+	function check_filters(){
+		reset_filters_score(false);
+		for ( i in filters.groups ){
+			for( a in filters.groups[i].itens ){
+				if( filters.groups[i].itens[a].on ) {
+					filters.score ++;
+					$(filters_nb).css({opacity:1}).html( filters.score );
+					filters.groups[i].score++;
+					$(filters.groups[i].nb).css({opacity:1}).html( filters.groups[i].score );
+					$(filters.groups[i].itens[a]).addClass('selected');
+				}else{
+					$(filters.groups[i].itens[a]).removeClass('selected');
+				}
+			}
+		}
 
-	for( i in json.natureza ){
-		d = json.natureza[i];
-		if(i == 0){
-			$(legend_hub_title).html( d[lg] );
-		}else{
-			li = document.createElement('li');
-			$(li)
-				.addClass('legend')
-			$(legend_hub).append($(li));
+		//trash
+		if(filters.score > 0) $(trash).removeClass('empty');
+		else $(trash).addClass('empty');
 
-			div = document.createElement('div');
-			$(div)
-				.addClass('color')
-				.css({background:scale_hub(i)})
-			$(li).append($(div));
+		// redesenho!!
 
-			div = document.createElement('div');
-			$(div)
-				.addClass('lb')
-				.html( d[lg] )
-			$(li).append($(div));
+	}
 
+	$(trash).on(bt_event, function(){
+		reset_filters_score(true);
+		check_filters();
+	});
+
+	function reset_open_filters(ignore){
+		for(i in filters.groups	){
+			if(filters.groups[i].open && filters.groups[i] != ignore ) toggle_list(filters.groups[i]);
 		}
 	}
 
-	// aqui!!!!
-	// - fazer as escalas hub e sig com os DOM (color) respectivos
-	// - fazer escalas posicionadas no centro vertical
-	// - inclusão de porcentagens na legenda
+	function toggle_list(trg){
+		if(trg.open){
+			trg.open = false;
+			$(trg.list).animate({height: 0 }, dur, in_out, function(){
+				$(trg).css({ backgroundImage: 'url(layout/plus.png)', backgroundColor:''});
+			});
+		}else{
+			trg.open = true;
+			$(trg).css({ backgroundImage: 'url(layout/minus.png)', backgroundColor:'#262c38'});
+			$(trg.list).animate({height: 20 + trg.itens.length * filter_h}, dur, in_out);
+		}
+	}
 
-	// initial target: signals
+	function toggle_filter(trg){
+		if(trg.on){
+			trg.on = false;
+		}else{
+			trg.on = true;
+		}
+		check_filters();
+	}
 
-	set_target('sig');
+	function check_source(source){
+		if(Array.isArray(source)) return source[0];
+		else return source;
+	}
+
+	function create_filters(data){
+		var title;
+		for( i in data ){
+			d = data[i];
+			if(i == 0){
+				title = document.createElement('div');
+				$(title)
+					.addClass('title')
+					.html(d[lg]);
+				$(filters).append(title);
+
+				span = document.createElement('span');
+				$(span)
+					.html(0)
+					.addClass('counter');
+				$(title).append(span);
+
+				ul = document.createElement('ul');
+				$(ul)
+					.addClass('group')
+					.height(0);
+				$(filters).append(ul);
+
+				title.list = ul;
+				title.nb = span;
+				title.open = false;
+				title.score = 0;
+				title.itens = [];
+
+				$(title).on('click', function(){
+					reset_open_filters(this);
+					toggle_list(this);
+				});
+
+				filters.groups.push(title);
+
+			}else{
+
+				li = document.createElement('li');
+				li.on = false;
+				$(li)
+					.addClass('filter')
+					.html( check_source(d[lg]) )
+				$(ul).append($(li));
+
+				$(li).on('click', function(){
+					toggle_filter(this);
+				});
+
+				title.itens.push(li);
+			}
+		}
+	}
+
+
+	//////////////////////////////// LOAD ////////////////////////////////
+
+	function load(){
+
+		scale_hub = d3.scale.linear().domain([0,json.metodos.length-1]).range(colors.hub).interpolate(d3.interpolateHcl);
+		scale_sig = d3.scale.linear().domain([0,json.natureza.length-1]).range(colors.sig).interpolate(d3.interpolateHcl);
+
+		$(legend_hub).height(json.natureza.length * 21 );
+		$(legend_sig).height(json.metodos.length * 21 );
+
+		create_filters(json.metodos);
+		create_filters(json.natureza);
+		create_filters(json.abrangencia);
+		create_filters(json.proposito);
+		create_filters(json.tipo);
+		reset_filters_score(true);
+
+		for( i in json.metodos ){
+			d = json.metodos[i];
+			if(i == 0){
+				$(legend_sig_title).html( d[lg] );
+			}else{
+				li = document.createElement('li');
+				$(li)
+					.addClass('legend')
+				$(legend_sig).append($(li));
+
+				div = document.createElement('div');
+				$(div)
+					.addClass('color')
+					.css({background:scale_sig(i)})
+				$(li).append($(div));
+
+				div = document.createElement('div');
+				$(div)
+					.addClass('lb')
+					.html( d[lg][0] )
+				$(li).append($(div));
+			}
+		}
+
+		// hub legend
+
+		for( i in json.natureza ){
+			d = json.natureza[i];
+			if(i == 0){
+				$(legend_hub_title).html( d[lg] );
+			}else{
+				li = document.createElement('li');
+				$(li)
+					.addClass('legend')
+				$(legend_hub).append($(li));
+
+				div = document.createElement('div');
+				$(div)
+					.addClass('color')
+					.css({background:scale_hub(i)})
+				$(li).append($(div));
+
+				div = document.createElement('div');
+				$(div)
+					.addClass('lb')
+					.html( d[lg] )
+				$(li).append($(div));
+
+			}
+		}
+
+		// filters
+
+
+
+		// initial this: signals
+
+		set_target('sig');
+
+	} // load
+
+
+	load();
+
 
 } // window load
 
