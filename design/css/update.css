@@ -410,7 +410,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #control_left{
     left:0;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 300;
     border-right: 1px #212733 solid;
     background: #262c38;
 }
@@ -488,6 +488,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     font-size: 16px;
     border-left: 1px #212733 solid;
     height: 80px;
+    font-weight: 300;
 }
 
 #control_filters{
@@ -517,6 +518,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     border-left: #212733 1px solid;
     border-top: #212733 1px solid;
     border-bottom: #212733 1px solid;
+    padding-top: 25px;
 }
 
 #filters .title{
@@ -547,6 +549,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     border-radius: 12px;
     cursor: pointer;
     opacity: .2;
+    position: relative;
+    top:15px
 }
 
 .filter:hover{

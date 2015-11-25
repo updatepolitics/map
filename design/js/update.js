@@ -307,7 +307,7 @@ window.onload = function (){
 				} else {
 					delay = 0;
 				}
-				setTimeout( function(){ 
+				setTimeout( function(){
 					$(control).animate({top:80}, dur2, in_out);
 					$(filters).css({bottom:0, height:win_h - 160})
 					$(list).animate({ top:200 }, dur2, in_out);
@@ -348,31 +348,43 @@ window.onload = function (){
 		cur_this = tg;
 		switch(tg){
 			case "hub":
+				$(legend_hub).delay(dur/2).animate({left:0}, dur/2);
+				$(list_hub).fadeIn(dur);
 				$(control_hub).addClass('selected');
+				$(control_hub_lb).animate({opacity:1}, dur);
+				$(flap_hub).fadeIn(dur);
+
 				$(control_sig).removeClass('selected');
-				$(list_hub).fadeIn(dur, in_out);
+				$(control_sig)
+					.css({backgroundColor:'#262c38'})
+					.animate({backgroundColor:'#2d3340'}, dur/2, function(){
+						$(this).css({backgroundColor:''})
+					});
 				$(list_sig).hide();
-				$(control_hub_lb).animate({opacity:1}, dur, in_out);
-				$(control_sig_lb).animate({opacity:.2}, dur, in_out);
-				$(legend_hub).animate({left:0}, dur, in_out);
-				$(legend_sig).animate({left:-300}, dur, in_out);
-				$(flap_hub).fadeIn(dur/2, in_out);
-				$(flap_sig).fadeOut(dur/2, in_out);
+				$(control_sig_lb).animate({opacity:.2}, dur/2);
+				$(legend_sig).animate({left:-300}, dur/2 );
+				$(flap_sig).fadeOut(dur/2);
 			break;
 			case "sig":
+				$(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
+				$(list_sig).fadeIn(dur);
 				$(control_sig).addClass('selected');
+				$(control_sig_lb).animate({opacity:1}, dur );
+				$(flap_sig).fadeIn(dur);
+
 				$(control_hub).removeClass('selected');
-				$(list_sig).fadeIn(dur, in_out);
+				$(control_hub)
+					.css({backgroundColor:'#262c38'})
+					.animate({backgroundColor:'#2d3340'}, dur/2, function(){
+						$(this).css({backgroundColor:''})
+					});
 				$(list_hub).hide();
-				$(control_hub_lb).animate({opacity:.2}, dur, in_out);
-				$(control_sig_lb).animate({opacity:1}, dur, in_out);
-				$(legend_hub).animate({left:-300}, dur, in_out);
-				$(legend_sig).animate({left:0}, dur, in_out);
-				$(flap_sig).fadeIn(dur, in_out);
-				$(flap_hub).fadeOut(dur, in_out);
+				$(control_hub_lb).animate({opacity:.2}, dur/2 );
+				$(legend_hub).animate({left:-300}, dur/2 );
+				$(flap_hub).fadeOut(dur/2);
 			break;
 		}
-		$(map).fadeOut(dur, function(){ $(map).css({ backgroundImage:'url(layout/bg_map_'+ tg +'.png)' }).fadeIn(dur); })
+		$(map).fadeOut(dur/2, function(){ $(map).css({ backgroundImage:'url(layout/bg_map_'+ tg +'.png)' }).fadeIn(dur/2); })
 	}
 
 	$(control_hub).on(bt_event, function(){
@@ -482,12 +494,12 @@ window.onload = function (){
 		if(trg.open){
 			trg.open = false;
 			$(trg.list).animate({height: 0 }, dur, in_out, function(){
-				$(trg).css({ backgroundImage: 'url(layout/plus.png)', backgroundColor:''});
+				$(trg).css({ backgroundImage: 'url(layout/plus.png)'});
 			});
 		}else{
 			trg.open = true;
-			$(trg).css({ backgroundImage: 'url(layout/minus.png)', backgroundColor:'#262c38'});
-			$(trg.list).animate({height: 20 + trg.itens.length * filter_h}, dur, in_out);
+			$(trg).css({ backgroundImage: 'url(layout/minus.png)'});
+			$(trg.list).animate({height: 30 + trg.itens.length * filter_h}, dur, in_out);
 		}
 	}
 
