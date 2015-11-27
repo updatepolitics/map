@@ -46,6 +46,26 @@
 
 <body>
 
+	<div id="help">
+		<div id="help_box">
+			<div id="help_nav">
+				<img id="help_x" src="layout/x.png"/>
+				<img id="help_next" src="layout/next.png"/>
+				<img id="help_prev" src="layout/prev.png"/>
+				<div id="help_nav_pos">1/4</div>
+			</div>
+			<div id="help_title"></div>
+			<div id="help_text"></div>
+		</div>
+		<div id="help_frame">
+			<div class="frame" ></div>
+			<div class="left" ></div>
+			<div class="right" ></div>
+			<div class="top" ></div>
+			<div class="bottom" ></div>
+		</div>
+	</div>
+
 	<div id="menu">
 		<div id="menu_close"></div>
 		<ul id="menu_bts">
@@ -97,8 +117,11 @@
 		</div>
 
 		<div id="control">
-			<div id="help"></div>
-			<div id="map_help"></div>
+			<img src="layout/help.png" id="help_bt" />
+			<div id="circles">
+				<div id="circles_out">MÉTODOS</div>
+				<div id="circles_in">SINAIS</div>
+			</div>
 			<div class="control" id="control_left">
 				<div id="control_hub">
 					<div class="flap" id="flap_hub"></div>
@@ -128,7 +151,7 @@
 			</div>
 			<div id="list_header">
 				<div id="search">
-					<input type="text" id="search_str" placeholder="BUSCAR"/>
+					<input type="text" id="search_str" tabindex="-1" placeholder="BUSCAR"/>
 					<div id="search_x"></div>
 				</div>
 			 </div>
@@ -137,128 +160,8 @@
 		<div id="filters"></div>
 
 		<div id="list">
-			<ul class="list_itens" id="list_hub">
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Mapas Culturais</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Política de Boteco</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Circulo de Cidadania </div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Laboratorio para la Ciudad</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Política de Boteco</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Mapas Culturais</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Política de Boteco</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Mapas Culturais</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Política de Boteco</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Mapas Culturais</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-
-			</ul>
-			<ul class="list_itens" id="list_sig">
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-				<li class="list_item"><img src="layout/go.png"/>
-					<div class="title">Titulo do Sinal</div>
-					<div class="subtitle">subtitulo <span class="bold">subtitulo</span> &bull; subtitulo subtitulo</div>
-				</li>
-
-			</ul>
+			<ul class="list_itens" id="list_hub"></ul>
+			<ul class="list_itens" id="list_sig"></ul>
 		</div>
 
 	<!-- container  -->

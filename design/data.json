@@ -1,0 +1,198 @@
+
+{
+	"hubs":[],
+	"signals":[],
+	"filters":{
+		"method":{
+			"_pt":"métodos",
+			"itens":[
+				{	"id":1,
+					"_pt": "Mecanismos de diálogo",
+					"itens":[
+						{ "_pt":"consulta popular"},
+						{ "_pt":"assembléia"},
+						{ "_pt":"diálogo social"},
+						{ "_pt":"debate público"},
+						{ "_pt":"Mediação/Facilitação"},
+						{ "_pt":"Circulo de Cidadania"}
+					]
+				},
+				{	"id":2,
+					"_pt": "Pressão Popular" ,
+					"itens":[
+						{ "_pt":"consulta popular"},
+						{ "_pt":"cidadania digital"},
+						{ "_pt":"ação cívica"},
+						{ "_pt":"ativismo digital"},
+						{ "_pt":"campanha"},
+						{ "_pt":"manifestações"},
+						{ "_pt":"mobilização"}
+					]
+				},
+				{	"id":3,
+					"_pt": "Artvismo/Revolução Estética" ,
+					"itens":[
+						{ "_pt":"Culture Jaming"},
+						{ "_pt":"Intervenções"},
+						{ "_pt":"Choque Estético"},
+						{ "_pt":"Humor/Comédia"},
+						{ "_pt":"Atividades Culturais"}
+					]
+				},
+				{	"id":4,
+					"_pt": "Pedagogia Política" ,
+					"itens":[
+						{ "_pt":"Oficina"},
+						{ "_pt":"Formação"},
+						{ "_pt":"Pedagogia Política"},
+						{ "_pt":"Jogo"}
+					]
+				},
+				{	"id":5,
+					"_pt": "Open Knowledge" ,
+					"itens":[
+						{ "_pt":"Data viz"},
+						{ "_pt":"Análise de dados"},
+						{ "_pt":"Index/Indicadores"},
+						{ "_pt":"Pesquisa"},
+						{ "_pt":"Georreferenciamento"},
+						{ "_pt":"Conhecimento Colaborativo"},
+						{ "_pt":"Wiki"},
+						{ "_pt":"Pesquisa colaborativa e participativa"},
+						{ "_pt":"Decodificação"}
+					]
+				},
+				{"id":6,
+					"_pt": "Open Data" ,
+					"itens":[
+						{ "_pt":"Banco de dados"},
+						{ "_pt":"Repositório"},
+						{ "_pt":"Big Data"}
+					]
+				},
+				{"id":7,
+					"_pt": "Controle Social" ,
+					"itens":[
+						{ "_pt":"Denúncia"},
+						{ "_pt":"Investigação"},
+						{ "_pt":"Monitoramento"},
+						{ "_pt":"Infoativismo"},
+						{ "_pt":"Relatório"},
+						{ "_pt":"Cobertura Colaborativa"},
+						{ "_pt":"Ação Judicial de interesse público"}
+					]
+				},
+				{"id":8,
+					"_pt": "Parlamento Aberto" ,
+					"itens":[
+						{ "_pt":"Legislação participativa"},
+						{ "_pt":"Mandato interativo "}
+					]
+				},
+				{"id":9,
+					"_pt": "Executivo Aberto" ,
+					"itens":[
+						{ "_pt":"Resident Feedback"},
+						{ "_pt":"Governo Eletrônico"},
+						{ "_pt":"Mandato interativo"}
+					]
+				}
+			]
+		},
+		"kind":{
+			"_pt": "natureza" ,
+			"itens":[
+				{"id":1, "_pt":"pessoas"},
+				{"id":2, "_pt":"institutos/fundações"},
+				{"id":3, "_pt":"Empresas"},
+				{"id":4, "_pt":"partidos"},
+				{"id":5, "_pt":"ONGs"},
+				{"id":6, "_pt":"Orgãos Não governamentais"},
+				{"id":7, "_pt":"Organismo Multilateral/internacional"},
+				{"id":8, "_pt":"Coletivos"},
+				{"id":9, "_pt":"Movimentos"},
+				{"id":10, "_pt":"Rede (p2p)"},
+				{"id":11, "_pt":"Aliança (1+1)"},
+				{"id":12, "_pt":"Parcerias (1+2)"}
+			]
+		},
+		"purpose":{
+			"_pt": "propósito" ,
+			"itens":[
+				{"id":1, "_pt":"Empoderamento"},
+				{"id":2, "_pt":"Incidência"}
+			]
+		},
+		"coverage":{
+			"_pt": "abrangência" ,
+			"itens":[
+				{"id":1, "_pt":"Local"},
+				{"id":2, "_pt":"Nacional"},
+				{"id":3, "_pt":"Regional"},
+				{"id":4, "_pt":"Internacional"}
+			]
+		},
+		"type":{
+			"_pt": "tipo" ,
+			"itens":[
+				{	"id":1,
+					"_pt": "Tecnologias Sociais",
+					"itens":[
+						{"_pt":"wiki"},
+						{"_pt":"campanha"},
+						{"_pt":"ocupação"},
+						{"_pt":"jogo"},
+						{"_pt":"encontro"},
+						{"_pt":"laboratório"}
+					]
+				},
+				{	"id":2,
+					"_pt": "Tecnologia Digital",
+					"itens":[
+						{"_pt":"aplicativo"},
+						{"_pt":"plataforma"},
+						{"_pt":"plugin"},
+						{"_pt":"site"},
+						{"_pt":"blog"}
+					]
+				},
+				{	"id":3,
+					"_pt": "Evento",
+					"itens":[
+						{"_pt":"colóquio"},
+						{"_pt":"seminário"},
+						{"_pt":"forum"},
+						{"_pt":"hackton"}
+					]
+				},
+				{	"id":4,
+					"_pt": "Publicações/Estudos",
+					"itens":[
+						{"_pt":"pesquisas"},
+						{"_pt":"livros"},
+						{"_pt":"artigos"},
+						{"_pt":"estudos"}
+					]
+				},
+				{	"id":5,
+					"_pt": "Prêmios/Concursos",
+					"itens":[
+						{"_pt":"editais"},
+						{"_pt":"prêmios"},
+						{"_pt":"concursos"}
+					]
+				}
+			]
+		},
+		"origin":{
+			"_pt": "origem" ,
+			"itens":[
+				{"id":1, "_pt":"Brasil", "_en":"Brazil" },
+				{"id":2, "_pt":"Colombia"},
+				{"id":3, "_pt":"Peru" },
+				{"id":4, "_pt":"Argentina" },
+				{"id":5, "_pt":"Equador" }
+			]
+		}
+	}
+}
