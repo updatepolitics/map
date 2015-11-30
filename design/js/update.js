@@ -52,9 +52,18 @@ window.onload = function (){
 		sig:['#adcc8f','#9e8fcc']
 	}
 
-	var scale_hub,
-		scale_sig;
+	var scale_kind,
+		scale_method;
 
+	// map vars
+
+	var c_total;
+	var c_parcial;
+	var svg_map;
+
+	var svg_nodes;
+	var svg_force;
+	var svg_circles;
 
 	//////////////////////////////// OBJECTS ////////////////////////////////
 
@@ -315,7 +324,6 @@ window.onload = function (){
 					if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
 					$(circles).fadeIn(dur2, in_out);
 					$(help_bt).fadeIn(dur2, in_out);
-					if( delay > 0 ) setTimeout(function(){open_filters()}, dur);
 					setTimeout( function(){
 						$(control_score).css({backgroundImage:'url(layout/up.png)'});
 						$(control_score_lb).html('LISTA');
@@ -340,7 +348,6 @@ window.onload = function (){
 					if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
 					$(circles).fadeOut(dur2, in_out);
 					$(help_bt).fadeOut(dur2, in_out);
-					if( delay > 0 ) setTimeout(function(){open_filters()}, dur);
 					setTimeout( function(){
 						$(control_score).css({backgroundImage:'url(layout/down.png)'});
 						$(control_score_lb).html('MAPA');
@@ -361,6 +368,155 @@ window.onload = function (){
 	})
 
 	//////////////////////////////// MAP ////////////////////////////////
+
+
+	function calc_radius(area){
+		return 30 * Math.sqrt(area / Math.PI);
+	}
+
+	function tick(e) {
+		svg_circles.each(gravity(.08 * e.alpha))
+		.each(collide(.25))
+		.attr('transform', function (d) {
+			return 'translate(' + d.x + ' ' + d.y + ')';
+		});
+	}
+
+	// Move nodes toward cluster focus.
+	function gravity(alpha) {
+		return function (d) {
+			d.y += (d.cy - d.y) * alpha;
+			d.x += (d.cx - d.x) * alpha;
+		};
+	}
+
+	// Resolve collisions between nodes.
+	function collide(alpha) {
+		var quadtree = d3.geom.quadtree(svg_nodes);
+		return function (d) {
+			var r = d.radius,
+			nx1 = d.x - r,
+			nx2 = d.x + r,
+			ny1 = d.y - r,
+			ny2 = d.y + r;
+			quadtree.visit(function (quad, x1, y1, x2, y2) {
+				if (quad.point && (quad.point !== d)) {
+					var x = d.x - quad.point.x,
+					y = d.y - quad.point.y,
+					l = Math.sqrt(x * x + y * y),
+					r = d.radius + quad.point.radius + (d.color !== quad.point.color);
+					if (l < r) {
+						l = (l - r) / l * alpha;
+						d.x -= x *= l;
+						d.y -= y *= l;
+						quad.point.x += x;
+						quad.point.y += y;
+					}
+				}
+				return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+			});
+		};
+	}
+
+	function create_map(trg){
+
+		var list;
+		var nodes;
+		var color;
+		var group;
+
+		if(trg == 'hub'){
+			nodes = json.filters.kind.itens;
+			color = scale_kind;
+			list = json.hubs;
+			group = "kind";
+		}
+
+		if(trg == 'sig'){
+			nodes = json.filters.method.itens;
+			color = scale_method;
+			list = json.signals;
+			group = "method";
+		}
+
+		svg_map.selectAll("*").remove();
+
+		svg_nodes = nodes.map(function (d,i) {
+			return {
+				id: d.id,
+				fill: color(i),
+				cx: 1000,
+				cy: 1000,
+			};
+		});
+
+		svg_force = d3.layout.force()
+			.nodes(svg_nodes)
+			.size([2000, 2000])
+			.gravity(0)
+			.charge(10)
+			.on('tick', tick)
+			.start();
+
+		// circles
+
+		svg_circles = svg_map.selectAll('g')
+		.data(svg_nodes)
+		.enter()
+		.append('g')
+		.attr('style', 'cursor:pointer')
+		.on('click', function(d){
+		    // alert('CÍRCULO ' + d.ID);
+		})
+		.call(svg_force.drag)
+		.each(function (d, i) {
+			c_total = d3.select(this)
+				.append('circle')
+				.attr('id', 'circ' + d.id + '_total')
+				.attr('fill-opacity', .2)
+				.attr('fill', function (d) {
+					return d.fill;
+				});
+
+			c_parcial = d3.select(this)
+				.append('circle')
+				.attr('id', 'circ' + i + '_parcial')
+				.attr('fill', function (d) {
+					return d.fill;
+				});
+
+			d.c_total = c_total;
+			d.c_parcial = c_parcial;
+			d.total = 0;
+			d.parcial = 0;
+
+			d.list = [];
+			list.forEach( function( sd, si ){
+				if(sd[group].indexOf( d.id ) >= 0) {
+					d.total ++;
+					d.list.push(sd);
+				}
+			});
+
+			d.radius = calc_radius(d.total) + 1;
+			d.c_total.attr('r', calc_radius(d.total));
+
+		});
+
+		set_all_circles();
+
+	}
+
+	function set_all_circles(){
+		svg_circles = svg_map.selectAll('g')
+		.each( function (d, i) {
+			d.parcial = 0;
+			d.list.forEach( function( sd, si ){
+				if(sd.visible) d.parcial ++;
+			});
+			d.c_parcial.transition().duration(dur).attr('r', calc_radius(d.parcial));
+		});
+	}
 
 	// legend
 
@@ -415,7 +571,9 @@ window.onload = function (){
 				$(score_lb).html(labels.signals[lg].toUpperCase());
 			break;
 		}
-		$(map).fadeOut(dur/2, function(){ $(map).css({ backgroundImage:'url(layout/bg_map_'+ tg +'.png)' }).fadeIn(dur/2); })
+
+		create_map(tg);
+		//$(map).fadeOut(dur/2, function(){ $(map).css({ backgroundImage:'url(layout/bg_map_'+ tg +'.png)' }).fadeIn(dur/2); })
 	}
 
 	$(control_hub).on(bt_event, function(){
@@ -614,13 +772,25 @@ window.onload = function (){
 
 	function update_list(data, cod){
 		var n = data.length;
-		for(i in data){
-			d = data[i];
+		for(a in data){
+			d = data[a];
 			$(d.li).show();
 			d.visible = true;
 			for( i in json.filters ){
-				if( json.filters[i].active.length > 0 ){
-					if( d[i] && d.visible && json.filters[i].active.indexOf(d[i]) < 0 ){
+				if( d[i] &&	d.visible && json.filters[i].active.length > 0 ){
+					var found = false;
+					if(i != 'method' && i != 'kind'){
+						if(	json.filters[i].active.indexOf( d[i] )  >= 0 ){
+								found = true;
+							}
+					}else{
+						for( b in d[i]){
+							if( json.filters[i].active.indexOf( d[i][b] ) >= 0 ) {
+								found = true;
+							}
+						}
+					}
+					if(	!found ){
 						d.visible = false;
 						n --;
 						$(d.li).hide();
@@ -629,6 +799,7 @@ window.onload = function (){
 			}
 		}
 		if(cur_target == cod) $(score_nb).html(n);
+		set_all_circles();
 		return n;
 	}
 
@@ -803,8 +974,8 @@ window.onload = function (){
 
 		}
 
-		scale_hub = d3.scale.linear().domain([0,json.filters.method.itens.length-1]).range(colors.hub).interpolate(d3.interpolateHcl);
-		scale_sig = d3.scale.linear().domain([0,json.filters.kind.itens.length-1]).range(colors.sig).interpolate(d3.interpolateHcl);
+		scale_kind = d3.scale.linear().domain([0,json.filters.method.itens.length-1]).range(colors.hub).interpolate(d3.interpolateHcl);
+		scale_method = d3.scale.linear().domain([0,json.filters.kind.itens.length-1]).range(colors.sig).interpolate(d3.interpolateHcl);
 
 		$(legend_hub).height(json.filters.kind.itens.length * 21 );
 		$(legend_sig).height(json.filters.method.itens.length * 21 );
@@ -820,9 +991,13 @@ window.onload = function (){
 
 		set_layout('home');
 
+		//method legend
+
 		$(legend_sig_title).html( json.filters.method[lg] );
 
 		for( i in json.filters.method.itens ){
+
+			// legend
 
 			d = json.filters.method.itens[i];
 			li = document.createElement('li');
@@ -833,7 +1008,7 @@ window.onload = function (){
 			div = document.createElement('div');
 			$(div)
 				.addClass('color')
-				.css({background:scale_sig(i)})
+				.css({background:scale_method(i)})
 			li.appendChild(div);
 
 			div = document.createElement('div');
@@ -846,7 +1021,7 @@ window.onload = function (){
 
 		// hub legend
 
-		$(legend_hub_title).html( d[lg] );
+		$(legend_hub_title).html( json.filters.kind[lg] );
 
 		for( i in json.filters.kind.itens ){
 
@@ -860,7 +1035,7 @@ window.onload = function (){
 			div = document.createElement('div');
 			$(div)
 				.addClass('color')
-				.css({background:scale_hub(i)})
+				.css({background:scale_kind(i)})
 			li.appendChild(div);
 
 			div = document.createElement('div');
@@ -871,11 +1046,30 @@ window.onload = function (){
 
 		}
 
-		// filters
+		// SVG MAP
+
+		svg_map = d3.select('#map')
+			.append('svg')
+			.attr('id', 'svg_map');
 
 
+		// X central teste
+		// svg_sig.append('line')
+		// 	.attr('stroke', '#f00')
+		// 	.attr('x1',0)
+		// 	.attr('y1',0)
+		// 	.attr('x2',2000)
+		// 	.attr('y2',2000)
+		//
+		// svg_sig.append('line')
+		// 	.attr('stroke', '#f00')
+		// 	.attr('x2',0)
+		// 	.attr('y2',2000)
+		// 	.attr('x1',2000)
+		// 	.attr('y1',0)
 
-		// initial this: signals
+
+		// initial target: signals
 
 		set_target('sig');
 
@@ -933,29 +1127,39 @@ function simulate_db(db){
 		livros[l] = livro;
 	}
 
-	function sorte(n){
+	function rand(n){
 		return Math.ceil(Math.random()*n);
+	}
+
+	function rand_shift(n){
+		var shift = Math.random();
+		if(shift <= .2)	return Math.ceil(Math.random()*n*20);
+		if(shift > .2 && shift <= .5)	return Math.ceil(Math.random()*n*10);
+		if(shift > .5 && shift <= .8) return Math.ceil(Math.random()*n*5);
+		else return Math.ceil(Math.random()*n);
 	}
 
 	for(var h=0; h<215; h++){
 		var hb = {};
 		hb.id = h;
-		hb.name = livros[sorte(livros.length-1)].autor;
-		hb.kind = sorte(12);
-		hb.origin = sorte(5);
-		hb.coverage = sorte(4);
+		hb.visible = true;
+		hb.name = livros[rand(livros.length-1)].autor;
+		hb.kind = [rand_shift(12)];
+		hb.origin = rand(5);
+		hb.coverage = rand(4);
 		db.hubs.push(hb);
 	}
 
 	for(var s=0; s<445; s++){
 		var sg = {};
 		sg.id = s;
-		sg.name = livros[sorte(livros.length-1)].titulo;
-		sg.method = sorte(9);
-		sg.origin = sorte(5);
-		sg.coverage = sorte(4);
-		sg.type = sorte(5);
-		sg.purpose = sorte(2);
+		sg.visible = true;
+		sg.name = livros[rand(livros.length-1)].titulo;
+		sg.method = [rand_shift(9),rand_shift(9)];
+		sg.origin = rand(5);
+		sg.coverage = rand(4);
+		sg.type = rand(5);
+		sg.purpose = rand(2);
 		db.signals.push(sg);
 	}
 }
