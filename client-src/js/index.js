@@ -39,14 +39,10 @@ app.config([
       controller: 'HomeCtrl',
       templateUrl: '/views/home.html'
     })
-    .state('about', {
-      url: '/sobre/',
-      templateUrl: '/views/pages/about.html'
+    .state('explore', {
+      url: '/explore/',
+      templateUrl: '/views/pages/explore.html'
     })
-    .state('data', {
-      url: '/dados/',
-      templateUrl: '/views/pages/data.html'
-    });
 
     /*
     * Trailing slash rule
