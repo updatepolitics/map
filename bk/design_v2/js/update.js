@@ -15,11 +15,8 @@ window.onload = function (){
 		delay,
 		cur_layout,
 		cur_target,
-		scale,
 		n_hubs,
-		n_signals,
-		tt_kind,
-		tt_method;
+		n_signals;
 
 	var dur = 350, // animation
 	 	dur2 = 550, // layout
@@ -36,20 +33,14 @@ window.onload = function (){
 
 	var hub_filters = [];
 	var sig_filters = [];
-	var strict = {
-		'method':[],
-		'kind':[]
-	};
 
 	var labels = {
 		hub: { "_pt":"hub" },
 		hubs: { "_pt":"hubs" },
-		sig: { "_pt":"sinal" },
-		sigs: { "_pt":"sinais" },
+		signal: { "_pt":"sinal" },
+		signals: { "_pt":"sinais" },
 		kind: { "_pt":"natureza" },
-		method: { "_pt":"mecanismo" },
-		sig_list: { "_pt":"filtros de sinais" },
-		hub_list: { "_pt":"filtros de hubs" },
+		method: { "_pt":"método" }
 	}
 
 	console.log( "ROOT: " + root );
@@ -70,8 +61,7 @@ window.onload = function (){
 	// map vars
 
 	var c_total;
-	var c_partial;
-	var svg_map_area;
+	var c_parcial;
 	var svg_map;
 
 	var svg_nodes;
@@ -108,7 +98,7 @@ window.onload = function (){
 	reg('legends');
 	reg('legend_sig_title');
 	reg('legend_hub_title');
-	reg('zoom_control');
+	reg('zoom');
 	reg('zoom_in');
 	reg('zoom_out');
 
@@ -286,23 +276,6 @@ window.onload = function (){
 	resize();
 
 	//////////////////////////////// LAYOUTS ////////////////////////////////
-	var rot = 0;
-	var rotation;
-	var rot_delay;
-
-	function map_rotation(delay,rotate){
-		if(rotate){
-			rot_delay = setTimeout( function(){
-				rotation = setInterval(function(){
-					rot += .02;
-					svg_map.attr('transform', 'translate(1000 1000) scale(5) rotate(' + rot + ')');
-				},10)
-			}, delay);
-		}else{
-			clearInterval(rotation);
-			clearTimeout(rot_delay);
-		}
-	}
 
 	$(map).css({backgroundSize:'100%', opacity:.2});
 
@@ -321,16 +294,14 @@ window.onload = function (){
 					$(update_logo).animate({top:-32}, dur2, in_out);
 					$(control).animate({top:'100%'}, dur2, in_out);
 					$(legends).animate({left:-400}, dur2, in_out);
-					$(zoom_control).animate({right:-50}, dur2, in_out);
-					$(map).animate({ opacity:.15}, dur2, in_out);
+					$(zoom).animate({right:-50}, dur2, in_out);
+					$(map).animate({backgroundSize:'100%', opacity:.2}, dur2, in_out);
 					$(map_container).animate({height:win_h, opacity:1}, dur2, in_out);
 					$(list).animate({ top: win_h }, dur2, in_out);
 					$(control_score).css({backgroundImage:'url(layout/up.png)'});
 					$(filters).css({bottom:80, height:win_h - 80});
 					$(circles).fadeOut(dur2, in_out);
 					$(help_bt).fadeOut(dur2, in_out);
-					svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale(5) rotate(' + rot + ')');
-					map_rotation(dur2,true);
 				}, delay);
 			break;
 			case 'map':
@@ -344,8 +315,8 @@ window.onload = function (){
 					$(home).delay(dur2/3).fadeOut(dur2/3);
 					$(update_logo).animate({top:32}, dur2, in_out);
 					$(legends).animate({left:30}, dur2, in_out);
-					$(zoom_control).animate({right:25}, dur2, in_out);
-					$(map).animate({ opacity:1}, dur2, in_out);
+					$(zoom).animate({right:25}, dur2, in_out);
+					$(map).animate({backgroundSize:'45%', opacity:1}, dur2, in_out);
 					$(map_container).animate({height:win_h-80, opacity:1}, dur2, in_out);
 					$(control).animate({top:win_h - 80}, dur2, in_out);
 					$(filters).css({bottom:80, height:win_h - 80});
@@ -356,8 +327,6 @@ window.onload = function (){
 					if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
 					$(circles).fadeIn(dur2, in_out);
 					$(help_bt).fadeIn(dur2, in_out);
-					svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale(' + cur_scale + ') rotate(' + rot + ')');
-					map_rotation(0,false);
 					setTimeout( function(){
 						$(control_score).css({backgroundImage:'url(layout/up.png)'});
 						$(control_score_lb).html('LISTA');
@@ -405,7 +374,7 @@ window.onload = function (){
 
 
 	function calc_radius(area){
-		return scale * Math.sqrt(area / Math.PI);
+		return 30 * Math.sqrt(area / Math.PI);
 	}
 
 	function tick(e) {
@@ -445,6 +414,7 @@ window.onload = function (){
 						d.y -= y *= l;
 						quad.point.x += x;
 						quad.point.y += y;
+
 					}
 				}
 				return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
@@ -452,49 +422,48 @@ window.onload = function (){
 		};
 	}
 
-	function create_map(trg){
+	function create_map(){
 
 		var list;
 		var nodes;
 		var color;
 		var group;
-		var total;
 
-		if(trg == 'hub'){
-			nodes = json.filters.kind.itens;
-			color = scale_kind;
-			list = json.hubs;
-			group = "kind";
-		}
+		// if(trg == 'hub'){
+		// 	nodes = json.filters.kind.itens;
+		// 	color = scale_kind;
+		// 	list = json.hubs;
+		// 	group = "kind";
+		// }
+		//
+		// if(trg == 'sig'){
+		// 	nodes = json.filters.method.itens;
+		// 	color = scale_method;
+		// 	list = json.signals;
+		// 	group = "method";
+		// }
 
-		if(trg == 'sig'){
-			nodes = json.filters.method.itens;
-			color = scale_method;
-			list = json.signals;
-			group = "method";
-		}
+		// svg_map.selectAll("*").remove();
 
-		svg_map.selectAll("*").remove();
-
-		svg_nodes = nodes.map(function (d,i) {
+		svg_nodes = json.hubs.map(function (d,i) {
 			return {
 				id: d.id,
-				pc: d.pc,
-				fill: color(i),
-				cx: 0,
-				cy: 0,
+				signals: d.signals,
+				fill: scale_kind(d.kind),
+				cx: 1000,
+				cy: 1000,
 			};
 		});
 
 		svg_force = d3.layout.force()
 			.nodes(svg_nodes)
-			.on('tick', tick)
+			.size([2000, 2000])
 			.gravity(0)
 			.charge(1)
-			.friction(.85)
+			.on('tick', tick)
+			.start();
 
 		// circles
-		total = 0;
 
 		svg_circles = svg_map.selectAll('g')
 		.data(svg_nodes)
@@ -502,113 +471,90 @@ window.onload = function (){
 		.append('g')
 		.attr('style', 'cursor:pointer')
 		.on('click', function(d){
-			console.log(d.total);
+		    // alert('CÍRCULO ' + d.ID);
 		})
-		.call(svg_force.drag)
+		// .call(svg_force.drag)
 		.each(function (d, i) {
+
 			c_total = d3.select(this)
 				.append('circle')
 				.attr('id', 'circ' + d.id + '_total')
-				.attr('fill-opacity', .1)
-				.attr('fill', d.fill);
+				.attr('fill-opacity', 1)
+				.attr('r', 5)
+				.attr('fill', function (d) {
+					return d.fill;
+				});
 
-			c_partial = d3.select(this)
-				.append('circle')
-				.attr('r',0)
-				.attr('id', 'circ' + d.id + '_partial')
-				.attr('fill', d.fill);
-
-			d.c_total = c_total;
-			d.c_partial = c_partial;
 			d.total = 0;
-			d.partial = 0;
-			d.group = group;
 
-			d.list = [];
-			list.forEach( function( sd, si ){
-				if(sd[group].indexOf( d.id ) >= 0) {
-					total++
-					d.total ++;
-					d.list.push(sd);
-				}
-			});
+			for( a in d.signals ){
+				d.total += 5;
+				d3.select(this)
+					.append('circle')
+					.attr('r', 6 + d.total)
+					.attr('stroke', '#fff' )
+					.attr('fill', 'none' )
+					.attr('stroke-opacity', .2 )
+					.attr('stroke-width', .5 )
+			}
 
-			d.radius = calc_radius(d.total) + 1;
-			d.c_total
-				.attr('r',0)
-				.transition().duration(dur2)
-				.attr('r', calc_radius(d.total));
+
+			d.radius = 10 + d.total;
+
+
+			// c_parcial = d3.select(this)
+			// 	.append('circle')
+			// 	.attr('id', 'circ' + i + '_parcial')
+			// 	.attr('fill', function (d) {
+			// 		return d.fill;
+			// 	});
+
+			// d.c_total = c_total;
+			// d.c_parcial = c_parcial;
+			// d.total = 0;
+			// d.parcial = 0;
+
+			// d.list = [];
+			// list.forEach( function( sd, si ){
+			// 	if(sd[group].indexOf( d.id ) >= 0) {
+			// 		d.total ++;
+			// 		d.list.push(sd);
+			// 	}
+			// });
+			//
+			// d.radius = calc_radius(d.total) + 1;
+			// d.c_total.attr('r', calc_radius(d.total));
 
 		});
 
-		if(trg == 'hub') tt_kind = total;
-		if(trg == 'sig') tt_method = total;
-
-		svg_force.alpha(0).start();
-		set_all_circles();
+		// set_all_circles();
 
 	}
 
 	function set_all_circles(){
 		svg_circles = svg_map.selectAll('g')
 		.each( function (d, i) {
-			d.partial = 0;
-			if(strict[d.group].length == 0 || strict[d.group].indexOf(d.id) >= 0){
-				d.list.forEach( function( sd, si ){
-					if(sd.visible){
-						d.partial ++;
-					}
-				});
-			}
-			if(cur_target == 'sig') percent( d, d.partial/tt_method )
-			if(cur_target == 'hub') percent( d, d.partial/tt_kind )
-			d.c_partial.transition().duration(dur).attr('r', calc_radius(d.partial));
+			d.parcial = 0;
+			d.list.forEach( function( sd, si ){
+				if(sd.visible) d.parcial ++;
+			});
+			d.c_parcial.transition().duration(dur).attr('r', calc_radius(d.parcial));
 		});
 	}
 
-	function percent(d, n){
-		var pc = Math.round(n*1000)/10;
-		$(d.pc).html( pc + '%');
-		if(pc == 0) $(d.pc).css({color:'#fff', opacity:.2});
-		else $(d.pc).css({color:d.fill, opacity:1});
-	}
+	// legend
 
 	// zoom
 
-	var cur_scale = 1;
-	var zoom_limits = [ .5, 5 ];
-	var zoom_factor = 1.5;
-
-	$(zoom_out).on(bt_event, function(){
-		if(cur_scale > zoom_limits[0]){
-			cur_scale = cur_scale/zoom_factor;
-			svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +') rotate(' + rot + ')');
-		}
-	});
-
-	$(zoom_in).on(bt_event, function(){
-		if(cur_scale < zoom_limits[1]){
-			cur_scale *= zoom_factor;
-			svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +') rotate(' + rot + ')');
-		}
-	});
-
-	// target
-
-	function set_score(n){
-		$(score_nb).html(n);
-		if(n==1) $(score_lb).html(labels[cur_target][lg].toUpperCase());
-		else $(score_lb).html(labels[cur_target + 's'][lg].toUpperCase());
-	}
+	// this
 
 	function set_target(trg){
 		console.log('target: ' + trg);
 		cur_target = trg;
 		switch(trg){
 			case "hub":
-				scale = 5000/json.hubs.length ;
-				$(filters_sep).html(labels.hub_list[lg].toUpperCase());
-				$(legend_hub).delay(dur/2).animate({left:0}, dur/2);
+				// $(legend_hub).delay(dur/2).animate({left:0}, dur/2);
+				// $(legend_sig).animate({left:-300}, dur/2 );
 				$(list_hub).fadeIn(dur);
 				$(control_hub).addClass('selected');
 				$(control_hub_lb).animate({opacity:1}, dur);
@@ -621,18 +567,17 @@ window.onload = function (){
 					});
 				$(list_sig).hide();
 				$(control_sig_lb).animate({opacity:.2}, dur/2);
-				$(legend_sig).animate({left:-350}, dur/2 );
 				$(flap_sig).fadeOut(dur/2);
 				$(circles_out).html(labels.kind[lg].toUpperCase());
 				$(circles_in).html(labels.hubs[lg].toUpperCase());
-				set_score(n_hubs);
-				for(i in sig_filters) $(sig_filters[i]).hide();
-				for(i in hub_filters) $(hub_filters[i]).show();
+				$(score_nb).html(n_hubs);
+				$(score_lb).html(labels.hubs[lg].toUpperCase());
+				// for(i in sig_filters) $(sig_filters[i]).hide();
+				// for(i in hub_filters) $(hub_filters[i]).show();
 			break;
 			case "sig":
-				scale =  5000/json.signals.length
-				$(filters_sep).html(labels.sig_list[lg].toUpperCase());
-				$(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
+				// $(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
+				// $(legend_hub).animate({left:-300}, dur/2 );
 				$(list_sig).fadeIn(dur);
 				$(control_sig).addClass('selected');
 				$(control_sig_lb).animate({opacity:1}, dur );
@@ -645,13 +590,13 @@ window.onload = function (){
 					});
 				$(list_hub).hide();
 				$(control_hub_lb).animate({opacity:.2}, dur/2 );
-				$(legend_hub).animate({left:-350}, dur/2 );
 				$(flap_hub).fadeOut(dur/2);
 				$(circles_out).html(labels.method[lg].toUpperCase());
-				$(circles_in).html(labels.sigs[lg].toUpperCase());
-				set_score(n_signals);
-				for(i in hub_filters) $(hub_filters[i]).hide();
-				for(i in sig_filters) $(sig_filters[i]).show();
+				$(circles_in).html(labels.signals[lg].toUpperCase());
+				$(score_nb).html(n_signals);
+				$(score_lb).html(labels.signals[lg].toUpperCase());
+				// for(i in hub_filters) $(hub_filters[i]).hide();
+				// for(i in sig_filters) $(sig_filters[i]).show();
 			break;
 		}
 
@@ -690,14 +635,6 @@ window.onload = function (){
 			open_filters();
 		}
 	})
-
-	function sep(tx){
-		div = document.createElement('div');
-		$(div)
-			.attr('id','filters_sep')
-			.html(tx);
-		filters.appendChild(div);
-	}
 
 	// search
 
@@ -812,8 +749,6 @@ window.onload = function (){
 				for(b in json.filters[i].itens){
 					json.filters[i].itens[b].on = false;
 				}
-				strict.method = [];
-				strict.kind = [];
 			}
 		}
 	}
@@ -891,7 +826,7 @@ window.onload = function (){
 				}
 			}
 		}
-		if(cur_target == cod) set_score(n);
+		if(cur_target == cod) $(score_nb).html(n);
 		set_all_circles();
 		return n;
 	}
@@ -918,20 +853,21 @@ window.onload = function (){
 	function toggle_filter(trg){
 		if(trg.on){
 			trg.on = false;
-			if( trg.group && strict[trg.group].indexOf(trg.id) >= 0 ){
-				strict[trg.group].splice( strict[trg.group].indexOf(trg.id),1);
-			}
 		}else{
 			trg.on = true;
-			if( trg.group && strict[trg.group].indexOf(trg.id) < 0 ){
-				strict[trg.group].push(trg.id);
-			}
 		}
 		check_filters();
 	}
 
+	function sep_filters(tx){
+		div = document.createElement('div');
+		$(div)
+			.addClass('sep')
+			.html(tx);
+		filters.appendChild(div);
+	}
 
-	function create_filters(data, target, group){
+	function create_filters(data, target){
 
 		var title;
 
@@ -987,7 +923,6 @@ window.onload = function (){
 			});
 
 			d.li = li;
-			d.group = group;
 			li.data = d;
 
 		}
@@ -1008,7 +943,6 @@ window.onload = function (){
 
 		// hubs
 		n_hubs = json.hubs.length;
-		t_hubs = json.hubs.length;
 
 		for( i in json.hubs ){
 
@@ -1045,7 +979,6 @@ window.onload = function (){
 
 		// signals
 		n_signals = json.signals.length;
-		t_signals = json.signals.length;
 
 		for( i in json.signals ){
 
@@ -1081,63 +1014,56 @@ window.onload = function (){
 
 		}
 
-		scale_kind = d3.scale.linear().domain([0,json.filters.method.itens.length-1]).range(colors.hub).interpolate(d3.interpolateHcl);
-		scale_method = d3.scale.linear().domain([0,json.filters.kind.itens.length-1]).range(colors.sig).interpolate(d3.interpolateHcl);
+		// scale_kind = d3.scale.linear().domain([0,json.filters.method.itens.length-1]).range(colors.hub).interpolate(d3.interpolateHcl);
+		scale_kind = d3.scale.linear().domain([0,json.filters.kind.itens.length-1]).range(colors.sig).interpolate(d3.interpolateHcl);
 
 		$(legend_hub).height(json.filters.kind.itens.length * 21 );
-		$(legend_sig).height(json.filters.method.itens.length * 21 );
+		// $(legend_sig).height(json.filters.method.itens.length * 21 );
 
+		create_filters(json.filters.origin, false);
+		create_filters(json.filters.coverage, false);
+		sep_filters("FILTROS DE HUBS");
+		create_filters(json.filters.kind, hub_filters);
+		sep_filters("FILTROS DE SINAIS");
+		create_filters(json.filters.method, sig_filters);
+		create_filters(json.filters.purpose, sig_filters);
+		create_filters(json.filters.type, sig_filters);
 
-		create_filters(json.filters.origin, false, false);
-		create_filters(json.filters.coverage, false, false);
-		sep("FILTROS DE SINAIS");
-		create_filters(json.filters.method, sig_filters, 'method');
-		create_filters(json.filters.kind, hub_filters, 'kind');
-		create_filters(json.filters.purpose, sig_filters, false);
-		create_filters(json.filters.type, sig_filters, false);
-
-		reg('filters_sep');
 		reset_filters_score(true);
+
 		set_layout('home');
 
 		//method legend
 
-		$(legend_sig_title).html( json.filters.method[lg] );
+		// $(legend_sig_title).html( json.filters.method[lg] );
 
-		for( i in json.filters.method.itens ){
-
-			// legend
-			d = json.filters.method.itens[i];
-			li = document.createElement('li');
-			$(li)
-				.addClass('legend')
-			legend_sig.appendChild(li);
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('color')
-				.css({background:scale_method(i)})
-			li.appendChild(div);
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('lb')
-				.html( d[lg] )
-			li.appendChild(div);
-
-			span = document.createElement('span');
-			$(span)
-				.addClass('pc')
-				.attr('style','color:' + scale_method(i));
-			li.appendChild(span);
-
-			d.pc = span;
-
-		}
+		// for( i in json.filters.method.itens ){
+		//
+		// 	// legend
+		//
+		// 	d = json.filters.method.itens[i];
+		// 	li = document.createElement('li');
+		// 	$(li)
+		// 		.addClass('legend')
+		// 	legend_sig.appendChild(li);
+		//
+		// 	div = document.createElement('div');
+		// 	$(div)
+		// 		.addClass('color')
+		// 		.css({background:scale_method(i)})
+		// 	li.appendChild(div);
+		//
+		// 	div = document.createElement('div');
+		// 	$(div)
+		// 		.addClass('lb')
+		// 		.html( d[lg] )
+		// 	li.appendChild(div);
+		//
+		// }
 
 		// hub legend
 
-		$(legend_hub_title).html( json.filters.kind[lg] );
+		// $(legend_hub_title).html( json.filters.kind[lg] );
 
 		for( i in json.filters.kind.itens ){
 
@@ -1160,26 +1086,13 @@ window.onload = function (){
 				.html( d[lg] )
 			li.appendChild(div);
 
-			span = document.createElement('span');
-			$(span)
-				.addClass('pc')
-				.attr('style','color:' + scale_kind(i))
-			li.appendChild(span);
-
-			d.pc = span;
-
 		}
 
 		// SVG MAP
 
-		svg_map_area = d3.select('#map')
+		svg_map = d3.select('#map')
 			.append('svg')
-			.attr('id', 'svg_map_area')
-
-		svg_map = svg_map_area
-			.append('g')
-			.attr('transform','translate(1000 1000)');
-
+			.attr('id', 'svg_map');
 
 
 		// X central teste
@@ -1243,6 +1156,17 @@ window.onload = function (){
 
 	*/
 
+function rand(n){
+	return Math.ceil(Math.random()*n);
+}
+
+function rand_shift(n){
+	var shift = Math.random();
+	if(shift <= .2)	return Math.ceil(Math.random()*n*20);
+	if(shift > .2 && shift <= .5)	return Math.ceil(Math.random()*n*10);
+	if(shift > .5 && shift <= .8) return Math.ceil(Math.random()*n*5);
+	else return Math.ceil(Math.random()*n);
+}
 
 function simulate_db(db){
 
@@ -1256,26 +1180,19 @@ function simulate_db(db){
 		livros[l] = livro;
 	}
 
-	function rand(n){
-		return Math.ceil(Math.random()*n);
-	}
-
-	function shift_rand(n){
-		var shift = Math.random();
-		if(shift <= .2)	return Math.ceil(Math.random()*n/4);
-		if(shift > .2 && shift <= .5) return Math.ceil(Math.random()*n/3);
-		if(shift > .5 && shift <= .8) return Math.ceil(Math.random()*n/2);
-		else return Math.ceil(Math.random()*n);
-	}
-
 	for(var h=1; h<=215; h++){
 		var hb = {};
 		hb.id = h;
 		hb.visible = true;
 		hb.name = livros[rand(livros.length-1)].autor;
-		hb.kind = [shift_rand(12)];
+		hb.kind = rand(12);
 		hb.origin = rand(5);
 		hb.coverage = rand(4);
+		hb.signals = [];
+		var rand_sig = rand(4);
+		for( var r=0; r<rand_sig; r++ ){
+			hb.signals.push(rand(445));
+		}
 		db.hubs.push(hb);
 	}
 
@@ -1284,7 +1201,7 @@ function simulate_db(db){
 		sg.id = s;
 		sg.visible = true;
 		sg.name = livros[rand(livros.length-1)].titulo;
-		sg.method = [shift_rand(14),shift_rand(14)];
+		sg.method = [rand_shift(9),rand_shift(9)];
 		sg.origin = rand(5);
 		sg.coverage = rand(4);
 		sg.type = rand(5);

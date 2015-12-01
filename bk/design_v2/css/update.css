@@ -477,8 +477,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 #circles{
     position: absolute;
-    top: -80px;
-    left: 25px;
+    top: -70px;
+    left: 15px;
     font-size: 11px;
     font-weight: 600;
     width: 100px;
@@ -493,7 +493,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     position: absolute;
     left: 55px;
     top: 0;
-    color: #6a747c;
+    color: #4f5a66;
 }
 
 #circles_in{
@@ -507,11 +507,10 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     left:33.3%;
     width: 33.4%;
     height: 80px;
-    bottom:1px;
+    bottom:0;
     z-index: 4;
     text-align: center;
     position: relative;
-    border-top: #212733 1px solid;
 }
 
 #control_center:hover{
@@ -522,6 +521,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     height: 100%;
     font-size: 28px;
     z-index: 5;
+    background-repeat: no-repeat;
     background-position: right 23px top 33px;
     background-repeat: no-repeat;
     background-image: url("../layout/up.png");
@@ -685,6 +685,15 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     padding-top: 25px;
 }
 
+#filters .sep{
+    width: 100%;
+    padding: 15px 10px 10px 60px;
+    font-size: 12px;
+    font-weight: 300;
+    opacity: .3;
+    border-top: rgba(255,255,255,.3) 1px solid
+}
+
 #filters .title{
     width: 100%;
     padding: 20px 10px 20px 60px;
@@ -697,14 +706,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     cursor: pointer;
 }
 
-#filters_sep{
-    width: 100%;
-    padding: 15px 10px 10px 60px;
-    font-size: 12px;
-    font-weight: 300;
-    opacity: .3;
-    border-top: rgba(255,255,255,.3) 1px solid
-}
+
 
 #filters .group{
     overflow: hidden;
@@ -803,7 +805,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     opacity: .2;
 }
 
-#svg_map_area{
+#svg_map{
     position: absolute;
     left: -1000px;
     top: -1000px;
@@ -824,7 +826,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     width: 100%;
     height: 100%;
     position: absolute;
-    left: -300px;
+    left: 0;
     top: 0;
     bottom:0;
     margin: auto;
@@ -840,7 +842,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .legend{
     width: 100%;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 .legend .lb{
@@ -848,27 +850,21 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     font-weight: 100;
     display: inline-block;
     text-transform: uppercase;
-    margin-left: 4px;
-}
-
-.legend .pc{
-    font-weight: 400;
-    margin-left: 10px;
-    font-size: 12px;
 }
 
 .legend .color{
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
     background: #f00;
     display: inline-block;
     margin-right: 5px;
     border-radius: 10px;
+    border:#212733 2px solid;
     position: relative;
-    top: 1px;
+    top: 3px;
 }
 
-#zoom_control{
+#zoom{
     position: absolute;
     width: 35px;
     height: 71px;

@@ -4,10 +4,10 @@
 	"signals":[],
 	"filters":{
 		"method":{
-			"_pt":"mecanismos",
+			"_pt":"métodos",
 			"itens":[
 				{	"id":1,
-					"_pt": "diálogo",
+					"_pt": "Mecanismos de diálogo",
 					"itens":[
 						{ "_pt":"consulta popular"},
 						{ "_pt":"assembléia"},
@@ -18,7 +18,7 @@
 					]
 				},
 				{	"id":2,
-					"_pt": "Mobilização" ,
+					"_pt": "Pressão Popular" ,
 					"itens":[
 						{ "_pt":"consulta popular"},
 						{ "_pt":"cidadania digital"},
@@ -30,7 +30,7 @@
 					]
 				},
 				{	"id":3,
-					"_pt": "Sensibilização" ,
+					"_pt": "Artvismo/Revolução Estética" ,
 					"itens":[
 						{ "_pt":"Culture Jaming"},
 						{ "_pt":"Intervenções"},
@@ -40,7 +40,7 @@
 					]
 				},
 				{	"id":4,
-					"_pt": "Formação" ,
+					"_pt": "Pedagogia Política" ,
 					"itens":[
 						{ "_pt":"Oficina"},
 						{ "_pt":"Formação"},
@@ -49,7 +49,7 @@
 					]
 				},
 				{	"id":5,
-					"_pt": "Produção de Conhecimento" ,
+					"_pt": "Open Knowledge" ,
 					"itens":[
 						{ "_pt":"Data viz"},
 						{ "_pt":"Análise de dados"},
@@ -63,7 +63,7 @@
 					]
 				},
 				{"id":6,
-					"_pt": "levantamento de dados" ,
+					"_pt": "Open Data" ,
 					"itens":[
 						{ "_pt":"Banco de dados"},
 						{ "_pt":"Repositório"},
@@ -71,7 +71,7 @@
 					]
 				},
 				{"id":7,
-					"_pt": "visualização de dados" ,
+					"_pt": "Controle Social" ,
 					"itens":[
 						{ "_pt":"Denúncia"},
 						{ "_pt":"Investigação"},
@@ -83,54 +83,14 @@
 					]
 				},
 				{"id":8,
-					"_pt": "Fomento" ,
+					"_pt": "Parlamento Aberto" ,
 					"itens":[
 						{ "_pt":"Legislação participativa"},
 						{ "_pt":"Mandato interativo "}
 					]
 				},
 				{"id":9,
-					"_pt": "Fiscalização" ,
-					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
-					]
-				},
-				{"id":10,
-					"_pt": "consulta" ,
-					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
-					]
-				},
-				{"id":11,
-					"_pt": "participação" ,
-					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
-					]
-				},
-				{"id":12,
-					"_pt": "Governo 2.0" ,
-					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
-					]
-				},
-				{"id":13,
-					"_pt": "Comunicação" ,
-					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
-					]
-				},
-				{"id":14,
-					"_pt": "conexão" ,
+					"_pt": "Executivo Aberto" ,
 					"itens":[
 						{ "_pt":"Resident Feedback"},
 						{ "_pt":"Governo Eletrônico"},
