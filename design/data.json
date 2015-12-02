@@ -4,7 +4,8 @@
 	"signals":[],
 	"filters":{
 		"method":{
-			"_pt":"mecanismos",
+			"_pt":"métodos",
+			"target":"sig",
 			"itens":[
 				{	"id":1,
 					"_pt": "diálogo",
@@ -161,6 +162,13 @@
 			"itens":[
 				{"id":1, "_pt":"Empoderamento"},
 				{"id":2, "_pt":"Incidência"}
+			]
+		},
+		"financier":{
+			"_pt": "financiador" ,
+			"itens":[
+				{"id":1, "_pt":"não"},
+				{"id":2, "_pt":"sim"}
 			]
 		},
 		"coverage":{

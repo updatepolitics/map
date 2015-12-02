@@ -5,6 +5,7 @@ window.onload = function (){
 
 	var dbody = document.body,
 		json,
+		node,
 		page_y,
 		wn,
 		win_w,
@@ -15,11 +16,12 @@ window.onload = function (){
 		delay,
 		cur_layout,
 		cur_target,
+		search_target,
 		scale,
 		n_hubs,
 		n_signals,
-		tt_kind,
-		tt_method;
+		total_kind,
+		total_method;
 
 	var dur = 350, // animation
 	 	dur2 = 550, // layout
@@ -47,7 +49,7 @@ window.onload = function (){
 		sig: { "_pt":"sinal" },
 		sigs: { "_pt":"sinais" },
 		kind: { "_pt":"natureza" },
-		method: { "_pt":"mecanismo" },
+		method: { "_pt":"método" },
 		sig_list: { "_pt":"filtros de sinais" },
 		hub_list: { "_pt":"filtros de hubs" },
 	}
@@ -104,6 +106,9 @@ window.onload = function (){
 	reg('update_logo');
 
 	reg('map_container');
+	reg('tooltip');
+	reg('tt_title');
+	reg('tt_val');
 	reg('map');
 	reg('legends');
 	reg('legend_sig_title');
@@ -416,7 +421,6 @@ window.onload = function (){
 		});
 	}
 
-	// Move nodes toward cluster focus.
 	function gravity(alpha) {
 		return function (d) {
 			d.y += (d.cy - d.y) * alpha;
@@ -424,7 +428,6 @@ window.onload = function (){
 		};
 	}
 
-	// Resolve collisions between nodes.
 	function collide(alpha) {
 		var quadtree = d3.geom.quadtree(svg_nodes);
 		return function (d) {
@@ -478,9 +481,12 @@ window.onload = function (){
 
 		svg_nodes = nodes.map(function (d,i) {
 			return {
-				id: d.id,
-				pc: d.pc,
+				node:d,
+				id:d.id,
 				fill: color(i),
+				pc: d.pc,
+				partial:0,
+				total:0,
 				cx: 0,
 				cy: 0,
 			};
@@ -502,31 +508,34 @@ window.onload = function (){
 		.append('g')
 		.attr('style', 'cursor:pointer')
 		.on('click', function(d){
-			console.log(d.total);
+			alert(d.node[lg]);
+		})
+		.on('mouseover', function(d){
+			var val = d.partial + ' ' + check_num(d.partial) + ' (' + d.pc_val + '%)';
+			tt(d.node[lg], val, d.fill);
+		})
+		.on('mouseout', function(d){
+			tt(false);
 		})
 		.call(svg_force.drag)
 		.each(function (d, i) {
 			c_total = d3.select(this)
 				.append('circle')
-				.attr('id', 'circ' + d.id + '_total')
 				.attr('fill-opacity', .1)
 				.attr('fill', d.fill);
 
 			c_partial = d3.select(this)
 				.append('circle')
 				.attr('r',0)
-				.attr('id', 'circ' + d.id + '_partial')
 				.attr('fill', d.fill);
 
 			d.c_total = c_total;
 			d.c_partial = c_partial;
-			d.total = 0;
-			d.partial = 0;
 			d.group = group;
 
 			d.list = [];
 			list.forEach( function( sd, si ){
-				if(sd[group].indexOf( d.id ) >= 0) {
+				if(sd[group].indexOf( d.node.id ) >= 0) {
 					total++
 					d.total ++;
 					d.list.push(sd);
@@ -541,8 +550,8 @@ window.onload = function (){
 
 		});
 
-		if(trg == 'hub') tt_kind = total;
-		if(trg == 'sig') tt_method = total;
+		if(trg == 'hub') total_kind = total;
+		if(trg == 'sig') total_method = total;
 
 		svg_force.alpha(0).start();
 		set_all_circles();
@@ -560,8 +569,8 @@ window.onload = function (){
 					}
 				});
 			}
-			if(cur_target == 'sig') percent( d, d.partial/tt_method )
-			if(cur_target == 'hub') percent( d, d.partial/tt_kind )
+			if(cur_target == 'sig') percent( d, d.partial/total_method )
+			if(cur_target == 'hub') percent( d, d.partial/total_kind )
 			d.c_partial.transition().duration(dur).attr('r', calc_radius(d.partial));
 		});
 	}
@@ -569,9 +578,30 @@ window.onload = function (){
 	function percent(d, n){
 		var pc = Math.round(n*1000)/10;
 		$(d.pc).html( pc + '%');
+		d.pc_val = pc;
 		if(pc == 0) $(d.pc).css({color:'#fff', opacity:.2});
 		else $(d.pc).css({color:d.fill, opacity:1});
 	}
+
+	// tooltip
+
+	$(window).mousemove(function( event ){
+		mouse_x = event.clientX - $(tooltip).width()/2 - 30;
+		mouse_y = event.clientY - 60;
+		$(tooltip).css({ left:mouse_x, top:mouse_y });
+	});
+
+	function tt(title, val, color){
+		if(title){
+			$(tt_title).html(title);
+			$(tt_val).html(val);
+			$(tooltip).css({background:color}).show();
+		}else{
+			$(tooltip).hide();
+		}
+	}
+
+
 
 	// zoom
 
@@ -595,17 +625,23 @@ window.onload = function (){
 
 	// target
 
+	function check_num(n){
+		if(n==1) return labels[cur_target][lg].toUpperCase();
+		else return labels[cur_target + 's'][lg].toUpperCase();
+	}
+
 	function set_score(n){
 		$(score_nb).html(n);
-		if(n==1) $(score_lb).html(labels[cur_target][lg].toUpperCase());
-		else $(score_lb).html(labels[cur_target + 's'][lg].toUpperCase());
+		$(score_lb).html( check_num(n));
 	}
 
 	function set_target(trg){
 		console.log('target: ' + trg);
 		cur_target = trg;
+		reset_search();
 		switch(trg){
 			case "hub":
+				search_target = json.hubs;
 				scale = 5000/json.hubs.length ;
 				$(filters_sep).html(labels.hub_list[lg].toUpperCase());
 				$(legend_hub).delay(dur/2).animate({left:0}, dur/2);
@@ -630,6 +666,7 @@ window.onload = function (){
 				for(i in hub_filters) $(hub_filters[i]).show();
 			break;
 			case "sig":
+				search_target = json.signals;
 				scale =  5000/json.signals.length
 				$(filters_sep).html(labels.sig_list[lg].toUpperCase());
 				$(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
@@ -704,6 +741,36 @@ window.onload = function (){
 	$(search_str).on('click', function(event){
 		 event.stopPropagation();
 	});
+
+	$(search_x).hide();
+
+	$(search_str).on('input', function(){
+		if( this.value != "" ) $(search_x).show();
+		else $(search_x).hide();
+		search_for(this.value);
+	});
+
+	function search_for(tx){
+		var search_tx = tx.toUpperCase();
+		for( i in search_target ){
+			node = search_target[i];
+			if( node.visible ){
+				if( node.name && node.name.toUpperCase().indexOf( search_tx ) >= 0 ){
+					$(node.li).show();
+				}else{
+					$(node.li).hide();
+				}
+			}
+		}
+	}
+
+	function reset_search(){
+		search_str.value = "";
+		search_for("");
+		$(search_x).hide();
+	}
+
+	$(search_x).on('click', reset_search);
 
 	//////////////////////////////// HELP ////////////////////////////////
 
@@ -820,6 +887,7 @@ window.onload = function (){
 
 	function check_filters() {
 		reset_filters_score(false);
+		reset_search();
 		for ( i in json.filters ) {
 			var all_off = true;
 			for( a in json.filters[i].itens ) {
@@ -905,12 +973,11 @@ window.onload = function (){
 	function toggle_list(trg){
 		if(trg.open){
 			trg.open = false;
-			$(trg.list).animate({height: 0 }, dur, in_out, function(){
-				$(trg).css({ backgroundImage: 'url(layout/plus.png)'});
-			});
+			$(trg.list).animate({height: 0 }, dur, in_out);
+			$(trg.title).css({ backgroundImage: 'url(layout/plus.png)'});
 		}else{
 			trg.open = true;
-			$(trg).css({ backgroundImage: 'url(layout/minus.png)'});
+			$(trg.title).css({ backgroundImage: 'url(layout/minus.png)'});
 			$(trg.list).animate({height: 30 + trg.itens.length * filter_h}, dur, in_out);
 		}
 	}
@@ -964,6 +1031,7 @@ window.onload = function (){
 		}
 
 		title.data = data;
+		data.title = title;
 		data.list = ul;
 		data.nb = span;
 		data.open = false;
@@ -1015,11 +1083,11 @@ window.onload = function (){
 			d = json.hubs[i];
 
 			li = document.createElement('li');
-			li.data = json.hubs[i];
+			li.node = json.hubs[i];
 			$(li)
 				.addClass('list_item')
 				.on('click', function(){
-					console.log(this.data.name);
+					alert( this.node.name );
 				});
 
 			d.li = li;
@@ -1052,11 +1120,11 @@ window.onload = function (){
 			d = json.signals[i];
 
 			li = document.createElement('li');
-			li.data = json.signals[i];
+			li.node = json.signals[i];
 			$(li)
 				.addClass('list_item')
 				.on('click', function(){
-					console.log(this.data.name);
+					alert( this.node.name );
 				});
 
 			d.li = li;
@@ -1095,6 +1163,7 @@ window.onload = function (){
 		create_filters(json.filters.kind, hub_filters, 'kind');
 		create_filters(json.filters.purpose, sig_filters, false);
 		create_filters(json.filters.type, sig_filters, false);
+		create_filters(json.filters.financier, hub_filters, false);
 
 		reg('filters_sep');
 		reset_filters_score(true);
@@ -1276,6 +1345,7 @@ function simulate_db(db){
 		hb.kind = [shift_rand(12)];
 		hb.origin = rand(5);
 		hb.coverage = rand(4);
+		hb.financier = shift_rand(2);
 		db.hubs.push(hb);
 	}
 
