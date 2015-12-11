@@ -1,0 +1,28 @@
+{
+  "name": "Affiliation",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "parentId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "parent": {
+      "type": "belongsTo",
+      "model": "Hub",
+      "foreignKey": "parentId"
+    },
+    "child": {
+      "type": "belongsTo",
+      "model": "Hub",
+      "foreignKey": "childId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

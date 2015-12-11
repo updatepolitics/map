@@ -31,5 +31,17 @@
   "Role": {
     "dataSource": "mongodb",
     "public": false
+  },
+  "Hub": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Place": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Affiliation": {
+    "dataSource": "mongodb",
+    "public": false
   }
 }
