@@ -36,12 +36,16 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "Place": {
-    "dataSource": "mongodb",
-    "public": true
-  },
   "Affiliation": {
     "dataSource": "mongodb",
     "public": false
+  },
+  "Method": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "MethodType": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
