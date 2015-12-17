@@ -1019,7 +1019,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 .list_item{
-    width: 100%;
+    width: 50%;
     float: left;
     padding-top: 25px;
     padding-left: 20px;
