@@ -869,28 +869,26 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 .legend .lb{
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 100;
     display: inline-block;
     text-transform: uppercase;
     margin-left: 4px;
 }
 
-.legend .pc{
+/*.legend .pc{
     font-weight: 600;
     margin-left: 5px;
     font-size: 12px;
-}
+}*/
 
 .legend .color{
-    width: 10px;
-    height: 10px;
+    width: 11px;
+    height: 11px;
     background: #f00;
     display: inline-block;
     margin-right: 5px;
     border-radius: 10px;
-    position: relative;
-    top: 1px;
 }
 
 #zoom_control{
@@ -1022,6 +1020,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .list_item{
     width: 100%;
+    float: left;
     padding-top: 25px;
     padding-left: 20px;
     cursor: pointer;
@@ -1029,11 +1028,9 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     background-repeat: no-repeat;
     height: 90px;
     text-align: center;
-    overflow: hidden;
-    text-overflow:clip;
-    white-space: nowrap;
     position: relative;
     border-bottom: #d9d7d9 1px solid;
+    border-right: #d9d7d9 1px solid;
 }
 
 .list_item:hover{
@@ -1045,7 +1042,11 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 3px;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 .list_item .subtitle{

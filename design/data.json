@@ -8,6 +8,7 @@
 			"target":"sig",
 			"itens":[
 				{	"id":1,
+					"hex":"#adcc8f",
 					"_pt": "diálogo",
 					"itens":[
 						{ "_pt":"consulta popular"},
@@ -19,6 +20,7 @@
 					]
 				},
 				{	"id":2,
+					"hex":"#95cc98",
 					"_pt": "Mobilização" ,
 					"itens":[
 						{ "_pt":"consulta popular"},
@@ -31,6 +33,7 @@
 					]
 				},
 				{	"id":3,
+					"hex":"#7dcaa3",
 					"_pt": "Sensibilização" ,
 					"itens":[
 						{ "_pt":"Culture Jaming"},
@@ -41,6 +44,7 @@
 					]
 				},
 				{	"id":4,
+					"hex":"#66c7b0",
 					"_pt": "Formação" ,
 					"itens":[
 						{ "_pt":"Oficina"},
@@ -50,6 +54,7 @@
 					]
 				},
 				{	"id":5,
+					"hex":"#50c4be",
 					"_pt": "Produção de Conhecimento" ,
 					"itens":[
 						{ "_pt":"Data viz"},
@@ -63,7 +68,8 @@
 						{ "_pt":"Decodificação"}
 					]
 				},
-				{"id":6,
+				{	"id":6,
+					"hex":"#3fbfca",
 					"_pt": "levantamento de dados" ,
 					"itens":[
 						{ "_pt":"Banco de dados"},
@@ -71,7 +77,8 @@
 						{ "_pt":"Big Data"}
 					]
 				},
-				{"id":7,
+				{	"id":7,
+					"hex":"#3bb9d4",
 					"_pt": "visualização de dados" ,
 					"itens":[
 						{ "_pt":"Denúncia"},
@@ -83,14 +90,16 @@
 						{ "_pt":"Ação Judicial de interesse público"}
 					]
 				},
-				{"id":8,
+				{	"id":8,
+					"hex":"#47b3dc",
 					"_pt": "Fomento" ,
 					"itens":[
 						{ "_pt":"Legislação participativa"},
 						{ "_pt":"Mandato interativo "}
 					]
 				},
-				{"id":9,
+				{	"id":9,
+					"hex":"#5cabdf",
 					"_pt": "Fiscalização" ,
 					"itens":[
 						{ "_pt":"Resident Feedback"},
@@ -98,7 +107,8 @@
 						{ "_pt":"Mandato interativo"}
 					]
 				},
-				{"id":10,
+				{	"id":10,
+					"hex":"#74a2dd",
 					"_pt": "consulta" ,
 					"itens":[
 						{ "_pt":"Resident Feedback"},
@@ -106,7 +116,8 @@
 						{ "_pt":"Mandato interativo"}
 					]
 				},
-				{"id":11,
+				{	"id":11,
+					"hex":"#8a99d7",
 					"_pt": "participação" ,
 					"itens":[
 						{ "_pt":"Resident Feedback"},
@@ -114,7 +125,8 @@
 						{ "_pt":"Mandato interativo"}
 					]
 				},
-				{"id":12,
+				{	"id":12,
+					"hex":"#9e8fcc",
 					"_pt": "Governo 2.0" ,
 					"itens":[
 						{ "_pt":"Resident Feedback"},
@@ -122,7 +134,8 @@
 						{ "_pt":"Mandato interativo"}
 					]
 				},
-				{"id":13,
+				{	"id":13,
+					"hex":"#ae85bd",
 					"_pt": "Comunicação" ,
 					"itens":[
 						{ "_pt":"Resident Feedback"},
@@ -130,7 +143,8 @@
 						{ "_pt":"Mandato interativo"}
 					]
 				},
-				{"id":14,
+				{	"id":14,
+					"hex":"#ba7dac",
 					"_pt": "conexão" ,
 					"itens":[
 						{ "_pt":"Resident Feedback"},
@@ -143,18 +157,18 @@
 		"kind":{
 			"_pt": "natureza" ,
 			"itens":[
-				{"id":1, "_pt":"pessoas"},
-				{"id":2, "_pt":"institutos/fundações"},
-				{"id":3, "_pt":"Empresas"},
-				{"id":4, "_pt":"partidos"},
-				{"id":5, "_pt":"ONGs"},
-				{"id":6, "_pt":"Orgãos Não governamentais"},
-				{"id":7, "_pt":"Organismo Multilateral/internacional"},
-				{"id":8, "_pt":"Coletivos"},
-				{"id":9, "_pt":"Movimentos"},
-				{"id":10, "_pt":"Rede (p2p)"},
-				{"id":11, "_pt":"Aliança (1+1)"},
-				{"id":12, "_pt":"Parcerias (1+2)"}
+				{"id":1, "_pt":"pessoas", "hex":"#d87d7d"},
+				{"id":2, "_pt":"institutos/fundações", "hex":"#da8278"},
+				{"id":3, "_pt":"Empresas", "hex":"#da8874"},
+				{"id":4, "_pt":"partidos", "hex":"#d98e70"},
+				{"id":5, "_pt":"ONGs", "hex":"#d8946e"},
+				{"id":6, "_pt":"Orgãos Não governamentais", "hex":"#d59b6c"},
+				{"id":7, "_pt":"Organismo Multilateral/internacional", "hex":"#d2a16c"},
+				{"id":8, "_pt":"Coletivos", "hex":"#cea86d"},
+				{"id":9, "_pt":"Movimentos", "hex":"#caae6f"},
+				{"id":10, "_pt":"Rede (p2p)", "hex":"#c4b573"},
+				{"id":11, "_pt":"Aliança (1+1)", "hex":"#bfbb78"},
+				{"id":12, "_pt":"Parcerias (1+2)", "hex":"#b9c17f"}
 			]
 		},
 		"purpose":{

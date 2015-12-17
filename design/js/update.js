@@ -20,11 +20,11 @@ window.onload = function (){
 		scale,
 		n_hubs,
 		n_signals,
-		total_kind,
-		total_method;
+		trg_total;
 
 	var dur = 350, // animation
 	 	dur2 = 550, // layout
+		scale_factor = 6000, // chart size on Explorer Mode
 		in_out = "easeInOutQuart",
 		_out = "easeOutQuart",
 		in_ = "easeInQuart";
@@ -51,7 +51,7 @@ window.onload = function (){
 		kind: { "_pt":"natureza" },
 		method: { "_pt":"método" },
 		sig_list: { "_pt":"filtros de sinais" },
-		hub_list: { "_pt":"filtros de hubs" },
+		hub_list: { "_pt":"filtros de hubs" }
 	}
 
 	console.log( "ROOT: " + root );
@@ -461,20 +461,19 @@ window.onload = function (){
 		var nodes;
 		var color;
 		var group;
-		var total;
 
 		if(trg == 'hub'){
 			nodes = json.filters.kind.itens;
-			color = scale_kind;
 			list = json.hubs;
 			group = "kind";
+			trg_total = json.hubs.length;
 		}
 
 		if(trg == 'sig'){
 			nodes = json.filters.method.itens;
-			color = scale_method;
 			list = json.signals;
 			group = "method";
+			trg_total = json.signals.length;
 		}
 
 		svg_map.selectAll("*").remove();
@@ -483,8 +482,8 @@ window.onload = function (){
 			return {
 				node:d,
 				id:d.id,
-				fill: color(i),
-				pc: d.pc,
+				fill: d.hex,
+				// pc: d.pc,
 				partial:0,
 				total:0,
 				cx: 0,
@@ -500,7 +499,6 @@ window.onload = function (){
 			.friction(.85)
 
 		// circles
-		total = 0;
 
 		svg_circles = svg_map.selectAll('g')
 		.data(svg_nodes)
@@ -508,10 +506,10 @@ window.onload = function (){
 		.append('g')
 		.attr('style', 'cursor:pointer')
 		.on('click', function(d){
-			alert(d.node[lg]);
+			// alert(d.node[lg]);
 		})
 		.on('mouseover', function(d){
-			var val = d.partial + ' ' + check_num(d.partial) + ' (' + d.pc_val + '%)';
+			var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial) + ' (' + d.pc_val + '%)';
 			tt(d.node[lg], val, d.fill);
 		})
 		.on('mouseout', function(d){
@@ -532,11 +530,11 @@ window.onload = function (){
 			d.c_total = c_total;
 			d.c_partial = c_partial;
 			d.group = group;
+			d.trg_total = trg_total;
 
 			d.list = [];
 			list.forEach( function( sd, si ){
 				if(sd[group].indexOf( d.node.id ) >= 0) {
-					total++
 					d.total ++;
 					d.list.push(sd);
 				}
@@ -549,9 +547,6 @@ window.onload = function (){
 				.attr('r', calc_radius(d.total));
 
 		});
-
-		if(trg == 'hub') total_kind = total;
-		if(trg == 'sig') total_method = total;
 
 		svg_force.alpha(0).start();
 		set_all_circles();
@@ -569,19 +564,21 @@ window.onload = function (){
 					}
 				});
 			}
-			if(cur_target == 'sig') percent( d, d.partial/total_method )
-			if(cur_target == 'hub') percent( d, d.partial/total_kind )
+
+			var pc = Math.round(d.partial/d.trg_total*1000)/10;
+			d.pc_val = pc;
+
 			d.c_partial.transition().duration(dur).attr('r', calc_radius(d.partial));
 		});
 	}
 
-	function percent(d, n){
-		var pc = Math.round(n*1000)/10;
-		$(d.pc).html( pc + '%');
-		d.pc_val = pc;
-		if(pc == 0) $(d.pc).css({color:'#fff', opacity:.2});
-		else $(d.pc).css({color:d.fill, opacity:1});
-	}
+	// function percent(d, t){
+	// 	var pc = Math.round(d.partial/d.trg_total*1000)/10;
+	// 	// $(d.pc).html( pc + '%');
+	// 	d.pc_val = pc;
+	// 	// if(pc == 0) $(d.pc).css({color:'#fff', opacity:.2});
+	// 	// else $(d.pc).css({color:d.fill, opacity:1});
+	// }
 
 	// tooltip
 
@@ -642,7 +639,7 @@ window.onload = function (){
 		switch(trg){
 			case "hub":
 				search_target = json.hubs;
-				scale = 5000/json.hubs.length ;
+				scale = scale_factor/json.hubs.length;
 				$(filters_sep).html(labels.hub_list[lg].toUpperCase());
 				$(legend_hub).delay(dur/2).animate({left:0}, dur/2);
 				$(list_hub).fadeIn(dur);
@@ -667,7 +664,7 @@ window.onload = function (){
 			break;
 			case "sig":
 				search_target = json.signals;
-				scale =  5000/json.signals.length
+				scale = scale_factor/json.signals.length
 				$(filters_sep).html(labels.sig_list[lg].toUpperCase());
 				$(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
 				$(list_sig).fadeIn(dur);
@@ -1067,7 +1064,29 @@ window.onload = function (){
 		}
 	}
 
+	function subtitle(d, cod){
+
+		var sub = "";
+		sub += "<span class='bold'>" + json.filters.origin[lg] + "</span> ";
+		sub += arr_search( json.filters.origin.itens, d.origin )[lg];
+		sub += " | ";
+		sub +=  "<span class='bold'>" + json.filters.coverage[lg] + "</span> ";
+		sub += arr_search( json.filters.coverage.itens, d.coverage )[lg];
+
+		if(cod == 'sig'){
+			sub += " | ";
+			sub +=  "<span class='bold'>" + json.filters.purpose[lg] + "</span> ";
+			sub += arr_search( json.filters.purpose.itens, d.purpose )[lg];
+			sub += " | ";
+			sub +=  "<span class='bold'>" + json.filters.type[lg] + "</span> ";
+			sub += arr_search( json.filters.type.itens, d.type )[lg];
+		}
+
+		return sub;
+	}
+
 	//////////////////////////////// LOAD ////////////////////////////////
+
 
 	function load(){
 
@@ -1076,7 +1095,6 @@ window.onload = function (){
 
 		// hubs
 		n_hubs = json.hubs.length;
-		t_hubs = json.hubs.length;
 
 		for( i in json.hubs ){
 
@@ -1087,7 +1105,7 @@ window.onload = function (){
 			$(li)
 				.addClass('list_item')
 				.on('click', function(){
-					alert( this.node.name );
+					// alert( this.node.name );
 				});
 
 			d.li = li;
@@ -1105,7 +1123,7 @@ window.onload = function (){
 			div = document.createElement('div');
 			$(div)
 				.addClass('subtitle')
-				.html( arr_search( json.filters.origin.itens, d.origin )[lg] )
+				.html( subtitle( d, 'hub') )
 			li.appendChild(div);
 
 			list_hub.appendChild(li);
@@ -1113,7 +1131,6 @@ window.onload = function (){
 
 		// signals
 		n_signals = json.signals.length;
-		t_signals = json.signals.length;
 
 		for( i in json.signals ){
 
@@ -1124,7 +1141,7 @@ window.onload = function (){
 			$(li)
 				.addClass('list_item')
 				.on('click', function(){
-					alert( this.node.name );
+					// alert( this.node.name );
 				});
 
 			d.li = li;
@@ -1142,7 +1159,7 @@ window.onload = function (){
 			div = document.createElement('div');
 			$(div)
 				.addClass('subtitle')
-				.html( arr_search(json.filters.origin.itens, d.origin)[lg] )
+				.html( subtitle( d, 'sig'))
 			li.appendChild(div);
 
 			list_sig.appendChild(li);
@@ -1154,7 +1171,6 @@ window.onload = function (){
 
 		$(legend_hub).height(json.filters.kind.itens.length * 21 );
 		$(legend_sig).height(json.filters.method.itens.length * 21 );
-
 
 		create_filters(json.filters.origin, false, false);
 		create_filters(json.filters.coverage, false, false);
@@ -1177,6 +1193,9 @@ window.onload = function (){
 
 			// legend
 			d = json.filters.method.itens[i];
+
+			console.log(d[lg] + " " + scale_method(i));
+
 			li = document.createElement('li');
 			$(li)
 				.addClass('legend')
@@ -1185,7 +1204,7 @@ window.onload = function (){
 			div = document.createElement('div');
 			$(div)
 				.addClass('color')
-				.css({background:scale_method(i)})
+				.css({background:d.hex})
 			li.appendChild(div);
 
 			div = document.createElement('div');
@@ -1194,13 +1213,13 @@ window.onload = function (){
 				.html( d[lg] )
 			li.appendChild(div);
 
-			span = document.createElement('span');
-			$(span)
-				.addClass('pc')
-				.attr('style','color:' + scale_method(i));
-			li.appendChild(span);
-
-			d.pc = span;
+			// span = document.createElement('span');
+			// $(span)
+			// 	.addClass('pc')
+			// 	.attr('style','color:' + d.hex);
+			// li.appendChild(span);
+			//
+			// d.pc = span;
 
 		}
 
@@ -1220,7 +1239,7 @@ window.onload = function (){
 			div = document.createElement('div');
 			$(div)
 				.addClass('color')
-				.css({background:scale_kind(i)})
+				.css({background:d.hex })
 			li.appendChild(div);
 
 			div = document.createElement('div');
@@ -1229,13 +1248,13 @@ window.onload = function (){
 				.html( d[lg] )
 			li.appendChild(div);
 
-			span = document.createElement('span');
-			$(span)
-				.addClass('pc')
-				.attr('style','color:' + scale_kind(i))
-			li.appendChild(span);
-
-			d.pc = span;
+			// span = document.createElement('span');
+			// $(span)
+			// 	.addClass('pc')
+			// 	.attr('style','color:' + d.hex))
+			// li.appendChild(span);
+			//
+			// d.pc = span;
 
 		}
 
