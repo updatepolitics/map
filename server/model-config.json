@@ -47,5 +47,9 @@
   "MethodType": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "HubNature": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

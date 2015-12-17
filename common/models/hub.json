@@ -43,6 +43,11 @@
       "foreignKey": "childId",
       "keyThrough": "parentId",
       "throught": "Affiliation"
+    },
+    "nature": {
+      "type": "belongsTo",
+      "model": "HubNature",
+      "foreignKey": ""
     }
   },
   "acls": [],

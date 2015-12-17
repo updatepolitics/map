@@ -1,0 +1,33 @@
+{
+  "name": "HubNature",
+  "plural": "natures",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "plural": {
+      "type": "boolean",
+      "required": true
+    },
+    "institutional": {
+      "type": "boolean",
+      "required": true
+    },
+    "name_pt": {
+      "type": "string",
+      "required": true
+    },
+    "name_es": {
+      "type": "string"
+    },
+    "name_en": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

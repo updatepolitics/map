@@ -8,8 +8,9 @@ module.exports = function(app, donePopulate) {
   if (process.env.NODE_ENV != 'production') {
     tasks.push(
       populate.clearDb,
-      populate.loadCsv,
-      populate.loadMethods,
+      populate.importCsv,
+      populate.importMethods,
+      populate.importHubNature,
       populate.importHubs,
       populate.setHubsParents
     );
