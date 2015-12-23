@@ -46,7 +46,7 @@ input:focus:-moz-placeholder { opacity: 0 }
 input:focus::-moz-placeholder {  opacity: 0 }
 input:focus:-ms-input-placeholder {  opacity: 0}
 
-.bold{ font-weight:700}
+.bold{ font-weight:900}
 .light{ font-weight:100}
 
 *,
@@ -65,6 +65,9 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     top: 0;
     overflow: hidden;
 }
+
+p { margin-bottom: 20px; }
+p:last-child { margin-bottom: 0; }
 
 /* ////////////////////////// MENU ////////////////////////// */
 
@@ -102,7 +105,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #menu_bts .bt{
     margin-bottom: 10px;
     list-style: none;
-    opacity: .2;
+    opacity: .3;
 }
 
 #menu_bts .bt:hover{
@@ -111,7 +114,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 #menu_bts .bt.selected{
     color: #fff;
-    font-weight: 600;
+    font-weight: 700;
     opacity: 1;
     cursor: default;
 }
@@ -303,6 +306,229 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     display: table-cell;
 }
 
+
+/* ////////////////////////// MODAL + POPUP ////////////////////////// */
+
+#modal{
+    width: 90%;
+    height: 90%;
+    max-width: 720px;
+    max-height: 720px;
+    position: fixed;
+    z-index: 10;
+    background: #fff;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+    color: #212733;
+    display: none;
+    overflow: hidden;
+    text-align: center;
+}
+
+#modal .title {
+    font-family: 'Stardos Stencil';
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#modal .subtitle{
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+#modal .about{
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: #ddd 1px solid;
+}
+
+#modal .list{
+    width: 100%;
+}
+
+
+#modal .item{
+    font-family: 'Stardos Stencil';
+    font-size: 24px;
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px;
+    cursor: pointer;
+    line-height: 34px;
+    background-image: url('../layout/plus_white.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    list-style: none;
+    color: #fff;
+}
+
+.item_plus{
+    overflow: hidden;
+    color:#fff;
+    font-size: 14px;
+	font-weight:400;
+	font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 0 30px;
+    text-align: left;
+    margin-bottom: 1px;
+}
+
+#modal_nav{
+    width: 100%;
+    height: 50px;
+    background: #fff;
+}
+
+#modal_content{
+    width: 100%;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 0 50px;
+    overflow:auto;
+}
+
+#modal_x{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background-image: url('../layout/modal_x.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#modal .section{
+    font-size: 14px;
+    width: 100%;
+    font-weight: 400;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    color: #999;
+}
+
+#modal .link{
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    line-height: 34px;
+    background-image: url('../layout/popup.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    list-style: none;
+    color: #fff;
+    background-color: #2d3340;
+    padding: 15px 40px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+#modal .link:hover{
+    background-color: #262c38;
+}
+
+/*popup*/
+
+#popup_x{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url('../layout/x.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#popup_container{
+    width: 50%;
+    max-width: 500px;
+    height: 100%;
+    position: fixed;
+    z-index: 10;
+    display: none;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.table{
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.table_cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#popup{
+    display: inline-block;
+    padding: 50px;
+    position: relative;
+}
+
+#popup .title{
+    font-family: 'Stardos Stencil';
+    font-size: 30px;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 24px;
+    line-height: 36px;
+    text-align: center;
+}
+
+#popup_content{
+    width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+/* Track */
+#modal_content::-webkit-scrollbar-track {
+	background-color:#fff;
+}
+/* Handle */
+#modal_content::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border:#fff 5px solid;
+    background-color:#ccc;
+}#modal_content::-webkit-scrollbar-thumb:hover{
+    background-color:#212733;
+}
+
+
+#curtain{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(33,39,51,.7);
+    z-index: 9;
+    display: none;
+}
 
 /* ////////////////////////// HELP ////////////////////////// */
 
@@ -510,7 +736,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     bottom:1px;
     z-index: 4;
     text-align: center;
-    position: relative;
     border-top: #212733 1px solid;
 }
 
@@ -584,23 +809,19 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 #control_hub{
     z-index: 4;
-    display: table;
-    height: 100%;
-    width: 50%;
-    position: absolute;
-    left: 0;
-    background: #2d3340;
-}
-
-#control_hub_lb{
     display: table-cell;
+    background: #2d3340;
+    vertical-align: middle;
+    position: relative;
     background-image: url("../layout/hub1.png");
     background-repeat: no-repeat;
     background-position: right 10px top 15px;
+}
+
+#control_hub_lb{
     opacity: .2;
-    vertical-align: middle;
-    text-align: right;
     padding-right: 70px;
+    float: right;
 }
 
 #control_hub:hover{
@@ -609,22 +830,18 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 #control_sig{
     z-index: 4;
-    display: table;
-    height:100%;
-    width: 50%;
-    position: absolute;
-    right: 0;
-    background: #2d3340;
-}
-
-#control_sig_lb{
     display: table-cell;
+    vertical-align: middle;
+    background: #2d3340;
+    position: relative;
     background-image: url("../layout/sig1.png");
     background-repeat: no-repeat;
     background-position: left 10px top 15px;
+}
+
+#control_sig_lb{
     opacity: .2;
-    vertical-align: middle;
-    text-align: left;
+    float: left;
     padding-left: 70px;
 }
 
@@ -794,8 +1011,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 	position: fixed;
 	z-index: 10;
 	padding: 10px 15px;
-	border-radius: 2px;
-    border: #fff 1px solid;
+	/*border-radius: 2px;
+    border: #fff 1px solid;*/
     color: #fff;
     text-align: center;
 	text-transform: uppercase;
@@ -929,7 +1146,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #e5e3e5;
+    background-color: #f2f0f2;
     color: #212733;
     overflow: auto;
     overflow-x: hidden;
@@ -947,7 +1164,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     color:#212733;
     text-align: center;
     padding-top: 12px;
-    background-color: #f2f0f2;
+    background-color: #fff;
 }
 
 #list_header_title{
@@ -967,8 +1184,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     left: 0;
     right: 0;
     margin: auto;
-    border-left: #f2f0f2 10px solid;
-    border-right: #f2f0f2 15px solid;
+    border-left: #fff 10px solid;
+    border-right: #fff 15px solid;
 }
 
 #search_str{
@@ -1004,23 +1221,23 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 
+
 /* Track */
 #list::-webkit-scrollbar-track {
-	background-color:#e5e3e5;
+	background-color:#f2f0f2;
 }
 /* Handle */
 #list::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-	border:#e5e3e5 5px solid;
+	border:#f2f0f2 5px solid;
     background-color:#b3b1b3;
 }#list::-webkit-scrollbar-thumb:hover{
     background-color:#212733;
 }
 
 .list_item{
-    width: 50%;
-    float: left;
+    width: 100%;
     padding-top: 25px;
     padding-left: 20px;
     cursor: pointer;
@@ -1029,19 +1246,26 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     height: 90px;
     text-align: center;
     position: relative;
-    border-bottom: #d9d7d9 1px solid;
-    border-right: #d9d7d9 1px solid;
+    border: #fff 1px solid;
+    border-top: none;
+
+    background-color: #f2f0f2;
+}
+
+.layout2 .list_item{
+    width: 50%;
+    float: left;
 }
 
 .list_item:hover{
-    background-color: #d9d7d9;
+    background-color: #e5e3e5;
 }
 
 .list_item .title{
     font-family: 'Stardos Stencil';
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     width: 80%;
     margin-left: 10%;
     overflow: hidden;
@@ -1053,6 +1277,15 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 400;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.layout2 .list_item .subtitle{
+    width: 80%;
 }
 
 .list_item img{

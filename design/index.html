@@ -67,11 +67,7 @@
 
 	<div id="menu">
 		<div id="menu_close"></div>
-		<ul id="menu_bts">
-			<li class="bt selected">UPDATE</li>
-			<li class="bt">EXPLORAR</li>
-			<li class="bt">SINAIS</li>
-		</ul>
+		<ul id="menu_bts"></ul>
 		<ul id="contact">
 			<li id="email" class="bt"></li>
 			<li id="twitter" class="bt"></li>
@@ -79,6 +75,27 @@
 			<li id="fbook" class="bt"></li>
 		</ul>
 	</div>
+
+	<div id="modal">
+		<div id="modal_nav">
+			<div id="modal_back"></div>
+			<div id="modal_x"></div>
+		</div>
+		<div id="modal_content"></div>
+	</div>
+
+	<div id="popup_container">
+		<div class="table">
+			<div class="table_cell">
+				<div id="popup">
+					<div id="popup_x"></div>
+					<div id="popup_content"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="curtain"></div>
 
 	<div id="container">
 
@@ -128,11 +145,11 @@
 			<div class="control" id="control_left">
 				<div id="control_hub">
 					<div class="flap" id="flap_hub"></div>
-					<div id="control_hub_lb">HUBS</div>
+					<span id="control_hub_lb">HUBS</span>
 				</div>
 				<div id="control_sig">
 					<div class="flap" id="flap_sig"></div>
-					<div id="control_sig_lb">SINAIS</div>
+					<span id="control_sig_lb">SINAIS</span>
 				</div>
 			</div>
 			<div class="control" id="control_center">
