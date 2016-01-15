@@ -1,4 +1,5 @@
 
+
 window.onload = function (){
 
 	var page_id = 0; // index.html
@@ -26,16 +27,67 @@ window.onload = function (){
 	    root += path[i] + '/';
 	}
 
+	function set_location( html, section, cod, push ){
+		var new_loc = root;
+		var navigate = false;
+		if ( section ){
+			new_loc += "index.html?section=" + section;
+			if(cod) new_loc += "&cod=" + cod;
+			if ( cur_page != "index.html" ){
+				navigate = true;
+			} else {
+				if(section != cur_layout) set_layout(section);
+				if( cod && cod != cur_target ){
+					set_target( cod );
+				}
+				if(push) history.pushState({page: new_loc}, '', new_loc );
+			}
+		} else {
+			new_loc += html;
+			navigate = true;
+		}
+
+		if(navigate) document.location.href = new_loc;
+
+	}
+
+	function $_GET() {
+		var vars = {};
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+			vars[key] = value;
+		});
+		return vars;
+
+	}
+
+	var get_section,
+		get_cod;
+
+	function check_get(){
+		get_section = $_GET()["section"];
+		if(get_section) set_layout(get_section);
+
+		get_cod = $_GET()["cod"];
+		if(get_cod && get_cod != cur_target) set_target( get_cod );
+	}
+
+	window.onpopstate = check_get;
+
 	console.log( "ROOT: " + root );
 	var cur_page = path[path.length-1];
 
+	if( cur_page == '' ){
+		cur_page = 'index.html';
+		set_location('index.html', false, false, false);
+	}
+
 	var pages = [
-	    { _pt:'IN&Iacute;CIO', html:"index.html", section:"home" },
-	    { _pt:'EXPLORE', html:"index.html", section:"map" },
+	    { _pt:'IN&Iacute;CIO', html:"index.html", section:"home", cod:false },
+	    { _pt:'EXPLORE', html:"index.html", section:"map", cod: false },
 	    { _pt:'SINAIS', html:"index.html", section:"list", cod:'sig' },
 	    { _pt:'HUBS', html:"index.html", section:"list", cod:'hub' },
-	    { _pt:'METODOLOGIA', html:"methodology.html" },
-	    { _pt:'SOBRE', html:"about.html" }
+	    { _pt:'METODOLOGIA', html:"methodology.html", section:false, cod:false },
+	    { _pt:'SOBRE', html:"about.html", section:false, cod:false }
 	];
 
 	function open_menu(){
@@ -52,7 +104,6 @@ window.onload = function (){
 
 	function set_menu(id){
 	    for( i in pages ){
-
 			if( i == id) $(pages[i].li).addClass('selected');
 			else $(pages[i].li).removeClass('selected');
 	    }
@@ -160,19 +211,7 @@ window.onload = function (){
             .addClass('bt')
             .html( pages[i][lg] )
             .on( bt_event, function(){
-                if ( this.d.section ){
-                    if ( cur_page != "index.html" || cur_page == '' ){
-                        document.location.href = "index.html?section=" + this.d.section;
-                    } else {
-						set_layout(this.d.section);
-                        if( this.d.cod ){
-                            set_target( this.d.cod );
-                        }
-                    }
-                } else {
-                    document.location.href = this.d.html;
-                }
-				close_menu();
+				set_location(this.d.html, this.d.section, this.d.cod, true);
             });
 
         if(i == page_id){
@@ -208,7 +247,7 @@ window.onload = function (){
 		wn,
 		win_w,
 		win_h,
-		cur_layout,
+		cur_layout = 'home',
 		cur_target,
 		search_target,
 		scale,
@@ -335,8 +374,10 @@ window.onload = function (){
 
 
 	$(update_logo).on(bt_event, function(){
-		if(cur_layout == 'map') set_layout('home');
-		if(cur_layout == 'list') set_layout('map');
+		if(cur_page == "index.html" ){
+			if(cur_layout == 'map') set_location('index.html','home',false, true);
+			if(cur_layout == 'list') set_location('index.html','map', false, true);
+		}
 	});
 
 	//////////////////////////////// WINDOW ////////////////////////////////
@@ -599,6 +640,7 @@ window.onload = function (){
 	$(map).css({backgroundSize:'100%', opacity:.2});
 
 	function set_layout(lay){
+		document.title = "UPDATE POLITICS :: " + lay
 		cur_layout = lay;
 		switch(lay){
 			case 'home':
@@ -669,6 +711,7 @@ window.onload = function (){
 				}
 				setTimeout( function(){
 					$(control).animate({top:80}, dur2, in_out);
+					$(update_logo).animate({top:32}, dur2, in_out);
 					$(filters).css({bottom:0, height:win_h - 160})
 					$(list).animate({ top:200 }, dur2, in_out);
 					$(map_container).animate({height:win_h-240, opacity:0}, dur2, in_out);
@@ -694,7 +737,7 @@ window.onload = function (){
 	})
 
 	$(explore).on(bt_event, function(){
-		set_layout('map');
+		set_location('index.html', 'map', cur_target, true);
 	})
 
 	//////////////////////////////// MAP ////////////////////////////////
@@ -977,12 +1020,13 @@ window.onload = function (){
 		create_map(trg);
 	}
 
+
 	$(control_hub).on(bt_event, function(){
-		if( cur_target != 'hub') set_target('hub');
+		if( cur_target != 'hub') set_location('index.html', cur_layout, 'hub', true);
 	});
 
 	$(control_sig).on(bt_event, function(){
-		if( cur_target != 'sig') set_target('sig');
+		if( cur_target != 'sig') set_location('index.html', cur_layout, 'sig', true);
 	});
 
 	// filters
@@ -1141,8 +1185,8 @@ window.onload = function (){
 	//////////////////////////////// LIST ////////////////////////////////
 
 	$(control_center).on(bt_event, function () {
-		if(cur_layout == 'map') set_layout('list');
-		else set_layout('map');
+		if( cur_layout == 'map') set_location('index.html', 'list', cur_target, true);
+		else set_location('index.html', 'map', cur_target, true);
 	})
 
 	//////////////////////////////// FILTERS ////////////////////////////////
@@ -1560,7 +1604,8 @@ window.onload = function (){
 
 		// initial target: signals
 
-		set_target('sig');
+		if(!get_cod) set_target('sig');
+		check_get();
 
 	} // load
 
@@ -1570,7 +1615,6 @@ window.onload = function (){
 		url: 'data.json',
 		dataType: 'json',
 		success: function(data){
-
 			json = data;
 			load();
 		}
