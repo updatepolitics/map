@@ -16,24 +16,22 @@ html{
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+    overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
-    height: 18px;
-    width: 18px;
-}
+
 /* Track */
 ::-webkit-scrollbar-track {
-	background-color:#2d3340;
+	background-color:#f00;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-	border:#2d3340 5px solid;
-    background-color:#525762;
+	border:#fff 5px solid;
+    background-color:#ccc;
 }::-webkit-scrollbar-thumb:hover{
-    background-color:#fff;
+    background-color:#212733;
 }
 
 ::-webkit-input-placeholder { color: inherit; opacity: .2 }
@@ -58,12 +56,18 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 #container{
+    position: relative;
+    left: 0;
+}
+
+#container.fixed{
     position: fixed;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
     overflow: hidden;
+    z-index: 7;
 }
 
 p { margin-bottom: 20px; }
@@ -138,6 +142,140 @@ p:last-child { margin-bottom: 0; }
 #fbook{ background-image: url('../layout/fbook.png') }
 #twitter{ background-image: url('../layout/twitter.png') }
 #github{ background-image: url('../layout/github.png') }
+
+
+/* //////////////////////////  MODAL + POPUP ////////////////////////// */
+
+
+#modal{
+    width: 90%;
+    height: 90%;
+    max-width: 720px;
+    max-height: 720px;
+    position: fixed;
+    z-index: 10;
+    background: #fff;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+    color: #212733;
+    display: none;
+    overflow: hidden;
+    text-align: center;
+}
+
+#modal_nav{
+    width: 100%;
+    height: 50px;
+    background: #fff;
+}
+
+#modal_content{
+    width: 100%;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 0 50px;
+    overflow:auto;
+}
+
+#modal_x{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background-image: url('../layout/modal_x.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/*popup*/
+
+#popup_x{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url('../layout/x.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#popup_container{
+    width: 50%;
+    max-width: 500px;
+    height: 100%;
+    position: fixed;
+    z-index: 10;
+    display: none;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.table{
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.table_cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#popup{
+    display: inline-block;
+    padding: 50px;
+    position: relative;
+}
+
+#popup .title{
+    font-family: 'Stardos Stencil';
+    font-size: 30px;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 24px;
+    line-height: 36px;
+    text-align: center;
+}
+
+#popup_content{
+    width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+/* Track */
+#modal_content::-webkit-scrollbar-track {
+	background-color:#fff;
+}
+/* Handle */
+#modal_content::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border:#fff 5px solid;
+    background-color:#ccc;
+}#modal_content::-webkit-scrollbar-thumb:hover{
+    background-color:#212733;
+}
+
+#curtain{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(33,39,51,.7);
+    z-index: 9;
+    display: none;
+}
 
 /* ////////////////////////// HOME ////////////////////////// */
 
@@ -238,12 +376,16 @@ p:last-child { margin-bottom: 0; }
 /* ////////////////////////// HEADER ////////////////////////// */
 
 #header{
-    position: absolute;
-    width: 100%;
-    height: 80px;
-    z-index: 2;
+    position: fixed;
     left: 0;
     top: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 8;
+}
+
+#header.bg{
+    background: #212733;
 }
 
 #menu_bt{
@@ -307,228 +449,6 @@ p:last-child { margin-bottom: 0; }
 }
 
 
-/* ////////////////////////// MODAL + POPUP ////////////////////////// */
-
-#modal{
-    width: 90%;
-    height: 90%;
-    max-width: 720px;
-    max-height: 720px;
-    position: fixed;
-    z-index: 10;
-    background: #fff;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom:0;
-    color: #212733;
-    display: none;
-    overflow: hidden;
-    text-align: center;
-}
-
-#modal .title {
-    font-family: 'Stardos Stencil';
-    font-size: 30px;
-    line-height: 36px;
-    font-weight: 700;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-#modal .subtitle{
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 400;
-}
-
-#modal .about{
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: #ddd 1px solid;
-}
-
-#modal .list{
-    width: 100%;
-}
-
-
-#modal .item{
-    font-family: 'Stardos Stencil';
-    font-size: 24px;
-    font-weight: 400;
-    width: 100%;
-    text-align: center;
-    vertical-align: middle;
-    padding: 15px;
-    cursor: pointer;
-    line-height: 34px;
-    background-image: url('../layout/plus_white.png');
-    background-repeat: no-repeat;
-    background-position: right;
-    list-style: none;
-    color: #fff;
-}
-
-.item_plus{
-    overflow: hidden;
-    color:#fff;
-    font-size: 14px;
-	font-weight:400;
-	font-family: 'Source Sans Pro', sans-serif;
-    font-size: 16px;
-    line-height: 22px;
-    padding: 0 30px;
-    text-align: left;
-    margin-bottom: 1px;
-}
-
-#modal_nav{
-    width: 100%;
-    height: 50px;
-    background: #fff;
-}
-
-#modal_content{
-    width: 100%;
-    font-size: 18px;
-    line-height: 24px;
-    padding: 0 50px;
-    overflow:auto;
-}
-
-#modal_x{
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    background-image: url('../layout/modal_x.png');
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-#modal .section{
-    font-size: 14px;
-    width: 100%;
-    font-weight: 400;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    text-transform: uppercase;
-    color: #999;
-}
-
-#modal .link{
-    font-weight: 400;
-    width: 100%;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    line-height: 34px;
-    background-image: url('../layout/popup.png');
-    background-repeat: no-repeat;
-    background-position: right;
-    list-style: none;
-    color: #fff;
-    background-color: #2d3340;
-    padding: 15px 40px;
-    margin-bottom: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-#modal .link:hover{
-    background-color: #262c38;
-}
-
-/*popup*/
-
-#popup_x{
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50px;
-    height: 50px;
-    background-image: url('../layout/x.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-#popup_container{
-    width: 50%;
-    max-width: 500px;
-    height: 100%;
-    position: fixed;
-    z-index: 10;
-    display: none;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-}
-
-.table{
-    display: table;
-    width: 100%;
-    height: 100%;
-}
-
-.table_cell{
-    display: table-cell;
-    vertical-align: middle;
-}
-
-#popup{
-    display: inline-block;
-    padding: 50px;
-    position: relative;
-}
-
-#popup .title{
-    font-family: 'Stardos Stencil';
-    font-size: 30px;
-    font-weight: 700;
-    width: 100%;
-    margin-bottom: 24px;
-    line-height: 36px;
-    text-align: center;
-}
-
-#popup_content{
-    width: 100%;
-    font-size: 16px;
-    line-height: 20px;
-}
-
-/* Track */
-#modal_content::-webkit-scrollbar-track {
-	background-color:#fff;
-}
-/* Handle */
-#modal_content::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-	border:#fff 5px solid;
-    background-color:#ccc;
-}#modal_content::-webkit-scrollbar-thumb:hover{
-    background-color:#212733;
-}
-
-
-#curtain{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: rgba(33,39,51,.7);
-    z-index: 9;
-    display: none;
-}
 
 /* ////////////////////////// HELP ////////////////////////// */
 
@@ -901,7 +821,26 @@ p:last-child { margin-bottom: 0; }
     border-bottom: #212733 1px solid;
 }
 
-#filters .title{
+
+#filters::-webkit-scrollbar {
+    height: 18px;
+    width: 18px;
+}
+/* Track */
+#filters::-webkit-scrollbar-track {
+	background-color:#2d3340;
+}
+/* Handle */
+#filters::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border:#2d3340 5px solid;
+    background-color:#525762;
+}#filters::-webkit-scrollbar-thumb:hover{
+    background-color:#fff;
+}
+
+.filter_title{
     width: 100%;
     padding: 20px 10px 20px 60px;
     font-size: 16px;
@@ -1010,8 +949,10 @@ p:last-child { margin-bottom: 0; }
 	position: fixed;
 	z-index: 10;
 	padding: 10px 15px;
-	/*border-radius: 2px;
-    border: #fff 1px solid;*/
+	/*
+    border-radius: 2px;
+    border: #fff 1px solid;
+    */
     color: #fff;
     text-align: center;
 	text-transform: uppercase;
@@ -1219,8 +1160,6 @@ p:last-child { margin-bottom: 0; }
     cursor: pointer;
 }
 
-
-
 /* Track */
 #list::-webkit-scrollbar-track {
 	background-color:#f2f0f2;
@@ -1272,7 +1211,7 @@ p:last-child { margin-bottom: 0; }
     white-space: nowrap;
 }
 
-.list_item .subtitle{
+.list_item .info{
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 400;
@@ -1283,7 +1222,7 @@ p:last-child { margin-bottom: 0; }
     white-space: nowrap;
 }
 
-.layout2 .list_item .subtitle{
+.layout2 .list_item .info{
     width: 80%;
 }
 
@@ -1306,5 +1245,211 @@ p:last-child { margin-bottom: 0; }
 }
 
 
+
+/* ////////////////////////// content ////////////////////////// */
+
+
+#content{
+    width: 100%;
+    background: #f2f0f2;
+    color: #212733;
+    padding: 160px 50px;
+}
+
+/* Track */
+#content::-webkit-scrollbar-track {
+	background-color:#f00;
+}
+/* Handle */
+#content::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border:#f2f0f2 5px solid;
+    background-color:#b3b1b3;
+}#content::-webkit-scrollbar-thumb:hover{
+    background-color:#212733;
+}
+
+#content_dark{
+    width: 100%;
+    color: #fff;
+    background: #212733;
+    padding: 160px 50px;
+    font-weight: 300;
+}
+
+#content_dark hr{
+    background: #fff;
+    opacity: .2;
+}
+
+/* Track */
+#content_dark::-webkit-scrollbar-track {
+	background-color:#f00;
+}
+/* Handle */
+#content_dark::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border:#f2f0f2 5px solid;
+    background-color:#b3b1b3;
+}#content_dark::-webkit-scrollbar-thumb:hover{
+    background-color:#212733;
+}
+
+.title {
+    font-family: 'Stardos Stencil';
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+.mt40{
+    margin-top:40px;
+}
+
+hr{
+    width: 100%;
+    height: 1px;
+    border:none;
+    background: #000;
+    opacity: .3;
+    margin: 40px 0;
+}
+
+.subtitle {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info{
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.list{
+    width: 100%;
+}
+
+.box{
+    font-size: 16px;
+    padding: 30px;
+    color: #fff;
+    line-height: 22px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.box_title{
+    font-family: 'Stardos Stencil';
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.item{
+    font-family: 'Stardos Stencil';
+    font-size: 24px;
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px;
+    cursor: pointer;
+    line-height: 34px;
+    background-image: url('../layout/plus_white.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    list-style: none;
+    color: #fff;
+}
+
+.item_plus{
+    overflow: hidden;
+    color:#fff;
+    font-size: 14px;
+	font-weight:400;
+	font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 0 30px;
+    text-align: left;
+    margin-bottom: 1px;
+}
+
+.section{
+    font-size: 14px;
+    width: 100%;
+    font-weight: 400;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #999;
+    text-align: center;
+}
+
+.link{
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    line-height: 34px;
+    background-image: url('../layout/popup.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    list-style: none;
+    color: #fff;
+    background-color: #2d3340;
+    padding: 15px 40px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.link:hover{
+    background-color: #262c38;
+}
+
+#sub_content{
+    max-width: 800px;
+    margin: auto;
+	-webkit-user-select:all;
+	-khtml-user-select: all;
+	-moz-user-select: all;
+	-ms-user-select: all;
+	user-select: all;
+}
+
+.text{
+    margin-top: 40px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+
+/* ////////////////////////// about ////////////////////////// */
+
+#staff{
+    width: 100%;
+    position: relative;
+}
+
+.staff{
+    display: inline;
+    width: 20%;
+    overflow: hidden;
+}
 
 /**/

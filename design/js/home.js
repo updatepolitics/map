@@ -15,6 +15,10 @@ var json,
 
 var scale_factor = 6000; // chart size on Explorer Mode
 
+var cur_scale = 1;
+var zoom_limits = [ .5, 5 ];
+var zoom_factor = 1.5;
+
 var hub_filters = [];
 var sig_filters = [];
 var strict = {
@@ -77,8 +81,6 @@ reg('popup');
 reg('popup_x');
 reg('popup_content');
 
-reg('curtain');
-
 reg('map_container');
 reg('tooltip');
 reg('tt_title');
@@ -129,7 +131,6 @@ reg('trash');
 
 //////////////////////////////// HEADER ////////////////////////////////
 
-
 $(update_logo).on(bt_event, function(){
 	if(cur_page == "index.html" ){
 		if(cur_layout == 'map') set_location('index.html','home',false, true);
@@ -137,18 +138,29 @@ $(update_logo).on(bt_event, function(){
 	}
 });
 
+// tooltip
+
+function tt(title, val, color){
+	if(title){
+		$(tt_title).html(title);
+		$(tt_val).html(val);
+		$(tooltip).css({background:color}).show();
+	}else{
+		$(tooltip).hide();
+	}
+}
+
+if(!mobile){
+	$(window).mousemove(function( event ){
+	    mouse_x = event.clientX - $(tooltip).width()/2 - 30;
+	    mouse_y = event.clientY - 60;
+	    $(tooltip).css({ left:mouse_x, top:mouse_y });
+	});
+}
+
 //////////////////////////////// WINDOW ////////////////////////////////
 
-function resize(){
-	win_w = $( window ).width();
-	win_h = $( window ).height();
-	if(mobile){
-		if(win_w < win_h) $(dbody).addClass('port');
-		else $(dbody).addClass('land');
-	}else{
-		if( win_w > 1200 ) $(dbody).addClass('layout2');
-		else $(dbody).removeClass('layout2');
-	}
+function resize_update(){
 
 	$(list).height(win_h - 200);
 	$(modal_content).height($(modal).height() - 50);
@@ -167,11 +179,8 @@ function resize(){
 	if(cur_layout == 'list') {
 		$(filters).height(win_h - 160);
 	}
-
 }
 
-window.onresize = resize;
-resize();
 
 //////////////////////////////// MODAL ////////////////////////////////
 
@@ -190,10 +199,9 @@ function scroll(trg, to, dur){
 	});
 }
 
-
 modal.open = false;
 
-function open_modal(d){
+function open_modal (d){
 
 	modal.open = true;
 	$(modal_content).html('');
@@ -206,9 +214,12 @@ function open_modal(d){
 
 	div = document.createElement('div');
 	$(div)
-		.addClass('subtitle')
-		.html( subtitle( d, false ))
+		.addClass('info')
+		.html( info( d, false ))
 	modal_content.appendChild(div);
+
+	hr = document.createElement('hr');
+	modal_content.appendChild(hr);
 
 	div = document.createElement('div');
 	$(div)
@@ -381,6 +392,7 @@ var rotation;
 var rot_delay;
 
 function map_rotation(delay,rotate){
+	// console.log("map rotation: " + rotate);
 	if(rotate){
 		rot_delay = setTimeout( function(){
 			rotation = setInterval(function(){
@@ -421,6 +433,7 @@ function set_layout(lay){
 				$(filters).css({bottom:80, height:win_h - 80});
 				$(circles).fadeOut(dur2, in_out);
 				$(help_bt).fadeOut(dur2, in_out);
+				cur_scale = 5;
 				svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale(5) rotate(' + rot + ')');
 				map_rotation(dur2,true);
 			}, delay);
@@ -449,7 +462,8 @@ function set_layout(lay){
 				if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
 				$(circles).fadeIn(dur2, in_out);
 				$(help_bt).fadeIn(dur2, in_out);
-				svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale(' + cur_scale + ') rotate(' + rot + ')');
+				cur_scale = 1;
+				svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale(1) rotate(' + rot + ')');
 				map_rotation(0,false);
 				setTimeout( function(){
 					$(control_score).css({backgroundImage:'url(layout/up.png)'});
@@ -478,6 +492,7 @@ function set_layout(lay){
 				if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
 				$(circles).fadeOut(dur2, in_out);
 				$(help_bt).fadeOut(dur2, in_out);
+				map_rotation(0,false);
 				setTimeout( function(){
 					$(control_score).css({backgroundImage:'url(layout/down.png)'});
 					$(control_score_lb).html('MAPA');
@@ -665,29 +680,7 @@ function set_all_circles(){
 
 
 
-// tooltip
-
-$(window).mousemove(function( event ){
-	mouse_x = event.clientX - $(tooltip).width()/2 - 30;
-	mouse_y = event.clientY - 60;
-	$(tooltip).css({ left:mouse_x, top:mouse_y });
-});
-
-function tt(title, val, color){
-	if(title){
-		$(tt_title).html(title);
-		$(tt_val).html(val);
-		$(tooltip).css({background:color}).show();
-	}else{
-		$(tooltip).hide();
-	}
-}
-
 // zoom
-
-var cur_scale = 1;
-var zoom_limits = [ .5, 5 ];
-var zoom_factor = 1.5;
 
 $(zoom_out).on(bt_event, function(){
 	if(cur_scale > zoom_limits[0]){
@@ -993,7 +986,6 @@ function check_filters() {
 		if(json.filters[i].active.length > 0){
 			$(json.filters[i].nb).css({opacity:1}).html( json.filters[i].active.length );
 		}
-
 	}
 
 	//trash
@@ -1024,8 +1016,8 @@ function update_list(data, cod){
 				var found = false;
 				if(i != 'method' && i != 'kind'){
 					if(	json.filters[i].active.indexOf( d[i] )  >= 0 ){
-							found = true;
-						}
+						found = true;
+					}
 				}else{
 					for( b in d[i]){
 						if( json.filters[i].active.indexOf( d[i][b] ) >= 0 ) {
@@ -1079,14 +1071,13 @@ function toggle_filter(trg){
 	check_filters();
 }
 
-
-function create_filters(data, target, group){
+function create_filters( data, target, group ){
 
 	var title;
 
 	title = document.createElement('div');
 	$(title)
-		.addClass('title')
+		.addClass('filter_title')
 		.html(data[lg]);
 	filters.appendChild(title);
 
@@ -1149,8 +1140,7 @@ function arr_search( arr, id ){
 	}
 }
 
-function subtitle(d, inline){
-
+function info(d, inline){
 
 	var sub = "";
 	sub += "<span class='bold'>" + json.filters.origin[lg] + "</span> ";
@@ -1228,8 +1218,8 @@ function load(){
 
 		div = document.createElement('div');
 		$(div)
-			.addClass('subtitle')
-			.html( subtitle( d, true ))
+			.addClass('info')
+			.html( info( d, true ))
 		li.appendChild(div);
 
 		list_hub.appendChild(li);
@@ -1264,8 +1254,8 @@ function load(){
 
 		div = document.createElement('div');
 		$(div)
-			.addClass('subtitle')
-			.html( subtitle( d, true ))
+			.addClass('info')
+			.html( info( d, true ))
 		li.appendChild(div);
 
 		list_sig.appendChild(li);
@@ -1289,7 +1279,6 @@ function load(){
 
 	reg('filters_sep');
 	reset_filters_score(true);
-	set_layout('home');
 
 	//method legend
 
@@ -1360,8 +1349,8 @@ function load(){
 
 
 	// initial target: signals
-
 	if(!get_cod) set_target('sig');
+	resize();
 	check_get();
 
 } // load
