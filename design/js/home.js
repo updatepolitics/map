@@ -426,7 +426,7 @@ function set_layout(lay){
 				$(control).animate({top:'100%'}, dur2, in_out);
 				$(legends).animate({left:-400}, dur2, in_out);
 				$(zoom_control).animate({right:-50}, dur2, in_out);
-				$(map).animate({ opacity:.15}, dur2, in_out);
+				$(map).animate({ opacity:.3}, dur2, in_out);
 				$(map_container).animate({height:win_h, opacity:1}, dur2, in_out);
 				$(list).animate({ top: win_h }, dur2, in_out);
 				$(control_score).css({backgroundImage:'url(layout/up.png)'});

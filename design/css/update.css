@@ -3,11 +3,12 @@
 
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
 @import url(https://fonts.googleapis.com/css?family=Stardos+Stencil:400,700);
+@import url(https://fonts.googleapis.com/css?family=Passion+One:700);
 
 body,
 html{
     color:#fff;
-    background: #212733;
+    background: #262c38;
 	font-size:11px;
 	font-weight:400;
 	font-family: 'Source Sans Pro', sans-serif;
@@ -19,10 +20,13 @@ html{
     overflow-x: hidden;
 }
 
-
+::-webkit-scrollbar {
+    height: 18px;
+    width: 18px;
+}
 /* Track */
 ::-webkit-scrollbar-track {
-	background-color:#f00;
+	background-color:#fff;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -31,7 +35,7 @@ html{
 	border:#fff 5px solid;
     background-color:#ccc;
 }::-webkit-scrollbar-thumb:hover{
-    background-color:#212733;
+    background-color:#262c38;
 }
 
 ::-webkit-input-placeholder { color: inherit; opacity: .2 }
@@ -68,6 +72,37 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     top: 0;
     overflow: hidden;
     z-index: 7;
+}
+
+#container.light{
+    background: #f2f0f2;
+    color: #262c38;
+    font-weight: 400;
+}
+
+#container.red{
+    /*background: #fc5a58;*/
+    /*background: #d87d7d;*/
+    /*background: #e06262;*/
+    background: #e16969;
+    color: #fcfbe3;
+    font-weight: 400;
+}
+
+#container.blue{
+    background: #5880b5;
+    color: #e5e9f8;
+    font-weight: 400;
+}
+
+#container.dark{
+    font-weight: 300;
+    color: #eee;
+    background: #2a303c;
+}
+
+#container.red hr, #container.dark hr{
+    background: #fff;
 }
 
 p { margin-bottom: 20px; }
@@ -160,7 +195,7 @@ p:last-child { margin-bottom: 0; }
     right: 0;
     top: 0;
     bottom:0;
-    color: #212733;
+    color: #262c38;
     display: none;
     overflow: hidden;
     text-align: center;
@@ -238,7 +273,8 @@ p:last-child { margin-bottom: 0; }
 
 #popup .title{
     font-family: 'Stardos Stencil';
-    font-size: 30px;
+    /*font-family: 'Passion One', cursive;*/
+    font-size: 28px;
     font-weight: 700;
     width: 100%;
     margin-bottom: 24px;
@@ -263,7 +299,7 @@ p:last-child { margin-bottom: 0; }
 	border:#fff 5px solid;
     background-color:#ccc;
 }#modal_content::-webkit-scrollbar-thumb:hover{
-    background-color:#212733;
+    background-color:#262c38;
 }
 
 #curtain{
@@ -316,7 +352,7 @@ p:last-child { margin-bottom: 0; }
 
 .home_bt:hover{
     background: #fff;
-    color: #212733;
+    color: #262c38;
 }
 
 #intro{
@@ -346,8 +382,10 @@ p:last-child { margin-bottom: 0; }
 #quotes{
     position: absolute;
     top: 75%;
-    width: 70%;
-    left: 15%;
+    width: 60%;
+    left: 0;
+    right: 0;
+    margin: auto;
     text-align: center;
     font-size: 20px;
     font-weight: 300;
@@ -385,7 +423,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 #header.bg{
-    background: #212733;
+    background: #262c38;
 }
 
 #menu_bt{
@@ -428,19 +466,35 @@ p:last-child { margin-bottom: 0; }
     opacity: .3
 }
 
+
 .lang:hover{
     background: #fff;
-    color: #212733;
+    color: #262c38;
     font-weight: 600;
     opacity: 1;
 }
 
+#language.red .lang:hover{
+    color: #e16969;
+}
+
+#language.blue .lang:hover{
+    color: #5880b5;
+}
+
 .lang.selected{
     background: #fff;
-    color: #212733;
+    color: #262c38;
     cursor: default;
     font-weight: 600;
     opacity: 1;
+}
+
+#language.red .lang.selected{
+    color: #e16969;
+}
+#language.blue .lang.selected{
+    color: #5880b5;
 }
 
 .lg_sep {
@@ -556,7 +610,7 @@ p:last-child { margin-bottom: 0; }
     height: 100%;
     position: absolute;
     opacity: .85;
-    background: #212733;
+    background: #262c38;
 }
 
 #help_frame .left{
@@ -607,7 +661,7 @@ p:last-child { margin-bottom: 0; }
     width: 100%;
     height: 80px;
     background: #2d3340;
-    border-bottom: #212733 1px solid;
+    border-bottom: #262c38 1px solid;
 }
 
 .control{
@@ -656,11 +710,11 @@ p:last-child { margin-bottom: 0; }
     bottom:1px;
     z-index: 4;
     text-align: center;
-    border-top: #212733 1px solid;
+    border-top: #262c38 1px solid;
 }
 
 #control_center:hover{
-    background-color: #262c38;
+    background-color: #2a303c;
 }
 
 #control_score{
@@ -719,12 +773,12 @@ p:last-child { margin-bottom: 0; }
     left:0;
     font-size: 16px;
     font-weight: 300;
-    border-right: 1px #212733 solid;
-    background: #262c38;
+    border-right: 1px #262c38 solid;
+    background: #2a303c;
 }
 
 #control_left .selected{
-    background-color: #262c38;
+    background-color: #2a303c;
 }
 
 #control_hub{
@@ -745,7 +799,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 #control_hub:hover{
-    background-color: #262c38;
+    background-color: #2a303c;
 }
 
 #control_sig{
@@ -766,13 +820,13 @@ p:last-child { margin-bottom: 0; }
 }
 
 #control_sig:hover{
-    background-color: #262c38;
+    background-color: #2a303c;
 }
 
 .flap{
     width: 100%;
     height: 4px;
-    border: 1px #212733 solid;
+    border: 1px #262c38 solid;
     position: absolute;
     top:0;
     left: 0;
@@ -786,8 +840,8 @@ p:last-child { margin-bottom: 0; }
 #control_right{
     left:66.7%;
     font-size: 16px;
-    border-left: 1px #212733 solid;
-    border-top: 1px #212733 solid;
+    border-left: 1px #262c38 solid;
+    border-top: 1px #262c38 solid;
     height: 80px;
     font-weight: 300;
 }
@@ -805,7 +859,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 #control_filters:hover{
-    background-color: #262c38;
+    background-color: #2a303c;
 }
 
 #filters{
@@ -816,16 +870,12 @@ p:last-child { margin-bottom: 0; }
     z-index: 5;
     background-color: #2d3340;
     overflow: auto;
-    border-left: #212733 1px solid;
-    border-top: #212733 1px solid;
-    border-bottom: #212733 1px solid;
+    border-left: #262c38 1px solid;
+    border-top: #262c38 1px solid;
+    border-bottom: #262c38 1px solid;
 }
 
 
-#filters::-webkit-scrollbar {
-    height: 18px;
-    width: 18px;
-}
 /* Track */
 #filters::-webkit-scrollbar-track {
 	background-color:#2d3340;
@@ -864,7 +914,7 @@ p:last-child { margin-bottom: 0; }
 #filters .group{
     overflow: hidden;
     height: auto;
-    background: #262c38;
+    background: #2a303c;
 }
 
 .filter{
@@ -922,7 +972,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 #trash:hover {
-    background-color: #262c38;
+    background-color: #2a303c;
 }
 
 #trash.empty {
@@ -1087,7 +1137,7 @@ p:last-child { margin-bottom: 0; }
     left: 0;
     width: 100%;
     background-color: #f2f0f2;
-    color: #212733;
+    color: #2d3340;
     overflow: auto;
     overflow-x: hidden;
     z-index: 2;
@@ -1101,7 +1151,7 @@ p:last-child { margin-bottom: 0; }
     position: absolute;
     top: 80px;
     left: 0;
-    color:#212733;
+    color:#262c38;
     text-align: center;
     padding-top: 12px;
     background-color: #fff;
@@ -1137,7 +1187,7 @@ p:last-child { margin-bottom: 0; }
     padding: 0;
     font-size: 14px;
     font-weight: 400;
-    color: #212733;
+    color: #262c38;
     position: abosolute;
     bottom: 0;
     margin: 0;
@@ -1171,7 +1221,7 @@ p:last-child { margin-bottom: 0; }
 	border:#f2f0f2 5px solid;
     background-color:#b3b1b3;
 }#list::-webkit-scrollbar-thumb:hover{
-    background-color:#212733;
+    background-color:#262c38;
 }
 
 .list_item{
@@ -1199,13 +1249,14 @@ p:last-child { margin-bottom: 0; }
     background-color: #e5e3e5;
 }
 
-.list_item .title{
+.title{
     font-family: 'Stardos Stencil';
+    /*font-family: 'Passion One', cursive;*/
     font-size: 28px;
     font-weight: 700;
-    margin-bottom: 5px;
     width: 80%;
-    margin-left: 10%;
+    margin: auto;
+    margin-bottom: 5px;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
@@ -1251,60 +1302,31 @@ p:last-child { margin-bottom: 0; }
 
 #content{
     width: 100%;
-    background: #f2f0f2;
-    color: #212733;
-    padding: 160px 50px;
+    padding: 180px 50px;
 }
 
-/* Track */
-#content::-webkit-scrollbar-track {
-	background-color:#f00;
-}
-/* Handle */
-#content::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-	border:#f2f0f2 5px solid;
-    background-color:#b3b1b3;
-}#content::-webkit-scrollbar-thumb:hover{
-    background-color:#212733;
-}
-
-#content_dark{
+#content .title {
+    font-family: 'Passion One', cursive;
+    font-size: 80px;
+    font-weight: 400;
     width: 100%;
-    color: #fff;
-    background: #212733;
-    padding: 160px 50px;
-    font-weight: 300;
-}
-
-#content_dark hr{
-    background: #fff;
-    opacity: .2;
-}
-
-/* Track */
-#content_dark::-webkit-scrollbar-track {
-	background-color:#f00;
-}
-/* Handle */
-#content_dark::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-	border:#f2f0f2 5px solid;
-    background-color:#b3b1b3;
-}#content_dark::-webkit-scrollbar-thumb:hover{
-    background-color:#212733;
-}
-
-.title {
-    font-family: 'Stardos Stencil';
-    font-size: 30px;
-    line-height: 36px;
-    font-weight: 700;
-    width: 100%;
+    color: #262c38;
     text-align: center;
+    margin: 0 0 100px 0;
 }
+
+#container.dark .title{
+    color: #fff;
+}
+
+#content .subtitle {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    margin: 40px 0;
+}
+
 
 .mt40{
     margin-top:40px;
@@ -1351,16 +1373,18 @@ hr{
 
 .box_title{
     font-family: 'Stardos Stencil';
-    font-size: 24px;
-    font-weight: 400;
+    /*font-family: 'Passion One', cursive;*/
+    font-size: 20px;
+    font-weight: 700;
     margin-bottom: 10px;
     text-align: center;
 }
 
 .item{
     font-family: 'Stardos Stencil';
-    font-size: 24px;
-    font-weight: 400;
+    /*font-family: 'Passion One', cursive;*/
+    font-size: 20px;
+    font-weight: 700;
     width: 100%;
     text-align: center;
     vertical-align: middle;
@@ -1419,7 +1443,7 @@ hr{
 }
 
 .link:hover{
-    background-color: #262c38;
+    background-color: #2a303c;
 }
 
 #sub_content{
@@ -1443,13 +1467,35 @@ hr{
 
 #staff{
     width: 100%;
-    position: relative;
+    font-size: 0;
 }
 
 .staff{
-    display: inline;
-    width: 20%;
-    overflow: hidden;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 20px;
+    position: relative;
 }
+
+.staff img{ height: 100%;}
+
+.staff_name{
+    position: absolute;
+    top: 0;
+    left: 200px;
+    color: #262c38;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.staff_about{
+    position: absolute;
+    font-size: 16px;
+    top: 30px;
+    left: 200px;
+    line-height: 20px;
+    font-weight: 400
+}
+
 
 /**/
