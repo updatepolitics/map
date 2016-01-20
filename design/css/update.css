@@ -335,12 +335,15 @@ p:last-child { margin-bottom: 0; }
     width:80%;
 }
 
+.land #update_logo_home{
+    width: 50%;
+}
+
 .home_bt{
     position: absolute;
     top: 58%;
     width: 200px;
-    height: 58px;
-    padding: 20px 20px;
+    padding: 20px;
     border: #fff 1px solid;
     font-size: 16px;
     font-weight: 400;
@@ -348,6 +351,13 @@ p:last-child { margin-bottom: 0; }
     border-radius: 2px;
     background-repeat: no-repeat;
     border-radius: 30px;
+}
+
+.land .home_bt{
+    padding: 10px;
+    width: 180px;
+    font-size: 14px;
+    background-size: contain;
 }
 
 .home_bt:hover{
@@ -392,6 +402,10 @@ p:last-child { margin-bottom: 0; }
     line-height: 30px;
 }
 
+.mobile #quotes{
+    display: none;
+}
+
 #credit{
     width: 70%;
     left: 15%;
@@ -422,8 +436,8 @@ p:last-child { margin-bottom: 0; }
     z-index: 8;
 }
 
-#header.bg{
-    background: #262c38;
+.mobile #header{
+    height: 50px;
 }
 
 #menu_bt{
@@ -436,6 +450,11 @@ p:last-child { margin-bottom: 0; }
     cursor: pointer;
 }
 
+.mobile #menu_bt{
+    top: 0;
+    left: 5px;
+}
+
 #update_logo{
     width: 100px;
     position: absolute;
@@ -446,11 +465,21 @@ p:last-child { margin-bottom: 0; }
     cursor: pointer;
 }
 
+.mobile
+#update_logo{
+    width: 80px;
+}
+
 #language{
     position: absolute;
     right: 25px;
     top: 25px;
     display: table;
+}
+
+.mobile #language{
+    top: 15px;
+    right: 15px;
 }
 
 .lang{
@@ -466,6 +495,10 @@ p:last-child { margin-bottom: 0; }
     opacity: .3
 }
 
+.mobile .lang{
+    width: 25px;
+    height: 25px;
+}
 
 .lang:hover{
     background: #fff;
@@ -512,6 +545,11 @@ p:last-child { margin-bottom: 0; }
     right: 15px;
     display: none;
     cursor: pointer;
+}
+
+.mobile #help_bt {
+    top: -50px;
+    right: 0;
 }
 
 #help{
@@ -664,6 +702,10 @@ p:last-child { margin-bottom: 0; }
     border-bottom: #262c38 1px solid;
 }
 
+.land #control{
+    height: 50px;
+}
+
 .control{
     display: table;
     width: 33.3%;
@@ -673,6 +715,10 @@ p:last-child { margin-bottom: 0; }
     cursor: pointer;
     z-index: 5;
     background: #2d3340;
+}
+
+.land .control{
+    height: 50px;
 }
 
 #circles{
@@ -1120,6 +1166,12 @@ p:last-child { margin-bottom: 0; }
     border-radius: 1px;
 }
 
+.mobile #zoom_in{
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+}
+
 #zoom_out{
     width: 35px;
     height: 35px;
@@ -1127,6 +1179,12 @@ p:last-child { margin-bottom: 0; }
     background-image: url("../layout/zoom_out.png");
     background-position: center;
     border-radius: 1px;
+}
+
+.mobile #zoom_out{
+    width: 30px;
+    height: 30px;
+    background-size: contain;
 }
 
 /* ////////////////////////// LIST ////////////////////////// */
@@ -1253,6 +1311,7 @@ p:last-child { margin-bottom: 0; }
     font-family: 'Stardos Stencil';
     /*font-family: 'Passion One', cursive;*/
     font-size: 28px;
+    min-height: 30px;
     font-weight: 700;
     width: 80%;
     margin: auto;

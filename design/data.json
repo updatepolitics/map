@@ -1,273 +1,338 @@
 
 {
+	"labels" : {
+		"intro": { "_pt":"apresentação", "_en":"intro", "_es":"es_intro"  },
+		"explore": { "_pt":"explore", "_en":"explore", "_es":"es_explore" },
+		"search": { "_pt":"buscar", "_en":"search", "_es":"es_search" },
+		"hub": { "_pt":"hub", "_en":"hub", "_es":"es_hub" },
+		"hubs": { "_pt":"hubs", "_en":"hubs", "_es":"es_hubs" },
+		"sig": { "_pt":"sinal", "_en":"signal", "_es":"es_signal" },
+		"sigs": { "_pt":"sinais", "_en":"signals", "_es":"es_signals" },
+		"kind": { "_pt":"natureza", "_en":"kind", "_es":"es_kind" },
+		"method": { "_pt":"método", "_en":"method", "_es":"es_method" },
+		"methods": { "_pt":"métodos", "_en":"methods", "_es":"es_methods" },
+		"sig_list": { "_pt":"filtros de sinais", "_en":"signal filters", "_es":"es_signal filters" },
+		"hub_list": { "_pt":"filtros de hubs", "_en":"hub filters", "_es":"es_hub filters" },
+		"more": { "_pt":"saiba mais", "_en":"more info", "_es":"es_more" },
+		"list": { "_pt":"lista", "_en":"list", "_es":"es_list" },
+		"map": { "_pt":"mapa", "_en":"map", "_es":"es_map" },
+		"filters": { "_pt":"filtros", "_en":"filters", "_es":"es_filters" }
+	},
+
+	"help_text" : [
+		{
+			"title":"ESCOLHA HUBS OU SINAIS",
+			"text":"alvo : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+		},
+		{
+			"title":"ESCOLHA FILTROS",
+			"text":"Filtros : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+		},
+		{
+			"title":"VEJA A LISTA DE RESULTADOS",
+			"text":" lista : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+		}
+	],
+
+	"home":"O <b>UPDATE</b> é um laboratório para criar espaços de diálogo e reflexão entre Hackers da Política, com o intuito de reconhecer, potencializar e dar visibilidade às práticas emergentes de participação política no século XXI.",
+
+	"about":{
+		"staff_title" : "EQUIPE",
+		"staff":[
+		{ "name":"Beatriz Pedreira",
+		  "photo":"beatriz.jpg",
+		  "about":"Beatriz Pedreira é cientista social, designer de serviços e trabalha com projetos que estimulem e engajem a sociedade nas causas públicas. Tem nove anos de experiência em inovação pública e política. Recentemente trabalhou como pesquisadora de comportamento na Box1824 e co-criou e coordenou a pesquisa Sonho Brasileiro da Política."
+	  	},
+		{ "name":"Caio Tendolini",
+		  "photo":"caio.jpg",
+		  "about":"Caio Tendolini é economista e apaixonado por projetos coletivos de impacto positivo na sociedade. Participou da rede Fora do Eixo, co-fundou o Toque no Brasil, o Canal Wings for Change, o Instituto Companheiros do Txai e a Rede Sustentabilidade. Atualmente, trabalha numa república criativa chamada Estufa, onde colabora com o Catarse, a Rede Sustentabilidade, dentre outros."
+	  	},
+		{ "name":"Túlio Malaspina",
+		  "photo":"tulio.jpg",
+		  "about":"Tulio Kengi Malaspina é formado em comunicação social com especialização em marketing, trabalha como consultor em mobilização e articulação de rede. É fundador da SustentaLab e colaborador na Escola de Ativismo."
+	  	},
+		{ "name":"Talita Montiel",
+		  "photo":"talita.jpg",
+		  "about":"Talita Montiel é consultora na área de desenvolvimento de projetos sociais, com foco em inovação, tecnologia, articulação e inteligência de redes. Os últimos projetos estão relacionados à qualificação de investimentos sociais privados de empresas e ou indivíduos, levando em conta a complexidade de suas relações, no diálogo multi-stakeholders."
+	  	},
+		{ "name":"Eduardo Rombauer",
+		  "photo":"eduardo.jpg",
+		  "about":"Bacharel em Relações Internacionais, atua desde 2002 com inovações na política e com aprofundamento da democracia participativa.Desde 2011 atua com formação de novas lideranças para transformação pública e está concluindo mestrado em Prática Social Reflexiva pela London Metropolitan University."
+	  	},
+		{ "name":"Rafael Poço",
+		  "photo":"rafael.jpg",
+		  "about":"Rafael Poço é advogado de formação e provocador por vocação, se dedica há mais de dez anos a projetos coletivos que buscam fortalecer aprimorar práticas políticas de pessoas e instituições. Em 2012, coordenou a campanha para Rio+20 da GCCA. Trabalhou no Ministério Público de São Paulo. Recentemente, foi assessor de Marina Silva na campanha presidencial de 2014"
+	  	}]
+	},
+
 	"hubs":[],
 	"signals":[],
 	"filters":{
 		"method":{
-			"_pt":"métodos",
+			"label":"métodos",
 			"target":"sig",
 			"itens":[
 				{	"id":1,
 					"hex":"#adcc8f",
-					"_pt": "diálogo",
+					"label": "diálogo",
 					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
 					"itens":[
-						{ "_pt":"consulta popular"},
-						{ "_pt":"assembléia"},
-						{ "_pt":"diálogo social"},
-						{ "_pt":"debate público"},
-						{ "_pt":"Mediação/Facilitação"},
-						{ "_pt":"Circulo de Cidadania"}
+						{ "label":"consulta popular"},
+						{ "label":"assembléia"},
+						{ "label":"diálogo social"},
+						{ "label":"debate público"},
+						{ "label":"Mediação/Facilitação"},
+						{ "label":"Circulo de Cidadania"}
 					]
 				},
 				{	"id":2,
 					"hex":"#95cc98",
-					"_pt": "Mobilização" ,
+					"label": "Mobilização" ,
 					"about":"Rutrum iaculis mauris. Nullam fringilla orci. Enim nullam blandit. Pretium aliquam ac integer et iaculis. Eget quis habitasse arcu gravida ut. Vel sit egestas. Consectetuer erat massa. Quis libero malesuada. Imperdiet sollicitudin viverra rutrum diam luctus et nec ultricies aliquam placerat amet eu ut morbi.",
 					"itens":[
-						{ "_pt":"consulta popular"},
-						{ "_pt":"cidadania digital"},
-						{ "_pt":"ação cívica"},
-						{ "_pt":"ativismo digital"},
-						{ "_pt":"campanha"},
-						{ "_pt":"manifestações"},
-						{ "_pt":"mobilização"}
+						{ "label":"consulta popular"},
+						{ "label":"cidadania digital"},
+						{ "label":"ação cívica"},
+						{ "label":"ativismo digital"},
+						{ "label":"campanha"},
+						{ "label":"manifestações"},
+						{ "label":"mobilização"}
 					]
 				},
 				{	"id":3,
 					"hex":"#7dcaa3",
-					"_pt": "Sensibilização" ,
+					"label": "Sensibilização" ,
 					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
 					"itens":[
-						{ "_pt":"Culture Jaming"},
-						{ "_pt":"Intervenções"},
-						{ "_pt":"Choque Estético"},
-						{ "_pt":"Humor/Comédia"},
-						{ "_pt":"Atividades Culturais"}
+						{ "label":"Culture Jaming"},
+						{ "label":"Intervenções"},
+						{ "label":"Choque Estético"},
+						{ "label":"Humor/Comédia"},
+						{ "label":"Atividades Culturais"}
 					]
 				},
 				{	"id":4,
 					"hex":"#66c7b0",
-					"_pt": "Formação" ,
+					"label": "Formação" ,
 					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
 					"itens":[
-						{ "_pt":"Oficina"},
-						{ "_pt":"Formação"},
-						{ "_pt":"Pedagogia Política"},
-						{ "_pt":"Jogo"}
+						{ "label":"Oficina"},
+						{ "label":"Formação"},
+						{ "label":"Pedagogia Política"},
+						{ "label":"Jogo"}
 					]
 				},
 				{	"id":5,
 					"hex":"#50c4be",
-					"_pt": "Produção de Conhecimento" ,
+					"label": "Produção de Conhecimento" ,
 					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
 					"itens":[
-						{ "_pt":"Data viz"},
-						{ "_pt":"Análise de dados"},
-						{ "_pt":"Index/Indicadores"},
-						{ "_pt":"Pesquisa"},
-						{ "_pt":"Georreferenciamento"},
-						{ "_pt":"Conhecimento Colaborativo"},
-						{ "_pt":"Wiki"},
-						{ "_pt":"Pesquisa colaborativa e participativa"},
-						{ "_pt":"Decodificação"}
+						{ "label":"Data viz"},
+						{ "label":"Análise de dados"},
+						{ "label":"Index/Indicadores"},
+						{ "label":"Pesquisa"},
+						{ "label":"Georreferenciamento"},
+						{ "label":"Conhecimento Colaborativo"},
+						{ "label":"Wiki"},
+						{ "label":"Pesquisa colaborativa e participativa"},
+						{ "label":"Decodificação"}
 					]
 				},
 				{	"id":6,
 					"hex":"#3fbfca",
-					"_pt": "levantamento de dados" ,
+					"label": "levantamento de dados" ,
 					"about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. ",
 					"itens":[
-						{ "_pt":"Banco de dados"},
-						{ "_pt":"Repositório"},
-						{ "_pt":"Big Data"}
+						{ "label":"Banco de dados"},
+						{ "label":"Repositório"},
+						{ "label":"Big Data"}
 					]
 				},
 				{	"id":7,
 					"hex":"#3bb9d4",
-					"_pt": "visualização de dados" ,
+					"label": "visualização de dados" ,
 					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
 					"itens":[
-						{ "_pt":"Denúncia"},
-						{ "_pt":"Investigação"},
-						{ "_pt":"Monitoramento"},
-						{ "_pt":"Infoativismo"},
-						{ "_pt":"Relatório"},
-						{ "_pt":"Cobertura Colaborativa"},
-						{ "_pt":"Ação Judicial de interesse público"}
+						{ "label":"Denúncia"},
+						{ "label":"Investigação"},
+						{ "label":"Monitoramento"},
+						{ "label":"Infoativismo"},
+						{ "label":"Relatório"},
+						{ "label":"Cobertura Colaborativa"},
+						{ "label":"Ação Judicial de interesse público"}
 					]
 				},
 				{	"id":8,
 					"hex":"#47b3dc",
-					"_pt": "Fomento" ,
+					"label": "Fomento" ,
 					"about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. ",
 					"itens":[
-						{ "_pt":"Legislação participativa"},
-						{ "_pt":"Mandato interativo "}
+						{ "label":"Legislação participativa"},
+						{ "label":"Mandato interativo "}
 					]
 				},
 				{	"id":9,
 					"hex":"#5cabdf",
-					"_pt": "Fiscalização" ,
+					"label": "Fiscalização" ,
 					"about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat.",
 					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
+						{ "label":"Resident Feedback"},
+						{ "label":"Governo Eletrônico"},
+						{ "label":"Mandato interativo"}
 					]
 				},
 				{	"id":10,
 					"hex":"#74a2dd",
-					"_pt": "consulta" ,
+					"label": "consulta" ,
 					"about":"Rutrum iaculis mauris. Nullam fringilla orci. Enim nullam blandit. Pretium aliquam ac integer et iaculis. Eget quis habitasse arcu gravida ut. Vel sit egestas. Consectetuer erat massa. Quis libero malesuada. Imperdiet sollicitudin viverra rutrum diam luctus et nec ultricies aliquam placerat amet eu ut morbi.",
 					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
+						{ "label":"Resident Feedback"},
+						{ "label":"Governo Eletrônico"},
+						{ "label":"Mandato interativo"}
 					]
 				},
 				{	"id":11,
 					"hex":"#8a99d7",
-					"_pt": "participação" ,
+					"label": "participação" ,
 					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
 					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
+						{ "label":"Resident Feedback"},
+						{ "label":"Governo Eletrônico"},
+						{ "label":"Mandato interativo"}
 					]
 				},
 				{	"id":12,
 					"hex":"#9e8fcc",
-					"_pt": "Governo 2.0" ,
+					"label": "Governo 2.0" ,
 					"about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat.",
 					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
+						{ "label":"Resident Feedback"},
+						{ "label":"Governo Eletrônico"},
+						{ "label":"Mandato interativo"}
 					]
 				},
 				{	"id":13,
 					"hex":"#ae85bd",
-					"_pt": "Comunicação" ,
+					"label": "Comunicação" ,
 					"about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat.",
 					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
+						{ "label":"Resident Feedback"},
+						{ "label":"Governo Eletrônico"},
+						{ "label":"Mandato interativo"}
 					]
 				},
 				{	"id":14,
 					"hex":"#ba7dac",
-					"_pt": "conexão" ,
+					"label": "conexão" ,
 					"about":"<p>Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque.</p><p>lista, lista, lista, lista, lista e lista.</p>",
 					"itens":[
-						{ "_pt":"Resident Feedback"},
-						{ "_pt":"Governo Eletrônico"},
-						{ "_pt":"Mandato interativo"}
+						{ "label":"Resident Feedback"},
+						{ "label":"Governo Eletrônico"},
+						{ "label":"Mandato interativo"}
 					]
 				}
 			]
 		},
 		"kind":{
-			"_pt": "natureza" ,
+			"label": "natureza" ,
 			"itens":[
-				{"id":1, "_pt":"pessoas", "hex":"#d87d7d", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
-				{"id":2, "_pt":"institutos/fundações", "hex":"#da8278", "about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. " },
-				{"id":3, "_pt":"Empresas", "hex":"#da8874", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." },
-				{"id":4, "_pt":"partidos", "hex":"#d98e70", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer." },
-				{"id":5, "_pt":"ONGs", "hex":"#d8946e", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
-				{"id":6, "_pt":"Orgãos Não governamentais", "hex":"#d59b6c", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. " },
-				{"id":7, "_pt":"Organismo Multilateral/internacional", "hex":"#d2a16c", "about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. " },
-				{"id":8, "_pt":"Coletivos", "hex":"#cea86d", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." },
-				{"id":9, "_pt":"Movimentos", "hex":"#caae6f", "about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. " },
-				{"id":10, "_pt":"Rede (p2p)", "hex":"#c4b573", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. " },
-				{"id":11, "_pt":"Aliança (1+1)", "hex":"#bfbb78", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
-				{"id":12, "_pt":"Parcerias (1+2)", "hex":"#b9c17f", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." }
+				{"id":1, "label":"pessoas", "hex":"#d87d7d", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
+				{"id":2, "label":"institutos/fundações", "hex":"#da8278", "about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. " },
+				{"id":3, "label":"Empresas", "hex":"#da8874", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." },
+				{"id":4, "label":"partidos", "hex":"#d98e70", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer." },
+				{"id":5, "label":"ONGs", "hex":"#d8946e", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
+				{"id":6, "label":"Orgãos Não governamentais", "hex":"#d59b6c", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. " },
+				{"id":7, "label":"Organismo Multilateral/internacional", "hex":"#d2a16c", "about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. " },
+				{"id":8, "label":"Coletivos", "hex":"#cea86d", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." },
+				{"id":9, "label":"Movimentos", "hex":"#caae6f", "about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. " },
+				{"id":10, "label":"Rede (p2p)", "hex":"#c4b573", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. " },
+				{"id":11, "label":"Aliança (1+1)", "hex":"#bfbb78", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
+				{"id":12, "label":"Parcerias (1+2)", "hex":"#b9c17f", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." }
 			]
 		},
 		"purpose":{
-			"_pt": "propósito" ,
+			"label": "propósito" ,
 			"itens":[
-				{"id":1, "_pt":"Empoderamento"},
-				{"id":2, "_pt":"Incidência"}
+				{"id":1, "label":"Empoderamento"},
+				{"id":2, "label":"Incidência"}
 			]
 		},
 		"financier":{
-			"_pt": "financiador" ,
+			"label": "financiador" ,
 			"itens":[
-				{"id":1, "_pt":"não"},
-				{"id":2, "_pt":"sim"}
+				{"id":1, "label":"não"},
+				{"id":2, "label":"sim"}
 			]
 		},
 		"coverage":{
-			"_pt": "abrangência" ,
+			"label": "abrangência" ,
 			"itens":[
-				{"id":1, "_pt":"Local"},
-				{"id":2, "_pt":"Nacional"},
-				{"id":3, "_pt":"Regional"},
-				{"id":4, "_pt":"Internacional"}
+				{"id":1, "label":"Local"},
+				{"id":2, "label":"Nacional"},
+				{"id":3, "label":"Regional"},
+				{"id":4, "label":"Internacional"}
 			]
 		},
 		"type":{
-			"_pt": "tipo" ,
+			"label": "tipo" ,
 			"itens":[
 				{	"id":1,
-					"_pt": "Tecnologias Sociais",
+					"label": "Tecnologias Sociais",
 					"itens":[
-						{"_pt":"wiki"},
-						{"_pt":"campanha"},
-						{"_pt":"ocupação"},
-						{"_pt":"jogo"},
-						{"_pt":"encontro"},
-						{"_pt":"laboratório"}
+						{"label":"wiki"},
+						{"label":"campanha"},
+						{"label":"ocupação"},
+						{"label":"jogo"},
+						{"label":"encontro"},
+						{"label":"laboratório"}
 					]
 				},
 				{	"id":2,
-					"_pt": "Tecnologia Digital",
+					"label": "Tecnologia Digital",
 					"itens":[
-						{"_pt":"aplicativo"},
-						{"_pt":"plataforma"},
-						{"_pt":"plugin"},
-						{"_pt":"site"},
-						{"_pt":"blog"}
+						{"label":"aplicativo"},
+						{"label":"plataforma"},
+						{"label":"plugin"},
+						{"label":"site"},
+						{"label":"blog"}
 					]
 				},
 				{	"id":3,
-					"_pt": "Evento",
+					"label": "Evento",
 					"itens":[
-						{"_pt":"colóquio"},
-						{"_pt":"seminário"},
-						{"_pt":"forum"},
-						{"_pt":"hackton"}
+						{"label":"colóquio"},
+						{"label":"seminário"},
+						{"label":"forum"},
+						{"label":"hackton"}
 					]
 				},
 				{	"id":4,
-					"_pt": "Publicações/Estudos",
+					"label": "Publicações/Estudos",
 					"itens":[
-						{"_pt":"pesquisas"},
-						{"_pt":"livros"},
-						{"_pt":"artigos"},
-						{"_pt":"estudos"}
+						{"label":"pesquisas"},
+						{"label":"livros"},
+						{"label":"artigos"},
+						{"label":"estudos"}
 					]
 				},
 				{	"id":5,
-					"_pt": "Prêmios/Concursos",
+					"label": "Prêmios/Concursos",
 					"itens":[
-						{"_pt":"editais"},
-						{"_pt":"prêmios"},
-						{"_pt":"concursos"}
+						{"label":"editais"},
+						{"label":"prêmios"},
+						{"label":"concursos"}
 					]
 				}
 			]
 		},
 		"origin":{
-			"_pt": "origem" ,
+			"label": "origem" ,
 			"itens":[
-				{"id":1, "_pt":"Brasil", "_en":"Brazil" },
-				{"id":2, "_pt":"Colombia"},
-				{"id":3, "_pt":"Peru" },
-				{"id":4, "_pt":"Argentina" },
-				{"id":5, "_pt":"Equador" }
+				{"id":1, "label":"Brasil", "_en":"Brazil" },
+				{"id":2, "label":"Colombia"},
+				{"id":3, "label":"Peru" },
+				{"id":4, "label":"Argentina" },
+				{"id":5, "label":"Equador" }
 			]
 		}
 	}

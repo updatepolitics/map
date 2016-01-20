@@ -19,24 +19,15 @@ var cur_scale = 1;
 var zoom_limits = [ .5, 5 ];
 var zoom_factor = 1.5;
 
+var bar_h = 80;
+var logo_t = 32;
+
 var hub_filters = [];
 var sig_filters = [];
 var strict = {
 	'method':[],
 	'kind':[]
 };
-
-var labels = {
-	hub: { "_pt":"hub" },
-	hubs: { "_pt":"hubs" },
-	sig: { "_pt":"sinal" },
-	sigs: { "_pt":"sinais" },
-	kind: { "_pt":"natureza" },
-	method: { "_pt":"método" },
-	sig_list: { "_pt":"filtros de sinais" },
-	hub_list: { "_pt":"filtros de hubs" },
-	more: { "_pt":"SAIBA MAIS" }
-}
 
 var colors = {
 	bg1:'#212733', // map bg
@@ -68,6 +59,7 @@ var svg_circles;
 reg('container');
 
 reg('home');
+reg('quotes');
 reg('intro');
 reg('explore');
 reg('credit_who');
@@ -162,6 +154,15 @@ if(!mobile){
 
 function resize_update(){
 
+	if(mobile){
+		bar_h = 50
+		logo_t = 20;
+	}else{
+		logo_t = 32
+		bar_h = 80;
+	}
+
+
 	$(list).height(win_h - 200);
 	$(modal_content).height($(modal).height() - 50);
 
@@ -172,12 +173,12 @@ function resize_update(){
 	}
 	if(cur_layout == 'map'){
 		$(list).css({top:win_h});
-		$(control).css({top:win_h - 80});
-		$(map_container).height(win_h - 80);
-		$(filters).height(win_h - 80);
+		$(control).css({top:win_h - bar_h});
+		$(map_container).height(win_h - bar_h);
+		$(filters).height(win_h - bar_h);
 	}
 	if(cur_layout == 'list') {
-		$(filters).height(win_h - 160);
+		$(filters).height(win_h - bar_h*2);
 	}
 }
 
@@ -188,8 +189,10 @@ $(document).keyup(function(e) {
      if (e.keyCode == 27) {
         if(modal.open) close_win(modal);
         if(popup.open) close_win(popup_container);
+		if(help.open) close_help();
     }
 });
+
 
 function scroll(trg, to, dur){
 	$(trg).scrollTo( to, {
@@ -218,12 +221,12 @@ function open_modal (d){
 		.html( info( d, false ))
 	modal_content.appendChild(div);
 
-	hr = document.createElement('hr');
-	modal_content.appendChild(hr);
+	// hr = document.createElement('hr');
+	// modal_content.appendChild(hr);
 
 	div = document.createElement('div');
 	$(div)
-		.addClass('about')
+		.addClass('about mt40')
 		.html(d.about);
 	$(modal_content).append(div);
 
@@ -233,7 +236,7 @@ function open_modal (d){
 			div = document.createElement('div');
 			$(div)
 				.addClass('section')
-				.html(json.filters.method[lg])
+				.html( json.labels.methods[lg] )
 			$(modal_content).append(div);
 
 			ul = document.createElement('div');
@@ -251,7 +254,7 @@ function open_modal (d){
 						toggle_plus(this);
 					})
 					.addClass('item')
-					.html(node[lg])
+					.html(node.label)
 					.css({ backgroundColor:node.hex })
 				$(ul).append(li);
 
@@ -276,7 +279,7 @@ function open_modal (d){
 		div = document.createElement('div');
 		$(div)
 			.addClass('section')
-			.html(json.filters.kind[lg])
+			.html(json.filters.kind.label)
 		$(modal_content).append(div);
 
 		ul = document.createElement('div');
@@ -292,7 +295,7 @@ function open_modal (d){
 				toggle_plus(this);
 			})
 			.addClass('item')
-			.html(node[lg])
+			.html(node.label)
 			.css({ backgroundColor:node.hex })
 		$(ul).append(li);
 
@@ -315,7 +318,7 @@ function open_modal (d){
 	div = document.createElement('div');
 	$(div)
 		.addClass('section')
-		.html(labels.more[lg])
+		.html(json.labels.more[lg])
 	$(modal_content).append(div);
 
 	div = document.createElement('div');
@@ -358,7 +361,7 @@ function open_popup(d){
 	div = document.createElement('div');
 	$(div)
 		.addClass('title')
-		.html(d.node[lg]);
+		.html(d.node.label);
 	$(popup_content).append(div);
 
 	div = document.createElement('div');
@@ -422,7 +425,7 @@ function set_layout(lay){
 			}
 			setTimeout( function(){
 				$(home).delay(dur2/3).fadeIn(dur2/3);
-				$(update_logo).animate({top:-32}, dur2, in_out);
+				$(update_logo).animate({top:-logo_t}, dur2, in_out);
 				$(control).animate({top:'100%'}, dur2, in_out);
 				$(legends).animate({left:-400}, dur2, in_out);
 				$(zoom_control).animate({right:-50}, dur2, in_out);
@@ -430,7 +433,7 @@ function set_layout(lay){
 				$(map_container).animate({height:win_h, opacity:1}, dur2, in_out);
 				$(list).animate({ top: win_h }, dur2, in_out);
 				$(control_score).css({backgroundImage:'url(layout/up.png)'});
-				$(filters).css({bottom:80, height:win_h - 80});
+				$(filters).css({bottom:bar_h, height:win_h - bar_h});
 				$(circles).fadeOut(dur2, in_out);
 				$(help_bt).fadeOut(dur2, in_out);
 				cur_scale = 5;
@@ -448,13 +451,13 @@ function set_layout(lay){
 			}
 			setTimeout( function(){
 				$(home).delay(dur2/3).fadeOut(dur2/3);
-				$(update_logo).animate({top:32}, dur2, in_out);
+				$(update_logo).animate({top:logo_t}, dur2, in_out);
 				$(legends).animate({left:30}, dur2, in_out);
 				$(zoom_control).animate({right:25}, dur2, in_out);
 				$(map).animate({ opacity:1 }, dur2, in_out);
-				$(map_container).animate({height:win_h-80, opacity:1}, dur2, in_out);
-				$(control).animate({top:win_h - 80}, dur2, in_out);
-				$(filters).css({bottom:80, height:win_h - 80});
+				$(map_container).animate({height:win_h-bar_h, opacity:1}, dur2, in_out);
+				$(control).animate({top:win_h - bar_h}, dur2, in_out);
+				$(filters).css({bottom:bar_h, height:win_h - bar_h});
 				$(list).animate({ top: win_h }, dur2, in_out);
 				$(flap_hub).fadeOut(dur2/2, function(){ $(flap_hub).css({ bottom:'inherit', top:0 })});
 				$(flap_sig).fadeOut(dur2/2, function(){ $(flap_sig).css({ bottom:'inherit', top:0 })});
@@ -467,7 +470,7 @@ function set_layout(lay){
 				map_rotation(0,false);
 				setTimeout( function(){
 					$(control_score).css({backgroundImage:'url(layout/up.png)'});
-					$(control_score_lb).html('LISTA');
+					$(control_score_lb).html( json.labels.list[lg].toUpperCase() );
 				}, dur2/2);
 			}, delay);
 		break;
@@ -481,11 +484,11 @@ function set_layout(lay){
 				delay = 0;
 			}
 			setTimeout( function(){
-				$(control).animate({top:80}, dur2, in_out);
+				$(control).animate({top:bar_h}, dur2, in_out);
 				$(update_logo).animate({top:32}, dur2, in_out);
-				$(filters).css({bottom:0, height:win_h - 160})
+				$(filters).css({bottom:0, height:win_h - bar_h*2})
 				$(list).animate({ top:200 }, dur2, in_out);
-				$(map_container).animate({height:win_h-240, opacity:0}, dur2, in_out);
+				$(map_container).animate({height:win_h-bar_h*3, opacity:0}, dur2, in_out);
 				$(flap_hub).fadeOut(dur2/2, function(){ $(flap_hub).css({ bottom:0, top:'inherit' }) });
 				$(flap_sig).fadeOut(dur2/2, function(){ $(flap_sig).css({ bottom:0, top:'inherit' }) });
 				if(cur_target == 'hub') $(flap_hub).fadeIn(dur2/2);
@@ -495,7 +498,7 @@ function set_layout(lay){
 				map_rotation(0,false);
 				setTimeout( function(){
 					$(control_score).css({backgroundImage:'url(layout/down.png)'});
-					$(control_score_lb).html('MAPA');
+					$(control_score_lb).html(json.labels.map[lg].toUpperCase());
 				}, dur2/2);
 			}, delay);
 		break;
@@ -616,7 +619,7 @@ function create_map(trg){
 	})
 	.on('mouseover', function(d){
 		var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial) + ' (' + d.pc_val + '%)';
-		tt(d.node[lg], val, d.fill);
+		tt(d.node.label, val, d.fill);
 	})
 	.on('mouseout', function(d){
 		tt(false);
@@ -699,8 +702,8 @@ $(zoom_in).on(bt_event, function(){
 // target
 
 function check_num(n){
-	if(n==1) return labels[cur_target][lg].toUpperCase();
-	else return labels[cur_target + 's'][lg].toUpperCase();
+	if(n==1) return json.labels[cur_target][lg].toUpperCase();
+	else return json.labels[cur_target + 's'][lg].toUpperCase();
 }
 
 function set_score(n){
@@ -717,7 +720,7 @@ function set_target(trg){
 			if(cur_layout == 'list') set_menu(2);
 			search_target = json.signals;
 			scale = scale_factor/json.signals.length
-			$(filters_sep).html(labels.sig_list[lg].toUpperCase());
+			$(filters_sep).html(json.labels.sig_list[lg].toUpperCase());
 			$(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
 			$(list_sig).fadeIn(dur);
 			$(control_sig).addClass('selected');
@@ -733,8 +736,8 @@ function set_target(trg){
 			$(control_hub_lb).animate({opacity:.2}, dur/2 );
 			$(legend_hub).animate({left:-350}, dur/2 );
 			$(flap_hub).fadeOut(dur/2);
-			$(circles_out).html(labels.method[lg].toUpperCase());
-			$(circles_in).html(labels.sigs[lg].toUpperCase());
+			$(circles_out).html(json.labels.method[lg].toUpperCase());
+			$(circles_in).html(json.labels.sigs[lg].toUpperCase());
 			set_score(n_signals);
 			for(i in hub_filters) $(hub_filters[i]).hide();
 			for(i in sig_filters) $(sig_filters[i]).show();
@@ -743,7 +746,7 @@ function set_target(trg){
 			if(cur_layout == 'list') set_menu(3);
 			search_target = json.hubs;
 			scale = scale_factor/json.hubs.length;
-			$(filters_sep).html(labels.hub_list[lg].toUpperCase());
+			$(filters_sep).html(json.labels.hub_list[lg].toUpperCase());
 			$(legend_hub).delay(dur/2).animate({left:0}, dur/2);
 			$(list_hub).fadeIn(dur);
 			$(control_hub).addClass('selected');
@@ -759,8 +762,8 @@ function set_target(trg){
 			$(control_sig_lb).animate({opacity:.2}, dur/2);
 			$(legend_sig).animate({left:-350}, dur/2 );
 			$(flap_sig).fadeOut(dur/2);
-			$(circles_out).html(labels.kind[lg].toUpperCase());
-			$(circles_in).html(labels.hubs[lg].toUpperCase());
+			$(circles_out).html(json.labels.kind[lg].toUpperCase());
+			$(circles_in).html(json.labels.hubs[lg].toUpperCase());
 			set_score(n_hubs);
 			for(i in sig_filters) $(sig_filters[i]).hide();
 			for(i in hub_filters) $(hub_filters[i]).show();
@@ -852,33 +855,15 @@ $(search_x).on('click', reset_search);
 var help_itens = [
 	{
 		"obj": control_left,
-		"cont": control,
-		"title":{
-			"_pt": "ESCOLHA HUBS OU SINAIS"
-		},
-		"text":{
-			"_pt": "alvo : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
-		}
+		"cont": control
 	},
 	{
 		"obj": control_right,
-		"cont": control,
-		"title":{
-			"_pt": "FILTROS"
-		},
-		"text":{
-			"_pt": "Filtros : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
-		}
+		"cont": control
 	},
 	{
 		"obj": control_center,
-		"cont": control,
-		"title":{
-			"_pt": "LISTA DE RESULTADOS"
-		},
-		"text":{
-			"_pt": "lista : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
-		}
+		"cont": control
 	}
 ];
 
@@ -903,8 +888,8 @@ function help_pos(pos){
 			left: cln.left,
 			top: cln.top
 		});
-	$(help_title).html(help_itens[pos].title[lg]);
-	$(help_text).html(help_itens[pos].text[lg]);
+	$(help_title).html(json.help_text[pos].title);
+	$(help_text).html(json.help_text[pos].text);
 	$(help_nav_pos).html( (help_itens.pos+1) + ' / ' + help_itens.length);
 
 	if (pos == 0) $(help_prev).css({opacity: .2, cursor:'default'});
@@ -915,9 +900,12 @@ function help_pos(pos){
 
 }
 
-$(help_x).on(bt_event,function(){
+function close_help(){
 	$(help).fadeOut(dur/2);
-});
+	help.open = false;
+}
+
+$(help_x).on(bt_event, close_help);
 
 $(help_next).on(bt_event,function(){
 	if(help_itens.pos < help_itens.length-1) help_pos(help_itens.pos + 1)
@@ -930,6 +918,7 @@ $(help_prev).on(bt_event,function(){
 $(help_bt).on(bt_event, function(){
 	help_pos(0);
 	$(help).fadeIn(dur/2);
+	help.open = true;
 });
 
 //////////////////////////////// LIST ////////////////////////////////
@@ -1078,7 +1067,7 @@ function create_filters( data, target, group ){
 	title = document.createElement('div');
 	$(title)
 		.addClass('filter_title')
-		.html(data[lg]);
+		.html(data.label);
 	filters.appendChild(title);
 
 	span = document.createElement('span');
@@ -1120,7 +1109,7 @@ function create_filters( data, target, group ){
 		$(li)
 			.addClass('filter')
 			.css({opacity:1})
-			.html( d[lg] )
+			.html( d.label )
 		ul.appendChild(li);
 
 		$(li).on('click', function(){
@@ -1143,28 +1132,28 @@ function arr_search( arr, id ){
 function info(d, inline){
 
 	var sub = "";
-	sub += "<span class='bold'>" + json.filters.origin[lg] + "</span> ";
-	sub += arr_search( json.filters.origin.itens, d.origin )[lg];
+	sub += "<span class='bold'>" + json.filters.origin.label + "</span> ";
+	sub += arr_search( json.filters.origin.itens, d.origin ).label;
 
 	if(inline)	sub += " | ";
 	else sub += "<br>";
 
-	sub +=  "<span class='bold'>" + json.filters.coverage[lg] + "</span> ";
-	sub += arr_search( json.filters.coverage.itens, d.coverage )[lg];
+	sub +=  "<span class='bold'>" + json.filters.coverage.label + "</span> ";
+	sub += arr_search( json.filters.coverage.itens, d.coverage ).label;
 
 	if(d.cod == 'sig'){
 
 		if(inline)	sub += " | ";
 		else sub += "<br>";
 
-		sub +=  "<span class='bold'>" + json.filters.purpose[lg] + "</span> ";
-		sub += arr_search( json.filters.purpose.itens, d.purpose )[lg];
+		sub +=  "<span class='bold'>" + json.filters.purpose.label + "</span> ";
+		sub += arr_search( json.filters.purpose.itens, d.purpose ).label;
 
 		if(inline)	sub += " | ";
 		else sub += "<br>";
 
-		sub +=  "<span class='bold'>" + json.filters.type[lg] + "</span> ";
-		sub += arr_search( json.filters.type.itens, d.type )[lg];
+		sub +=  "<span class='bold'>" + json.filters.type.label + "</span> ";
+		sub += arr_search( json.filters.type.itens, d.type ).label;
 
 	}
 
@@ -1173,12 +1162,13 @@ function info(d, inline){
 		if(inline)	sub += " | ";
 		else sub += "<br>";
 
-		sub +=  "<span class='bold'>" + json.filters.financier[lg] + "</span> ";
-		sub += arr_search( json.filters.financier.itens, d.financier )[lg];
+		sub +=  "<span class='bold'>" + json.filters.financier.label + "</span> ";
+		sub += arr_search( json.filters.financier.itens, d.financier ).label;
 
 	}
 
 	return sub;
+
 }
 
 //////////////////////////////// LOAD ////////////////////////////////
@@ -1186,6 +1176,24 @@ function info(d, inline){
 
 function load(){
 
+	//INTERFACE LANGUAGE
+	$(intro).html( json.labels.intro[lg].toUpperCase());
+	$(explore).html( json.labels.explore[lg].toUpperCase());
+
+	$(control_hub_lb).html( json.labels.hubs[lg].toUpperCase());
+	$(control_sig_lb).html( json.labels.sigs[lg].toUpperCase());
+
+	if( cur_layout == "list") $(control_score_lb).html( json.labels.map[lg].toUpperCase());
+	else $(control_score_lb).html( json.labels.list[lg].toUpperCase());
+
+	$(filters_lb).html(json.labels.filters[lg].toUpperCase());
+	$(search_str).attr("placeholder", json.labels.search[lg].toUpperCase());
+
+	$(legend_sig_title).html(json.labels.sigs[lg].toUpperCase());
+	$(legend_hub_title).html(json.labels.hubs[lg].toUpperCase());
+	$(quotes).html( json.home );
+
+	// start data
 	simulate_db(json);
 	console.log(json);
 
@@ -1282,14 +1290,14 @@ function load(){
 
 	//method legend
 
-	$(legend_sig_title).html( json.filters.method[lg] );
+	$(legend_sig_title).html( json.filters.method.label );
 
 	for( i in json.filters.method.itens ){
 
 		// legend
 		d = json.filters.method.itens[i];
 
-		console.log(d[lg] + " " + scale_method(i));
+		console.log(d.label + " " + scale_method(i));
 
 		li = document.createElement('li');
 		$(li)
@@ -1305,14 +1313,14 @@ function load(){
 		div = document.createElement('div');
 		$(div)
 			.addClass('lb')
-			.html( d[lg] )
+			.html( d.label )
 		li.appendChild(div);
 
 	}
 
 	// hub legend
 
-	$(legend_hub_title).html( json.filters.kind[lg] );
+	$(legend_hub_title).html( json.filters.kind.label );
 
 	for( i in json.filters.kind.itens ){
 
@@ -1332,7 +1340,7 @@ function load(){
 		div = document.createElement('div');
 		$(div)
 			.addClass('lb')
-			.html( d[lg] )
+			.html( d.label )
 		li.appendChild(div);
 
 	}

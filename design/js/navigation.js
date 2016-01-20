@@ -31,13 +31,7 @@ for(i=0; i<path.length-1; i++){
 }
 
 // placeholders for local functions
-
-var resize_update = false,
-    resize_content = false;
-
-var lang_update = false,
-    lang_methodology = false,
-    lang_about = false;
+var resize_update = false;
 
 // location
 
@@ -129,20 +123,10 @@ var lgs = [
 ];
 
 function set_lg(_lg){
-    for( i in lgs ){
-        if( lgs[i].lg != _lg ) $(lgs[i].li).removeClass('selected');
-        else $(lgs[i].li).addClass('selected');
-    }
     sessionStorage.setItem('lg', _lg);
     lg = _lg;
 
-    // menu
-
-    // pages
-    if(lang_update) lang_update();
-    if(lang_methodology) lang_methodology();
-    if(lang_about) lang_about();
-
+    location.reload();
 }
 
 // header objects
@@ -162,6 +146,10 @@ reg('curtain');
 
 // lg
 
+if( !sessionStorage.getItem('lg')) set_lg("_pt"); // defaut lang
+else lg = sessionStorage.getItem('lg');
+console.log(sessionStorage.getItem('lg'));
+
 for( i in lgs ){
     li = document.createElement('li');
     li.lg = lgs[i].lg;
@@ -172,6 +160,9 @@ for( i in lgs ){
     $(li).on(bt_event, function(){
         set_lg(this.lg);
     });
+
+    if( li.lg == lg ) $(li).addClass('selected');
+
     if( i < lgs.length-1){
         li = document.createElement('li');
         li.className = "lg_sep";
@@ -179,30 +170,30 @@ for( i in lgs ){
     }
 }
 
-if( !sessionStorage.getItem('lg')) set_lg('_pt'); // defaut lang
-else  set_lg(sessionStorage.getItem('lg'));
 
 // WINDOW
 
 function resize(){
 
     // public resize
-
 	win_w = $( window ).width();
 	win_h = $( window ).height();
 
 	if(mobile){
-		if(win_w < win_h) $(dbody).addClass('port');
-		else $(dbody).addClass('land');
+		if(win_w < win_h){
+            $(dbody).addClass('port');
+            $(dbody).removeClass('land');
+        } else {
+            $(dbody).removeClass('port');
+            $(dbody).addClass('land');
+        }
 	}else{
 		if( win_w > 1200 ) $(dbody).addClass('layout2');
 		else $(dbody).removeClass('layout2');
 	}
 
     // local resize
-
 	if(resize_update) resize_update();
-	// if(resize_content) resize_content();
 
 }
 
@@ -212,12 +203,12 @@ resize();
 // menu
 
 var pages = [
-    { _pt:'IN&Iacute;CIO', html:"index.html", section:"home", cod:false },
-    { _pt:'EXPLORE', html:"index.html", section:"map", cod: false },
-    { _pt:'SINAIS', html:"index.html", section:"list", cod:'sig' },
-    { _pt:'HUBS', html:"index.html", section:"list", cod:'hub' },
-    { _pt:'METODOLOGIA', html:"methodology.html", section:false, cod:false },
-    { _pt:'SOBRE', html:"about.html", section:false, cod:false }
+    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html", section:"home", cod:false },
+    { _pt:'EXPLORE', _en:'EXPLORE', html:"index.html", section:"map", cod: false },
+    { _pt:'SINAIS', _en:'SIGNALS', html:"index.html", section:"list", cod:'sig' },
+    { _pt:'HUBS', _en:'HUBS', html:"index.html", section:"list", cod:'hub' },
+    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html", section:false, cod:false },
+    { _pt:'SOBRE', _en:'ABOUT', html:"about.html", section:false, cod:false }
 ];
 
 function open_menu(){
