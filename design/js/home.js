@@ -16,11 +16,12 @@ var json,
 var scale_factor = 6000; // chart size on Explorer Mode
 
 var cur_scale = 1;
-var zoom_limits = [ .5, 5 ];
+var zoom_limits = [ .1, 5 ];
 var zoom_factor = 1.5;
 
 var bar_h = 80;
 var logo_t = 32;
+var zoom_r = 25;
 
 var hub_filters = [];
 var sig_filters = [];
@@ -68,10 +69,6 @@ reg('credit_what');
 reg('modal');
 reg('modal_x');
 reg('modal_content');
-reg('popup_container');
-reg('popup');
-reg('popup_x');
-reg('popup_content');
 
 reg('map_container');
 reg('tooltip');
@@ -79,8 +76,13 @@ reg('tt_title');
 reg('tt_val');
 reg('map');
 reg('legends');
+reg('legend_bts');
+reg('legend_sig');
+reg('legend_hub');
 reg('legend_sig_title');
 reg('legend_hub_title');
+reg('legend_sig_bt');
+reg('legend_hub_bt');
 reg('zoom_control');
 reg('zoom_in');
 reg('zoom_out');
@@ -148,6 +150,8 @@ if(!mobile){
 	    mouse_y = event.clientY - 60;
 	    $(tooltip).css({ left:mouse_x, top:mouse_y });
 	});
+}else{
+	$(tooltip).remove();
 }
 
 //////////////////////////////// WINDOW ////////////////////////////////
@@ -157,11 +161,12 @@ function resize_update(){
 	if(mobile){
 		bar_h = 50
 		logo_t = 20;
+		zoom_r = 10;
 	}else{
 		logo_t = 32
 		bar_h = 80;
+		zoom_r = 25;
 	}
-
 
 	$(list).height(win_h - 200);
 	$(modal_content).height($(modal).height() - 50);
@@ -177,7 +182,7 @@ function resize_update(){
 		$(map_container).height(win_h - bar_h);
 		$(filters).height(win_h - bar_h);
 	}
-	if(cur_layout == 'list') {
+	if(cur_layout == 'list' ) {
 		$(filters).height(win_h - bar_h*2);
 	}
 }
@@ -187,8 +192,7 @@ function resize_update(){
 
 $(document).keyup(function(e) {
      if (e.keyCode == 27) {
-        if(modal.open) close_win(modal);
-        if(popup.open) close_win(popup_container);
+        if(modal.open) close_modal();
 		if(help.open) close_help();
     }
 });
@@ -204,134 +208,158 @@ function scroll(trg, to, dur){
 
 modal.open = false;
 
-function open_modal (d){
+function open_modal (d, pop){
 
 	modal.open = true;
 	$(modal_content).html('');
 
-	div = document.createElement('div');
-	$(div)
-		.addClass('title')
-		.html(d.name);
-	$(modal_content).append(div);
+	if(pop){
 
-	div = document.createElement('div');
-	$(div)
-		.addClass('info')
-		.html( info( d, false ))
-	modal_content.appendChild(div);
+		$(modal).css({color:'#fff', backgroundColor:d.fill});
+		if(!mobile) $(modal).css({ maxHeight: '50%' });
+		$(modal_x).css({ backgroundImage: 'url(layout/x.png)' });
 
-	// hr = document.createElement('hr');
-	// modal_content.appendChild(hr);
+		div = document.createElement('div');
+ 		$(div)
+ 			.addClass('title')
+ 			.html(d.node.label);
+ 		$(modal_content).append(div);
 
-	div = document.createElement('div');
-	$(div)
-		.addClass('about mt40')
-		.html(d.about);
-	$(modal_content).append(div);
+ 		div = document.createElement('div');
+ 		$(div)
+ 			.addClass('about')
+ 			.html( d.node.about )
+ 		modal_content.appendChild(div);
 
-	if( d.cod == 'sig' ){
-		if( d.method.length > 0 ){
+ 	}else{
+
+		$(modal).css({color:'', backgroundColor:''});
+		$(modal_x).css({ backgroundImage: '' });
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('title')
+			.html(d.name);
+		$(modal_content).append(div);
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('info')
+			.html( info( d, false ))
+		modal_content.appendChild(div);
+
+		// hr = document.createElement('hr');
+		// modal_content.appendChild(hr);
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('about mt40')
+			.html(d.about);
+		$(modal_content).append(div);
+
+		if( d.cod == 'sig' ){
+			if( d.method.length > 0 ){
+
+				div = document.createElement('div');
+				$(div)
+					.addClass('section')
+					.html( json.labels.methods[lg] )
+				$(modal_content).append(div);
+
+				ul = document.createElement('div');
+				$(ul).addClass('list');
+				$(modal_content).append(ul);
+
+				for( i in d.method ){
+
+					node = arr_search( json.filters.method.itens, d.method[i] );
+					li = document.createElement('li');
+					li.open = false;
+					li.node = node;
+					$(li)
+						.on('click', function(){
+							toggle_plus(this);
+						})
+						.addClass('item')
+						.html(node.label)
+						.css({ backgroundColor:node.hex })
+					$(ul).append(li);
+
+					div = document.createElement('div');
+					$(div)
+						.addClass('item_plus')
+						.css({ backgroundColor:node.hex, height:0})
+					$(ul).append(div);
+
+					div2 = document.createElement('div');
+					$(div2)
+						.html(node.about)
+					$(div).append(div2);
+
+					li.plus = div;
+					li.plus_tx = div2;
+				}
+			}
+
+		}else{
 
 			div = document.createElement('div');
 			$(div)
 				.addClass('section')
-				.html( json.labels.methods[lg] )
+				.html(json.filters.kind.label)
 			$(modal_content).append(div);
 
 			ul = document.createElement('div');
 			$(ul).addClass('list');
 			$(modal_content).append(ul);
 
-			for( i in d.method ){
+			node = arr_search( json.filters.kind.itens, d.kind );
+			li = document.createElement('li');
+			li.open = false;
+			li.node = node;
+			$(li)
+				.on('click', function(){
+					toggle_plus(this);
+				})
+				.addClass('item')
+				.html(node.label)
+				.css({ backgroundColor:node.hex })
+			$(ul).append(li);
 
-				node = arr_search( json.filters.method.itens, d.method[i] );
-				li = document.createElement('li');
-				li.open = false;
-				li.node = node;
-				$(li)
-					.on('click', function(){
-						toggle_plus(this);
-					})
-					.addClass('item')
-					.html(node.label)
-					.css({ backgroundColor:node.hex })
-				$(ul).append(li);
+			div = document.createElement('div');
+			$(div)
+				.addClass('item_plus')
+				.css({ backgroundColor:node.hex, height:0})
+			$(ul).append(div);
 
-				div = document.createElement('div');
-				$(div)
-					.addClass('item_plus')
-					.css({ backgroundColor:node.hex, height:0})
-				$(ul).append(div);
+			div2 = document.createElement('div');
+			$(div2)
+				.html(node.about)
+			$(div).append(div2);
 
-				div2 = document.createElement('div');
-				$(div2)
-					.html(node.about)
-				$(div).append(div2);
+			li.plus = div;
+			li.plus_tx = div2;
 
-				li.plus = div;
-				li.plus_tx = div2;
-			}
 		}
-
-	}else{
 
 		div = document.createElement('div');
 		$(div)
 			.addClass('section')
-			.html(json.filters.kind.label)
+			.html(json.labels.more[lg])
 		$(modal_content).append(div);
-
-		ul = document.createElement('div');
-		$(ul).addClass('list');
-		$(modal_content).append(ul);
-
-		node = arr_search( json.filters.kind.itens, d.kind );
-		li = document.createElement('li');
-		li.open = false;
-		li.node = node;
-		$(li)
-			.on('click', function(){
-				toggle_plus(this);
-			})
-			.addClass('item')
-			.html(node.label)
-			.css({ backgroundColor:node.hex })
-		$(ul).append(li);
 
 		div = document.createElement('div');
 		$(div)
-			.addClass('item_plus')
-			.css({ backgroundColor:node.hex, height:0})
-		$(ul).append(div);
-
-		div2 = document.createElement('div');
-		$(div2)
-			.html(node.about)
-		$(div).append(div2);
-
-		li.plus = div;
-		li.plus_tx = div2;
+			.addClass('link')
+			.html(d.url)
+			.on('click', function(){
+				alert(d.url);
+			});
+		$(modal_content).append(div);
 
 	}
 
-	div = document.createElement('div');
-	$(div)
-		.addClass('section')
-		.html(json.labels.more[lg])
-	$(modal_content).append(div);
-
-	div = document.createElement('div');
-	$(div)
-		.addClass('link')
-		.html(d.url)
-		.on('click', function(){
-			alert(d.url);
-		});
-	$(modal_content).append(div);
-
 	scroll(modal_content, 0, 0);
-	console.log(modal_content.scrollTop);
 
 	$(modal).fadeIn(dur,_out);
 	$(curtain).fadeIn( dur, _out);
@@ -350,41 +378,15 @@ function toggle_plus(trg){
 	console.log(trg.open);
 }
 
-popup.open = false;
 
-function open_popup(d){
-	popup.open = true;
-
-	$(popup).css({backgroundColor:d.fill});
-	$(popup_content).html('');
-
-	div = document.createElement('div');
-	$(div)
-		.addClass('title')
-		.html(d.node.label);
-	$(popup_content).append(div);
-
-	div = document.createElement('div');
-	$(div)
-		.html(d.node.about);
-	$(popup_content).append(div);
-
-	$(popup_container).fadeIn(dur,_out);
-	$(curtain).fadeIn( dur, _out);
-}
-
-function close_win(win){
-	win.open = false;
-	$(win).fadeOut( dur,_out );
+function close_modal(){
+	modal.open = false;
+	$(modal).fadeOut( dur,_out );
 	$(curtain).fadeOut( dur, _out);
 }
 
 $(modal_x).on(bt_event, function(){
-	close_win(modal);
-});
-
-$(popup_x).on(bt_event, function(){
-	close_win(popup_container);
+	close_modal();
 });
 
 
@@ -427,8 +429,9 @@ function set_layout(lay){
 				$(home).delay(dur2/3).fadeIn(dur2/3);
 				$(update_logo).animate({top:-logo_t}, dur2, in_out);
 				$(control).animate({top:'100%'}, dur2, in_out);
-				$(legends).animate({left:-400}, dur2, in_out);
-				$(zoom_control).animate({right:-50}, dur2, in_out);
+				if( !mobile ) $(legends).animate({left:-400}, dur2, in_out);
+				$(zoom_control).animate({right:-zoom_r*4}, dur2, in_out);
+				$(legend_bts).animate({left:-20}, dur2, in_out);
 				$(map).animate({ opacity:.3}, dur2, in_out);
 				$(map_container).animate({height:win_h, opacity:1}, dur2, in_out);
 				$(list).animate({ top: win_h }, dur2, in_out);
@@ -452,8 +455,9 @@ function set_layout(lay){
 			setTimeout( function(){
 				$(home).delay(dur2/3).fadeOut(dur2/3);
 				$(update_logo).animate({top:logo_t}, dur2, in_out);
-				$(legends).animate({left:30}, dur2, in_out);
-				$(zoom_control).animate({right:25}, dur2, in_out);
+				if( !mobile ) $(legends).animate({left:32}, dur2, in_out);
+				$(zoom_control).animate({right:zoom_r}, dur2, in_out);
+				$(legend_bts).animate({left:20}, dur2, in_out);
 				$(map).animate({ opacity:1 }, dur2, in_out);
 				$(map_container).animate({height:win_h-bar_h, opacity:1}, dur2, in_out);
 				$(control).animate({top:win_h - bar_h}, dur2, in_out);
@@ -465,8 +469,9 @@ function set_layout(lay){
 				if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
 				$(circles).fadeIn(dur2, in_out);
 				$(help_bt).fadeIn(dur2, in_out);
-				cur_scale = 1;
-				svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale(1) rotate(' + rot + ')');
+				if(mobile) cur_scale = .3;
+				else cur_scale = 1;
+				svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale('+cur_scale+') rotate(' + rot + ')');
 				map_rotation(0,false);
 				setTimeout( function(){
 					$(control_score).css({backgroundImage:'url(layout/up.png)'});
@@ -615,14 +620,14 @@ function create_map(trg){
 	.append('g')
 	.attr('style', 'cursor:pointer')
 	.on('click', function(d){
-		open_popup(d);
+		open_modal(d, true);
 	})
 	.on('mouseover', function(d){
 		var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial) + ' (' + d.pc_val + '%)';
-		tt(d.node.label, val, d.fill);
+		if(!mobile) tt(d.node.label, val, d.fill);
 	})
 	.on('mouseout', function(d){
-		tt(false);
+		if(!mobile) tt(false);
 	})
 	//.call(svg_force.drag)
 	.each(function (d, i) {
@@ -721,7 +726,13 @@ function set_target(trg){
 			search_target = json.signals;
 			scale = scale_factor/json.signals.length
 			$(filters_sep).html(json.labels.sig_list[lg].toUpperCase());
-			$(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
+			if(!mobile){
+				$(legend_sig).delay(dur/2).animate({left:0}, dur/2 );
+			} else{
+				$(legend_sig_bt).show();
+				$(legend_sig).show();
+				$(legend_hub).hide();
+			}
 			$(list_sig).fadeIn(dur);
 			$(control_sig).addClass('selected');
 			$(control_sig_lb).animate({opacity:1}, dur );
@@ -734,7 +745,8 @@ function set_target(trg){
 				});
 			$(list_hub).hide();
 			$(control_hub_lb).animate({opacity:.2}, dur/2 );
-			$(legend_hub).animate({left:-350}, dur/2 );
+			if(!mobile) $(legend_hub).animate({left:-350}, dur/2, in_ );
+			else $(legend_hub_bt).hide();
 			$(flap_hub).fadeOut(dur/2);
 			$(circles_out).html(json.labels.method[lg].toUpperCase());
 			$(circles_in).html(json.labels.sigs[lg].toUpperCase());
@@ -747,7 +759,13 @@ function set_target(trg){
 			search_target = json.hubs;
 			scale = scale_factor/json.hubs.length;
 			$(filters_sep).html(json.labels.hub_list[lg].toUpperCase());
-			$(legend_hub).delay(dur/2).animate({left:0}, dur/2);
+			if(!mobile){
+				$(legend_hub).delay(dur/2).animate({left:0}, dur/2 );
+			} else{
+				$(legend_hub_bt).show();
+				$(legend_hub).show();
+				$(legend_sig).hide();
+			}
 			$(list_hub).fadeIn(dur);
 			$(control_hub).addClass('selected');
 			$(control_hub_lb).animate({opacity:1}, dur);
@@ -760,7 +778,8 @@ function set_target(trg){
 				});
 			$(list_sig).hide();
 			$(control_sig_lb).animate({opacity:.2}, dur/2);
-			$(legend_sig).animate({left:-350}, dur/2 );
+			if(!mobile) $(legend_sig).animate({left:-350}, dur/2, in_ );
+			else $(legend_sig_bt).hide();
 			$(flap_sig).fadeOut(dur/2);
 			$(circles_out).html(json.labels.kind[lg].toUpperCase());
 			$(circles_in).html(json.labels.hubs[lg].toUpperCase());
@@ -789,13 +808,13 @@ filters.open = false;
 function open_filters() {
 	filters.open = true;
 	$(filters).animate({right:0}, dur, in_out);
-	$(control_filters).css({backgroundImage:'url(layout/minus.png)'});
+	$(control_filters).css({backgroundImage:'url(layout/minus_white.png)'});
 }
 
 function close_filters() {
 	filters.open = false;
 	$(filters).animate({right:'-34%'}, dur, in_out);
-	$(control_filters).css({backgroundImage:'url(layout/plus.png)'});
+	$(control_filters).css({backgroundImage:'url(layout/plus_white.png)'});
 }
 
 $(control_filters).on( bt_event, function(){
@@ -1037,10 +1056,10 @@ function toggle_list(trg){
 	if(trg.open){
 		trg.open = false;
 		$(trg.list).animate({height: 0 }, dur, in_out);
-		$(trg.title).css({ backgroundImage: 'url(layout/plus.png)'});
+		$(trg.title).css({ backgroundImage: 'url(layout/plus_white.png)'});
 	}else{
 		trg.open = true;
-		$(trg.title).css({ backgroundImage: 'url(layout/minus.png)'});
+		$(trg.title).css({ backgroundImage: 'url(layout/minus_white.png)'});
 		$(trg.list).animate({height: 30 + trg.itens.length * filter_h}, dur, in_out);
 	}
 }
@@ -1171,6 +1190,18 @@ function info(d, inline){
 
 }
 
+function open_legend(){
+	legends.open = true;
+	$(legends).fadeIn( dur, _out);
+}
+
+function close_legend(){
+	legends.open = false;
+	$(legends).fadeOut( dur, _out);
+}
+
+
+
 //////////////////////////////// LOAD ////////////////////////////////
 
 
@@ -1209,7 +1240,7 @@ function load(){
 		$(li)
 			.addClass('list_item')
 			.on('click', function(){
-				open_modal(this.node);
+				open_modal(this.node, false);
 			});
 
 		d.li = li;
@@ -1245,7 +1276,7 @@ function load(){
 		$(li)
 			.addClass('list_item')
 			.on('click', function(){
-				open_modal(this.node);
+				open_modal(this.node, false);
 			});
 
 		d.li = li;
@@ -1273,8 +1304,14 @@ function load(){
 	scale_kind = d3.scale.linear().domain([0,json.filters.method.itens.length-1]).range(colors.hub).interpolate(d3.interpolateHcl);
 	scale_method = d3.scale.linear().domain([0,json.filters.kind.itens.length-1]).range(colors.sig).interpolate(d3.interpolateHcl);
 
-	$(legend_hub).height(json.filters.kind.itens.length * 21 );
-	$(legend_sig).height(json.filters.method.itens.length * 21 );
+	if(mobile){
+		dbody.appendChild(legends); // change legends DOM position
+		$(legends).hide();
+	}else{
+		$(legend_hub).height(json.filters.kind.itens.length * 21 );
+		$(legend_sig).height(json.filters.method.itens.length * 21 );
+	}
+
 
 	create_filters(json.filters.origin, false, false);
 	create_filters(json.filters.coverage, false, false);
@@ -1316,6 +1353,16 @@ function load(){
 			.html( d.label )
 		li.appendChild(div);
 
+		// mobile legend bt
+
+		if( mobile && (i==0 || i==Math.round(json.filters.kind.itens.length/2) || i == json.filters.kind.itens.length - 1)){
+			div = document.createElement('div');
+			$(div)
+				.addClass('legend_bt_color')
+				.css({ background:d.hex })
+			legend_sig_bt.appendChild(div);
+		}
+
 	}
 
 	// hub legend
@@ -1343,7 +1390,35 @@ function load(){
 			.html( d.label )
 		li.appendChild(div);
 
+		// mobile legend bt
+
+		if( mobile && (i==0 || i==Math.round(json.filters.kind.itens.length/2) || i == json.filters.kind.itens.length - 1)){
+			div = document.createElement('div');
+			$(div)
+				.addClass('legend_bt_color')
+				.css({ background:d.hex })
+			legend_hub_bt.appendChild(div);
+
+		}
+
 	}
+
+	// mobile legend close bt
+
+	if(mobile) {
+		$(legends_x).on(bt_event, close_legend);
+	}
+
+	// mobile legend bts
+
+	$(legend_hub_bt).on(bt_event, function(){
+		open_legend();
+	});
+
+	$(legend_sig_bt).on(bt_event, function(){
+		open_legend();
+	});
+
 
 	// SVG MAP
 

@@ -75,21 +75,9 @@
 
 	<div id="modal">
 		<div id="modal_nav">
-			<div id="modal_back"></div>
 			<div id="modal_x"></div>
 		</div>
 		<div id="modal_content"></div>
-	</div>
-
-	<div id="popup_container">
-		<div class="table">
-			<div class="table_cell">
-				<div id="popup">
-					<div id="popup_x"></div>
-					<div id="popup_content"></div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<div id="curtain"></div>
@@ -99,6 +87,8 @@
 		<img src="layout/update_header.png" id="update_logo" style="top:-32px" />
 		<ul id="language"></ul>
 	</div>
+
+	<div id="filters"></div>
 
 	<div id="container" class="fixed">
 
@@ -118,7 +108,14 @@
 				<div id="tt_title"></div>
 				<div id="tt_val"></div>
 			</div>
+
+			<div id="legend_bts">
+				<div id="legend_sig_bt"></div>
+				<div id="legend_hub_bt"></div>
+			</div>
+
 			<div id="legends">
+				<div id="legends_x"></div>
 				<ul class="legend_list" id="legend_sig">
 					<div class="legend_title" id="legend_sig_title"></div>
 				</ul>
@@ -134,7 +131,7 @@
 		</div>
 
 		<div id="control">
-			<img src="layout/help.png" id="help_bt" />
+			<div id="help_bt" ></div>
 			<div id="circles">
 				<div id="circles_out"></div>
 				<div id="circles_in"></div>
@@ -142,16 +139,16 @@
 			<div class="control" id="control_left">
 				<div id="control_hub">
 					<div class="flap" id="flap_hub"></div>
-					<span id="control_hub_lb"></span>
+					<div id="control_hub_lb"></div>
 				</div>
 				<div id="control_sig">
 					<div class="flap" id="flap_sig"></div>
-					<span id="control_sig_lb"></span>
+					<div id="control_sig_lb"></div>
 				</div>
 			</div>
 			<div class="control" id="control_center">
+				<div id="control_score_lb"></div>
 				<div id="control_score">
-					<div id="control_score_lb"></div>
 					<div id="score">
 						<span id="score_nb"></span>
 						<span id="score_lb"></span>
@@ -173,8 +170,6 @@
 				</div>
 			 </div>
 		</div>
-
-		<div id="filters"></div>
 
 		<div id="list">
 			<ul class="list_itens" id="list_hub"></ul>

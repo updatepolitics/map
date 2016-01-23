@@ -192,6 +192,8 @@ function resize(){
 		else $(dbody).removeClass('layout2');
 	}
 
+    close_menu();
+
     // local resize
 	if(resize_update) resize_update();
 
@@ -239,6 +241,8 @@ if( cur_page == '' ){
     set_location('index.html', false, false, false);
 }
 
+$(curtain).on(bt_event, close_menu);
+
 for( i in pages ){
 
     li = document.createElement('li');
@@ -249,6 +253,7 @@ for( i in pages ){
         .html( pages[i][lg] )
         .on( bt_event, function(){
             set_location(this.d.html, this.d.section, this.d.cod, true);
+            close_menu();
         });
 
     if(pages[i].html == cur_page){
@@ -258,6 +263,7 @@ for( i in pages ){
     menu_bts.appendChild(li);
 
 }
+
 
 menu.open = false;
 
