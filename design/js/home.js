@@ -16,7 +16,7 @@ var json,
 var scale_factor = 6000; // chart size on Explorer Mode
 
 var cur_scale = 1;
-var zoom_limits = [ .1, 5 ];
+var zoom_limits = [ 0.1, 5 ];
 var zoom_factor = 1.5;
 
 var bar_h = 80;
@@ -160,15 +160,16 @@ function resize_update(){
 
 	if(mobile){
 		bar_h = 50
-		logo_t = 20;
+		logo_t = 16;
 		zoom_r = 10;
+		$(list).height(win_h - 130);
 	}else{
 		logo_t = 32
 		bar_h = 80;
 		zoom_r = 25;
+		$(list).height(win_h - 200);
 	}
 
-	$(list).height(win_h - 200);
 	$(modal_content).height($(modal).height() - 50);
 
 	if(cur_layout == 'home'){
@@ -187,7 +188,6 @@ function resize_update(){
 	}
 }
 
-
 //////////////////////////////// MODAL ////////////////////////////////
 
 $(document).keyup(function(e) {
@@ -196,7 +196,6 @@ $(document).keyup(function(e) {
 		if(help.open) close_help();
     }
 });
-
 
 function scroll(trg, to, dur){
 	$(trg).scrollTo( to, {
@@ -401,7 +400,7 @@ function map_rotation(delay,rotate){
 	if(rotate){
 		rot_delay = setTimeout( function(){
 			rotation = setInterval(function(){
-				rot += .02;
+				rot += 0.02;
 				svg_map.attr('transform', 'translate(1000 1000) scale(5) rotate(' + rot + ')');
 			},10)
 		}, delay);
@@ -411,7 +410,7 @@ function map_rotation(delay,rotate){
 	}
 }
 
-$(map).css({backgroundSize:'100%', opacity:.2});
+$(map).css({backgroundSize:'100%', opacity:0.2});
 
 function set_layout(lay){
 	document.title = "UPDATE POLITICS :: " + lay
@@ -432,7 +431,7 @@ function set_layout(lay){
 				if( !mobile ) $(legends).animate({left:-400}, dur2, in_out);
 				$(zoom_control).animate({right:-zoom_r*4}, dur2, in_out);
 				$(legend_bts).animate({left:-20}, dur2, in_out);
-				$(map).animate({ opacity:.3}, dur2, in_out);
+				$(map).animate({ opacity:0.3}, dur2, in_out);
 				$(map_container).animate({height:win_h, opacity:1}, dur2, in_out);
 				$(list).animate({ top: win_h }, dur2, in_out);
 				$(control_score).css({backgroundImage:'url(layout/up.png)'});
@@ -469,7 +468,7 @@ function set_layout(lay){
 				if(cur_target == 'sig') $(flap_sig).fadeIn(dur2/2);
 				$(circles).fadeIn(dur2, in_out);
 				$(help_bt).fadeIn(dur2, in_out);
-				if(mobile) cur_scale = .3;
+				if(mobile) cur_scale = 0.3;
 				else cur_scale = 1;
 				svg_map.transition().duration(dur2).attr('transform', 'translate(1000 1000) scale('+cur_scale+') rotate(' + rot + ')');
 				map_rotation(0,false);
@@ -489,10 +488,11 @@ function set_layout(lay){
 				delay = 0;
 			}
 			setTimeout( function(){
+				$(home).delay(dur2/3).fadeOut(dur2/3);
 				$(control).animate({top:bar_h}, dur2, in_out);
-				$(update_logo).animate({top:32}, dur2, in_out);
+				$(update_logo).animate({top:logo_t}, dur2, in_out);
 				$(filters).css({bottom:0, height:win_h - bar_h*2})
-				$(list).animate({ top:200 }, dur2, in_out);
+				$(list).animate({ top: bar_h*2 + 30 }, dur2, in_out);
 				$(map_container).animate({height:win_h-bar_h*3, opacity:0}, dur2, in_out);
 				$(flap_hub).fadeOut(dur2/2, function(){ $(flap_hub).css({ bottom:0, top:'inherit' }) });
 				$(flap_sig).fadeOut(dur2/2, function(){ $(flap_sig).css({ bottom:0, top:'inherit' }) });
@@ -528,8 +528,8 @@ function calc_radius(area){
 }
 
 function tick(e) {
-	svg_circles.each(gravity(.08 * e.alpha))
-	.each(collide(.1))
+	svg_circles.each(gravity(0.08 * e.alpha))
+	.each(collide(0.1))
 	.attr('transform', function (d) {
 		return 'translate(' + d.x + ' ' + d.y + ')';
 	});
@@ -610,7 +610,7 @@ function create_map(trg){
 		.on('tick', tick)
 		.gravity(0)
 		.charge(1)
-		.friction(.85)
+		.friction(0.85)
 
 	// circles
 
@@ -633,7 +633,7 @@ function create_map(trg){
 	.each(function (d, i) {
 		c_total = d3.select(this)
 			.append('circle')
-			.attr('fill-opacity', .1)
+			.attr('fill-opacity', 0.1)
 			.attr('fill', d.fill);
 
 		c_partial = d3.select(this)
@@ -744,7 +744,7 @@ function set_target(trg){
 					$(this).css({backgroundColor:''})
 				});
 			$(list_hub).hide();
-			$(control_hub_lb).animate({opacity:.2}, dur/2 );
+			$(control_hub_lb).animate({opacity:0.2}, dur/2 );
 			if(!mobile) $(legend_hub).animate({left:-350}, dur/2, in_ );
 			else $(legend_hub_bt).hide();
 			$(flap_hub).fadeOut(dur/2);
@@ -777,7 +777,7 @@ function set_target(trg){
 					$(this).css({backgroundColor:''})
 				});
 			$(list_sig).hide();
-			$(control_sig_lb).animate({opacity:.2}, dur/2);
+			$(control_sig_lb).animate({opacity:0.2}, dur/2);
 			if(!mobile) $(legend_sig).animate({left:-350}, dur/2, in_ );
 			else $(legend_sig_bt).hide();
 			$(flap_sig).fadeOut(dur/2);
@@ -911,10 +911,10 @@ function help_pos(pos){
 	$(help_text).html(json.help_text[pos].text);
 	$(help_nav_pos).html( (help_itens.pos+1) + ' / ' + help_itens.length);
 
-	if (pos == 0) $(help_prev).css({opacity: .2, cursor:'default'});
+	if (pos == 0) $(help_prev).css({opacity: 0.2, cursor:'default'});
 	else $(help_prev).css({opacity: 1, cursor:'pointer'});
 
-	if (pos == help_itens.length-1) $(help_next).css({opacity: .2, cursor:'default'});
+	if (pos == help_itens.length-1) $(help_next).css({opacity: 0.2, cursor:'default'});
 	else  $(help_next).css({opacity: 1, cursor:'pointer'});
 
 }
@@ -954,10 +954,10 @@ filters.score = 0;
 
 function reset_filters_score(clear){
 	filters.score = 0;
-	$(filters_nb).css({opacity:.2}).html(0);
+	$(filters_nb).css({opacity:0.2}).html(0);
 	for( i in json.filters ){
 		json.filters[i].active = [];
-		$(json.filters[i].nb).css({opacity:.2}).html(0);
+		$(json.filters[i].nb).css({opacity:0.2}).html(0);
 		if(clear){
 			for(b in json.filters[i].itens){
 				json.filters[i].itens[b].on = false;
@@ -1467,9 +1467,9 @@ function simulate_db(db){
 
 	function shift_rand(n){
 		var shift = Math.random();
-		if(shift <= .2)	return Math.ceil(Math.random()*n/4);
-		if(shift > .2 && shift <= .5) return Math.ceil(Math.random()*n/3);
-		if(shift > .5 && shift <= .8) return Math.ceil(Math.random()*n/2);
+		if(shift <= 0.2)	return Math.ceil(Math.random()*n/4);
+		if(shift > 0.2 && shift <= 0.5) return Math.ceil(Math.random()*n/3);
+		if(shift > 0.5 && shift <= 0.8) return Math.ceil(Math.random()*n/2);
 		else return Math.ceil(Math.random()*n);
 	}
 
@@ -1478,7 +1478,7 @@ function simulate_db(db){
 		hb.id = h;
 		hb.visible = true;
 		hb.cod = "hub";
-		hb.url = "http://putasitelongodocaralhomaislongoaindameuhub_url.com";
+		hb.url = "http://hub_url.com";
 		hb.about = "Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ";
 		hb.name = livros[rand(livros.length-1)].autor;
 		hb.kind = [shift_rand(12)];

@@ -546,8 +546,8 @@ p:last-child { margin-bottom: 0; }
 
 .mobile
     #language{
-        top: 15px;
-        right: 15px;
+        top: 12px;
+        right: 12px;
     }
 
 .lang{
@@ -1519,6 +1519,11 @@ p:last-child { margin-bottom: 0; }
     background-color: #fff;
 }
 
+.mobile #list_header{
+  top: 50px;
+  height: 30px;
+}
+
 #list_header_title{
     background-image: url("../layout/list.png");
     background-repeat: no-repeat;
@@ -1540,6 +1545,10 @@ p:last-child { margin-bottom: 0; }
     border-right: #fff 15px solid;
 }
 
+.mobile #search{
+  background-size: contain;
+}
+
 #search_str{
     width: 100%;
     height: 100%;
@@ -1554,6 +1563,10 @@ p:last-child { margin-bottom: 0; }
     bottom: 0;
     margin: 0;
     outline: 0;
+}
+
+.mobile #search_str{
+  font-size: 12px;
 }
 
 ::-webkit-input-placeholder {
@@ -1571,6 +1584,11 @@ p:last-child { margin-bottom: 0; }
     background-image: url('../layout/search_x.png');
     cursor: pointer;
 }
+
+.mobile #search_x{
+  right: 0;
+}
+
 
 /* Track */
 #list::-webkit-scrollbar-track {
@@ -1591,16 +1609,23 @@ p:last-child { margin-bottom: 0; }
     padding-top: 25px;
     padding-left: 20px;
     cursor: pointer;
-    background-position: 15px 20px;
+    background-position: left;
     background-repeat: no-repeat;
     height: 90px;
     text-align: center;
     position: relative;
     border: #fff 1px solid;
     border-top: none;
-
     background-color: #f2f0f2;
 }
+
+.mobile
+  .list_item{
+    height: 70px;
+    background-size: 40px;
+    padding-top: 15px;
+  }
+
 
 .layout2
     .list_item{
@@ -1628,7 +1653,8 @@ p:last-child { margin-bottom: 0; }
 
 .mobile
     .title{
-        font-size: 24px;
+        font-size: 20px;
+        margin-bottom: 0;
     }
 
 .list_item
@@ -1643,6 +1669,16 @@ p:last-child { margin-bottom: 0; }
         white-space: nowrap;
     }
 
+.mobile
+  .list_item
+      .info{
+          font-size: 11px;
+          width: 80%;
+          overflow: hidden;;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+
 .layout2 .list_item .info{
     width: 80%;
 }
@@ -1651,6 +1687,12 @@ p:last-child { margin-bottom: 0; }
     position: absolute;
     right: 0;
     top: 20px;
+}
+
+.mobile .list_item img{
+    position: absolute;
+    right: 0;
+    top: 10px;
 }
 
 .list_item .bod{
