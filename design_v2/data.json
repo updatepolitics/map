@@ -1,7 +1,7 @@
 
 {
 	"labels" : {
-		"intro": { "_pt":"sobre", "_en":"about", "_es":"es_intro"  },
+		"about": { "_pt":"sobre", "_en":"about", "_es":"es_intro"  },
 		"explore": { "_pt":"explore", "_en":"explore", "_es":"es_explore" },
 		"search": { "_pt":"buscar", "_en":"search", "_es":"es_search" },
 		"hub": { "_pt":"hub", "_en":"hub", "_es":"es_hub" },

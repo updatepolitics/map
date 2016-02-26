@@ -35,49 +35,12 @@ var resize_update = false;
 
 // location
 
-function set_location( html, section, cod, push ){
-    var new_loc = root;
-    var navigate = false;
-    if ( section ){
-        new_loc += "index.html?section=" + section;
-        if(cod) new_loc += "&cod=" + cod;
-        if ( cur_page != "index.html" ){
-            navigate = true;
-        } else { // + update.js
-            if(section != cur_layout) set_layout(section);
-            if( cod && cod != cur_target ){
-                set_target( cod );
-            }
-            if(push) history.pushState({page: new_loc}, '', new_loc );
-        }
-    } else {
-        new_loc += html;
-        navigate = true;
-    }
-
-    if(navigate) document.location.href = new_loc;
+function navigate( html, cod ){
+  var new_loc = root + html;
+  if(cod) new_loc += "?cod=" + cod;
+  document.location.href = new_loc;
 }
 
-function $_GET() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
-var get_section,
-    get_cod;
-
-function check_get(){
-    get_section = $_GET()["section"];
-    if(get_section) set_layout(get_section);
-
-    get_cod = $_GET()["cod"];
-    if(get_cod && get_cod != cur_target) set_target( get_cod );
-}
-
-window.onpopstate = check_get;
 
 // MOBILE
 
@@ -125,7 +88,6 @@ var lgs = [
 function set_lg(_lg){
     sessionStorage.setItem('lg', _lg);
     lg = _lg;
-
     location.reload();
 }
 
@@ -133,6 +95,8 @@ function set_lg(_lg){
 
 reg('header');
 reg('language');
+reg('cur_lang');
+reg('cur_lang_lb');
 reg('update_logo');
 reg('menu');
 reg('menu_bt');
@@ -143,6 +107,7 @@ reg('twitter');
 reg('github');
 reg('fbook');
 reg('curtain');
+
 
 // lg
 
@@ -158,16 +123,39 @@ for( i in lgs ){
     lgs[i].li = li;
     language.appendChild(li);
     $(li).on(bt_event, function(){
-        set_lg(this.lg);
+      if( lg == this.lg ) close_lang();
+      else set_lg(this.lg);
     });
 
-    if( li.lg == lg ) $(li).addClass('selected');
+    if( li.lg == lg ){
+      $(cur_lang_lb).html(lgs[i].lb);
+      $(li).addClass('selected');
+    }
 
     if( i < lgs.length-1){
         li = document.createElement('li');
         li.className = "lg_sep";
         language.appendChild(li);
     }
+}
+
+$(cur_lang).on('click', function(){
+  open_lang();
+  setTimeout(function(){
+    close_lang();
+  }, 3000);
+});
+
+// $(language).on('mouseleave', close_lang);
+
+function close_lang(){
+  $(language).animate({top:-30}, dur/2, _out);
+  $(cur_lang).animate({top:25}, dur/2, _out);
+}
+
+function open_lang(){
+  $(language).animate({top:25}, dur/2, _out);
+  $(cur_lang).animate({top:-30}, dur/2, _out);
 }
 
 // WINDOW
@@ -191,7 +179,7 @@ function resize(){
 		else $(dbody).removeClass('layout2');
 	}
 
-    close_menu();
+  close_menu();
 
     // local resize
 	if(resize_update) resize_update();
@@ -204,12 +192,12 @@ resize();
 // menu
 
 var pages = [
-    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html", section:"home", cod:false },
-    { _pt:'EXPLORE', _en:'EXPLORE', html:"index.html", section:"map", cod: false },
-    { _pt:'SINAIS', _en:'SIGNALS', html:"index.html", section:"list", cod:'sig' },
-    { _pt:'HUBS', _en:'HUBS', html:"index.html", section:"list", cod:'hub' },
-    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html", section:false, cod:false },
-    { _pt:'SOBRE', _en:'ABOUT', html:"about.html", section:false, cod:false }
+    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html", cod:false },
+    { _pt:'EXPLORE', _en:'EXPLORE', html:"explore.html", cod: false },
+    { _pt:'SINAIS', _en:'SIGNALS', html:"list.html", cod:'sig' },
+    { _pt:'HUBS', _en:'HUBS', html:"list.html", cod:'hub' },
+    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html", cod:false },
+    { _pt:'SOBRE', _en:'ABOUT', html:"about.html", cod:false }
 ];
 
 function open_menu(){
@@ -246,7 +234,7 @@ for( i in pages ){
         .addClass('bt')
         .html( pages[i][lg] )
         .on( bt_event, function(){
-            set_location(this.d.html, this.d.section, this.d.cod, true);
+            navigate(this.d.html, this.d.cod);
             close_menu();
         });
 
