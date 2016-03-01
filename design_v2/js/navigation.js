@@ -31,7 +31,7 @@ for(i=0; i<path.length-1; i++){
 }
 
 // placeholders for local functions
-var resize_update = false;
+var resize_explore = false;
 
 // location
 
@@ -182,7 +182,7 @@ function resize(){
   close_menu();
 
     // local resize
-	if(resize_update) resize_update();
+	if(resize_explore) resize_explore();
 
 }
 

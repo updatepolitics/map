@@ -42,6 +42,26 @@
 </head>
 <body >
 
+	<div id="help">
+		<div id="help_box">
+			<div id="help_nav">
+				<img id="help_x" src="layout/x.png"/>
+				<img id="help_next" src="layout/next.png"/>
+				<img id="help_prev" src="layout/prev.png"/>
+				<div id="help_nav_pos">1/4</div>
+			</div>
+			<div id="help_title"></div>
+			<div id="help_text"></div>
+		</div>
+		<div id="help_frame">
+			<div class="frame" ></div>
+			<div class="left" ></div>
+			<div class="right" ></div>
+			<div class="top" ></div>
+			<div class="bottom" ></div>
+		</div>
+	</div>
+
 	<div id="menu">
 		<div id="menu_close"></div>
 		<ul id="menu_bts"></ul>
@@ -73,7 +93,15 @@
 	</div>
 
 
-	<div id="filters"></div>
+	<div id="filters">
+		<div id="filters_header">
+			<div id="trash"></div>
+			<div id="filters_x"></div>
+		</div>
+		<div id="filters_list">
+
+		</div>
+	</div>
 
 
 	<div id="container">
@@ -112,27 +140,27 @@
 			</div>
 
 			<div id="circles">
-				<div id="circles_out">METODOS</div>
-				<div id="circles_in">SINAIS</div>
+				<div id="circles_out"></div>
+				<div id="circles_in"></div>
 			</div>
 
 			<div id="control_center">
 
 				<div id="control_hub" class="control">
 					<div class="flap" id="flap_hub"></div>
-					<span id="score_hub">291</span>
-					<span id="control_hub_lb">HUBS</span>
+					<span id="score_hub"></span>
+					<span id="control_hub_lb"></span>
 				</div>
 
 				<div id="control_filters" class="control">
-					<span id="filters_lb">FILTROS</span>
-					<span class="counter" id="filters_counter">20</span>
+					<span id="filters_lb"></span>
+					<span class="counter" id="filters_counter"></span>
 				</div>
 
 				<div id="control_sig" class="control">
 					<div class="flap" id="flap_sig"></div>
-					<span id="score_sig">445 </span>
-					<span id="control_sig_lb">SINAIS</span>
+					<span id="score_sig"> </span>
+					<span id="control_sig_lb"></span>
 				</div>
 
 			</div>
@@ -149,6 +177,7 @@
 	<!-- script  -->
 
 	<script type="text/javascript" src="js/navigation.js"></script>
+	<script type="text/javascript" src="js/simulate.js"></script>
 	<script type="text/javascript" src="js/explore.js"></script>
 
 </body>

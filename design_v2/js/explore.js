@@ -6,11 +6,17 @@ var json,
 	win_w,
 	win_h,
 	cur_code,
+	cur_filters,
+	n_hubs = 0,
+	n_signals = 0,
 	scale;
 
 var scale_kind,
 	scale_method;
 
+var cur_scale = 1;
+var zoom_limits = [ 0.1, 5 ];
+var zoom_factor = 1.5;
 
 var bar_h = 80;
 var logo_t = 32;
@@ -33,9 +39,6 @@ var svg_map;
 var svg_nodes;
 var svg_force;
 var svg_circles;
-
-
-//////////////////////////////// objects ////////////////////////////////
 
 
 //////////////////////////////// OBJECTS ////////////////////////////////
@@ -89,11 +92,14 @@ reg('score_sig');
 reg('control_sig_lb');
 
 reg('control_filters');
+reg('filters');
+reg('filters_list');
+reg('filters_x');
+reg('trash');
 reg('filters_lb');
 reg('filters_counter');
 
 reg('mode_list');
-
 
 
 //////////////////////////////// control ////////////////////////////////
@@ -115,12 +121,12 @@ filters.open = false;
 
 function open_filters() {
 	filters.open = true;
-	$(filters).animate({right:0}, dur, in_out);
+	$(filters).animate({right:20}, dur, _out);
 }
 
 function close_filters() {
 	filters.open = false;
-	$(filters).animate({right:'-100%'}, dur, in_out);
+	$(filters).animate({right:-350}, dur, in_);
 }
 
 $(control_filters).on( bt_event, function(){
@@ -136,8 +142,144 @@ function sep(tx){
 	$(div)
 		.attr('id','filters_sep')
 		.html(tx);
-	filters.appendChild(div);
+	filters_list.appendChild(div);
 }
+
+
+////////////////////////////////  zoom  ////////////////////////////////
+
+$(zoom_out).on(bt_event, function(){
+	if(cur_scale > zoom_limits[0]){
+		cur_scale = cur_scale/zoom_factor;
+		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
+	}
+});
+
+$(zoom_in).on(bt_event, function(){
+	if(cur_scale < zoom_limits[1]){
+		cur_scale *= zoom_factor;
+		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
+	}
+});
+
+//////////////////////////////// MODAL ////////////////////////////////
+
+$(document).keyup(function(e) {
+     if (e.keyCode == 27) {
+        if(modal.open) close_modal();
+		if(help.open) close_help();
+    }
+});
+
+function scroll(trg, to, dur){
+	$(trg).scrollTo( to, {
+		duration: dur2,
+		easing: in_out,
+		axis:'y'
+	});
+}
+
+modal.open = false;
+
+function open_modal (d){
+
+	if(filters.open) close_filters();
+
+	modal.open = true;
+	$(modal_content).html('');
+
+	$(modal).css({color:'#fff', backgroundColor:d.fill});
+	if(!mobile) $(modal).css({ maxHeight: '50%' });
+	$(modal_x).css({ backgroundImage: 'url(layout/x.png)' });
+
+	div = document.createElement('div');
+		$(div)
+			.addClass('title')
+			.html(d.node.label);
+		$(modal_content).append(div);
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('about')
+			.html( d.node.about )
+		modal_content.appendChild(div);
+
+	scroll(modal_content, 0, 0);
+
+	$(modal).fadeIn(dur,_out);
+	$(curtain).fadeIn( dur, _out);
+
+}
+
+
+function close_modal(){
+	modal.open = false;
+	$(modal).fadeOut( dur,_out );
+	$(curtain).fadeOut( dur, _out);
+}
+
+$(modal_x).on(bt_event, function(){
+	close_modal();
+});
+
+
+//////////////////////////////// HELP ////////////////////////////////
+
+var help_itens = [ control_hub, control_sig, control_filters, mode ];
+
+help_itens.pos = 0;
+
+function clone(trg){
+	return {
+		width: $(trg).width(),
+		height: $(trg).height(),
+		left: $(trg).offset().left
+	}
+}
+
+function help_pos(pos){
+	help_itens.pos = pos;
+	var cln = clone( help_itens[pos] );
+	$(help_frame)
+		.css({
+			width: cln.width,
+			height: cln.height,
+			left: cln.left,
+			bottom: 0
+		});
+	$(help_title).html(json.help_text[pos].title);
+	$(help_text).html(json.help_text[pos].text);
+	$(help_nav_pos).html( (help_itens.pos+1) + ' / ' + help_itens.length);
+
+	if (pos == 0) $(help_prev).css({opacity: 0.2, cursor:'default'});
+	else $(help_prev).css({opacity: 1, cursor:'pointer'});
+
+	if (pos == help_itens.length-1) $(help_next).css({opacity: 0.2, cursor:'default'});
+	else  $(help_next).css({opacity: 1, cursor:'pointer'});
+
+}
+
+function close_help(){
+	$(help).fadeOut(dur/2);
+	help.open = false;
+}
+
+$(help_x).on(bt_event, close_help);
+
+$(help_next).on(bt_event,function(){
+	if(help_itens.pos < help_itens.length-1) help_pos(help_itens.pos + 1)
+})
+
+$(help_prev).on(bt_event,function(){
+	if(help_itens.pos > 0) help_pos(help_itens.pos - 1)
+})
+
+$(help_bt).on(bt_event, function(){
+	help_pos(0);
+	$(help).fadeIn(dur/2);
+	help.open = true;
+});
+
 
 
 //////////////////////////////// FILTERS ////////////////////////////////
@@ -146,7 +288,7 @@ filters.score = 0;
 
 function reset_filters_score(clear){
 	filters.score = 0;
-	$(filters_nb).css({opacity:0.2}).html(0);
+	$(filters_counter).css({opacity:0.2}).html(0);
 	for( i in json.filters ){
 		json.filters[i].active = [];
 		$(json.filters[i].nb).css({opacity:0.2}).html(0);
@@ -158,11 +300,16 @@ function reset_filters_score(clear){
 			strict.kind = [];
 		}
 	}
+	if(clear){
+		cur_filters = [];
+		sessionStorage.setItem ('cur_filters', null);
+	}
 }
 
 function check_filters() {
+	console.log(json.filters);
+	console.log(cur_filters);
 	reset_filters_score(false);
-	reset_search();
 	for ( i in json.filters ) {
 		var all_off = true;
 		for( a in json.filters[i].itens ) {
@@ -181,35 +328,48 @@ function check_filters() {
 			else $(json.filters[i].itens[a].li).css({  opacity:'' });
 		}
 		if(filters.score > 0){
-			$(filters_nb).css({opacity:1}).html( filters.score );
+			$(filters_counter).css({opacity:1}).html( filters.score );
 		}
 		if(json.filters[i].active.length > 0){
 			$(json.filters[i].nb).css({opacity:1}).html( json.filters[i].active.length );
 		}
 	}
 
-	//trash
-	if(filters.score > 0) $(trash).removeClass('empty');
-	else $(trash).addClass('empty');
+	check_trash();
 
 	// hubs list
 	n_hubs = update_list( json.hubs, 'hub' );
+	$(score_hub).html(n_hubs);
 
 	// signals list
 	n_signals = update_list( json.signals, 'sig' );
+	$(score_sig).html(n_signals);
 
 }
 
-// $(trash).on(bt_event, function(){
-// 	reset_filters_score(true);
-// 	check_filters();
-// });
+function check_trash(){
+	if(filters.score > 0) {
+		$(trash).html(json.labels.remove_filters[lg].toUpperCase()).removeClass('empty');
+	} else {
+		$(trash).html(json.labels.no_filter[lg].toUpperCase()).addClass('empty');
+	}
+}
+
+
+$(filters_x).on(bt_event, function(){
+	close_filters();
+});
+
+$(trash).on(bt_event, function(){
+	reset_filters_score(true);
+	check_filters();
+});
 
 function update_list(data, cod){
 	var n = data.length;
 	for(a in data){
 		d = data[a];
-		$(d.li).show();
+		if(d.li) $(d.li).show();
 		d.visible = true;
 		for( i in json.filters ){
 			if( d[i] &&	d.visible && json.filters[i].active.length > 0 ){
@@ -228,13 +388,13 @@ function update_list(data, cod){
 				if(	!found ){
 					d.visible = false;
 					n --;
-					$(d.li).hide();
+					if(d.li) $(d.li).hide();
 				}
 			}
 		}
 	}
-	if(cur_target == cod) set_score(n);
-	set_all_circles();
+	set_score(n);
+	set_all_circles(dur);
 	return n;
 }
 
@@ -262,13 +422,24 @@ function toggle_filter(trg){
 		if( trg.group && strict[trg.group].indexOf(trg.id) >= 0 ){
 			strict[trg.group].splice( strict[trg.group].indexOf(trg.id),1);
 		}
+		store_filter(trg.id, false);
 	}else{
 		trg.on = true;
 		if( trg.group && strict[trg.group].indexOf(trg.id) < 0 ){
 			strict[trg.group].push(trg.id);
 		}
+		store_filter(trg.id, true);
 	}
 	check_filters();
+}
+
+function store_filter(filter, push){
+	if(push){
+		cur_filters.push(filter.toString());
+	}else{
+		cur_filters.splice(cur_filters.indexOf(filter.toString()),1);
+	}
+	sessionStorage.setItem ('cur_filters', cur_filters.join(','));
 }
 
 function create_filters( data, target, group ){
@@ -279,7 +450,7 @@ function create_filters( data, target, group ){
 	$(title)
 		.addClass('filter_title')
 		.html(data.label);
-	filters.appendChild(title);
+	filters_list.appendChild(title);
 
 	span = document.createElement('span');
 	$(span)
@@ -291,7 +462,7 @@ function create_filters( data, target, group ){
 	$(ul)
 		.addClass('group')
 		.height(0);
-	filters.appendChild(ul);
+	filters_list.appendChild(ul);
 
 	$(title).on('click', function(){
 		reset_open_filters(this.data);
@@ -316,7 +487,7 @@ function create_filters( data, target, group ){
 		d = data.itens[i];
 
 		li = document.createElement('li');
-		li.on = false;
+
 		$(li)
 			.addClass('filter')
 			.css({opacity:1})
@@ -331,6 +502,10 @@ function create_filters( data, target, group ){
 		d.group = group;
 		li.data = d;
 
+		// compare to stored filters
+		if(cur_filters.indexOf(d.id.toString()) >= 0) li.data.on = true;
+		else li.data.on = false;
+
 	}
 }
 
@@ -341,10 +516,51 @@ function arr_search( arr, id ){
 }
 
 
+$(update_logo).on(bt_event, function(){
+		navigate('index.html', false);
+});
+
+// tooltip
+
+function tt(title, val, color){
+	if(title){
+		$(tt_title).html(title);
+		$(tt_val).html(val);
+		$(tooltip).css({background:color}).show();
+	}else{
+		$(tooltip).hide();
+	}
+}
+
+if(!mobile){
+	$(window).mousemove(function( event ){
+	    mouse_x = event.clientX - $(tooltip).width()/2 - 30;
+	    mouse_y = event.clientY - 60;
+	    $(tooltip).css({ left:mouse_x, top:mouse_y });
+	});
+}else{
+	$(tooltip).remove();
+}
+
+
 //////////////////////////////// funcions ////////////////////////////////
 
 
-function resize_update(){
+function check_num(n, code){
+	if(n==1) return json.labels[code][lg].toUpperCase();
+	else return json.labels[code + 's'][lg].toUpperCase();
+}
+
+function set_score(n){
+	// aplicar a logica abaixo aos dois botoes
+
+	// $(score_nb).html(n);
+	// $(score_lb).html( check_num(n));
+}
+
+function resize_explore(){
+
+	console.log("resize");
 
 		if(mobile){
 			bar_h = 50
@@ -354,6 +570,9 @@ function resize_update(){
 
 		$(modal_content).height($(modal).height() - 50);
 		$(map_container).height(win_h - bar_h);
+		$(filters).height(win_h - bar_h - 40);
+		$(filters_list).height(win_h - bar_h - 97);
+
 }
 
 function calc_radius(area){
@@ -453,10 +672,10 @@ function create_map(trg){
 	.append('g')
 	.attr('style', 'cursor:pointer')
 	.on('click', function(d){
-		open_modal(d, true);
+		open_modal(d);
 	})
 	.on('mouseover', function(d){
-		var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial) + ' (' + d.pc_val + '%)';
+		var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial, cur_code) + ' (' + d.pc_val + '%)';
 		if(!mobile) tt(d.node.label, val, d.fill);
 	})
 	.on('mouseout', function(d){
@@ -497,11 +716,11 @@ function create_map(trg){
 	});
 
 	svg_force.alpha(0).start();
-  set_all_circles();
+  set_all_circles(1000);
 
 }
 
-function set_all_circles(){
+function set_all_circles(_dur){
 	svg_circles = svg_map.selectAll('g')
 	.each( function (d, i) {
 		d.partial = 0;
@@ -517,7 +736,7 @@ function set_all_circles(){
 		d.pc_val = pc;
 
 		d.c_partial
-			.transition().duration(1000)
+			.transition().duration(_dur)
 			.attr('r', calc_radius(d.partial))
 			.attr('fill-opacity', 1);
 	});
@@ -536,28 +755,154 @@ function $_GET() {
 
 function load(){
 
-
-
-	create_filters(json.filters.origin, false, false);
-	create_filters(json.filters.coverage, false, false);
-	sep("FILTROS DE SINAIS");
-	create_filters(json.filters.method, sig_filters, 'method');
-	create_filters(json.filters.kind, hub_filters, 'kind');
-	create_filters(json.filters.purpose, sig_filters, false);
-	create_filters(json.filters.type, sig_filters, false);
-	create_filters(json.filters.financier, hub_filters, false);
-
-
 	// check_get
 	cur_code = ( $_GET()["cod"] || 'sig' );
 
-	if(cur_code == 'sig'){
+	// check local storage filters
+	cur_filters = sessionStorage.getItem('cur_filters').split(',');
+	if (cur_filters.length == 0){
+		sessionStorage.setItem('cur_filters', null);
+	}
+
+	if(mobile){
+		dbody.appendChild(legends); // change legends DOM position
+		$(legends).hide();
+	}else{
+		$(legend_hub).height(json.filters.kind.itens.length * 21 );
+		$(legend_sig).height(json.filters.method.itens.length * 21 );
+	}
+
+	// mobile legend close bt
+
+	if(mobile) {
+		$(legends_x).on(bt_event, close_legend);
+	}
+
+	// mobile legend bts
+
+	$(legend_hub_bt).on(bt_event, function(){
+		open_legend();
+	});
+
+	$(legend_sig_bt).on(bt_event, function(){
+		open_legend();
+	});
+
+	create_filters(json.filters.origin, false, false);
+	create_filters(json.filters.coverage, false, false);
+
+	// set_target
+	if(cur_code == "sig"){
+
 		scale = 10;
 		$(control_sig).addClass('on');
+		sep(json.labels.sig_list[lg].toUpperCase());
+		create_filters(json.filters.method, sig_filters, 'method');
+		create_filters(json.filters.purpose, sig_filters, false);
+		create_filters(json.filters.type, sig_filters, false);
+
+		// legend
+		//method legend
+
+		$(legend_sig_title).html( json.filters.method.label );
+		for( i in json.filters.method.itens ){
+			// legend
+			d = json.filters.method.itens[i];
+			li = document.createElement('li');
+			$(li)
+				.addClass('legend')
+			legend_sig.appendChild(li);
+			div = document.createElement('div');
+			$(div)
+				.addClass('color')
+				.css({background:d.hex})
+			li.appendChild(div);
+			div = document.createElement('div');
+			$(div)
+				.addClass('lb')
+				.html( d.label )
+			li.appendChild(div);
+
+			// mobile legend bt
+			if( mobile && (i==0 || i==Math.round(json.filters.kind.itens.length/2) || i == json.filters.kind.itens.length - 1)){
+				div = document.createElement('div');
+				$(div)
+					.addClass('legend_bt_color')
+					.css({ background:d.hex })
+				legend_sig_bt.appendChild(div);
+			}
+		}
+
+		if(!mobile){
+			$(legend_sig).delay(dur).animate({left:0}, dur );
+		} else{
+			$(legend_sig_bt).show();
+			$(legend_sig).show();
+			$(legend_hub).hide();
+		}
+
+		// labels
+		$(circles_out).html(json.labels.method[lg].toUpperCase());
+		$(circles_in).html(json.labels.sigs[lg].toUpperCase());
+
 	}else{
+
 		scale = 20;
 		$(control_hub).addClass('on');
+		sep(json.labels.hub_list[lg].toUpperCase());
+		create_filters(json.filters.kind, hub_filters, 'kind');
+		create_filters(json.filters.financier, hub_filters, false);
+
+		// hub legend
+		$(legend_hub_title).html( json.filters.kind.label );
+
+		for( i in json.filters.kind.itens ){
+			d = json.filters.kind.itens[i];
+			li = document.createElement('li');
+			$(li)
+				.addClass('legend')
+			legend_hub.appendChild(li);
+
+			div = document.createElement('div');
+			$(div)
+				.addClass('color')
+				.css({background:d.hex })
+			li.appendChild(div);
+
+			div = document.createElement('div');
+			$(div)
+				.addClass('lb')
+				.html( d.label )
+			li.appendChild(div);
+
+			// mobile legend bt
+
+			if( mobile && (i==0 || i==Math.round(json.filters.kind.itens.length/2) || i == json.filters.kind.itens.length - 1)){
+				div = document.createElement('div');
+				$(div)
+					.addClass('legend_bt_color')
+					.css({ background:d.hex })
+				legend_hub_bt.appendChild(div);
+			}
+		}
+
+		if(!mobile){
+			$(legend_hub).delay(dur).animate({left:0}, dur );
+		} else{
+			$(legend_hub_bt).show();
+			$(legend_hub).show();
+			$(legend_sig).hide();
+		}
+
+		// labels
+		$(circles_out).html(json.labels.kind[lg].toUpperCase());
+		$(circles_in).html(json.labels.hubs[lg].toUpperCase());
 	}
+
+	// generic labels
+	$(filters_lb).html(json.labels.filters[lg].toUpperCase());
+	$(control_hub_lb).html(check_num(n_hubs, "hub"));
+	$(control_sig_lb).html(check_num(n_signals, "sig"));
 
 	// start data
 	simulate_db(json);
@@ -574,6 +919,10 @@ function load(){
 	resize();
 	create_map(cur_code);
 
+	// initial layout
+	check_filters();
+	check_trash();
+
 
 } // load
 
@@ -587,396 +936,3 @@ $.ajax({
 		load();
 	}
 });
-
-function simulate_db(db){
-
-	for( var l=1; l<livros.length; l++ ){
-		var livro = {};
-		livro.autor = livros[l].split('-')[1];
-		livro.titulo = livros[l].split('-')[0];
-		if(livro.titulo.indexOf(',') >= 0){
-			livro.titulo = livro.titulo.split(',')[1] + ' ' + livro.titulo.split(',')[0];
-		}
-		livros[l] = livro;
-	}
-
-	function rand(n){
-		return Math.ceil(Math.random()*n);
-	}
-
-	function shift_rand(n){
-		var shift = Math.random();
-		if(shift <= 0.2)	return Math.ceil(Math.random()*n/4);
-		if(shift > 0.2 && shift <= 0.5) return Math.ceil(Math.random()*n/3);
-		if(shift > 0.5 && shift <= 0.8) return Math.ceil(Math.random()*n/2);
-		else return Math.ceil(Math.random()*n);
-	}
-
-	for(var h=1; h<=215; h++){
-		var hb = {};
-		hb.id = h;
-		hb.visible = true;
-		hb.cod = "hub";
-		hb.url = "http://hub_url.com";
-		hb.about = "Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ";
-		hb.name = livros[rand(livros.length-1)].autor;
-		hb.kind = [shift_rand(12)];
-		hb.origin = rand(5);
-		hb.coverage = rand(4);
-		hb.financier = shift_rand(2);
-		db.hubs.push(hb);
-	}
-
-	for(var s=1; s<=445; s++){
-		var sg = {};
-		sg.id = s;
-		sg.visible = true;
-		sg.cod = "sig";
-		sg.url = "http://sig_url.com";
-		sg.about = "Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ";
-		sg.name = livros[rand(livros.length-1)].titulo;
-		var n_methods = rand(4);
-		sg.method = [];
-		for(a=1; a<=n_methods; a++){
-			var rand_met = shift_rand(14);
-			if( sg.method.indexOf(rand_met) < 0) sg.method.push(rand_met);
-		}
-		sg.origin = rand(5);
-		sg.coverage = rand(4);
-		sg.type = rand(5);
-		sg.purpose = rand(2);
-		db.signals.push(sg);
-	}
-}
-
-
-var livros = [null,
-"Abel e Helena - Artur Azevedo",
-"Agosto - Rubem Fonseca",
-"Águia e a Galinha, A - Leonardo Boff",
-"Alfarrábios - José de Alencar",
-"Alienista, O - Machado de Assis",
-"Alguma Poesia - Carlos Drummond de Andrade",
-"Alguma Poesia - Machado de Assis",
-"Alma - Oswald de Andrade",
-"Alma do Lázaro, A - José de Alencar",
-"Alma Inquieta - Olavo Bilac",
-"Alquimista, O - Paulo Coelho",
-"Americanas - Machado de Assis",
-"Amor com Amor se Paga - França Júnior",
-"Amor de Perdição - Josué Guimarães",
-"Amor e Pátria - Joaquim Manuel de Macedo",
-"Amor por Anexins - Artur Azevedo",
-"Ana Terra, Érico Veríssimo",
-"Antes da Missa - Machado de Assis",
-"Antes do Baile Verde - Lygia Fagundes Telles",
-"Aos Vinte Anos - Aluísio de Azevedo",
-"Arcádia e a Inconfidência, A - Oswald de Andrade",
-"Arquivos do inferno - Paulo Coelho",
-"Asa Esquerda do Anjo, A - Lya Luft",
-"Asas de um Anjo, As - José de Alencar",
-"As horas nuas - Lygia Fagundes Telles",
-"As Meninas - Lygia Fagundes Telles",
-"Assassinatos na Academia Brasileira de Letras - Jô Soares",
-"Assovio, Qorpo Santo",
-"Ateneu, O - Raul Pompéia",
-"Aventuras de Tibicuera, Érico Veríssimo",
-"Bacia das Almas - Luiz Antônio de Assis Brasil",
-"Bahia de Todos os Santos - Jorge Amado",
-"Baladas para El Rei - Cecília Meireles",
-"Balas de Estalo - Machado de Assis",
-"Balé Branco, O - Carlos Heitor Cony",
-"Bandoleiros - João Gilberto Noll",
-"Barca de Gleyre, A - Monteiro Lobato",
-"Batuque - Cecília Meireles",
-"Baú de Ossos - Pedro Nava",
-"Beira Mar - Pedro Nava",
-"Beira Rio Beira Vida - Assis Brasil",
-"Bela e a Fera, A - Clarice Lispector",
-"Bela Madame Vargas, A - João do Rio",
-"Bem Amado, O - Dias Gomes",
-"Bola e o goleiro, A - Jorge Amado",
-"Bons Dias - Machado de Assis",
-"Bote de Rapé, O - Machado de Assis",
-"Biblioteca - Lima Barreto",
-"Boca do Inferno - Ana Miranda",
-"Bom Crioulo - Adolfo Caminha",
-"Bons Dias - Machado de Assis",
-"Broquéis - Cruz e Sousa",
-"Bruzundangas - Lima Barreto",
-"Burgo - Gregório de Matos",
-"Bugrinha - Afrânio Peixoto",
-"Brida - Paulo Coelho",
-"Cabeleira - Franklin Távora",
-"Cabocla - Ribeiro Couto",
-"Cacau - Jorge Amado",
-"Cacto Vermelho, O - Lygia Fagundes Telles",
-"Cães da Província - Luiz Antônio de Assis Brasil",
-"Caetés - Graciliano Ramos",
-"Café da Manhã - Dináh Silveira de Queiróz",
-"Camilo Mortágua - Josué Guimarães",
-"Caminhos cruzados - Érico Veríssimo",
-"Canções - Cecília Meireles",
-"Capitães da Areia - Jorge Amado",
-"Capital Federal - Artur Azevedo",
-"Caramuru - Frei José de Santa Rita Durão",
-"Carnaval dos Animais, O - Moacyr Sclyar",
-"Carne - Júlio Ribeiro",
-"Carolina - Casimiro de Abreu",
-"Carrilhões - Murilo Araújo",
-"Cartas Chilenas - Tomaz Antonio Gonzaga",
-"Cartas perto do Coração - Clarice Lispector",
-"Carteira - Machado de Assis",
-"Casa das Quatro Luas, A - Josué Guimarães",
-"Casadas Solteiras - Martins Pena",
-"Casa de Pensão - Álvares de Azevedo",
-"Casadinha de Fresco - Artur Azevedo",
-"Casa Fechada - Roberto Gomes",
-"Casa Velha - Machado de Assis",
-"Castelo no Pampa, Um - Luiz Antônio de Assis Brasil",
-"Cavaleiro da Esperança, O - Jorge Amado",
-"Cavalo Cego, O - Josué Guimarães",
-"Cavalos e Obeliscos - Moacyr Sclyar",
-"Cemitério - Lima Barreto",
-"Centauro no Jardim, O - Moacyr Sclyar",
-"Certa Entidade em Busca de Outra - Qorpo Santo",
-"Certo Henrique Bertaso, Um - Érico Veríssimo",
-"Ciclo das Águas, O - Moacyr Sclyar",
-"Cidade Sitiada, A - Clarice Lispector",
-"Cinco Minutos - José de Alencar",
-"Ciranda de Pedra - Lygia Fagundes Telles",
-"Clara dos Anjos - Lima Barreto",
-"Clarissa - Érico Veríssimo",
-"Clô Dias & Noites - Sérgio Jockymann",
-"Comba Malina - Dináh Silveira de Queiróz",
-"Com o Vaqueiro Mariano - João Guimarães Rosa",
-"Como o Homem Chegou - Lima Barreto",
-"Como Nasceram as Estrelas - Clarice Lispector",
-"Como se Fazia um Deputado - França Júnior",
-"Concerto Campestre - Luiz Antônio de Assis Brasil",
-"Condição Judaica, A - Moacyr Sclyar",
-"Conexão Beirute Teeran - Luis Eduardo Matta",
-"Conto de Escola - Machado de Assis",
-"Contos Fluminenses - Machado de Assis",
-"Contos Gauchescos - Simões Lopes Neto",
-"Contrastes e Confrontos - Euclides da Cunha",
-"Coronel e o Lobisomem, O - José Cândido de Carvalho",
-"Corpo de Baile - João Guimarães Rosa",
-"Correspondência - Emílio de Menezes",
-"Correspondência - Machado de Assis",
-"Correspondências - Clarice Lispector",
-"Cortiço, O - Aluízio Azevedo",
-"Credor da Fazenda Nacional - Qorpo Santo",
-"Criança, Meu Amor - Cecília Meireles",
-"Crisálidas - Machado de Assis",
-"Crítica - Machado de Assis",
-"Crônica Trovada da Cidade de San Sebastian do Rio de Janeiro - Cecília Meireles",
-"Dança de Espelhos - Kátya Chamma",
-"Demônio e a Srta. Prym, O - Paulo Coelho",
-"Demônio Familiar - José de Alencar",
-"Depois do Último Trem - Josué Guimarães",
-"Descrição da Ilha de Itaparica, Termo da Cidade da Bahia - Frei Manuel de Santa Rita Itaparica",
-"Desencantos - Machado de Assis",
-"Deuses de Raquel, Os - Moacyr Sclyar",
-"Diário de um Mago, O - Paulo Coelho",
-"Dicionário do Viajante Insólito - Moacyr Sclyar",
-"Diplomático - Machado de Assis",
-"Disciplina do Amor, A - Lygia Fagundes Telles",
-"Discurso de Posse na Academia Brasileira de Letras - Emílio de Menezes",
-"Diva - José de Alencar",
-"Doença de Antunes - Lima Barreto",
-"Dom Casmurro - Machado de Assis",
-"Dom Supremo, O - Paulo Coelho",
-"Dona Anja - Josué Guimarães",
-"Dona Flor e Seus Dois Maridos - Jorge Amado",
-"Donaguidinha - Manuel de Oliveira Paiva",
-"Doutor Miragem - Moacyr Sclyar",
-"Durante Aquele Estranho Chá: Perdidos e Achados - Lygia Fagundes Telles",
-"E do meio do Mundo Prostituto, só Amores Guardei ao meu Charuto - Rubem Fonseca",
-"Encarnação - José de Alencar",
-"Enquanto a Noite não Chega - Josué Guimarães",
-"Esaú e Jacó - Machado de Assis",
-"Esganadas, As - Jô Soares",
-"Espumas Flutuantes - Castro Alves",
-"Estranha Nação de Rafael Mendes, A - Moacyr Scliar",
-"Exército de um Homem Só, O - Moacyr Scliar",
-"Falenas - Machado de Assis",
-"Ferro e Fogo, A - Josué Guimarães",
-"Festa no Castelo - Moacyr Sclyar",
-"Floradas na Serra - Dináh Silveira de Queiróz",
-"Gato no Escuro, O - Josué Guimarães",
-"Gato Preto em Campo de Neve - Érico Veríssimo",
-"Gaúcho, O - José de Alencar",
-"Grande Mulher Nua, A - Luís Fernando Veríssimo",
-"Guarani, O - José de Alencar",
-"Guerra no Bom Fim, A - Moacyr Sclyar",
-"Guida, Caríssima Guida - Dináh Silveira de Queiróz",
-"Gula - O Clube dos Anjos - Luís Fernando Veríssimo",
-"Helena - Machado de Assis",
-"História da Província de Santa Cruz - Pero de Magalhães Gândavo",
-"História de Quinze Dias - Machado de Assis",
-"Histórias da Meia Noite - Machado de Assis",
-"Histórias Escolhidas - Luís Fernando Veríssimo",
-"História só pra Mim, Uma - Moacyr Sclyar",
-"Histórias sem Data - Machado de Assis",
-"Hora da Estrela, A - Clarice Lispector",
-"Iaiá Garcia - Machado de Assis",
-"I Juca Pirama - Gonçalves Dias",
-"Ilha de Maré, À - Manuel Botelho de Oliveira",
-"Incidente em Antares - Érico Veríssimo",
-"Infância - Graciliano Ramos",
-"Inocência - Visconde de Taunay",
-"Insônia - Graciliano Ramos",
-"Introdução à Lógica Amorosa - Moacyr Sclyar",
-"Ira Implacável - Luis Eduardo Matta",
-"Iracema - José de Alencar",
-"Israel em Abril - Érico Veríssimo",
-"Jardim do Diabo, O - Luís Fernando Veríssimo",
-"Jubiabá - Jorge Amado",
-"Laços de Família - Clarice Lispector",
-"Lendas do Sul - Simões Lopes Neto",
-"Lição de Botânica - Machado de Assis",
-"Linhas Tortas - Graciliano Ramos",
-"Livro Derradeiro, O - Cruz e Sousa",
-"Lucíola - José de Alencar",
-"Lugar ao Sol, Um - Érico Veríssimo",
-"Luneta Mágica, A - Joaquim Manuel de Macedo",
-"Macário - Álvares de Azevedo",
-"Mad Maria - Márcio de Souza",
-"Mãe do Freud, A - Luís Fernando Veríssimo",
-"Maktub - Paulo Coelho",
-"Manhã Transfigurada - Luiz Antônio de Assis Brasil",
-"Manual do Guerreiro da Luz, O - Paulo Coelho",
-"Manuelzão e Miguilim - Guimarães Rosa",
-"Mão e a Luva, A - Machado de Assis",
-"Margarida la Rocque - A Ilha dos Demônios - Dináh Silveira de Queiróz",
-"Marido do Doutor Pompeu, O - Luís Fernando Veríssimo",
-"Max e Os Felinos - Moacyr Sclyar",
-"Memorial de Aires - Machado de Assis",
-"Memórias de um Sargento de Milícias - Manuel António de Almeida",
-"Memórias do Cárcere - Graciliano Ramos",
-"Memórias Póstumas de Brás Cubas - Machado de Assis",
-"Mentiras que os Homens Contam, As - Luís Fernando Veríssimo",
-"Mês de Cães Danados - Moacyr Sclyar",
-"Meus Lampejos - Geziel Ramos",
-"Meu Último Dragão - Josué Guimarães",
-"México - Érico Veríssimo",
-"Minas de Prata, As - José de Alencar",
-"Moço Loiro, O - Joaquim Manuel de Macedo",
-"Monte Cinco, O - Paulo Coelho",
-"Moreninha, A - Joaquim Manuel de Macedo",
-"Mortalha de Alzira, A - Aluízio Azevedo",
-"Mulato, O - Aluízio Azevedo",
-"Mulher do Silva, A - Luís Fernando Veríssimo",
-"Muralha, A - Dináh Silveira de Queiróz",
-"Música ao Longe - Érico Veríssimo",
-"Noite na Taverna, Álvares de Azevedo",
-"Noites - Érico Veríssimo",
-"Novas Crônicas da Vida Privada - Luís Fernando Veríssimo",
-"O País do Carnaval - Jorge Amado",
-"Ocidentais - Machado de Assis",
-"Olga - Fernando Morais",
-"Olhai os Lírios do Campo - Érico Veríssimo",
-"Orelha de Van Gogh, A - Moacyr Sclyar",
-"Orgia dos Duendes, A - Bernardo Guimarães",
-"Orgias - Luís Fernando Veríssimo",
-"Origem do Mênstruo, A - Bernardo Guimarães",
-"Outras do Analista de Bagé - Luís Fernando Veríssimo",
-"Páginas Recolhidas - Machado de Assis",
-"País do Carnaval, O - Jorge Amado",
-"Paixão segundo G.H., A - Clarice Lispector",
-"Papéis Avulsos - Machado de Assis",
-"Pata da Gazela, A - José de Alencar",
-"Pecado - Lima Barreto",
-"Pedro Gobá - Ezequiel Freire",
-"Pele o Lobo - Artur Azevedo",
-"Peru versus Bolívia - Euclides da Cunha",
-"Pessoas Beneméritas - Gregório de Matos",
-"Pequena História da República - Graciliano Ramos",
-"Pequenas Criaturas - Rubem Fonseca",
-"Poesias - Alphonsus de Guimarães",
-"Poemas Malditos - Álvares de Azevedo",
-"Poesias Coligidas - Castro Alves",
-"Poética 1 - Gregório de Matos",
-"Poética 2 - Gregório de Matos",
-"Porque Não Se Matava - Lima Barreto",
-"Primeiras Estórias - Guimarães Rosa",
-"Primeiros Cantos - Gonçalves Dias",
-"Primo da califórnia, O - Joaquim Manuel de Macedo",
-"Princesa dos Cajueiros - Artur Azevedo",
-"Prisioneiro, O - Érico Veríssimo",
-"Prole do Corvo, A - Luiz Antônio de Assis Brasil",
-"Prosopopéia - Bento Teixeira",
-"Quarto de Légua em Quadro, Um - Luiz Antônio de Assis Brasil",
-"Quem Casa, Quer Casa - Martins Pena",
-"Quincas Borba - Machado de Assis",
-"Relíquias de Casa Velha - Machado de Assis",
-"Recordações do Escrivão Isaías Caminha - Lima Barreto",
-"Relíquias de Casa Velha - Machado de Assis",
-"Resto É Silêncio, O - Érico Veríssimo",
-"Retirada da Laguna - Visconde de Taunay",
-"Rio de Janeiro em 1877 - Artur Azevedo",
-"Sacrifício - Franklin Távora",
-"Saga - Érico Veríssimo",
-"Sagarana - Guimarães Rosa",
-"Santo e a Porca, O - Ariano Suassuna",
-"São Bernardo - Graciliano Ramos",
-"Semana - Machado de Assis",
-"Senhora - José de Alencar",
-"Senhor Embaixador, O - Érico Veríssimo",
-"Sertões, Os - Euclides da Cunha",
-"Solo de Clarineta - Érico Veríssimo",
-"Sorriso do Lagarto, O - João Ubaldo Ribeiro",
-"Sonhos D'Oro - José de Alencar",
-"Souvenir iraquiano - Robinson dos Santos",
-"Subterraneo do Morro Castelo - Lima Barreto",
-"Suicida e o Computador, O - Luís Fernando Veríssimo",
-"Suje se Gordo! - Machado de Assis",
-"Suor - Jorge Amado",
-"Suspiros Poéticos e Saudades - Domingos Gonçalves de Magalhães",
-"Tambores Silenciosos, Os - Josué Guimarães",
-"Tarde para Saber, É - Josué Guimarães",
-"Tchau - Lygia Bojunga Nunes",
-"Tempo de Felicidade - Geziel Ramos",
-"Tempo e o Vento, O - Érico Veríssimo",
-"Terra dos Meninos Pelados, A - Graciliano Ramos",
-"Tenda dos Milagres - Jorge Amado",
-"Tentação - Adolfo Caminha",
-"Teresa Batista Cansada de Guerra - Jorge Amado",
-"Terras do Sem Fim - Jorge Amado",
-"Tieta do Agreste - Jorge Amado",
-"Til - José de Alencar",
-"Tio que Flutuava, O - Moacyr Sclyar",
-"Traçando Paris - Luís Fernando Veríssimo",
-"Traçando Roma - Luís Fernando Veríssimo",
-"Triste Fim de Policarpo Quaresma - Lima Barreto",
-"Ubirajara - José de Alencar",
-"Última Bruxa, A - Josué Guimarães",
-"Últimos Sonetos - Cruz e Sousa",
-"Um e Outro - Lima Barreto",
-"Um Lugar Ao Sol - Érico Veríssimo",
-"Único Assassinato de Cazuza - Lima Barreto",
-"Valkírias, As - Paulo Coelho",
-"Vaqueano - Apolinário Porto-Alegre",
-"Várias Histórias - Machado de Assis",
-"Vastas Emoções e Pensamentos Imperfeitos - Rubem Fonseca",
-"Velhinha de Taubaté, A - Luís Fernando Veríssimo",
-"Venha ver o Pô do Sol - Lygia Fagundes Telles",
-"Veronika decide Morrer - Paulo Coelho",
-"Verso e Reverso - José de Alencar",
-"Véspera de Reis - Artur Azevedo",
-"Viagem - Graciliano Ramos",
-"Viagem à Aurora do Mundo - Érico Veríssimo",
-"Vida de Joana D'Arc, A - Érico Veríssimo",
-"Vida e Morte de M. J. Gonzaga de Sá - Lima Barreto",
-"Videiras de Cristal - Luiz Antônio de Assis Brasil",
-"Vinte Anos - Álvares de Azevedo",
-"Virtudes da Casa, As - Luiz Antônio de Assis Brasil",
-"Viuvinha, A - José de Alencar",
-"Viventes das Alagoas - Graciliano Ramos",
-"Volta do Gato Preto, A - Érico Veríssimo",
-"Voluntários, Os - Moacyr Sclyar",
-"Xerloque da Silva em: O Rapto da Dorotéia - Josué Guimarães",
-"Xerloque da Silva em: Os Ladrões da Meia Noite - Josué Guimarães",
-"Zoeira - Luís Fernando Veríssimo	"
-];
