@@ -759,8 +759,10 @@ function load(){
 	cur_code = ( $_GET()["cod"] || 'sig' );
 
 	// check local storage filters
-	cur_filters = sessionStorage.getItem('cur_filters').split(',');
-	if (cur_filters.length == 0){
+  if(sessionStorage.getItem('cur_filters')){
+		cur_filters = sessionStorage.getItem('cur_filters').split(',');
+	}else{
+		cur_filters = [];
 		sessionStorage.setItem('cur_filters', null);
 	}
 
