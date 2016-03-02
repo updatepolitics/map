@@ -40,7 +40,27 @@
 	<link rel="stylesheet" type="text/css" href="css/update.css">
 
 </head>
-<body style="overflow:hidden" >
+<body class="white_bg">
+
+	<div id="help">
+		<div id="help_box">
+			<div id="help_nav">
+				<img id="help_x" src="layout/x.png"/>
+				<img id="help_next" src="layout/next.png"/>
+				<img id="help_prev" src="layout/prev.png"/>
+				<div id="help_nav_pos">1/4</div>
+			</div>
+			<div id="help_title"></div>
+			<div id="help_text"></div>
+		</div>
+		<div id="help_frame">
+			<div class="frame" ></div>
+			<div class="left" ></div>
+			<div class="right" ></div>
+			<div class="top" ></div>
+			<div class="bottom" ></div>
+		</div>
+	</div>
 
 	<div id="menu">
 		<div id="menu_close"></div>
@@ -55,28 +75,70 @@
 
 	<div id="curtain"></div>
 
-	<div id="header" class="white">
+	<div id="header">
 		<div id="menu_bt"></div>
+		<div id="update_logo" ></div>
 
 		<ul id="language"></ul>
 		<div id="cur_lang">
 			<div id="cur_lang_lb" class="lang selected"></div>
 		</div>
+
+		<div id="search">
+			<input type="text" id="search_str" tabindex="-1" placeholder="BUSCAR"/>
+			<div id="search_x"></div>
+		</div>
+	</div>
+
+	<div id="modal">
+		<div id="modal_nav">
+			<div id="modal_x"></div>
+		</div>
+		<div id="modal_content"></div>
+	</div>
+
+	<div id="filters">
+		<div id="filters_header">
+			<div id="trash"></div>
+			<div id="filters_x"></div>
+		</div>
+		<div id="filters_list"></div>
 	</div>
 
 	<div id="container">
 
-		<img src="layout/update_home.png" id="update_logo_home" />
-		<div class="home_bt" id="about"></div>
-		<div class="home_bt" id="explore"></div>
-		<div id="quotes"></div>
-		<div id="credit">
-			<span id="credit_who"></span>
-			<span id="credit_what"></span>
+		<div id="list">
+
 		</div>
 
-		<div id="map_container">
-			<div id="map"></div>
+		<div id="control">
+			<div id="help_bt" ></div>
+
+			<div id="mode">
+				<div id="mode_chart" class="mode"></div>
+				<div id="mode_list" class="mode selected"></div>
+			</div>
+
+			<div id="control_center">
+
+				<div id="control_hub" class="control">
+					<div class="flap" id="flap_hub"></div>
+					<span id="score_hub"></span>
+					<span id="control_hub_lb"></span>
+				</div>
+
+				<div id="control_filters" class="control">
+					<span id="filters_lb"></span>
+					<span class="counter" id="filters_counter"></span>
+				</div>
+
+				<div id="control_sig" class="control">
+					<div class="flap" id="flap_sig"></div>
+					<span id="score_sig"> </span>
+					<span id="control_sig_lb"></span>
+				</div>
+
+			</div>
 		</div>
 
 	<!-- container  -->
@@ -86,7 +148,7 @@
 
 	<script type="text/javascript" src="js/navigation.js"></script>
 	<script type="text/javascript" src="js/simulate.js"></script>
-	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/list.js"></script>
 
 </body>
 </html>

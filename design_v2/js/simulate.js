@@ -27,7 +27,7 @@ function simulate_db(db){
 		var hb = {};
 		hb.id = h;
 		hb.visible = true;
-		hb.cod = "hub";
+		hb.code = "hub";
 		hb.url = "http://hub_url.com";
 		hb.about = "Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ";
 		hb.name = livros[rand(livros.length-1)].autor;
@@ -42,7 +42,7 @@ function simulate_db(db){
 		var sg = {};
 		sg.id = s;
 		sg.visible = true;
-		sg.cod = "sig";
+		sg.code = "sig";
 		sg.url = "http://sig_url.com";
 		sg.about = "Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ";
 		sg.name = livros[rand(livros.length-1)].titulo;

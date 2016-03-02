@@ -32,12 +32,13 @@ for(i=0; i<path.length-1; i++){
 
 // placeholders for local functions
 var resize_explore = false;
+var resize_list = false;
 
 // location
 
-function navigate( html, cod ){
+function navigate( html, code ){
   var new_loc = root + html;
-  if(cod) new_loc += "?cod=" + cod;
+  if(code) new_loc += "?code=" + code;
   document.location.href = new_loc;
 }
 
@@ -185,6 +186,7 @@ function resize(){
 
     // local resize
 	if(resize_explore) resize_explore();
+	if(resize_list) resize_list();
 
 }
 
@@ -193,20 +195,31 @@ resize();
 
 // menu
 
+function $_GET() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+// check_get
+cur_code = ( $_GET()["code"] || 'sig' );
+
 var pages = [
-    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html", cod:false },
-    { _pt:'EXPLORE', _en:'EXPLORE', html:"explore.html", cod: false },
-    { _pt:'SINAIS', _en:'SIGNALS', html:"list.html", cod:'sig' },
-    { _pt:'HUBS', _en:'HUBS', html:"list.html", cod:'hub' },
-    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html", cod:false },
-    { _pt:'SOBRE', _en:'ABOUT', html:"about.html", cod:false }
+    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html", code:false },
+    { _pt:'EXPLORE', _en:'EXPLORE', html:"explore.html", code: false },
+    { _pt:'SINAIS', _en:'SIGNALS', html:"list.html", code:'sig' },
+    { _pt:'HUBS', _en:'HUBS', html:"list.html", code:'hub' },
+    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html", code:false },
+    { _pt:'SOBRE', _en:'ABOUT', html:"about.html", code:false }
 ];
 
 function open_menu(){
     menu.open = true;
     $(menu).animate({left:0}, dur, _out);
-    $(container).animate({left:$(menu).width()/5}, dur, _out);
-    $(header).animate({left:$(menu).width()/5 }, dur, _out);
+    // $(container).animate({left:$(menu).width()/5}, dur, _out);
+    // $(header).animate({left:$(menu).width()/5 }, dur, _out);
     $(curtain).fadeIn(dur, _out);
     if( filters && filters.open ) close_filters();
  }
@@ -214,17 +227,11 @@ function open_menu(){
 function close_menu(){
     menu.open = true;
     $(menu).animate({left:-1*$(menu).width()}, dur, _out);
-    $(container).animate({left:0}, dur, _out);
-    $(header).animate({left:0 }, dur, _out);
+    // $(container).animate({left:0}, dur, _out);
+    // $(header).animate({left:0 }, dur, _out);
     $(curtain).fadeOut(dur, _out);
 }
 
-function set_menu(id){
-    for( i in pages ){
-        if( i == id) $(pages[i].li).addClass('selected');
-        else $(pages[i].li).removeClass('selected');
-    }
-}
 
 $(curtain).on(bt_event, function(){
   if(menu.open) close_menu();
@@ -240,12 +247,14 @@ for( i in pages ){
         .addClass('bt')
         .html( pages[i][lg] )
         .on( bt_event, function(){
-            navigate(this.d.html, this.d.cod);
+            navigate(this.d.html, this.d.code);
             close_menu();
         });
 
-    if(pages[i].html == cur_page){
-        $(li).addClass('selected');
+    if( pages[i].html == cur_page){
+      if( !pages[i].code || pages[i].code == cur_code ){
+          $(li).addClass('selected');
+        }
     }
 
     menu_bts.appendChild(li);

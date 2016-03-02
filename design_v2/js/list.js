@@ -5,21 +5,12 @@ var json,
 	wn,
 	win_w,
 	win_h,
+	search_target,
 	cur_filters,
 	n_hubs = 0,
-	n_signals = 0,
-	scale;
-
-var scale_kind,
-	scale_method;
-
-var cur_scale = 1;
-
-var zoom_limits = [ 0.1, 5 ];
-var zoom_factor = 1.5;
+	n_signals = 0;
 
 var bar_h = 80;
-var zoom_r = 25;
 var filter_h = 25;
 
 var hub_filters = [];
@@ -28,16 +19,6 @@ var strict = {
 		'method':[],
 		'kind':[]
 	};
-
-
-// map vars
-
-var svg_map_area;
-var svg_map;
-
-var svg_nodes;
-var svg_force;
-var svg_circles;
 
 
 //////////////////////////////// OBJECTS ////////////////////////////////
@@ -49,24 +30,6 @@ reg('modal');
 reg('modal_x');
 reg('modal_content');
 
-reg('map_container');
-reg('tooltip');
-reg('tt_title');
-reg('tt_val');
-reg('map');
-reg('legends');
-reg('legends_x');
-reg('legend_bts');
-reg('legend_sig');
-reg('legend_hub');
-reg('legend_sig_title');
-reg('legend_hub_title');
-reg('legend_sig_bt');
-reg('legend_hub_bt');
-reg('zoom_control');
-reg('zoom_in');
-reg('zoom_out');
-
 reg('control');
 reg('help_bt');
 reg('help');
@@ -77,9 +40,6 @@ reg('help_nav_pos');
 reg('help_title');
 reg('help_text');
 reg('help_frame');
-reg('circles');
-reg('circles_out');
-reg('circles_in');
 
 reg('control_center');
 
@@ -101,21 +61,21 @@ reg('filters_counter');
 
 reg('mode_list');
 
+reg('list');
 
-//////////////////////////////// control ////////////////////////////////
+//////////////////////////////// control ////////////////////////////////////
 
 $(mode).on(bt_event, function(){
-	navigate("list.html?code=" + cur_code, false);
+	navigate("explore.html?code=" + cur_code, false);
 });
 
 $(control_hub).on(bt_event, function(){
-	if(cur_code != 'hub') navigate("explore.html?code=hub", false);
+	if(cur_code != 'hub') navigate("list.html?code=hub", false);
 });
 
 $(control_sig).on(bt_event, function(){
-	if(cur_code != 'sig') navigate("explore.html?code=sig", false);
+	if(cur_code != 'sig') navigate("list.html?code=sig", false);
 });
-
 
 filters.open = false;
 
@@ -131,7 +91,6 @@ function close_filters() {
 	else $(filters).animate({right:-350}, dur, in_);
 }
 $(filters).css({right:'-100%'});
-
 
 $(control_filters).on( bt_event, function(){
 	if(filters.open){
@@ -149,30 +108,48 @@ function sep(tx){
 	filters_list.appendChild(div);
 }
 
+//////////////////////////////// SEARCH ////////////////////////////////
 
-////////////////////////////////  zoom  ////////////////////////////////
-
-$(zoom_out).on(bt_event, function(){
-	if(cur_scale > zoom_limits[0]){
-		cur_scale = cur_scale/zoom_factor;
-		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
-	}
+$(search_str).on('click', function(event){
+	 event.stopPropagation();
 });
 
-$(zoom_in).on(bt_event, function(){
-	if(cur_scale < zoom_limits[1]){
-		cur_scale *= zoom_factor;
-		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
-	}
+$(search_x).hide();
+
+$(search_str).on('input', function(){
+	if( this.value != "" ) $(search_x).show();
+	else $(search_x).hide();
+	search_for(this.value);
 });
 
+function search_for(tx){
+	var search_tx = tx.toUpperCase();
+	for( i in search_target ){
+		node = search_target[i];
+		if( node.visible ){
+			if( node.name && node.name.toUpperCase().indexOf( search_tx ) >= 0 ){
+				$(node.li).show();
+			}else{
+				$(node.li).hide();
+			}
+		}
+	}
+}
+
+function reset_search(){
+	search_str.value = "";
+	search_for("");
+	$(search_x).hide();
+}
+
+$(search_x).on('click', reset_search);
 
 //////////////////////////////// MODAL ////////////////////////////////
 
 $(document).keyup(function(e) {
-     if (e.keyCode == 27) {
-        if(modal.open) close_modal();
-		if(help.open) close_help();
+	    if (e.keyCode == 27) {
+	    if(modal.open) close_modal();
+			if(help.open) close_help();
     }
 });
 
@@ -184,38 +161,186 @@ function scroll(trg, to, dur){
 	});
 }
 
+function info(d, inline){
+
+	var sub = "";
+	sub += "<span class='bold'>" + json.filters.origin.label + "</span> ";
+	sub += arr_search( json.filters.origin.itens, d.origin ).label;
+
+	if(inline)	sub += " | ";
+	else sub += "<br>";
+
+	sub +=  "<span class='bold'>" + json.filters.coverage.label + "</span> ";
+	sub += arr_search( json.filters.coverage.itens, d.coverage ).label;
+
+	if(d.code == 'sig'){
+
+		if(inline)	sub += " | ";
+		else sub += "<br>";
+
+		sub +=  "<span class='bold'>" + json.filters.purpose.label + "</span> ";
+		sub += arr_search( json.filters.purpose.itens, d.purpose ).label;
+
+		if(inline)	sub += " | ";
+		else sub += "<br>";
+
+		sub +=  "<span class='bold'>" + json.filters.type.label + "</span> ";
+		sub += arr_search( json.filters.type.itens, d.type ).label;
+
+	}
+
+	if( d.code == 'hub' ){
+
+		if(inline)	sub += " | ";
+		else sub += "<br>";
+
+		sub +=  "<span class='bold'>" + json.filters.financier.label + "</span> ";
+		sub += arr_search( json.filters.financier.itens, d.financier ).label;
+
+	}
+
+	return sub;
+
+}
+
 modal.open = false;
 
-function open_modal (d){
+function open_modal (d ){
 
 	if(filters.open) close_filters();
 
 	modal.open = true;
 	$(modal_content).html('');
 
-	$(modal).css({color:'#fff', backgroundColor:d.fill});
-	if(!mobile) $(modal).css({ maxHeight: '50%' });
-	$(modal_x).css({ backgroundImage: 'url(layout/x.png)' });
+	$(modal).css({color:'', backgroundColor:''});
+	$(modal_x).css({ backgroundImage: '' });
 
 	div = document.createElement('div');
-		$(div)
-			.addClass('title')
-			.html(d.node.label);
-		$(modal_content).append(div);
+	$(div)
+		.addClass('title')
+		.html(d.name);
+	$(modal_content).append(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('info')
+		.html( info( d, false ))
+	modal_content.appendChild(div);
+
+	// hr = document.createElement('hr');
+	// modal_content.appendChild(hr);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('about mt40')
+		.html(d.about);
+	$(modal_content).append(div);
+
+	if( d.code == 'sig' ){
+		if( d.method.length > 0 ){
+
+			div = document.createElement('div');
+			$(div)
+				.addClass('section')
+				.html( json.labels.methods[lg] )
+			$(modal_content).append(div);
+
+			ul = document.createElement('div');
+			$(ul).addClass('list');
+			$(modal_content).append(ul);
+
+			for( i in d.method ){
+
+				node = arr_search( json.filters.method.itens, d.method[i] );
+				li = document.createElement('li');
+				li.open = false;
+				li.node = node;
+				$(li)
+					.on('click', function(){
+						toggle_plus(this);
+					})
+					.addClass('item')
+					.html(node.label)
+					.css({ backgroundColor:node.hex })
+				$(ul).append(li);
+
+				div = document.createElement('div');
+				$(div)
+					.addClass('item_plus')
+					.css({ backgroundColor:node.hex, height:0})
+				$(ul).append(div);
+
+				div2 = document.createElement('div');
+				$(div2)
+					.html(node.about)
+				$(div).append(div2);
+
+				li.plus = div;
+				li.plus_tx = div2;
+			}
+		}
+
+	}else{
 
 		div = document.createElement('div');
 		$(div)
-			.addClass('about')
-			.html( d.node.about )
-		modal_content.appendChild(div);
+			.addClass('section')
+			.html(json.filters.kind.label)
+		$(modal_content).append(div);
+
+		ul = document.createElement('div');
+		$(ul).addClass('list');
+		$(modal_content).append(ul);
+
+		node = arr_search( json.filters.kind.itens, d.kind );
+		li = document.createElement('li');
+		li.open = false;
+		li.node = node;
+		$(li)
+			.on('click', function(){
+				toggle_plus(this);
+			})
+			.addClass('item')
+			.html(node.label)
+			.css({ backgroundColor:node.hex })
+		$(ul).append(li);
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('item_plus')
+			.css({ backgroundColor:node.hex, height:0})
+		$(ul).append(div);
+
+		div2 = document.createElement('div');
+		$(div2)
+			.html(node.about)
+		$(div).append(div2);
+
+		li.plus = div;
+		li.plus_tx = div2;
+
+	}
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('section')
+		.html(json.labels.more[lg])
+	$(modal_content).append(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('link')
+		.html(d.url)
+		.on('click', function(){
+			alert(d.url);
+		});
+	$(modal_content).append(div);
 
 	scroll(modal_content, 0, 0);
 
 	$(modal).fadeIn(dur,_out);
 	$(curtain).fadeIn( dur, _out);
-
 }
-
 
 function close_modal(){
 	modal.open = false;
@@ -226,7 +351,6 @@ function close_modal(){
 $(modal_x).on(bt_event, function(){
 	close_modal();
 });
-
 
 //////////////////////////////// HELP ////////////////////////////////
 
@@ -285,8 +409,6 @@ $(help_bt).on(bt_event, function(){
 	help.open = true;
 });
 
-
-
 //////////////////////////////// FILTERS ////////////////////////////////
 
 filters.score = 0;
@@ -327,7 +449,7 @@ function check_filters() {
 				$(json.filters[i].itens[a].li).removeClass('selected');
 			}
 		}
-		// all filters off = no filter = all on
+
 		for( a in json.filters[i].itens ){
 			if(all_off)	$(json.filters[i].itens[a].li).css({ opacity:1 });
 			else $(json.filters[i].itens[a].li).css({  opacity:'' });
@@ -359,7 +481,6 @@ function check_trash(){
 		$(trash).html(json.labels.no_filter[lg].toUpperCase()).addClass('empty');
 	}
 }
-
 
 $(filters_x).on(bt_event, function(){
 	close_filters();
@@ -398,7 +519,6 @@ function update_list(data, cod){
 			}
 		}
 	}
-	set_all_circles(dur);
 	return n;
 }
 
@@ -524,27 +644,6 @@ $(update_logo).on(bt_event, function(){
 		navigate('index.html', false);
 });
 
-// tooltip
-
-function tt(title, val, color){
-	if(title){
-		$(tt_title).html(title);
-		$(tt_val).html(val);
-		$(tooltip).css({background:color}).show();
-	}else{
-		$(tooltip).hide();
-	}
-}
-
-if(!mobile){
-	$(window).mousemove(function( event ){
-	    mouse_x = event.clientX - $(tooltip).width()/2 - 30;
-	    mouse_y = event.clientY - 60;
-	    $(tooltip).css({ left:mouse_x, top:mouse_y });
-	});
-}else{
-	$(tooltip).remove();
-}
 
 
 //////////////////////////////// funcions ////////////////////////////////
@@ -555,7 +654,8 @@ function check_num(n, code){
 	else return json.labels[code + 's'][lg].toUpperCase();
 }
 
-function resize_explore(){
+
+function resize_list(){
 
 	console.log("resize");
 
@@ -568,205 +668,19 @@ function resize_explore(){
 		}
 
 		$(modal_content).height($(modal).height() - 50);
-		$(map_container).height(win_h - bar_h);
 		$(filters).height(win_h - bar_h - 40);
 		$(filters_list).height(win_h - bar_h - 97);
 
 }
 
 
-//////////////////////////////// circles ////////////////////////////////
-
-function calc_radius(area){
-	return scale * Math.sqrt(area / Math.PI);
-}
-
-function tick(e) {
-	svg_circles.each(gravity(0.07 * e.alpha))
-	.each(collide(0.05))
-	.attr('transform', function (d) {
-		return 'translate(' + d.x + ' ' + d.y + ')';
-	});
-}
-
-function gravity(alpha) {
-	return function (d) {
-		d.y += (d.cy - d.y) * alpha;
-		d.x += (d.cx - d.x) * alpha;
-	};
-}
-
-function collide(alpha) {
-	var quadtree = d3.geom.quadtree(svg_nodes);
-	return function (d) {
-		var r = d.radius,
-		nx1 = d.x - r,
-		nx2 = d.x + r,
-		ny1 = d.y - r,
-		ny2 = d.y + r;
-		quadtree.visit(function (quad, x1, y1, x2, y2) {
-			if (quad.point && (quad.point !== d)) {
-				var x = d.x - quad.point.x,
-				y = d.y - quad.point.y,
-				l = Math.sqrt(x * x + y * y),
-				r = d.radius + quad.point.radius + (d.color !== quad.point.color);
-				if (l < r) {
-					l = (l - r) / l * alpha;
-					d.x -= x *= l;
-					d.y -= y *= l;
-					quad.point.x += x;
-					quad.point.y += y;
-				}
-			}
-			return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-		});
-	};
-}
-
-function create_map(trg){
-
-	var list;
-	var nodes;
-	var color;
-	var group;
-
-	if(trg == 'hub'){
-		nodes = json.filters.kind.itens;
-		list = json.hubs;
-		group = "kind";
-		trg_total = json.hubs.length;
-	}
-
-	if(trg == 'sig'){
-		nodes = json.filters.method.itens;
-		list = json.signals;
-		group = "method";
-		trg_total = json.signals.length;
-	}
-
-	svg_map.selectAll("*").remove();
-
-	svg_nodes = nodes.map(function (d,i) {
-		return {
-			node:d,
-			id:d.id,
-			fill: d.hex,
-			// pc: d.pc,
-			partial:0,
-			total:0,
-			cx: 0,
-			cy: 0,
-		};
-	});
-
-	svg_force = d3.layout.force()
-		.nodes(svg_nodes)
-		.on('tick', tick)
-		.gravity(0)
-		.charge(1)
-		.friction(0.85)
-
-	// circles
-
-	svg_circles = svg_map.selectAll('g')
-	.data(svg_nodes)
-	.enter()
-	.append('g')
-	.attr('style', 'cursor:pointer')
-	.on('click', function(d){
-		open_modal(d);
-	})
-	.on('mouseover', function(d){
-		var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial, cur_code) + ' (' + d.pc_val + '%)';
-		if(!mobile) tt(d.node.label, val, d.fill);
-	})
-	.on('mouseout', function(d){
-		if(!mobile) tt(false);
-	})
-	//.call(svg_force.drag)
-	.each(function (d, i) {
-		c_total = d3.select(this)
-			.append('circle')
-			.attr('fill-opacity', 0.1)
-			.attr('fill', d.fill);
-
-		c_partial = d3.select(this)
-			.append('circle')
-			.attr('r',0)
-			.attr('fill', d.fill)
-			.attr('fill-opacity', 0)
-
-		d.c_total = c_total;
-		d.c_partial = c_partial;
-		d.group = group;
-		d.trg_total = trg_total;
-
-		d.list = [];
-		list.forEach( function( sd, si ){
-			if(sd[group].indexOf( d.node.id ) >= 0) {
-				d.total ++;
-				d.list.push(sd);
-			}
-		});
-
-		d.radius = calc_radius(d.total) + 1;
-		d.c_total
-			.attr('r',0)
-			.transition().duration(dur2)
-			.attr('r', calc_radius(d.total));
-
-	});
-
-	svg_force.alpha(0).start();
-  set_all_circles(1000);
-
-	if(mobile) {
-		cur_scale = 0.5;
-		svg_map.attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
-	}
-
-}
-
-function set_all_circles(_dur){
-	svg_circles = svg_map.selectAll('g')
-	.each( function (d, i) {
-		d.partial = 0;
-		if(strict[d.group].length == 0 || strict[d.group].indexOf(d.id) >= 0){
-			d.list.forEach( function( sd, si ){
-				if(sd.visible){
-					d.partial ++;
-				}
-			});
-		}
-
-		var pc = Math.round(d.partial/d.trg_total*1000)/10;
-		d.pc_val = pc;
-
-		d.c_partial
-			.transition().duration(_dur)
-			.attr('r', calc_radius(d.partial))
-			.attr('fill-opacity', 1);
-	});
-}
-
-
-function open_legend(){
-	legends.open = true;
-	$(legends).fadeIn( dur, _out);
-}
-
-function close_legend(){
-	legends.open = false;
-	$(legends).fadeOut( dur, _out);
-}
-
-
-
 //////////////////////////////// LOAD ////////////////////////////////
 
 
-
 function load(){
+
+		// start data
+		simulate_db(json);
 
 	// check local storage filters
   if(sessionStorage.getItem('cur_filters')){
@@ -776,160 +690,111 @@ function load(){
 		sessionStorage.setItem('cur_filters', null);
 	}
 
-	if(mobile){
-		dbody.appendChild(legends); // change legends DOM position
-		$(legends).hide();
-	}else{
-		$(legend_hub).height(json.filters.kind.itens.length * 21 );
-		$(legend_sig).height(json.filters.method.itens.length * 21 );
-	}
-
-	// mobile legend close bt
-
-	if(mobile) {
-		$(legends_x).on(bt_event, close_legend);
-	}
-
-	// mobile legend bts
-
-	$(legend_hub_bt).on(bt_event, function(){
-		open_legend();
-	});
-
-	$(legend_sig_bt).on(bt_event, function(){
-		open_legend();
-	});
-
 	create_filters(json.filters.origin, false, false);
 	create_filters(json.filters.coverage, false, false);
 
 	// set_target
-	if(cur_code == "sig"){
+	if(cur_code == "sig"){ // signals
+		console.log('signals!');
 
-		scale = 10;
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
 		create_filters(json.filters.method, sig_filters, 'method');
 		create_filters(json.filters.purpose, sig_filters, false);
 		create_filters(json.filters.type, sig_filters, false);
 
-		// legend
-		//method legend
+		search_target = json.signals;
 
-		$(legend_sig_title).html( json.filters.method.label );
-		for( i in json.filters.method.itens ){
-			// legend
-			d = json.filters.method.itens[i];
+		for( i in json.signals ){
+
+			d = json.signals[i];
+
 			li = document.createElement('li');
+			li.node = json.signals[i];
 			$(li)
-				.addClass('legend')
-			legend_sig.appendChild(li);
+				.addClass('list_item sig')
+				.on('click', function(){
+					open_modal(this.node, false);
+				});
+
+			d.li = li;
+
+			img = new Image();
+			img.src = "layout/plus_gray.png";
+			li.appendChild(img);
+
 			div = document.createElement('div');
 			$(div)
-				.addClass('color')
-				.css({background:d.hex})
+				.addClass('title')
+				.html(d.name)
 			li.appendChild(div);
+
 			div = document.createElement('div');
 			$(div)
-				.addClass('lb')
-				.html( d.label )
+				.addClass('info')
+				.html( info( d, true ))
 			li.appendChild(div);
 
-			// mobile legend bt
-			if( mobile && (i==0 || i==Math.round(json.filters.kind.itens.length/2) || i == json.filters.kind.itens.length - 1)){
-				div = document.createElement('div');
-				$(div)
-					.addClass('legend_bt_color')
-					.css({ background:d.hex })
-				legend_sig_bt.appendChild(div);
-			}
+			list.appendChild(li);
+
 		}
 
-		if(!mobile){
-			$(legend_sig).delay(dur).animate({left:0}, dur );
-		} else{
-			$(legend_sig_bt).show();
-			$(legend_sig).show();
-			$(legend_hub).hide();
-		}
+	}else{ // hubs
+		console.log('hubs!');
 
-		// labels
-		$(circles_out).html(json.labels.method[lg].toUpperCase());
-		$(circles_in).html(json.labels.sigs[lg].toUpperCase());
-
-	}else{
-
-		scale = 20;
 		$(control_hub).addClass('on');
 		sep(json.labels.hub_list[lg].toUpperCase());
 		create_filters(json.filters.kind, hub_filters, 'kind');
 		create_filters(json.filters.financier, hub_filters, false);
 
-		// hub legend
-		$(legend_hub_title).html( json.filters.kind.label );
+		search_target = json.hubs;
 
-		for( i in json.filters.kind.itens ){
-			d = json.filters.kind.itens[i];
+		for( i in json.hubs ){
+
+			d = json.hubs[i];
+
+			console.log('hubs list');
+			console.log(d );
+
 			li = document.createElement('li');
+			li.node = json.hubs[i];
 			$(li)
-				.addClass('legend')
-			legend_hub.appendChild(li);
+				.addClass('list_item hub')
+				.on('click', function(){
+					open_modal(this.node, false);
+				});
+
+			d.li = li;
+
+			img = new Image();
+			img.src = "layout/plus_gray.png";
+			li.appendChild(img);
 
 			div = document.createElement('div');
 			$(div)
-				.addClass('color')
-				.css({background:d.hex })
+				.addClass('title')
+				.html(d.name)
 			li.appendChild(div);
 
 			div = document.createElement('div');
 			$(div)
-				.addClass('lb')
-				.html( d.label )
+				.addClass('info')
+				.html( info( d, true ))
 			li.appendChild(div);
 
-			// mobile legend bt
+			list.appendChild(li);
 
-			if( mobile && (i==0 || i==Math.round(json.filters.kind.itens.length/2) || i == json.filters.kind.itens.length - 1)){
-				div = document.createElement('div');
-				$(div)
-					.addClass('legend_bt_color')
-					.css({ background:d.hex })
-				legend_hub_bt.appendChild(div);
-			}
 		}
-
-		if(!mobile){
-			$(legend_hub).delay(dur).animate({left:0}, dur );
-		} else{
-			$(legend_hub_bt).show();
-			$(legend_hub).show();
-			$(legend_sig).hide();
-		}
-
-		// labels
-		$(circles_out).html(json.labels.kind[lg].toUpperCase());
-		$(circles_in).html(json.labels.hubs[lg].toUpperCase());
 	}
+
+	$(list).css({ marginTop:bar_h+40, marginBottom:bar_h});
 
 	// generic labels
 	$(filters_lb).html(json.labels.filters[lg].toUpperCase());
 	$(control_hub_lb).html(check_num(n_hubs, "hub"));
 	$(control_sig_lb).html(check_num(n_signals, "sig"));
 
-	// start data
-	simulate_db(json);
-
-	// SVG MAP
-	svg_map_area = d3.select('#map')
-		.append('svg')
-		.attr('id', 'svg_map_area')
-
-	svg_map = svg_map_area
-		.append('g')
-		.attr('transform','translate(1000 1000)');
-
 	resize();
-	create_map(cur_code);
 
 	// initial layout
 	check_filters();
