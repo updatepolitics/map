@@ -149,13 +149,15 @@ $(cur_lang).on('click', function(){
 // $(language).on('mouseleave', close_lang);
 
 function close_lang(){
-  $(language).animate({top:-30}, dur/2, _out);
-  $(cur_lang).animate({top:25}, dur/2, _out);
+  $(language).animate({top:-30}, dur/2, in_out);
+  if(mobile) $(cur_lang).animate({top:12}, dur/2, in_out);
+  else $(cur_lang).animate({top:25}, dur/2, in_out);
 }
 
 function open_lang(){
-  $(language).animate({top:25}, dur/2, _out);
-  $(cur_lang).animate({top:-30}, dur/2, _out);
+  if(mobile) $(language).animate({top:12}, dur/2, in_out);
+  else $(language).animate({top:25}, dur/2, in_out);
+  $(cur_lang).animate({top:-30}, dur/2, in_out);
 }
 
 // WINDOW
@@ -206,7 +208,8 @@ function open_menu(){
     $(container).animate({left:$(menu).width()/5}, dur, _out);
     $(header).animate({left:$(menu).width()/5 }, dur, _out);
     $(curtain).fadeIn(dur, _out);
-}
+    if( filters && filters.open ) close_filters();
+ }
 
 function close_menu(){
     menu.open = true;
@@ -223,7 +226,10 @@ function set_menu(id){
     }
 }
 
-$(curtain).on(bt_event, close_menu);
+$(curtain).on(bt_event, function(){
+  if(menu.open) close_menu();
+  if(modal && modal.open) close_modal();
+});
 
 for( i in pages ){
 

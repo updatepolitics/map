@@ -15,6 +15,7 @@ var scale_kind,
 	scale_method;
 
 var cur_scale = 1;
+
 var zoom_limits = [ 0.1, 5 ];
 var zoom_factor = 1.5;
 
@@ -56,6 +57,7 @@ reg('tt_title');
 reg('tt_val');
 reg('map');
 reg('legends');
+reg('legends_x');
 reg('legend_bts');
 reg('legend_sig');
 reg('legend_hub');
@@ -104,7 +106,7 @@ reg('mode_list');
 
 //////////////////////////////// control ////////////////////////////////
 
-$(mode_list).on(bt_event, function(){
+$(mode).on(bt_event, function(){
 	navigate("list.html?cod=" + cur_code, false);
 });
 
@@ -121,13 +123,17 @@ filters.open = false;
 
 function open_filters() {
 	filters.open = true;
-	$(filters).animate({right:20}, dur, _out);
+	if(mobile) $(filters).animate({right:'5%'}, dur, _out);
+	else $(filters).animate({right:20}, dur, _out);
 }
 
 function close_filters() {
 	filters.open = false;
-	$(filters).animate({right:-350}, dur, in_);
+	if(mobile) $(filters).animate({right:'-100%'}, dur, in_);
+	else $(filters).animate({right:-350}, dur, in_);
 }
+$(filters).css({right:'-100%'});
+
 
 $(control_filters).on( bt_event, function(){
 	if(filters.open){
@@ -161,6 +167,7 @@ $(zoom_in).on(bt_event, function(){
 		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
 	}
 });
+
 
 //////////////////////////////// MODAL ////////////////////////////////
 
@@ -563,9 +570,11 @@ function resize_explore(){
 	console.log("resize");
 
 		if(mobile){
-			bar_h = 50
+			bar_h = 50;
+			filter_h = 20;
 		}else{
 			bar_h = 80;
+			filter_h = 25;
 		}
 
 		$(modal_content).height($(modal).height() - 50);
@@ -718,6 +727,11 @@ function create_map(trg){
 	svg_force.alpha(0).start();
   set_all_circles(1000);
 
+	if(mobile) {
+		cur_scale = 0.5;
+		svg_map.attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
+	}
+
 }
 
 function set_all_circles(_dur){
@@ -741,6 +755,19 @@ function set_all_circles(_dur){
 			.attr('fill-opacity', 1);
 	});
 }
+
+
+function open_legend(){
+	legends.open = true;
+	$(legends).fadeIn( dur, _out);
+}
+
+function close_legend(){
+	legends.open = false;
+	$(legends).fadeOut( dur, _out);
+}
+
+
 
 //////////////////////////////// LOAD ////////////////////////////////
 

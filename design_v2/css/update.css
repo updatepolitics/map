@@ -190,7 +190,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     max-width: 720px;
     max-height: 720px;
     position: fixed;
-    z-index: 10;
+    z-index: 20;
     background: #fff;
     margin: auto;
     left: 0;
@@ -469,6 +469,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   display: table;
 }
 
+.mobile
+  #cur_lang{
+    right: 12px;
+    top: 12px;
+  }
+
 #language{
     position: absolute;
     right: 25px;
@@ -478,7 +484,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile
     #language{
-        top: 12px;
         right: 12px;
     }
 
@@ -529,6 +534,13 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   height: 100%;
 }
 
+.mobile
+  #mode{
+    left: 0;
+    width: 50px;
+    height: 50px;
+  }
+
 .mode{
   width: 40px;
   height: 100%;
@@ -538,6 +550,16 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   display: inline-block;
   cursor: pointer;
 }
+
+.mobile
+  .mode{
+    left: 0;
+    width: 50px;
+    height: 35%;
+    background-size: 40px;
+    position: relative;
+    top: 7px;
+  }
 
 .mode.selected{
   opacity: 1;
@@ -569,8 +591,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile
     #help_bt {
-        top: -55px;
-        right: 5px;
+        right: 0;
+        background-size: 50px;
     }
 
 #help{
@@ -770,10 +792,15 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   bottom: 0;
   width: 480px;
   height: 100%;
-
   border-left: #262c38 1px solid;
   border-right: #262c38 1px solid;
 }
+
+.mobile
+  #control_center{
+    width: 220px;
+
+  }
 
 .control{
     display: table-cell;
@@ -799,6 +826,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     background-image: url('../layout/circles.png');
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 8;
 }
 
 .mobile
@@ -844,6 +872,22 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     opacity: .2;
 }
 
+.mobile
+  #control_hub{
+    width:85px;
+    background-position: top;
+    background-size: 40px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+.mobile
+  #control_hub
+    span{
+      position: relative;
+      top: 12px;
+    }
+
 #control_hub.on {
   opacity: 1;
 }
@@ -852,39 +896,21 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   cursor: default;
 }
 
-.mobile
-    #control_hub{
-        background-size: 40px
-    }
 
-.port
-  #control_hub{
-      background-position: center;
-  }
-
-#control_hub_lb{
-    width: 100%;
-    padding-left: 5px;
-}
 
 #score_hub{
   padding-left: 30px;
   font-weight: 700;
 }
 
-.land
-    #control_hub_lb{
-        padding-left: 30px;
-    }
-.port
-    #control_hub_lb{
-      display: none;
+.mobile
+    #score_hub{
+      padding-left: 0;
     }
 
 #control_hub:hover{
     background-color: #2a303c;
 }
-
 
 .mobile
   #control_hub:hover{
@@ -902,6 +928,23 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     opacity: .2;
 }
 
+.mobile
+  #control_sig{
+    width:85px;
+    background-position: top;
+    background-size: 40px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+.mobile
+  #control_sig
+    span{
+      position: relative;
+      top: 12px;
+    }
+
+
 #control_sig.on {
   opacity: 1;
 }
@@ -910,35 +953,9 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   cursor: default;
 }
 
-.mobile
-    #control_sig{
-        background-size: 40px
-    }
-
-.port
-    #control_sig{
-        background-position: center;
-    }
-
-#control_sig_lb{
-    width: 100%;
-    padding-right: 30px;
-}
-
 #score_sig{
-  padding-right: 5px;
   font-weight: 700;
 }
-
-
-.land
-    #control_sig_lb{
-        padding-right: 20px;
-    }
-.port
-    #control_sig_lb{
-        display: none;
-    }
 
 #control_sig:hover{
     background-color: #2a303c;
@@ -984,8 +1001,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile
     #control_filters{
-        font-size: 12px;
-        background-size: 50px
+        background-size: 50px;
+        width: 52px;
     }
 
 #control_filters:hover{
@@ -1003,6 +1020,13 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   left:35px;
 }
 
+.mobile
+  #filters_counter{
+    bottom: 30px;
+    left:15px;
+    font-size: 8px
+  }
+
 #filters_lb{
   width: 100%;
   position: absolute;
@@ -1012,13 +1036,18 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   bottom: 10px;
 }
 
+.mobile
+  #filters_lb{
+    font-size: 9px;
+    bottom: 5px;
+  }
+
+
 /* /////////////////////////// filters  */
 
 #filters{
   position: fixed;
   top: 20px;
-  right: -350px;
-  /*right: 20px;*/
   width: 350px;
   z-index: 11;
   background-color: #2d3340;
@@ -1031,8 +1060,14 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   width: 100%;
   height: 57px;
   z-index: 10;
-  border: #262c38 1px solid;
+  border-bottom: #262c38 1px solid;
+  display: table;
 }
+
+.mobile
+  #filters_header{
+    height: 50px;
+  }
 
 #filters_list{
   position: absolute;
@@ -1042,8 +1077,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   overflow: auto;
 }
 
-.port #filters{
-  width: 80%;
+.mobile #filters{
+  width: 90%;
 }
 
 /* Track */
@@ -1158,25 +1193,25 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     }
 
 
-    #trash{
-        width: 300px;
-        height: 57px;
-        background-image: url("../layout/trash.png");
-        background-repeat: no-repeat;
-        background-position: left;
-        z-index: 5;
-        display: table-cell;
-        vertical-align: middle;
-        padding-left:70px;
-        cursor: pointer;
-    }
+  #trash{
+      width: 100%;
+      height: 57px;
+      background-image: url("../layout/trash.png");
+      background-repeat: no-repeat;
+      background-position: left;
+      z-index: 5;
+      display: table-cell;
+      vertical-align: middle;
+      padding-left:70px;
+      cursor: pointer;
+  }
 
-    .mobile
-        #trash{
-            width: 50px;
-            height: 50px;
-            background-size: 50px;
-        }
+  .mobile
+      #trash{
+          height: 50px;
+          background-size: 50px;
+          padding-left:50px;
+      }
 
     #trash:hover {
         background-color: #2a303c;
@@ -1197,9 +1232,11 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     #filters_x{
       width: 50px;
       height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
       background-image: url('../layout/x.png');
       background-position: center;
-      display: table-cell;
       border-left: #262c38 1px solid;
       cursor: pointer;
     }
@@ -1313,7 +1350,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         margin: auto;
         width: 7px;
         height: 32px;
-        z-index: 20;
+        z-index: 10;
     }
 
 #legends_x{
@@ -1414,6 +1451,11 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     z-index: 1;
     cursor: pointer;
 }
+
+.mobile
+  #zoom_control{
+    right: 12px;
+  }
 
 #zoom_in{
     width: 35px;
