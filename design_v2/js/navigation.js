@@ -182,8 +182,6 @@ function resize(){
 		else $(dbody).removeClass('layout2');
 	}
 
-  close_menu();
-
     // local resize
 	if(resize_explore) resize_explore();
 	if(resize_list) resize_list();
