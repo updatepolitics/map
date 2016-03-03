@@ -232,7 +232,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         overflow: hidden;
         text-overflow: inherit;
         white-space: normal;
-        font-size: 24px;
+        font-size: 28px;
         line-height: 30px;
         width: 90%;
     }
@@ -1297,7 +1297,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     }
 
     #filters_x{
-      width: 50px;
+      width: 57px;
       height: 100%;
       position: absolute;
       top: 0;
@@ -1305,12 +1305,18 @@ input:focus:-ms-input-placeholder {  opacity: 0}
       background-image: url('../layout/x.png');
       background-position: center;
       border-left: #262c38 1px solid;
+      background-color: #2d3340;
       cursor: pointer;
     }
 
     #filters_x:hover {
         background-color: #2a303c;
     }
+
+    .mobile
+      #filters_x{
+        width: 50px;
+      }
 
 
 /* ////////////////////////// MAP ////////////////////////// */
