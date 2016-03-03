@@ -352,6 +352,19 @@ $(modal_x).on(bt_event, function(){
 	close_modal();
 });
 
+function toggle_plus(trg){
+	if(trg.open){
+		trg.open = false;
+		$(trg.plus).animate({ height:0 },dur, in_out);
+		$(trg).css({ backgroundImage:'url(layout/plus_white.png)' })
+	}else{
+		trg.open = true;
+		$(trg.plus).animate({ height: $(trg.plus_tx).height() + 30 },dur, in_out);
+		$(trg).css({ backgroundImage:'url(layout/minus_white.png)' })
+	}
+	console.log(trg.open);
+}
+
 //////////////////////////////// HELP ////////////////////////////////
 
 var help_itens = [ control_hub, control_sig, control_filters, mode ];
@@ -787,8 +800,6 @@ function load(){
 		}
 	}
 
-	$(list).css({ marginTop:bar_h+40, marginBottom:bar_h});
-
 	// generic labels
 	$(filters_lb).html(json.labels.filters[lg].toUpperCase());
 	$(control_hub_lb).html(check_num(n_hubs, "hub"));
@@ -799,6 +810,9 @@ function load(){
 	// initial layout
 	check_filters();
 	check_trash();
+
+	if(mobile) $(list).css({ marginTop:bar_h+30, marginBottom:bar_h});
+	else $(list).css({ marginTop:bar_h+40, marginBottom:bar_h});
 
 
 } // load

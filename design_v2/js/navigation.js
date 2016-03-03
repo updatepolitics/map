@@ -207,8 +207,8 @@ cur_code = ( $_GET()["code"] || 'sig' );
 var pages = [
     { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html", code:false },
     { _pt:'EXPLORE', _en:'EXPLORE', html:"explore.html", code: false },
-    { _pt:'SINAIS', _en:'SIGNALS', html:"list.html", code:'sig' },
     { _pt:'HUBS', _en:'HUBS', html:"list.html", code:'hub' },
+    { _pt:'SINAIS', _en:'SIGNALS', html:"list.html", code:'sig' },
     { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html", code:false },
     { _pt:'SOBRE', _en:'ABOUT', html:"about.html", code:false }
 ];
@@ -219,7 +219,7 @@ function open_menu(){
     // $(container).animate({left:$(menu).width()/5}, dur, _out);
     // $(header).animate({left:$(menu).width()/5 }, dur, _out);
     $(curtain).fadeIn(dur, _out);
-    if( filters && filters.open ) close_filters();
+    if( (cur_page == 'list.html' || cur_page == 'explore.html') && filters.open ) close_filters();
  }
 
 function close_menu(){

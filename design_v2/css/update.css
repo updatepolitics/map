@@ -4,8 +4,11 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
 @import url(https://fonts.googleapis.com/css?family=Stardos+Stencil:400,700);
 
-body,
 html{
+  width: 100%;
+  height: 100%;
+}
+body{
   color:#fff;
   background: #262c38;
 	font-size:11px;
@@ -224,6 +227,16 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         text-align: left;
     }
 
+#modal_content
+    .title{
+        overflow: hidden;
+        text-overflow: inherit;
+        white-space: normal;
+        font-size: 24px;
+        line-height: 30px;
+        width: 90%;
+    }
+
 .mobile
     #modal_content
         .about{
@@ -423,6 +436,16 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     z-index: 8;
 }
 
+.dark_bg
+  #header{
+    background: #262c38;
+}
+
+.dark_bg
+  hr{
+    background: #fff;
+}
+
 .white_bg
   #header{
     background: #fff;
@@ -479,7 +502,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 .mobile
     #update_logo{
         width: 80px;
-        top: 18px;
+        top: 16px;
     }
 
 #cur_lang{
@@ -652,7 +675,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     margin: auto;
     color: #fff;
     text-align: center;
-    border-radius: 3px;
     z-index: 21;
 }
 
@@ -662,7 +684,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         height: 100%;
         top: 0;
         left: 0;
-        padding: 3px;
     }
 
 #help_nav{
@@ -1222,6 +1243,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     border:#fff 1px solid;
     border-radius: 10px;
     color: #2d3340;
+    height: 13px;
     font-size: 11px;
     margin: 0 10px;
     font-weight: 700;
@@ -1571,7 +1593,9 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 .mobile #search{
-  background-size: contain;
+  height: 30px;
+  top: 50px;
+  background-size: 50px;
 }
 
 #search_str{
@@ -1605,13 +1629,9 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     top: 0;
     bottom:0;
     margin: auto;
-    right: 18px;
+      right: 18px;
     background-image: url('../layout/search_x.png');
     cursor: pointer;
-}
-
-.mobile #search_x{
-  right: 0;
 }
 
 
@@ -1648,7 +1668,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 .mobile
   .list_item{
     height: 70px;
-    background-size: 40px;
+    background-size: 50px;
     padding-top: 15px;
   }
 
@@ -1680,6 +1700,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     .title{
         font-size: 20px;
         margin-bottom: 0;
+        width: 70%;
     }
 
 .list_item
@@ -1698,7 +1719,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   .list_item
       .info{
           font-size: 11px;
-          width: 80%;
+          width: 70%;
           overflow: hidden;;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -1716,8 +1737,10 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile .list_item img{
     position: absolute;
-    right: 0;
-    top: 10px;
+    right: 5px;
+    top: 15px;
+    width: 40px;
+    height: 40px;
 }
 
 .list_item .bod{
@@ -1742,37 +1765,38 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     padding: 180px 50px;
 }
 
+.white_bg
+  #content{
+    background: #fff;
+  }
+
 .mobile
   #content{
-    padding: 100px 20px;
+    padding: 80px 20px;
   }
 
 #content
     .title {
         font-family: 'Stardos Stencil';
-        font-size: 70px;
+        font-size: 50px;
         font-weight: 400;
         width: 100%;
         color: #262c38;
         text-align: center;
-        margin: 0 0 100px 0;
+        margin: 0 0 70px 0;
     }
 
 .mobile
   #content
     .title {
-      font-size: 40px;
-      margin: 0 0 70px 0;
+      font-size: 30px;
+      margin: 0 0 50px 0;
   }
 
-#container.dark
-    .title{
-        color: #fff;
-    }
 
 #content
     .subtitle {
-        font-size: 20px;
+        font-size: 18px;
         text-transform: uppercase;
         font-weight: 700;
         text-align: center;
@@ -1793,6 +1817,18 @@ hr{
     margin: 40px 0;
 }
 
+
+.dark_bg
+  .title{
+    color: #fff !important;
+}
+
+.white_bg
+  .text{
+    color: #262c38 !important;
+    font-weight: 400;
+}
+
 .subtitle {
     font-size: 16px;
     text-transform: uppercase;
@@ -1801,6 +1837,12 @@ hr{
     margin-bottom: 20px;
 }
 
+.white_bg
+  .subtitle{
+    color: #262c38 !important;
+    font-weight: 400;
+  }
+
 .info{
     font-size: 14px;
     text-transform: uppercase;
@@ -1808,7 +1850,6 @@ hr{
     text-align: center;
     margin-top: 20px;
 }
-
 
 .list{
     width: 100%;
@@ -1908,8 +1949,9 @@ hr{
 
 .text{
     margin-top: 40px;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
+    font-weight: 300;
 }
 
 
@@ -1960,7 +2002,7 @@ hr{
     top: 30px;
     left: 200px;
     line-height: 20px;
-    font-weight: 400
+    font-weight: 300
 }
 
 
