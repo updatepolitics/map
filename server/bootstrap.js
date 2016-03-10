@@ -1,16 +1,10 @@
 var csv = Npm.require('csv');
 var fs = Npm.require('fs');
 
-// Collections
-var HubNature = new Mongo.Collection("hubNatures");
-
 Meteor.startup(function(){
 
-  console.log(process.env);
-  // console.log('lalalal');
-
   function importHubNature() {
-    HubNature.remove({});
+    HubNatureCollection.remove({});
 
     // [name_pt, plural, institutional]
     var natures = [
@@ -31,7 +25,7 @@ Meteor.startup(function(){
     ];
 
     _.each(natures, function(nature) {
-      HubNature.insert({
+      HubNatureCollection.insert({
         name_pt: nature[0],
         isPlural: nature[1],
         isInstitution: nature[2]
@@ -39,6 +33,27 @@ Meteor.startup(function(){
     });
   }
 
+  function importHubs() {
+    var hubs;
+
+    HubsCollection.remove({});
+
+    Async.runSync(function(doneImportHubs){
+      rs = fs.createReadStream(process.env.PWD +'/data/hubs.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportHubs(err);
+        hubs = data;
+        doneImportHubs();
+      });
+      rs.pipe(parser);
+    });
+
+    _.each(hubs, function(hub){
+      HubsCollection.insert(hub);
+    });
+  }
+
   importHubNature();
+  importHubs();
 
 });
