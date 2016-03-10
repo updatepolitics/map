@@ -13,7 +13,3 @@ Install dependencies:
 Run:
 
     meteor
-
-If you want to connect to a custom MongoDb server, create a `.env` file by copying `.env.example`, and edit `MONGO_URL` variable to your connection string:
-
-    cp .env.example .env
