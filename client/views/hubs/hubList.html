@@ -1,7 +1,7 @@
 <template name="hubList">
   <ul>
     {{#each hubs}}
-      <li>{{ name }}</li>
+      <li><a href="{{pathFor route='hub.show'}}">{{ name }}</a></li>
     {{/each}}
   </ul>
 </template>
