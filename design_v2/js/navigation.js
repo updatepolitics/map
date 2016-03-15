@@ -1,7 +1,7 @@
 
 // public vars
 var i, a, b, c, d, itm1, itm2, itm3;
-var div, ul, li, span, img, hr;
+var div, ul, li, li2, span, img, hr;
 var dbody = document.body,
     mobile,
     bt_event,
@@ -14,6 +14,41 @@ var dur = 350, // animation
     _out = "easeOutQuart",
     in_ = "easeInQuart";
 
+
+var bar_h = 80;
+
+
+var pages = [
+    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html",},
+    { _pt:'UPDATE', _en:'UPDATE', html:"update.html", submenu : [
+      {_pt : "Sobre o Update", anchor:'intro' },
+      {_pt : "Quem somos", anchor:'who' },
+      {_pt : "Quem nos financia + parceiros", anchor:'partners' }
+    ]},
+    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html"},
+    { _pt:'PAÍSES', _en:'COUNTRIES', html:"countries.html", submenu : [
+     {_pt : "Introdução / O que é", anchor:'intro' },
+     {_pt : "Paises/Iniciativas", anchor:'countries' },
+     {_pt : "Abrangência", anchor:'coverage' }
+    ]},
+    { _pt:'HUBS', _en:'HUBS', html:"hubs.html", submenu : [
+     {_pt : "Introdução / O que é", anchor:'intro' },
+     {_pt : "Natureza", anchor:'kind' },
+     {_pt : "Financiador", anchor:'financer' }
+    ]},
+    { _pt:'SINAIS', _en:'SIGNALS', html:"signals.html", submenu : [
+     {_pt : "Introdução / O que é", anchor:'intro' },
+     {_pt : "Tecnologia", anchor:'tech' },
+     {_pt : "Temas", anchor:'theme' },
+     {_pt : "Propósito", anchor:'purpose' },
+     {_pt : "Métodos", anchor:'method' }
+    ]},
+    { _pt:'DOWNLOAD', html:"download.html" },
+    { _pt:'CADASTRE SUA INICIATIVA', html:"initiative.html" },
+    { _pt:'EXPLORE', _en:'EXPLORE', html:"chart.html", html2:"list.html" }
+];
+
+
 // public funcions
 
 function get(id){ return document.getElementById(id)};
@@ -25,6 +60,7 @@ console.log( "ROOT: " + root );
 
 var cur_page = path[path.length-1];
 console.log( "cur_page: " + cur_page );
+
 
 for(i=0; i<path.length-1; i++){
     root += path[i] + '/';
@@ -169,6 +205,12 @@ function resize(){
 	win_w = $( window ).width();
 	win_h = $( window ).height();
 
+  if(mobile){
+    bar_h = 50;
+  }else{
+    bar_h = 80;
+  }
+
 	if(mobile){
 		if(win_w < win_h){
             $(dbody).addClass('port');
@@ -191,6 +233,25 @@ function resize(){
 window.onresize = resize;
 resize();
 
+if(cur_page != 'index.html'){
+  $(update_logo).on(bt_event, function(){
+    console.log('aqui');
+      navigate('index.html', false);
+  });
+}
+
+
+function scroll(trg, to, dur){
+
+  var pos = $(to).offset().top - bar_h;
+
+	$(trg).scrollTo( pos, {
+		duration: dur2,
+		easing: in_out,
+		axis:'y'
+	});
+}
+
 // menu
 
 function $_GET() {
@@ -201,35 +262,38 @@ function $_GET() {
     return vars;
 }
 
-// check_get
-cur_code = ( $_GET()["code"] || 'sig' );
+function set_code(c){
+  sessionStorage.setItem('code',c);
+  cur_code = c;
+}
 
-var pages = [
-    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html", code:false },
-    { _pt:'EXPLORE', _en:'EXPLORE', html:"explore.html", code: false },
-    { _pt:'HUBS', _en:'HUBS', html:"list.html", code:'hub' },
-    { _pt:'SINAIS', _en:'SIGNALS', html:"list.html", code:'sig' },
-    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html", code:false },
-    { _pt:'SOBRE', _en:'ABOUT', html:"about.html", code:false }
-];
+function get_code(){
+   return sessionStorage.getItem('code');
+}
+
+function check_code(){
+  cur_code = get_code();
+  if(!cur_code) set_code('sig');
+}
 
 function open_menu(){
     menu.open = true;
     $(menu).animate({left:0}, dur, _out);
-    // $(container).animate({left:$(menu).width()/5}, dur, _out);
-    // $(header).animate({left:$(menu).width()/5 }, dur, _out);
+    $(container).animate({left:$(menu).width()/5}, dur, _out);
+    $(header).animate({left:$(menu).width()/5 }, dur, _out);
+    if(cur_page == 'list.html' || cur_page == 'chart.html') $(control).animate({left:$(menu).width()/5 }, dur, _out);
     $(curtain).fadeIn(dur, _out);
-    if( (cur_page == 'list.html' || cur_page == 'explore.html') && filters.open ) close_filters();
+    if( (cur_page == 'list.html' || cur_page == 'chart.html') && filters.open ) close_filters();
  }
 
 function close_menu(){
-    menu.open = true;
+    menu.open = false;
     $(menu).animate({left:-1*$(menu).width()}, dur, _out);
-    // $(container).animate({left:0}, dur, _out);
-    // $(header).animate({left:0 }, dur, _out);
-    $(curtain).fadeOut(dur, _out);
+    $(container).animate({left:0}, dur, _out);
+    $(header).animate({left:0 }, dur, _out);
+    if(cur_page == 'list.html' || cur_page == 'chart.html') $(control).animate({left:0 }, dur, _out);
+    $(curtain).fadeOut(dur, _out); 
 }
-
 
 $(curtain).on(bt_event, function(){
   if(menu.open) close_menu();
@@ -249,21 +313,37 @@ for( i in pages ){
             close_menu();
         });
 
-    if( pages[i].html == cur_page){
-      if( !pages[i].code || pages[i].code == cur_code ){
-          $(li).addClass('selected');
-        }
-    }
-
     menu_bts.appendChild(li);
 
-}
+    if( pages[i].html == cur_page || pages[i].html2 == cur_page ){
+      $(li).addClass('selected');
+
+      // submenu
+      if( pages[i].submenu ) {
+        for(a in pages[i].submenu){
+          li2 = document.createElement('li');
+          li2.anchor = pages[i].submenu[a].anchor;
+
+          $(li2)
+            .addClass('sub_bt')
+            .html(pages[i].submenu[a][lg])
+            .on( bt_event, function(){
+                scroll(window, "#"+this.anchor, dur);
+                close_menu();
+            });
+
+          menu_bts.appendChild(li2);
+
+        }
+      }
+    }
+  }
 
 
 menu.open = false;
 
 $(menu_bt).on( bt_event, function (){
-    open_menu();
+    if(!menu.open) open_menu();
 });
 
 $(menu_close).on( bt_event, function (){

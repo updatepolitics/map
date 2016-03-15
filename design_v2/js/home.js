@@ -38,6 +38,16 @@ reg('explore');
 reg('credit_who');
 reg('credit_what');
 
+reg('curtain');
+reg('modal_home');
+reg('modal_home_box');
+reg('modal_home_x');
+reg('modal_home_next');
+reg('modal_home_prev');
+reg('modal_home_nav_pos');
+reg('modal_home_title');
+reg('modal_home_text');
+
 reg('map_container');
 reg('map');
 
@@ -54,7 +64,7 @@ function map_rotation(delay,rotate){
 			rotation = setInterval(function(){
 				rot += 0.02;
 				svg_map.attr('transform', 'translate(1000 1000) scale(1) rotate(' + rot + ')');
-			},10)
+			},20)
 		}, delay);
 	}else{
 		clearInterval(rotation);
@@ -64,14 +74,10 @@ function map_rotation(delay,rotate){
 
 $(map).css({backgroundSize:'100%'});
 
-$(about).on(bt_event, function(){
-	navigate("about.html", false);
-})
 
 $(explore).on(bt_event, function(){
-	navigate("explore.html?cod=" + cur_code, false);
-})
-
+	navigate("chart.html", false);
+});
 
 function calc_radius(area){
 	return scale * Math.sqrt(area / Math.PI);
@@ -132,7 +138,7 @@ function create_map(){
 		nodes = json.filters.kind.itens;
 		list = json.hubs;
 		group = "kind";
-		cur_code = "hub";
+		set_code("hub");
 		trg_total = json.hubs.length;
 		if(mobile) scale = 50;
 		else scale = 75;
@@ -140,7 +146,7 @@ function create_map(){
 		nodes = json.filters.method.itens;
 		list = json.signals;
 		group = "method";
-		cur_code = "sig";
+		set_code("sig");
 		trg_total = json.signals.length;
 		if(mobile) scale = 30;
 		else scale = 50;
@@ -206,6 +212,62 @@ function create_map(){
 }
 
 
+//////////////////////////////// home modal ////////////////////////////////
+
+modal_home.pos = 0;
+
+function modal_pos(pos){
+
+	modal_home.pos = pos;
+
+	$(modal_home_title).html(json.home_intro[pos].title);
+	$(modal_home_text).html(json.home_intro[pos].text);
+	$(modal_home_nav_pos).html( (modal_home.pos+1) + ' / ' + json.home_intro.length);
+
+	if (pos == 0) $(modal_home_prev).css({opacity: 0.2, cursor:'default'});
+	else $(modal_home_prev).css({opacity: 1, cursor:'pointer'});
+
+	if (pos == json.home_intro.length-1) $(modal_home_next).css({opacity: 0.2, cursor:'default'});
+	else  $(modal_home_next).css({opacity: 1, cursor:'pointer'});
+
+}
+
+$(modal_home_next).on(bt_event,function(){
+	if(modal_home.pos < json.home_intro.length-1) modal_pos(modal_home.pos + 1)
+})
+
+$(modal_home_prev).on(bt_event,function(){
+	if(modal_home.pos > 0) modal_pos(modal_home.pos - 1)
+})
+
+$(document).keyup(function(e) {
+    if (e.keyCode == 27) {
+	    if(modal_home.open) close_home_modal();
+	  }
+});
+
+function open_home_modal(){
+	modal_home.open = true;
+	$(curtain).fadeIn(dur);
+	$(modal_home).fadeIn(dur);
+	$(update_logo_home).fadeOut(dur);
+	$(quotes).fadeOut(dur);
+	$(credit).fadeOut(dur);
+	modal_pos(0);
+}
+
+function close_home_modal(){
+	modal_home.open = true;
+	$(curtain).fadeOut(dur);
+	$(modal_home).fadeOut(dur);
+	$(update_logo_home).fadeIn(dur);
+	$(quotes).fadeIn(dur);
+	$(credit).fadeIn(dur);
+}
+
+$(about).on(bt_event, open_home_modal);
+$(modal_home_x).on(bt_event, close_home_modal);
+
 //////////////////////////////// LOAD ////////////////////////////////
 
 
@@ -234,6 +296,7 @@ function load(){
 	create_map()
 
 	map_rotation(0, true);
+
 
 } // load
 

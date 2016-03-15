@@ -40,18 +40,18 @@
 	<link rel="stylesheet" type="text/css" href="css/update.css">
 
 </head>
-<body class="white_bg">
+<body class="light_bg">
 
-	<div id="help">
-		<div id="help_box">
-			<div id="help_nav">
-				<img id="help_x" src="layout/x.png"/>
-				<img id="help_next" src="layout/next.png"/>
-				<img id="help_prev" src="layout/prev.png"/>
-				<div id="help_nav_pos">1/4</div>
+	<div id="help" class="modal">
+		<div id="help_box" class="modal_box">
+			<div id="help_nav" class="modal_nav">
+				<img id="help_x" class="modal_x" src="layout/curtain_x.png"/>
+				<img id="help_next" class="modal_next" src="layout/arrow_r.png"/>
+				<img id="help_prev" class="modal_prev" src="layout/arrow_l.png"/>
+				<div id="help_nav_pos" class="modal_pos" >1/4</div>
 			</div>
-			<div id="help_title"></div>
-			<div id="help_text"></div>
+			<div id="help_title" class="modal_title"></div>
+			<div id="help_text" class="modal_text"></div>
 		</div>
 		<div id="help_frame">
 			<div class="frame" ></div>
@@ -111,34 +111,44 @@
 
 		</div>
 
-		<div id="control">
+		<div<div id="control">
+
+			<div id="need_help" >
+				<span id="need_help_lb">PRECISA DE AJUDA?</span>
+				<div id="need_help_x"></div>
+			</div>
 			<div id="help_bt" ></div>
 
-			<div id="mode">
-				<div id="mode_chart" class="mode"></div>
-				<div id="mode_list" class="mode selected"></div>
+			<div id="help_bt" ></div>
+
+			<div id="control_filters" class="control">
+				<span id="filters_lb" class="control_lb"></span>
+				<span class="counter" id="filters_counter"></span>
 			</div>
 
 			<div id="control_center">
 
 				<div id="control_hub" class="control">
 					<div class="flap" id="flap_hub"></div>
-					<span id="score_hub"></span>
-					<span id="control_hub_lb"></span>
+					<span id="control_hub_lb" class="control_lb"></span>
 				</div>
 
-				<div id="control_filters" class="control">
-					<span id="filters_lb"></span>
-					<span class="counter" id="filters_counter"></span>
+				<div id="mode">
+					<div id="mode_chart" class="mode"></div>
+					<div id="mode_list" class="mode selected"></div>
+					<div id="mode_lb">
+						<span id="mode_lb_num"></span>
+						<span id="mode_lb_tx"></span>
+					</div>
 				</div>
 
 				<div id="control_sig" class="control">
 					<div class="flap" id="flap_sig"></div>
-					<span id="score_sig"> </span>
-					<span id="control_sig_lb"></span>
+					<span id="control_sig_lb" class="control_lb"></span>
 				</div>
 
 			</div>
+
 		</div>
 
 	<!-- container  -->

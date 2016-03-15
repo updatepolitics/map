@@ -18,7 +18,6 @@ var cur_scale = 1;
 var zoom_limits = [ 0.1, 5 ];
 var zoom_factor = 1.5;
 
-var bar_h = 80;
 var zoom_r = 25;
 var filter_h = 25;
 
@@ -28,6 +27,8 @@ var strict = {
 		'method':[],
 		'kind':[]
 	};
+
+check_code();
 
 
 // map vars
@@ -84,12 +85,13 @@ reg('circles_in');
 reg('control_center');
 
 reg('control_hub');
-reg('score_hub');
 reg('control_hub_lb');
 
 reg('control_sig');
-reg('score_sig');
 reg('control_sig_lb');
+
+reg('mode_lb_num');
+reg('mode_lb_tx');
 
 reg('control_filters');
 reg('filters');
@@ -101,19 +103,25 @@ reg('filters_counter');
 
 reg('mode_list');
 
+reg('need_help');
+reg('need_help_lb');
+reg('need_help_x');
+
 
 //////////////////////////////// control ////////////////////////////////
 
 $(mode).on(bt_event, function(){
-	navigate("list.html?code=" + cur_code, false);
+	navigate("list.html", false);
 });
 
 $(control_hub).on(bt_event, function(){
-	if(cur_code != 'hub') navigate("explore.html?code=hub", false);
+	set_code("hub");
+	navigate("chart.html", false);
 });
 
 $(control_sig).on(bt_event, function(){
-	if(cur_code != 'sig') navigate("explore.html?code=sig", false);
+	set_code("sig");
+	navigate("chart.html", false);
 });
 
 
@@ -170,19 +178,11 @@ $(zoom_in).on(bt_event, function(){
 //////////////////////////////// MODAL ////////////////////////////////
 
 $(document).keyup(function(e) {
-     if (e.keyCode == 27) {
-        if(modal.open) close_modal();
+    if (e.keyCode == 27) {
+    if(modal.open) close_modal();
 		if(help.open) close_help();
-    }
+  }
 });
-
-function scroll(trg, to, dur){
-	$(trg).scrollTo( to, {
-		duration: dur2,
-		easing: in_out,
-		axis:'y'
-	});
-}
 
 modal.open = false;
 
@@ -208,8 +208,6 @@ function open_modal (d){
 			.addClass('about')
 			.html( d.node.about )
 		modal_content.appendChild(div);
-
-	scroll(modal_content, 0, 0);
 
 	$(modal).fadeIn(dur,_out);
 	$(curtain).fadeIn( dur, _out);
@@ -283,6 +281,7 @@ $(help_bt).on(bt_event, function(){
 	help_pos(0);
 	$(help).fadeIn(dur/2);
 	help.open = true;
+	close_need_help();
 });
 
 
@@ -312,8 +311,6 @@ function reset_filters_score(clear){
 }
 
 function check_filters() {
-	console.log(json.filters);
-	console.log(cur_filters);
 	reset_filters_score(false);
 	for ( i in json.filters ) {
 		var all_off = true;
@@ -344,11 +341,19 @@ function check_filters() {
 
 	// hubs list
 	n_hubs = update_list( json.hubs, 'hub' );
-	$(score_hub).html(n_hubs);
 
 	// signals list
 	n_signals = update_list( json.signals, 'sig' );
-	$(score_sig).html(n_signals);
+
+	if( cur_code == 'hub' ){
+		$(mode_lb_num).html( n_hubs  );
+		$(mode_lb_tx).html( check_num( n_hubs, 'hub' ) );
+	}
+
+	if( cur_code == 'sig' ){
+		$(mode_lb_num).html( n_signals );
+		$(mode_lb_tx).html( check_num( n_hubs, 'sig' ) );
+	}
 
 }
 
@@ -520,10 +525,6 @@ function arr_search( arr, id ){
 }
 
 
-$(update_logo).on(bt_event, function(){
-		navigate('index.html', false);
-});
-
 // tooltip
 
 function tt(title, val, color){
@@ -560,10 +561,8 @@ function resize_explore(){
 	console.log("resize");
 
 		if(mobile){
-			bar_h = 50;
 			filter_h = 20;
 		}else{
-			bar_h = 80;
 			filter_h = 25;
 		}
 
@@ -913,8 +912,8 @@ function load(){
 
 	// generic labels
 	$(filters_lb).html(json.labels.filters[lg].toUpperCase());
-	$(control_hub_lb).html(check_num(n_hubs, "hub"));
-	$(control_sig_lb).html(check_num(n_signals, "sig"));
+	$(control_hub_lb).html(json.labels['hubs'][lg].toUpperCase());
+	$(control_sig_lb).html(json.labels['sigs'][lg].toUpperCase());
 
 	// start data
 	simulate_db(json);
@@ -935,8 +934,45 @@ function load(){
 	check_filters();
 	check_trash();
 
+	// need help
+	$(need_help).hide();
+	$(need_help_lb).html(json.labels.need_help[lg]);
+
+	if( get_cookie('help_x') != 'ok' ){
+		$(need_help).show().delay(3000).animate({ opacity:1, bottom: 65 }, dur, _out);
+		setTimeout( function(){
+			$(need_help).fadeOut(dur);
+		}, 10000)
+	}
 
 } // load
+
+// need_help
+
+function close_need_help(){
+	$(need_help).stop().fadeOut(dur);
+	set_cookie('help_x', 'ok', 365);
+}
+
+$(need_help_x).on(bt_event, close_need_help)
+
+function set_cookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function get_cookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1);
+		if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+	}
+	return "";
+}
 
 //////////////////////////////// LOAD EXTERNAL DATA ////////////////////////////////
 

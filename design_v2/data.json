@@ -1,7 +1,8 @@
 
 {
 	"labels" : {
-		"about": { "_pt":"sobre", "_en":"about", "_es":"es_intro"  },
+		"need_help": { "_pt":"PRECISA DE AJUDA?", "_en":"NEED HELP?", "_es":"NECESITAS AYUDA?"  },
+		"about": { "_pt":"apresentação", "_en":"intro", "_es":"es_intro"  },
 		"explore": { "_pt":"explore", "_en":"explore", "_es":"es_explore" },
 		"search": { "_pt":"buscar", "_en":"search", "_es":"es_search" },
 		"hub": { "_pt":"hub", "_en":"hub", "_es":"es_hub" },
@@ -21,6 +22,16 @@
 		"remove_filters": { "_pt":"remover filtros", "_en":"remove filters", "_es":"es_ remover filtros" }
 	},
 
+	"contact" : {
+		"newsletter":"newsletter@update.com",
+		"channels" : [
+			{ "name": "e-mail", "icon":"email", "url":"http://medium.com" },
+			{ "name":"Medium", "icon":"medium", "url":"http://medium.com" },
+			{ "name": "Twitter", "icon":"twitter", "url":"http://medium.com" },
+			{ "name": "Github", "icon":"git", "url":"http://medium.com" }
+		]
+	},
+
 	"help_text" : [
 		{
 			"title":"HUBS",
@@ -37,6 +48,37 @@
 		{
 			"title":"MUDAR MODO DE EXIBIÇÃO",
 			"text":" lista ou gráfico : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+		}
+	],
+
+	"home_intro" : [
+		{
+			"title":"Problematização",
+			"text":"Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+		},
+		{
+			"title":"Surgimento de um campo de práticas políticas emergentes",
+			"text":"Vitae leo risus maecenas nunc erat. Et amet ac. Vel vestibulum arcu. Ut nibh nulla nulla ante ipsum augue in maecenas. Ut odio montes sociosqu pulvinar sed. Odio tortor pulvinar facilisis velit velit. Lacinia nibh dui. Sociosqu magna blandit."
+		},
+		{
+			"title":"Porque o Update",
+			"text":"Ante quam consequat. Fermentum lacus praesent. Mi in eu varius imperdiet feugiat. Vestibulum turpis adipiscing sit bibendum nulla et in a congue dolor pede magna nam ut. Arcu duis tincidunt. Rutrum nec dolor phasellus vehicula nulla cras ut sit. Rutrum blandit morbi faucibus auctor luctus praesent volutpat netus. Turpis integer pellentesque. Maecenas ac tellus orci sit nunc venenatis eu fermentum imperdiet nunc mi."
+		},
+		{
+			"title":"Para que o Update",
+			"text":"Commodo elit magna. Nec sed fringilla dolor tellus quisque. Tempor ut pede integer lectus curabitur justo eu magna ligula urna pede. Vestibulum neque hymenaeos amet malesuada quis. In aliquet habitasse tincidunt aptent arcu. Hendrerit interdum neque. Sociis dolor volutpat. Urna mauris lacus dui a aliquet aenean ac consequat."
+		},
+		{
+			"title":"Porque o mapeamento",
+			"text":"Vitae leo risus maecenas nunc erat. Et amet ac. Vel vestibulum arcu. Ut nibh nulla nulla ante ipsum augue in maecenas. Ut odio montes sociosqu pulvinar sed. Odio tortor pulvinar facilisis velit velit. Lacinia nibh dui. Sociosqu magna blandit."
+		},
+		{
+			"title":"Para entender o mapeamento - estrutura",
+			"text":"Ante quam consequat. Fermentum lacus praesent. Mi in eu varius imperdiet feugiat. Vestibulum turpis adipiscing sit bibendum nulla et in a congue dolor pede magna nam ut. Arcu duis tincidunt. Rutrum nec dolor phasellus vehicula nulla cras ut sit. Rutrum blandit morbi faucibus auctor luctus praesent volutpat netus. Turpis integer pellentesque. Maecenas ac tellus orci sit nunc venenatis eu fermentum imperdiet nunc mi."
+		},
+		{
+			"title":"Para entender o mapeamento - metodologia",
+			"text":"Commodo elit magna. Nec sed fringilla dolor tellus quisque. Tempor ut pede integer lectus curabitur justo eu magna ligula urna pede. Vestibulum neque hymenaeos amet malesuada quis. In aliquet habitasse tincidunt aptent arcu. Hendrerit interdum neque. Sociis dolor volutpat. Urna mauris lacus dui a aliquet aenean ac consequat."
 		}
 	],
 
