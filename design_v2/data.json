@@ -1,9 +1,10 @@
 
 {
+
 	"labels" : {
 		"need_help": { "_pt":"PRECISA DE AJUDA?", "_en":"NEED HELP?", "_es":"NECESITAS AYUDA?"  },
 		"about": { "_pt":"apresentação", "_en":"intro", "_es":"es_intro"  },
-		"explore": { "_pt":"explore", "_en":"explore", "_es":"es_explore" },
+		"explore": { "_pt":"explorar", "_en":"explore", "_es":"es_explore" },
 		"search": { "_pt":"buscar", "_en":"search", "_es":"es_search" },
 		"hub": { "_pt":"hub", "_en":"hub", "_es":"es_hub" },
 		"hubs": { "_pt":"hubs", "_en":"hubs", "_es":"es_hubs" },
@@ -16,7 +17,7 @@
 		"hub_list": { "_pt":"filtros de hubs", "_en":"hub filters", "_es":"es_hub filters" },
 		"more": { "_pt":"saiba mais", "_en":"more info", "_es":"es_more" },
 		"list": { "_pt":"lista", "_en":"list", "_es":"es_list" },
-		"map": { "_pt":"mapa", "_en":"map", "_es":"es_map" },
+		"chart": { "_pt":"gráfico", "_en":"chart", "_es":"es_chart" },
 		"filters": { "_pt":"filtros", "_en":"filters", "_es":"es_filters" },
 		"no_filter": { "_pt":"nenhum filtro selecionado", "_en":"no filter selected", "_es":"es_ nenhum filtro" },
 		"remove_filters": { "_pt":"remover filtros", "_en":"remove filters", "_es":"es_ remover filtros" }
@@ -25,10 +26,10 @@
 	"contact" : {
 		"newsletter":"newsletter@update.com",
 		"channels" : [
-			{ "name": "e-mail", "icon":"email", "url":"http://medium.com" },
-			{ "name":"Medium", "icon":"medium", "url":"http://medium.com" },
-			{ "name": "Twitter", "icon":"twitter", "url":"http://medium.com" },
-			{ "name": "Github", "icon":"git", "url":"http://medium.com" }
+			{ "name": "e-mail", "icon":"email", "url":"contact@update.org" },
+			{ "name": "Medium", "icon":"medium", "url":"http://medium.com/update" },
+			{ "name": "Twitter", "icon":"twitter", "url":"http://twitter.com/update" },
+			{ "name": "Github", "icon":"github", "url":"http://github.com/update" }
 		]
 	},
 

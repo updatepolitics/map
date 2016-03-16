@@ -1,10 +1,6 @@
 
 var json,
 	node,
-	page_y,
-	wn,
-	win_w,
-	win_h,
 	search_target,
 	cur_filters,
 	n_hubs = 0,

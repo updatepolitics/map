@@ -94,6 +94,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 /* ////////////////////////// MENU ////////////////////////// */
 
+
 .bt{ cursor: pointer; }
 
 
@@ -135,20 +136,38 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     position: absolute;
     top: 100px;
     left: 35px;
+    overflow: auto;
 }
 
 .mobile
-    #menu_bts{
-        top: 70px;
-        left: 20px;
-    }
+  #menu_bts{
+    top: 70px;
+    left: 20px;
+    font-size: 18px;
+  }
+
+#menu_bts::-webkit-scrollbar {
+    height: 18px;
+    width: 18px;
+}
+#menu_bts::-webkit-scrollbar-track {
+	background-color:#1c212b;
+}
+#menu_bts::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	  border:#1c212b 5px solid;
+    background-color:#676b73;
+}#menu_bts::-webkit-scrollbar-thumb:hover{
+    background-color:#fff;
+}
 
 #menu_bts
-    .bt{
-        margin-bottom: 10px;
-        list-style: none;
-        opacity: .3;
-    }
+  .bt{
+      margin-bottom: 10px;
+      list-style: none;
+      opacity: .3;
+  }
 
 #menu_bts
     .bt:hover{
@@ -156,12 +175,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     }
 
 #menu_bts
-    .bt.selected{
-        color: #fff;
-        font-weight: 700;
-        opacity: 1;
-        cursor: default;
-    }
+  .bt.selected{
+      color: #fff;
+      font-weight: 700;
+      opacity: 1;
+      cursor: default;
+  }
 
 
 .sub_bt{
@@ -170,13 +189,28 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   padding-left: 15px;
   margin-bottom: 12px;
   cursor: pointer;
+  opacity: 0.2
 }
 
+.sub_bt:hover, .sub_bt.selected{
+  opacity: 1;
+}
+
+#contact_name{
+  width: 100%;
+  height: 25px;
+  position: absolute;
+  bottom: 130px;
+  font-size: 14px;
+  text-align: center;
+  left: 0;
+}
 
 #contact{
     position: absolute;
-    bottom: 30px;
+    bottom: 70px;
     width: 100%;
+    height: 50px;
     text-align: center;
     font-size: 0;
     line-height: 0;
@@ -184,7 +218,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .land
     #contact{
-        bottom: 0;
         top: 0;
         height: 200px;
         margin: auto;
@@ -199,7 +232,21 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         display: inline-block;
         width: 50px;
         height: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: .2;
+        cursor: pointer;
     }
+
+#contact
+    .bt:hover{
+      opacity: 1;
+    }
+
+
+.mobile #contact_name{
+  display: none;
+}
 
 .land
     #contact
@@ -209,10 +256,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         }
 
 
-
-
 #email{ background-image: url('../layout/email.png') }
-#fbook{ background-image: url('../layout/fbook.png') }
+#medium{ background-image: url('../layout/medium.png') }
 #twitter{ background-image: url('../layout/twitter.png') }
 #github{ background-image: url('../layout/github.png') }
 
@@ -372,11 +417,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 .mobile
     .home_bt{
-        font-size: 14px;
+        font-size: 12px;
         padding: 20px;
         width: 48%;
         height: 54px;
         bottom: 5%;
+        background-size: 50px;
     }
 
 .home_bt:hover{
@@ -644,7 +690,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 .mobile
   #mode{
     left: 0;
-    width: 50px;
+    width: 110px;
     height: 50px;
   }
 
@@ -660,12 +706,9 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile
   .mode{
-    left: 0;
-    width: 30px;
-    height: 40%;
-    background-size: 40px;
-    position: relative;
-    top: 7px;
+    background-size: 50px;
+    width: 20px;
+    height: 60%;
   }
 
 .mode.selected{
@@ -691,6 +734,14 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   left: 0;
   bottom: 10px;
 }
+
+.mobile
+  #mode_lb{
+    font-size: 14px;
+    bottom: 1px;
+
+  }
+
 
 #mode_lb_num{
   font-weight: 700;
@@ -721,6 +772,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   display: table;
   margin-bottom: 20px;
 }
+
+.mobile
+  .modal_nav{
+    margin-top: 50px;
+    margin-bottom: 0;
+  }
 
 .modal_content{
   width: 100%;
@@ -875,7 +932,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile
     #help_bt {
-        right: 0;
+        left: 0;
         background-size: 50px;
     }
 
@@ -946,7 +1003,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     width: 100%;
     height: 80px;
     background: #2b3240;
-    border-bottom: #262c38 1px solid;
     z-index: 8
 }
 
@@ -971,8 +1027,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile
   #control_center{
-    width: 220px;
-
+    width: 210px;
   }
 
 .control{
@@ -990,6 +1045,15 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     height: 100%;
 }
 
+.mobile
+  .control{
+    width: 50px;
+    height: 50px;
+    background-position: top;
+    background-size: 40px;
+    text-align: center;
+  }
+
 .control_lb{
   width: 100%;
   position: absolute;
@@ -1000,7 +1064,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mobile
   .control_lb{
-    bottom: 5px;
+    bottom: 7px;
   }
 
 
@@ -1058,20 +1122,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     opacity: .2;
 }
 
-.mobile
-  #control_hub{
-    background-position: top;
-    background-size: 40px;
-    font-size: 12px;
-    text-align: center;
-  }
-
-.mobile
-  #control_hub
-    span{
-      position: relative;
-      top: 12px;
-    }
 
 #control_hub.on {
   opacity: 1;
@@ -1084,21 +1134,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     background-image: url("../layout/sig1.png");
     opacity: .2;
 }
-
-.mobile
-  #control_sig{
-    background-position: top;
-    background-size: 40px;
-    font-size: 12px;
-    text-align: center;
-  }
-
-.mobile
-  #control_sig
-    span{
-      position: relative;
-      top: 12px;
-    }
 
 
 #control_sig.on {
@@ -1135,25 +1170,20 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     top: 0;
 }
 
-.mobile
-    #control_filters{
-        background-size: 50px;
-        width: 52px;
-    }
-
-
 #filters_counter{
   position: absolute;
-  top: 17px;
-  left: 35px;
+  top: 15px;
+  right:15px;
   border: #2b3240 1px solid;
+  margin: 0;
 }
 
 .mobile
   #filters_counter{
-    bottom: 30px;
-    left:15px;
-    font-size: 8px
+    top: 5px;
+    right:5px;
+    font-size: 8px;
+    height: 13px;
   }
 
 
@@ -1289,11 +1319,11 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .counter{
     background: #fff;
-    padding: 0 5px;
+    padding: 1px 3px;
     border:#fff 1px solid;
     border-radius: 10px;
     color: #2b3240;
-    height: 13px;
+    height: 15px;
     font-size: 11px;
     margin: 0 10px;
     font-weight: 700;
@@ -1304,24 +1334,18 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     opacity: 0.2;
 }
 
-.mobile
-    .counter{
-        font-size: 10px;
-    }
-
-
-  #trash{
-      width: 100%;
-      height: 57px;
-      background-image: url("../layout/trash.png");
-      background-repeat: no-repeat;
-      background-position: left;
-      z-index: 5;
-      display: table-cell;
-      vertical-align: middle;
-      padding-left:70px;
-      cursor: pointer;
-  }
+#trash{
+    width: 100%;
+    height: 57px;
+    background-image: url("../layout/trash.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    z-index: 5;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left:70px;
+    cursor: pointer;
+}
 
   .mobile
       #trash{
@@ -1444,6 +1468,8 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         pointer-events: all;
     }
 
+
+
 .mobile
     #legends_x{
         display: block;
@@ -1557,7 +1583,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     .color{
         width: 11px;
         height: 11px;
-        background: #f00;
         display: inline-block;
         margin-right: 5px;
         border-radius: 10px;
@@ -1912,24 +1937,31 @@ hr{
 
 .box{
     font-size: 18px;
-    padding: 30px;
+    padding: 30px 50px;
     color: #fff;
     line-height: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 1px;
     font-weight: 400;
+    cursor: pointer;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+.box:hover{
+   background-image: url('../layout/next.png');
 }
 
 .box_title{
     font-family: 'Stardos Stencil';
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-align: center;
 }
 
 .item{
     font-family: 'Stardos Stencil';
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     width: 100%;
     text-align: center;
@@ -1942,6 +1974,7 @@ hr{
     background-position: right;
     list-style: none;
     color: #fff;
+    text-transform: uppercase;
 }
 
 .item_plus{

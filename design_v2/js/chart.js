@@ -1,10 +1,6 @@
 
 var json,
 	node,
-	page_y,
-	wn,
-	win_w,
-	win_h,
 	cur_filters,
 	n_hubs = 0,
 	n_signals = 0,
@@ -716,6 +712,11 @@ function create_map(trg){
 
 	});
 
+	svg_map
+		.attr('opacity', 0)
+		.transition().duration(1000)
+		.attr('opacity', 1);
+
 	svg_force.alpha(0).start();
   set_all_circles(1000);
 
@@ -944,6 +945,9 @@ function load(){
 			$(need_help).fadeOut(dur);
 		}, 10000)
 	}
+
+	// create contact bts in menu
+	contact_bts(json.contact);
 
 } // load
 

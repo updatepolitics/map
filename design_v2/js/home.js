@@ -1,11 +1,7 @@
 
 var json,
 	node,
-	page_y,
 	cur_code,
-	wn,
-	win_w,
-	win_h,
 	scale;
 
 var scale_kind,
@@ -186,8 +182,6 @@ function create_map(){
 		c_total = d3.select(this)
 			.append('circle')
 			.attr('fill', d.fill)
-			.attr('fill-opacity', 0)
-			.transition().duration(1000)
 			.attr('fill-opacity', 1);
 
 		d.c_total = c_total;
@@ -207,9 +201,15 @@ function create_map(){
 
 	});
 
+	svg_map
+		.attr('opacity', 0)
+		.transition().duration(1000)
+		.attr('opacity', 0.5);
+
 	svg_force.alpha(0).start();
 
 }
+
 
 
 //////////////////////////////// home modal ////////////////////////////////
@@ -253,6 +253,8 @@ function open_home_modal(){
 	$(update_logo_home).fadeOut(dur);
 	$(quotes).fadeOut(dur);
 	$(credit).fadeOut(dur);
+	$(about).fadeOut(dur);
+	$(explore).fadeOut(dur);
 	modal_pos(0);
 }
 
@@ -263,6 +265,8 @@ function close_home_modal(){
 	$(update_logo_home).fadeIn(dur);
 	$(quotes).fadeIn(dur);
 	$(credit).fadeIn(dur);
+	$(about).fadeIn(dur);
+	$(explore).fadeIn(dur);
 }
 
 $(about).on(bt_event, open_home_modal);

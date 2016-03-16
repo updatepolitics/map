@@ -4,6 +4,10 @@ var i, a, b, c, d, itm1, itm2, itm3;
 var div, ul, li, li2, span, img, hr;
 var dbody = document.body,
     mobile,
+  	page_y,
+  	wn,
+  	win_w,
+  	win_h,
     bt_event,
     lg,
     delay;
@@ -17,36 +21,39 @@ var dur = 350, // animation
 
 var bar_h = 80;
 
-
 var pages = [
-    { _pt:'IN&Iacute;CIO', _en:'HOME', html:"index.html",},
-    { _pt:'UPDATE', _en:'UPDATE', html:"update.html", submenu : [
-      {_pt : "Sobre o Update", anchor:'intro' },
-      {_pt : "Quem somos", anchor:'who' },
-      {_pt : "Quem nos financia + parceiros", anchor:'partners' }
-    ]},
-    { _pt:'METODOLOGIA', _en:'METODOLOGY', html:"methodology.html"},
-    { _pt:'PAÍSES', _en:'COUNTRIES', html:"countries.html", submenu : [
-     {_pt : "Introdução / O que é", anchor:'intro' },
-     {_pt : "Paises/Iniciativas", anchor:'countries' },
-     {_pt : "Abrangência", anchor:'coverage' }
-    ]},
-    { _pt:'HUBS', _en:'HUBS', html:"hubs.html", submenu : [
-     {_pt : "Introdução / O que é", anchor:'intro' },
-     {_pt : "Natureza", anchor:'kind' },
-     {_pt : "Financiador", anchor:'financer' }
-    ]},
-    { _pt:'SINAIS', _en:'SIGNALS', html:"signals.html", submenu : [
-     {_pt : "Introdução / O que é", anchor:'intro' },
-     {_pt : "Tecnologia", anchor:'tech' },
-     {_pt : "Temas", anchor:'theme' },
-     {_pt : "Propósito", anchor:'purpose' },
-     {_pt : "Métodos", anchor:'method' }
-    ]},
-    { _pt:'DOWNLOAD', html:"download.html" },
-    { _pt:'CADASTRE SUA INICIATIVA', html:"initiative.html" },
-    { _pt:'EXPLORE', _en:'EXPLORE', html:"chart.html", html2:"list.html" }
+   { "_pt":"IN&Iacute;CIO", "html":"index.html",},
+   { "_pt":"UPDATE", "_en":"UPDATE", "html":"update.html", "submenu" : [
+     {"_pt": "Sobre o Update", "anchor":"intro" },
+     {"_pt": "Quem somos", "anchor":"who" },
+     {"_pt": "Quem nos financia + parceiros", "anchor":"partners" }
+   ]},
+   { "_pt":"METODOLOGIA", "_en":"METODOLOGY", "html":"methodology.html"},
+   { "_pt":"PAÍSES", "_en":"COUNTRIES", "html":"countries.html", "submenu" : [
+      {"_pt": "Introdução / O que é", "anchor":"intro" },
+      {"_pt": "Paises/Iniciativas", "anchor":"countries" },
+      {"_pt": "Abrangência", "anchor":"coverage" }
+   ]},
+   { "_pt":"HUBS", "_en":"HUBS", "html":"hubs.html", "submenu" : [
+      {"_pt": "Introdução / O que é", "anchor":"intro" },
+      {"_pt": "Natureza", "anchor":"kind" },
+      {"_pt": "Financiador", "anchor":"financer" }
+   ]},
+   { "_pt":"SINAIS", "_en":"SIGNALS", "html":"signals.html", "submenu" : [
+      {"_pt": "Introdução / O que é", "anchor":"intro" },
+      {"_pt": "Tecnologia", "anchor":"tech" },
+      {"_pt": "Temas", "anchor":"theme" },
+      {"_pt": "Propósito", "anchor":"purpose" },
+      {"_pt": "Métodos", "anchor":"method" }
+   ]},
+   { "_pt":"DOWNLOAD", "html":"download.html" },
+   { "_pt":"CADASTRE SUA INICIATIVA", "html":"initiative.html" },
+   { "_pt":"EXPLORAR", "_en":"EXPLORE", "submenu" : [
+       {"_pt": "GRÁFICO", "html":"chart.html" },
+       {"_pt": "LISTA",  "html":"list.html", }
+   ]},
 ];
+
 
 
 // public funcions
@@ -144,6 +151,7 @@ reg('twitter');
 reg('github');
 reg('fbook');
 reg('curtain');
+reg('contact');
 
 
 // lg
@@ -201,7 +209,7 @@ function open_lang(){
 
 function resize(){
 
-    // public resize
+  // public resize
 	win_w = $( window ).width();
 	win_h = $( window ).height();
 
@@ -213,12 +221,15 @@ function resize(){
 
 	if(mobile){
 		if(win_w < win_h){
-            $(dbody).addClass('port');
-            $(dbody).removeClass('land');
-        } else {
-            $(dbody).removeClass('port');
-            $(dbody).addClass('land');
-        }
+      $(dbody).addClass('port');
+      $(dbody).removeClass('land');
+      $(menu_bts).css({height: win_h - 180, width: win_w * 0.8 - 20});
+    } else {
+      $(dbody).removeClass('port');
+      $(dbody).addClass('land');
+      $(menu_bts).css({height: win_h - 80, width: '75%' });
+    }
+    if(!menu.open) $(menu).css({left: -win_w*0.8 });
 	}else{
 		if( win_w > 1200 ) $(dbody).addClass('layout2');
 		else $(dbody).removeClass('layout2');
@@ -292,7 +303,7 @@ function close_menu(){
     $(container).animate({left:0}, dur, _out);
     $(header).animate({left:0 }, dur, _out);
     if(cur_page == 'list.html' || cur_page == 'chart.html') $(control).animate({left:0 }, dur, _out);
-    $(curtain).fadeOut(dur, _out); 
+    $(curtain).fadeOut(dur, _out);
 }
 
 $(curtain).on(bt_event, function(){
@@ -300,45 +311,101 @@ $(curtain).on(bt_event, function(){
   if(modal && modal.open) close_modal();
 });
 
+function check_submenu(submenu){
+  for (var i in submenu) {
+    if ( submenu[i].html == cur_page ) return true;
+  }
+  return false;
+}
+
+function contact_bts(contact_data){
+  for( i in contact_data.channels ){
+
+    d = contact_data.channels[i];
+
+    li = document.createElement('li');
+    li.url = d.url;
+    li.name = d.name;
+    li.id = d.icon;
+    $(li)
+      .addClass('bt')
+      .on("mouseover", function(){
+        $(contact_name).html(this.name + " (" + this.url + ")");
+      })
+      .on("mouseout", function(){
+        $(contact_name).html('');
+      })
+      .on(bt_event, function(){
+        console.log(this.url);
+      });
+
+    contact.appendChild(li);
+
+  }
+
+  var contact_name = document.createElement('div');
+  contact_name.id = 'contact_name';
+  menu.appendChild(contact_name);
+
+}
+
 for( i in pages ){
 
     li = document.createElement('li');
     li.d = pages[i];
     pages[i].li = li;
     $(li)
-        .addClass('bt')
-        .html( pages[i][lg] )
-        .on( bt_event, function(){
-            navigate(this.d.html, this.d.code);
-            close_menu();
-        });
+      .addClass('bt')
+      .html( pages[i][lg] )
+      .on( 'click', function(){
+          if(this.d.html){
+            navigate( this.d.html, this.d.code);
+          }else{
+            navigate( this.d.submenu[0].html, false);
+          }
+      });
 
     menu_bts.appendChild(li);
 
-    if( pages[i].html == cur_page || pages[i].html2 == cur_page ){
+    if( pages[i].html == cur_page || ( !pages[i].html && check_submenu(pages[i].submenu)) ){
+
       $(li).addClass('selected');
 
       // submenu
       if( pages[i].submenu ) {
         for(a in pages[i].submenu){
           li2 = document.createElement('li');
-          li2.anchor = pages[i].submenu[a].anchor;
 
-          $(li2)
-            .addClass('sub_bt')
-            .html(pages[i].submenu[a][lg])
-            .on( bt_event, function(){
-                scroll(window, "#"+this.anchor, dur);
-                close_menu();
-            });
+          if(pages[i].submenu[a].html){
+            li2.html = pages[i].submenu[a].html;
+
+            $(li2)
+              .addClass('sub_bt')
+              .html(pages[i].submenu[a][lg])
+              .on( bt_event, function(){
+                  navigate(this.html);
+              });
+
+            if(cur_page == li2.html)  $(li2).addClass('selected')
+          }
+
+          if(pages[i].submenu[a].anchor){
+            li2.anchor = pages[i].submenu[a].anchor;
+
+            $(li2)
+              .addClass('sub_bt selected')
+              .html(pages[i].submenu[a][lg])
+              .on( bt_event, function(){
+                  scroll(window, "#" + this.anchor, dur);
+                  close_menu();
+              });
+          }
 
           menu_bts.appendChild(li2);
-
         }
       }
     }
   }
-
 
 menu.open = false;
 
