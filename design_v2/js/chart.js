@@ -42,9 +42,9 @@ var svg_circles;
 
 reg('container');
 
-reg('modal');
-reg('modal_x');
-reg('modal_content');
+reg('popup');
+reg('popup_x');
+reg('popup_content');
 
 reg('map_container');
 reg('tooltip');
@@ -171,54 +171,54 @@ $(zoom_in).on(bt_event, function(){
 });
 
 
-//////////////////////////////// MODAL ////////////////////////////////
+//////////////////////////////// popup ////////////////////////////////
 
 $(document).keyup(function(e) {
     if (e.keyCode == 27) {
-    if(modal.open) close_modal();
+    if(popup.open) close_popup();
 		if(help.open) close_help();
   }
 });
 
-modal.open = false;
+popup.open = false;
 
-function open_modal (d){
+function open_popup (d){
 
 	if(filters.open) close_filters();
 
-	modal.open = true;
-	$(modal_content).html('');
+	popup.open = true;
+	$(popup_content).html('');
 
-	$(modal).css({color:'#fff', backgroundColor:d.fill});
-	if(!mobile) $(modal).css({ maxHeight: '50%' });
-	$(modal_x).css({ backgroundImage: 'url(layout/x.png)' });
+	$(popup).css({color:'#fff', backgroundColor:d.fill});
+	if(!mobile) $(popup).css({ maxHeight: '50%' });
+	$(popup_x).css({ backgroundImage: 'url(layout/x.png)' });
 
 	div = document.createElement('div');
 		$(div)
 			.addClass('title')
 			.html(d.node.label);
-		$(modal_content).append(div);
+		$(popup_content).append(div);
 
 		div = document.createElement('div');
 		$(div)
 			.addClass('about')
 			.html( d.node.about )
-		modal_content.appendChild(div);
+		popup_content.appendChild(div);
 
-	$(modal).fadeIn(dur,_out);
+	$(popup).fadeIn(dur,_out);
 	$(curtain).fadeIn( dur, _out);
 
 }
 
 
-function close_modal(){
-	modal.open = false;
-	$(modal).fadeOut( dur,_out );
+function close_popup(){
+	popup.open = false;
+	$(popup).fadeOut( dur,_out );
 	$(curtain).fadeOut( dur, _out);
 }
 
-$(modal_x).on(bt_event, function(){
-	close_modal();
+$(popup_x).on(bt_event, function(){
+	close_popup();
 });
 
 
@@ -562,7 +562,7 @@ function resize_explore(){
 			filter_h = 25;
 		}
 
-		$(modal_content).height($(modal).height() - 50);
+		$(popup_content).height($(popup).height() - 50);
 		$(map_container).height(win_h - bar_h);
 		$(filters).height(win_h - bar_h - 40);
 		$(filters_list).height(win_h - bar_h - 97);
@@ -669,7 +669,7 @@ function create_map(trg){
 	.append('g')
 	.attr('style', 'cursor:pointer')
 	.on('click', function(d){
-		open_modal(d);
+		open_popup(d);
 	})
 	.on('mouseover', function(d){
 		var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial, cur_code) + ' (' + d.pc_val + '%)';

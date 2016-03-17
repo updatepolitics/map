@@ -24,9 +24,9 @@ var strict = {
 
 reg('container');
 
-reg('modal');
-reg('modal_x');
-reg('modal_content');
+reg('popup');
+reg('popup_x');
+reg('popup_content');
 
 reg('control');
 reg('help_bt');
@@ -145,11 +145,11 @@ function reset_search(){
 
 $(search_x).on('click', reset_search);
 
-//////////////////////////////// MODAL ////////////////////////////////
+//////////////////////////////// popup ////////////////////////////////
 
 $(document).keyup(function(e) {
 	    if (e.keyCode == 27) {
-	    if(modal.open) close_modal();
+	    if(popup.open) close_popup();
 			if(help.open) close_help();
     }
 });
@@ -204,38 +204,38 @@ function info(d, inline){
 
 }
 
-modal.open = false;
+popup.open = false;
 
-function open_modal (d ){
+function open_popup (d ){
 
 	if(filters.open) close_filters();
 
-	modal.open = true;
-	$(modal_content).html('');
+	popup.open = true;
+	$(popup_content).html('');
 
-	$(modal).css({color:'', backgroundColor:''});
-	$(modal_x).css({ backgroundImage: '' });
+	$(popup).css({color:'', backgroundColor:''});
+	$(popup_x).css({ backgroundImage: '' });
 
 	div = document.createElement('div');
 	$(div)
 		.addClass('title')
 		.html(d.name);
-	$(modal_content).append(div);
+	$(popup_content).append(div);
 
 	div = document.createElement('div');
 	$(div)
 		.addClass('info')
 		.html( info( d, false ))
-	modal_content.appendChild(div);
+	popup_content.appendChild(div);
 
 	// hr = document.createElement('hr');
-	// modal_content.appendChild(hr);
+	// popup_content.appendChild(hr);
 
 	div = document.createElement('div');
 	$(div)
 		.addClass('about mt40')
 		.html(d.about);
-	$(modal_content).append(div);
+	$(popup_content).append(div);
 
 	if( d.code == 'sig' ){
 		if( d.method.length > 0 ){
@@ -244,11 +244,11 @@ function open_modal (d ){
 			$(div)
 				.addClass('section')
 				.html( json.labels.methods[lg] )
-			$(modal_content).append(div);
+			$(popup_content).append(div);
 
 			ul = document.createElement('div');
 			$(ul).addClass('list');
-			$(modal_content).append(ul);
+			$(popup_content).append(ul);
 
 			for( i in d.method ){
 
@@ -287,11 +287,11 @@ function open_modal (d ){
 		$(div)
 			.addClass('section')
 			.html(json.filters.kind.label)
-		$(modal_content).append(div);
+		$(popup_content).append(div);
 
 		ul = document.createElement('div');
 		$(ul).addClass('list');
-		$(modal_content).append(ul);
+		$(popup_content).append(ul);
 
 		node = arr_search( json.filters.kind.itens, d.kind );
 		li = document.createElement('li');
@@ -326,7 +326,7 @@ function open_modal (d ){
 	$(div)
 		.addClass('section')
 		.html(json.labels.more[lg])
-	$(modal_content).append(div);
+	$(popup_content).append(div);
 
 	div = document.createElement('div');
 	$(div)
@@ -335,22 +335,22 @@ function open_modal (d ){
 		.on('click', function(){
 			alert(d.url);
 		});
-	$(modal_content).append(div);
+	$(popup_content).append(div);
 
-	scroll(modal_content, 0, 0);
+	scroll(popup_content, 0, 0);
 
-	$(modal).fadeIn(dur,_out);
+	$(popup).fadeIn(dur,_out);
 	$(curtain).fadeIn( dur, _out);
 }
 
-function close_modal(){
-	modal.open = false;
-	$(modal).fadeOut( dur,_out );
+function close_popup(){
+	popup.open = false;
+	$(popup).fadeOut( dur,_out );
 	$(curtain).fadeOut( dur, _out);
 }
 
-$(modal_x).on(bt_event, function(){
-	close_modal();
+$(popup_x).on(bt_event, function(){
+	close_popup();
 });
 
 function toggle_plus(trg){
@@ -683,7 +683,7 @@ function resize_list(){
 			filter_h = 25;
 		}
 
-		$(modal_content).height($(modal).height() - 50);
+		$(popup_content).height($(popup).height() - 50);
 		$(filters).height(win_h - bar_h - 40);
 		$(filters_list).height(win_h - bar_h - 97);
 
@@ -730,7 +730,7 @@ function load(){
 			$(li)
 				.addClass('list_item sig')
 				.on('click', function(){
-					open_modal(this.node, false);
+					open_popup(this.node, false);
 				});
 
 			d.li = li;
@@ -776,7 +776,7 @@ function load(){
 			$(li)
 				.addClass('list_item hub')
 				.on('click', function(){
-					open_modal(this.node, false);
+					open_popup(this.node, false);
 				});
 
 			d.li = li;
@@ -826,6 +826,9 @@ function load(){
 			$(need_help).fadeOut(dur);
 		}, 10000)
 	}
+
+	// create contact bts in menu
+	contact_bts(json.contact);
 
 } // load
 

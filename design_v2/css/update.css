@@ -189,7 +189,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   padding-left: 15px;
   margin-bottom: 12px;
   cursor: pointer;
-  opacity: 0.2
+  opacity: 0.3
 }
 
 .sub_bt:hover, .sub_bt.selected{
@@ -200,7 +200,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   width: 100%;
   height: 25px;
   position: absolute;
-  bottom: 130px;
+  bottom: 120px;
   font-size: 14px;
   text-align: center;
   left: 0;
@@ -217,21 +217,22 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 .land
-    #contact{
-        top: 0;
-        height: 200px;
-        margin: auto;
-        right: 20px;
-        width: 50px;
-        font-size: 0;
-        line-height: 0;
-    }
+  #contact{
+    top: 0;
+    height: 200px;
+    margin: auto;
+    right: 20px;
+    width: 50px;
+    font-size: 0;
+    line-height: 0;
+  }
 
 #contact
     .bt{
         display: inline-block;
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
+        background-size: 60px;
         background-repeat: no-repeat;
         background-position: center;
         opacity: .2;
@@ -262,10 +263,48 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #github{ background-image: url('../layout/github.png') }
 
 
-/* //////////////////////////  MODAL + POPUP ////////////////////////// */
+#newsletter{
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  bottom: 20px;
+  border-right: #1c212b 20px solid;
+  border-left: #1c212b 20px solid;
+}
+
+#newsletter_email{
+  background: #262c38;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 14px;
+  padding-left: 20px;
+  padding-right: 50px;
+  outline: none;
+}
+
+#send_newsletter{
+  width: 45px;
+  height: 45px;
+  background-color: #fff;
+  opacity: .3;
+  background-image: url('../layout/send.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  position: absolute;top: 0;
+  right: 0;
+}
+
+#send_newsletter:hover{
+  opacity: 1;
+}
+
+/* //////////////////////////  POPUP ////////////////////////// */
 
 
-#modal{
+#popup{
     width: 90%;
     height: 90%;
     max-width: 720px;
@@ -284,12 +323,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     text-align: center;
 }
 
-#modal_nav{
+#popup_nav{
     width: 100%;
     height: 50px;
 }
 
-#modal_content{
+#popup_content{
     width: 100%;
     font-size: 18px;
     line-height: 24px;
@@ -297,13 +336,13 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     overflow:auto;
 }
 
-#modal_content
+#popup_content
     .about{
         margin-top: 30px;
         text-align: left;
     }
 
-#modal_content
+#popup_content
     .title{
         overflow: hidden;
         text-overflow: inherit;
@@ -314,25 +353,25 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     }
 
 .mobile
-    #modal_content
+    #popup_content
         .about{
             font-size: 16px;
             line-height: 20px;
         }
 
 .mobile
-    #modal_content .info{
+    #popup_content .info{
         font-size: 12px;
         line-height: 18px;
     }
 
 .mobile
-  #modal_content{
+  #popup_content{
     padding: 0 20px;
   }
 
 
-#modal_x{
+#popup_x{
     width: 50px;
     height: 50px;
     position: absolute;
@@ -357,16 +396,16 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 
 /* Track */
-#modal_content::-webkit-scrollbar-track {
+#popup_content::-webkit-scrollbar-track {
 	background-color:#fff;
 }
 /* Handle */
-#modal_content::-webkit-scrollbar-thumb {
+#popup_content::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
 	border:#fff 5px solid;
     background-color:#ccc;
-}#modal_content::-webkit-scrollbar-thumb:hover{
+}#popup_content::-webkit-scrollbar-thumb:hover{
     background-color:#262c38;
 }
 
@@ -696,7 +735,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .mode{
   width: 30px;
-  height: 70%;
+  height: 60%;
   opacity: .2;
   background-repeat: no-repeat;
   background-position: center;
@@ -728,11 +767,11 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #mode_lb{
   width: 100%;
   text-align: center;
-  font-size: 18px;
+  font-size: 22px;
   height: 20px;
   position: absolute;
   left: 0;
-  bottom: 10px;
+  bottom: 15px;
 }
 
 .mobile
@@ -742,7 +781,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
   }
 
-
 #mode_lb_num{
   font-weight: 700;
 }
@@ -750,6 +788,70 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #mode_lb_tx{
   font-weight: 300;
   margin-left: 5px;
+}
+
+/* ////////////////////////// resiter input ////////////////////////// */
+
+#register_form input{
+  width: 100%;
+  padding: 25px 30px;
+  margin-bottom: 5px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+
+#register_form select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 73px;
+  padding: 25px 30px;
+  margin-bottom: 5px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 0;
+  background-image: url('../layout/select.png');
+  background-position: right;
+  background-repeat:no-repeat;
+}
+
+#register_form textarea{
+  width: 100%;
+  padding: 25px 30px;
+  margin-bottom: 5px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  height: 200px;
+  margin-top: 10px;
+  resize: vertical;
+}
+
+
+#send_register{
+  width: 100%;
+  background: #f00;
+  padding: 25px 30px;
+  font-size: 18px;
+  color: #fff;
+  background: #2b3240;
+  cursor: pointer;
+  font-weight: 600;
+  background-image: url('../layout/next.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#send_register:hover{
+  background-color:#262c38;
 }
 
 /* ////////////////////////// modal_home ////////////////////////// */
@@ -1573,11 +1675,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         margin-left: 4px;
     }
 
-/*.legend .pc{
-    font-weight: 600;
-    margin-left: 5px;
-    font-size: 12px;
-}*/
 
 .legend
     .color{
@@ -1899,7 +1996,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 .content.light2{
-  background-color: #fcfafc;
+  background-color: #f7f7f7;
 }
 .content.light1{
   background-color: #fff;
@@ -1945,6 +2042,15 @@ hr{
     cursor: pointer;
     background-position: right;
     background-repeat: no-repeat;
+}
+
+.box p{
+  margin-bottom: 20px;
+}
+
+.examples{
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .box:hover{
@@ -2044,6 +2150,33 @@ hr{
 
 .light1 .text, .light2 .text{
   font-weight: 400;
+}
+
+.download_bt{
+  width: 100%;
+  background: #f00;
+  padding: 25px 30px;
+  font-size: 18px;
+  color: #fff;
+  background: #2b3240;
+  cursor: pointer;
+  font-weight: 600;
+  background-image: url('../layout/download.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  margin-bottom: 1px;
+}
+
+.download_bt:hover{
+  background-color:#262c38;
+}
+
+.download_sub{
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  font-weight: 300;
+
 }
 
 /* ////////////////////////// about ////////////////////////// */

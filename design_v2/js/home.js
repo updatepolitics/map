@@ -301,6 +301,9 @@ function load(){
 
 	map_rotation(0, true);
 
+	// create contact bts in menu
+	contact_bts(json.contact);
+
 
 } // load
 

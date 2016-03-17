@@ -10,14 +10,14 @@ var dbody = document.body,
   	win_h,
     bt_event,
     lg,
-    delay;
+    delay,
+    modal = false;
 
 var dur = 350, // animation
     dur2 = 550, // layout
     in_out = "easeInOutQuart",
     _out = "easeOutQuart",
     in_ = "easeInQuart";
-
 
 var bar_h = 80;
 
@@ -47,14 +47,12 @@ var pages = [
       {"_pt": "Métodos", "anchor":"method" }
    ]},
    { "_pt":"DOWNLOAD", "html":"download.html" },
-   { "_pt":"CADASTRE SUA INICIATIVA", "html":"initiative.html" },
+   { "_pt":"CADASTRE SUA INICIATIVA", "html":"register.html" },
    { "_pt":"EXPLORAR", "_en":"EXPLORE", "submenu" : [
        {"_pt": "GRÁFICO", "html":"chart.html" },
        {"_pt": "LISTA",  "html":"list.html", }
    ]},
 ];
-
-
 
 // public funcions
 
@@ -67,7 +65,6 @@ console.log( "ROOT: " + root );
 
 var cur_page = path[path.length-1];
 console.log( "cur_page: " + cur_page );
-
 
 for(i=0; i<path.length-1; i++){
     root += path[i] + '/';
@@ -336,8 +333,12 @@ function contact_bts(contact_data){
         $(contact_name).html('');
       })
       .on(bt_event, function(){
-        console.log(this.url);
-      });
+        if(this.name == 'e-mail'){
+          window.location.href = "mailto:" + this.url;
+        }else{
+          window.open(this.url, '_blank');
+        }
+    });
 
     contact.appendChild(li);
 

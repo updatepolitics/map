@@ -1,7 +1,7 @@
 
 var json;
 
-var i, item, li, div, p, list;
+var i, a, item, li, div, p, list;
 
 //////////////////////////////// OBJECTS ////////////////////////////////
 
@@ -36,6 +36,20 @@ function create_item( item, code ){
 			$(p)
 				.html(item.about);
 		li.appendChild(p);
+
+		p = document.createElement('p');
+		var examples = "";
+
+		for( a in item.itens ){
+			examples += item.itens[a].label;
+			if( a < item.itens.length - 1) examples += ", ";
+			else examples += ".";
+		}
+			$(p)
+				.addClass('examples')
+				.html(examples);
+				
+		li.appendChild(p);
 }
 
 function load(){
@@ -56,9 +70,8 @@ function load(){
 		}
 	}
 
-	// build menu
-	navigation(json.pages);
-
+	// create contact bts in menu
+	contact_bts(json.contact);
 
 } // load
 

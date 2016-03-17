@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<title>UPDATE</title>
+	<title>UPDATE :: metodology</title>
 
 	<meta name="title" content="UPDATE" />
 	<meta name="robots" content="index, follow">
@@ -40,27 +40,10 @@
 	<link rel="stylesheet" type="text/css" href="css/update.css">
 
 </head>
-<body class="light_bg">
 
-	<div id="help" class="modal">
-		<div id="help_box" class="modal_box">
-			<div id="help_nav" class="modal_nav">
-				<img id="help_x" class="modal_x" src="layout/curtain_x.png"/>
-				<img id="help_next" class="modal_next" src="layout/arrow_r.png"/>
-				<img id="help_prev" class="modal_prev" src="layout/arrow_l.png"/>
-				<div id="help_nav_pos" class="modal_pos" >1/4</div>
-			</div>
-			<div id="help_title" class="modal_title"></div>
-			<div id="help_text" class="modal_text"></div>
-		</div>
-		<div id="help_frame">
-			<div class="frame" ></div>
-			<div class="left" ></div>
-			<div class="right" ></div>
-			<div class="top" ></div>
-			<div class="bottom" ></div>
-		</div>
-	</div>
+	<body class="light_bg">
+
+	<div id="fake_header"></div>
 
 	<div id="menu">
 		<div id="menu_close"></div>
@@ -82,82 +65,48 @@
 		<div id="cur_lang">
 			<div id="cur_lang_lb" class="lang selected"></div>
 		</div>
-
-		<div id="search">
-			<input type="text" id="search_str" tabindex="-1" placeholder="BUSCAR"/>
-			<div id="search_x"></div>
-		</div>
 	</div>
 
-	<div id="popup">
-		<div id="popup_nav">
-			<div id="popup_x"></div>
-		</div>
-		<div id="popup_content"></div>
-	</div>
+	<div id="container" >
 
-	<div id="filters">
-		<div id="filters_header">
-			<div id="trash"></div>
-			<div id="filters_x"></div>
-		</div>
-		<div id="filters_list"></div>
-	</div>
-
-	<div id="container">
-
-		<div id="list">
-
-		</div>
-
-		<div<div id="control">
-
-			<div id="need_help" >
-				<span id="need_help_lb">PRECISA DE AJUDA?</span>
-				<div id="need_help_x"></div>
+		<div id="intro" class="content light1">
+			<div class="sub_content">
+				<div class="content_title">REGISTRE SUA INICIATIVA</div>
+				<p class="text">Texto normal Lorem ipsum dolor sit amet dictum eu turpis ut praesent erat magna suspendisse sollicitudin potenti nullam aliquam sem. Ea nec massa eleifend natoque donec. Ante nec mattis vitae id et. Nec suscipit eget. Sed ullamcorper ultricies. Tortor adipiscing vivamus. Vestibulum wisi venenatis. Quam adipiscing et. Enim faucibus sed proin accumsan dictum justo est eros. Nunc lorem eget. Neque urna pretium. Curabitur mi vulputate. Congue consequat proin velit amet et orci con rutrum. Luctus vitae pede eget eros ac. Sed incididunt ante. Purus elit eu. Tempor ut mollit. Orci hac leo eu donec nullam. Amet dui per. Vel eget enim. Nec libero dolor tempus orci suscipit rhoncus nunc euismod. Dui tincidunt congue mi adipiscing et sociis mauris pellentesque odio amet nibh auctor ut turpis nec pellentesque conubia nullam adipiscing eu nisl in natoque. Ullamcorper eget malesuada facilisi aliquet in turpis purus urna. Sapien pellentesque integer euismod libero quo. Amet odio massa.</p>
 			</div>
-			<div id="help_bt" ></div>
+		</div>
 
-			<div id="help_bt" ></div>
+		<div id="download" class="content light2">
+			<div class="sub_content">
 
-			<div id="control_filters" class="control">
-				<span id="filters_lb" class="control_lb"></span>
-				<span class="counter" id="filters_counter"></span>
-			</div>
+				<form id="register_form">
 
-			<div id="control_center">
+					<input type="text" placeholder="Nome" name="name" />
+					<input type="text" placeholder="Cidade" name="city" />
+					<input type="text" placeholder="País" name="country" />
+					<input type="text" placeholder="Website" name="site" />
 
-				<div id="control_hub" class="control">
-					<div class="flap" id="flap_hub"></div>
-					<span id="control_hub_lb" class="control_lb"></span>
-				</div>
+					<select id="kind" >
+						<option value='0' >Escolha uma categoria...</option>
+						<option value='0' >Ong </option>
+						<option value='0' >Onde você se insere? </option>
+						<option value='0' >Onde você se insere? </option>
+					</select>
 
-				<div id="mode">
-					<div id="mode_chart" class="mode"></div>
-					<div id="mode_list" class="mode selected"></div>
-					<div id="mode_lb">
-						<span id="mode_lb_num"></span>
-						<span id="mode_lb_tx"></span>
-					</div>
-				</div>
+					<textarea id='comments' placeholder="Comentários"></textarea>
 
-				<div id="control_sig" class="control">
-					<div class="flap" id="flap_sig"></div>
-					<span id="control_sig_lb" class="control_lb"></span>
-				</div>
+					<div id="send_register">ENVIAR</div>
+
+				</form>
 
 			</div>
-
 		</div>
 
-	<!-- container  -->
 	</div>
 
 	<!-- script  -->
-
 	<script type="text/javascript" src="js/navigation.js"></script>
-	<script type="text/javascript" src="js/simulate.js"></script>
-	<script type="text/javascript" src="js/list.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
 
 </body>
 </html>
