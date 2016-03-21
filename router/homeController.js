@@ -5,7 +5,7 @@ HomeController = RouteController.extend({
   template: "home",
   data: function() {
     return {
-      hubs: HubsCollection.find({}, {
+      hubs: Hubs.find({}, {
         limit: 20
       })
     }

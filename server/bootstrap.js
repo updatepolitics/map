@@ -36,7 +36,7 @@ Meteor.startup(function(){
   function importHubs() {
     var hubs;
 
-    HubsCollection.remove({});
+    Hubs.remove({});
 
     Async.runSync(function(doneImportHubs){
       rs = fs.createReadStream(process.env.PWD +'/data/hubs.csv');
@@ -48,8 +48,9 @@ Meteor.startup(function(){
       rs.pipe(parser);
     });
 
+
     _.each(hubs, function(hub){
-      HubsCollection.insert(hub);
+      Hubs.insert(hub);
     });
   }
 

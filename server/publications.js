@@ -1,7 +1,7 @@
 Meteor.publish('hubs', function () {
   hubs = Meteor.wrapAsync(function (cb) {
     Meteor.setTimeout(function () {
-      cb(null, HubsCollection.find({}, {
+      cb(null, Hubs.find({}, {
         limit: 10
       }));
     }, 1000);
@@ -11,8 +11,8 @@ Meteor.publish('hubs', function () {
 });
 
 Meteor.publish('hub', function (_id) {
-  // check(_id, String);
-  return HubsCollection.find({
+  check(_id, String);
+  return Hubs.find({
     _id: _id
   });
 });

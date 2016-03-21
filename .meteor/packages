@@ -24,3 +24,6 @@ npm-container
 reactive-var
 iron:router
 check
+twbs:bootstrap
+aldeed:collection2
+aldeed:autoform

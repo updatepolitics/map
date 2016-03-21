@@ -1,0 +1,14 @@
+<template name="hubEdit">
+  {{#autoForm collection="Hubs" doc=this id="hubEdit" type="update"}}
+    <fieldset>
+      <legend>Edit hub</legend>
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='description_en' rows=6}}
+      {{> afQuickField name='description_es' rows=6}}
+      {{> afQuickField name='description_pt' rows=6}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a class="btn btn-primary" href="{{pathFor route='hub.show'}}" role="button">Voltar</a>
+
+  {{/autoForm}}
+</template>

@@ -1,5 +1,5 @@
 Template.hubList.helpers({
   hubs: function() {
-    return HubsCollection.find({},{});
+    return Hubs.find({},{});
   }
 });
