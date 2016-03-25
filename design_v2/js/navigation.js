@@ -76,9 +76,9 @@ var resize_list = false;
 
 // location
 
-function navigate( html, code ){
+function navigate( html, filter_id ){
   var new_loc = root + html;
-  if(code) new_loc += "?code=" + code;
+  if(filter_id) new_loc += "?filter_id=" + filter_id;
   document.location.href = new_loc;
 }
 
@@ -360,7 +360,7 @@ for( i in pages ){
       .html( pages[i][lg] )
       .on( 'click', function(){
           if(this.d.html){
-            navigate( this.d.html, this.d.code);
+            navigate( this.d.html, false);
           }else{
             navigate( this.d.submenu[0].html, false);
           }
@@ -384,7 +384,7 @@ for( i in pages ){
               .addClass('sub_bt')
               .html(pages[i].submenu[a][lg])
               .on( bt_event, function(){
-                  navigate(this.html);
+                  navigate(this.html, false);
               });
 
             if(cur_page == li2.html)  $(li2).addClass('selected')

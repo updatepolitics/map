@@ -60,7 +60,26 @@ reg('filters_counter');
 
 reg('mode_list');
 
+reg('fixed_list');
+reg('fixed_list_lb');
+reg('fixed_list_x');
+
 reg('list');
+
+
+//////////////////////////////// fixed id ////////////////////////////////////
+
+
+	var fixed_filter_id = $_GET().filter_id;
+
+	if(fixed_filter_id) {
+		$(fixed_list).show();
+	}
+
+
+	$(fixed_list_x).on(bt_event, function(){
+		window.history.back();
+	})
 
 //////////////////////////////// control ////////////////////////////////////
 
@@ -206,7 +225,7 @@ function info(d, inline){
 
 popup.open = false;
 
-function open_popup (d ){
+function open_popup (d){
 
 	if(filters.open) close_filters();
 
@@ -730,7 +749,7 @@ function load(){
 			$(li)
 				.addClass('list_item sig')
 				.on('click', function(){
-					open_popup(this.node, false);
+					open_popup(this.node);
 				});
 
 			d.li = li;
@@ -776,7 +795,7 @@ function load(){
 			$(li)
 				.addClass('list_item hub')
 				.on('click', function(){
-					open_popup(this.node, false);
+					open_popup(this.node);
 				});
 
 			d.li = li;
@@ -830,9 +849,30 @@ function load(){
 	// create contact bts in menu
 	contact_bts(json.contact);
 
+
+	// fixed_list
+
+	var item;
+
+	if(fixed_filter_id) {
+
+		if( cur_code == 'hub' ){
+			item = find_id(json.filters.kind.itens, fixed_filter_id);
+		}else{
+			item = find_id(json.filters.method.itens, fixed_filter_id);
+		}
+
+		$(fixed_list_lb).html(item.label);
+		$(fixed_list).css({background: item.hex});
+	}
+
 } // load
 
-
+function find_id(itens,_id){
+	for(i in itens){
+		if(itens[i].id.toString() == _id.toString()) return itens[i];
+	}
+}
 // need_help
 
 function close_need_help(){

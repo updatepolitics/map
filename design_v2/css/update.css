@@ -1096,6 +1096,47 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         background: none;
     }
 
+/* ////////////////////////// FIXED LISTS ////////////////////////// */
+
+#fixed_list{
+  width: 100%;
+  height: 100%;
+  background: #2b3240;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  line-height: 80px;
+  text-align: center;
+  font-family: 'Stardos Stencil';
+  font-size: 24px;
+  display: none;
+}
+
+#fixed_list_x{
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-image: url('../layout/x.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+#fixed_list_back{
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url('../layout/back.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
 /* ////////////////////////// CONTROL ////////////////////////// */
 
 #control{

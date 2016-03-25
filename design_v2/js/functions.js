@@ -22,7 +22,7 @@ function create_item( item, code ){
 			.on('click', function(){
 				sessionStorage.setItem('cur_filters', this.ID);
 				sessionStorage.setItem('code', this.code);
-				navigate("list.html");
+				navigate("list.html",this.ID);
 		});
 		content_list.appendChild(li);
 
@@ -48,7 +48,7 @@ function create_item( item, code ){
 			$(p)
 				.addClass('examples')
 				.html(examples);
-				
+
 		li.appendChild(p);
 }
 
