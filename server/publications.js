@@ -12,3 +12,7 @@ Meteor.publish('hub', function (_id) {
 Meteor.publish('countries', function () {
   return Countries.find({});
 });
+
+Meteor.publish('natures', function () {
+  return Natures.find({});
+});
