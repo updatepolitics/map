@@ -3,9 +3,13 @@
     <fieldset>
       <legend>Edit hub</legend>
       {{> afQuickField name='name'}}
+      {{> afQuickField name='city'}}
+      {{> afQuickField name='country' options=countryOptions}}
       {{> afQuickField name='description_en' rows=6}}
       {{> afQuickField name='description_es' rows=6}}
       {{> afQuickField name='description_pt' rows=6}}
+
+
     </fieldset>
     <button type="submit" class="btn btn-primary">Update</button>
     <a class="btn btn-primary" href="{{pathFor route='hub.show'}}" role="button">Voltar</a>

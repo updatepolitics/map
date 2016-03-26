@@ -1,13 +1,5 @@
 Meteor.publish('hubs', function () {
-  hubs = Meteor.wrapAsync(function (cb) {
-    Meteor.setTimeout(function () {
-      cb(null, Hubs.find({}, {
-        limit: 10
-      }));
-    }, 1000);
-  })();
-
-  return hubs;
+  return Hubs.find({}, {limit: 10});
 });
 
 Meteor.publish('hub', function (_id) {
@@ -15,4 +7,8 @@ Meteor.publish('hub', function (_id) {
   return Hubs.find({
     _id: _id
   });
+});
+
+Meteor.publish('countries', function () {
+  return Countries.find({});
 });

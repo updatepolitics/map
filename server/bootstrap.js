@@ -54,7 +54,28 @@ Meteor.startup(function(){
     });
   }
 
-  importHubNature();
-  importHubs();
+  function importCountries() {
+    var countries;
+
+    Countries.remove({});
+
+    Async.runSync(function(doneImportCountries){
+      rs = fs.createReadStream(process.env.PWD +'/data_local/countries.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportCountries(err);
+        countries = data;
+        doneImportCountries();
+      });
+      rs.pipe(parser);
+    });
+
+    _.each(countries, function(country){
+      Countries.insert(country);
+    });
+  }
+
+
+  if (Countries.find({}).count() == 0) importCountries();
+  if (Hubs.find({}).count() == 0) importHubs();
 
 });
