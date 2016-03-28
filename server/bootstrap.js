@@ -64,10 +64,8 @@ Meteor.startup(function(){
     });
   }
 
-  importNatures();
-
   if (Countries.find({}).count() == 0) importCountries();
-  // if (Natures.find({}).count() == 0) importNatures();
+  if (Natures.find({}).count() == 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
 
 });

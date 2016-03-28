@@ -1,0 +1,21 @@
+<template name="userList">
+  <legend>All users</legend>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {{#each users}}
+          <td>{{ name }}</td>
+          <td>{{ emails.[0].address }}</td>
+          <td>Edit profile / Remove</td>
+        {{/each}}
+      </tr>
+    </tbody>
+  </table>
+</template>

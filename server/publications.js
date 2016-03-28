@@ -1,5 +1,9 @@
+Meteor.publish('users', function () {
+  return Meteor.users.find({}, {limit: 20});
+});
+
 Meteor.publish('hubs', function () {
-  return Hubs.find({}, {limit: 10});
+  return Hubs.find({}, {limit: 20});
 });
 
 Meteor.publish('hub', function (_id) {
