@@ -1,5 +1,5 @@
-<template name="hubEdit">
-  {{#autoForm collection="Hubs" doc=this id="hubEdit" type="update"}}
+<template name="hubCreate">
+  {{#autoForm collection="Hubs" doc=this id="hubCreate" type="insert"}}
     <fieldset>
       <legend>Edit hub</legend>
       {{> afQuickField name='name'}}
@@ -12,8 +12,8 @@
       {{> afQuickField name='description_es' rows=6}}
       {{> afQuickField name='description_pt' rows=6}}
     </fieldset>
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a class="btn btn-default" href="{{pathFor route='hub.list'}}" role="button">Back to index</a>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a class="btn btn-primary" href="{{pathFor route='hub.list'}}" role="button">Cancel</a>
 
   {{/autoForm}}
 </template>

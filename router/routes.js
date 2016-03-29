@@ -25,6 +25,8 @@ Router.route('/admin', {
   controller: 'AdminController'
 });
 
+Router.route("/hub/create", {name: 'hub.create'});
+
 Router.route('/hub/:_id', {
   name: 'hub.show',
   controller: 'HubController'
