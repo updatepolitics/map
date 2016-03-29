@@ -24,7 +24,6 @@
     "browserify-shim": "^3.8.11",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
-    "csv": "^0.4.6",
     "fs": "0.0.2",
     "grunt": "^0.4.5",
     "grunt-browserify": "^4.0.1",

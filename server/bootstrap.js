@@ -1,5 +1,5 @@
-var csv = Npm.require('csv');
-var fs = Npm.require('fs');
+// var csv = Npm.require('csv');
+// var fs = Npm.require('fs');
 
 Meteor.startup(function(){
 
@@ -62,8 +62,8 @@ Meteor.startup(function(){
     });
   }
 
-  if (Origins.find({}).count() != 0) importOrigins();
+  // if (Origins.find({}).count() == 0) importOrigins();
   // if (Natures.find({}).count() != 0) importNatures();
-  if (Hubs.find({}).count() == 0) importHubs();
+  // if (Hubs.find({}).count() == 0) importHubs();
 
 });
