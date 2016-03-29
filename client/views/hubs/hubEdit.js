@@ -1,17 +1,17 @@
 Template.hubEdit.onCreated(function (){
-  this.subscribe('natures');
-  this.subscribe('countries');
+  this.subscribe('natures', {sort: {name: 1}});
+  this.subscribe('origins');
 });
 
 Template.hubEdit.helpers({
-  countryOptions: function(){
-    return Countries.find({}, {sort: {en: 1}}).map(function (c) {
+  originsOptions: function(){
+    return Origins.find({}, {sort: {en: 1}}).map(function (c) {
       return {label: c.en, value: c._id};
     });
   },
   natureOptions: function(){
-    return Natures.find({}, {sort: {en: 1}}).map(function (n) {
-      return {label: n.en, value: n._id};
+    return _.map(['Academy', 'Company','Constellation','Government','Informal','Multitalteral','NGO','Party'], function (i) {
+      return {label: i, value: i};
     });
   },
   incidencyReachOptions: function(){

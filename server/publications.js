@@ -3,7 +3,7 @@ Meteor.publish('users', function () {
 });
 
 Meteor.publish('hubs', function () {
-  return Hubs.find({}, {limit: 20});
+  return Hubs.find({}, {sort: {name:1}});
 });
 
 Meteor.publish('hub', function (_id) {
@@ -13,8 +13,8 @@ Meteor.publish('hub', function (_id) {
   });
 });
 
-Meteor.publish('countries', function () {
-  return Countries.find({});
+Meteor.publish('origins', function () {
+  return Origins.find({});
 });
 
 Meteor.publish('natures', function () {

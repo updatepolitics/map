@@ -6,8 +6,6 @@ Meteor.startup(function(){
   function importHubs() {
     var hubs;
 
-    Hubs.remove({});
-
     Async.runSync(function(doneImportHubs){
       rs = fs.createReadStream(process.env.PWD +'/data/hubs.csv');
       var parser = csv.parse({columns: true}, function(err, data){
@@ -18,29 +16,29 @@ Meteor.startup(function(){
       rs.pipe(parser);
     });
 
-
     _.each(hubs, function(hub){
+      hub.isSponsor = (hub.isSponsor == 'true') ? true : false;
       Hubs.insert(hub);
     });
   }
 
-  function importCountries() {
-    var countries;
+  function importOrigins() {
+    var origins;
 
-    Countries.remove({});
+    Origins.remove({});
 
-    Async.runSync(function(doneImportCountries){
-      rs = fs.createReadStream(process.env.PWD +'/data_local/countries.csv');
+    Async.runSync(function(doneImportOrigins){
+      rs = fs.createReadStream(process.env.PWD +'/data/origins.csv');
       var parser = csv.parse({columns: true}, function(err, data){
-        if (err) return doneImportCountries(err);
-        countries = data;
-        doneImportCountries();
+        if (err) return doneImportOrigins(err);
+        origins = data;
+        doneImportOrigins();
       });
       rs.pipe(parser);
     });
 
-    _.each(countries, function(country){
-      Countries.insert(country);
+    _.each(origins, function(country){
+      Origins.insert(country);
     });
   }
 
@@ -50,7 +48,7 @@ Meteor.startup(function(){
     Natures.remove({});
 
     Async.runSync(function(doneImportNatures){
-      rs = fs.createReadStream(process.env.PWD +'/data/hub-natures.csv');
+      rs = fs.createReadStream(process.env.PWD +'/data/natures.csv');
       var parser = csv.parse({columns: true}, function(err, data){
         if (err) return doneImportNatures(err);
         natures = data;
@@ -64,8 +62,8 @@ Meteor.startup(function(){
     });
   }
 
-  if (Countries.find({}).count() == 0) importCountries();
-  if (Natures.find({}).count() == 0) importNatures();
+  if (Origins.find({}).count() != 0) importOrigins();
+  // if (Natures.find({}).count() != 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
 
 });
