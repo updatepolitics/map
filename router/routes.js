@@ -11,9 +11,13 @@ Router.plugin('auth',{
   ]
 });
 
-Router.route('/', {
+Router.route('/', { name: 'home' });
+
+Router.route('/hubs', {
   name: 'hub.list',
-  controller: 'HomeController'
+  waitOn: function() {
+    return Meteor.subscribe("hubs");
+  }
 });
 
 Router.route('/about', {
