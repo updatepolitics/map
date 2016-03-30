@@ -839,7 +839,7 @@ function load(){
 	$(need_help).hide();
 	$(need_help_lb).html(json.labels.need_help[lg]);
 
-	if( get_cookie('help_x') != 'ok' ){
+	if( get_cookie('help_x') != 'ok' && !fixed_filter_id ){
 		$(need_help).show().delay(3000).animate({ opacity:1, bottom: 65 }, dur, _out);
 		setTimeout( function(){
 			$(need_help).fadeOut(dur);
@@ -848,7 +848,6 @@ function load(){
 
 	// create contact bts in menu
 	contact_bts(json.contact);
-
 
 	// fixed_list
 
