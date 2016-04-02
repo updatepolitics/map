@@ -5,7 +5,7 @@ Template.menu.helpers({
         _es: "ADMININISTRAR",
         _pt: "ADMINISTRAR",
         menuItems: [{
-          "page": "hubs.list",
+          "page": "hub.list",
           "_pt": "HUBS",
         }, {
           "page": "natures.list",

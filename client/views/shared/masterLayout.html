@@ -1,11 +1,11 @@
 <template name="masterLayout">
   {{> yield 'header'}}
-  <div class="row">
-    <div class="col-xs-3">
+  <div class="ui grid">
+    <div class="four wide column">
       {{> menu }}
     </div>
 
-    <div class="col-xs-5">
+    <div class="twelve wide column">
         {{> yield}}
     </div>
   </div>

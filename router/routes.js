@@ -6,8 +6,7 @@ Router.plugin('auth',{
     'resetPassword',
     'signup',
     'verifyEmail',
-    'hubs.list',
-    'hubs.show'
+    'hub.list'
   ]
 });
 
@@ -23,16 +22,16 @@ Router.route('/signals', { name: 'signals' });
  */
 
 Router.route('admin/hubs', {
-  name: 'hubs.list',
+  name: 'hub.list',
   waitOn: function() {
     return Meteor.subscribe("hubs");
   }
 });
 
-Router.route("admin/hubs/create", {name: 'hubs.create'});
+Router.route("admin/hubs/create", {name: 'hub.create'});
 
 Router.route('admin/hubs/:_id/edit', {
-  name: 'hubs.edit',
+  name: 'hub.edit',
   controller: 'HubController'
 });
 
