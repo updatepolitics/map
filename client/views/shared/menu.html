@@ -1,0 +1,38 @@
+<template name="menu">
+  
+  <!-- GENERAL MENU  -->
+  <ul class="menu_bts">
+    <!-- ADMIN AREA MENU  -->
+    {{#if currentUser}}
+      <li>ADMIN</li>
+      {{#with adminMenu}}
+        <ul>
+          {{#each menuItems}}
+            <li>
+              <a href="{{ pathFor page }}">
+                {{ _pt }}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      {{/with}}
+    {{/if}}
+
+    {{#each generalMenu}}
+      <li>
+        <a href="{{ pathFor page }}">
+          {{ _pt }}
+        </a>
+        <ul>
+          {{#each submenu  }}
+            <li>
+              <a href="{{ pathFor ../page }}#{{ anchor }}">
+                {{ _pt }}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+</template>

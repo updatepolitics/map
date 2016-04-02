@@ -1,7 +1,12 @@
 <template name="masterLayout">
-  {{> header}}
+  {{> yield 'header'}}
+  <div class="row">
+    <div class="col-xs-3">
+      {{> menu }}
+    </div>
 
-  <div class="container">
-    {{> yield}}
+    <div class="col-xs-5">
+        {{> yield}}
+    </div>
   </div>
 </template>

@@ -1,9 +1,9 @@
-Template.hubList.onCreated(function (){
+Template.hubsList.onCreated(function (){
   this.subscribe('origins');
 });
 
 
-Template.hubList.helpers({
+Template.hubsList.helpers({
   hubs: function() {
     return Hubs.find({},{sort: {name: 1}});
   },

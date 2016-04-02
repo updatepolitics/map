@@ -9,13 +9,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        {{#each users}}
+      {{#each users}}
+        <tr>
           <td>{{ name }}</td>
           <td>{{ emails.[0].address }}</td>
           <td>Edit profile / Remove</td>
-        {{/each}}
-      </tr>
+        </tr>
+      {{/each}}
     </tbody>
   </table>
 </template>
