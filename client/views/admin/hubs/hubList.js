@@ -1,4 +1,6 @@
 Template.hubList.onCreated(function (){
+  this.subscribe('hubs');
+  this.subscribe('natures');
   this.subscribe('origins');
 });
 

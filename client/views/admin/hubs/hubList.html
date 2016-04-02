@@ -1,27 +1,31 @@
 <template name="hubList">
-    <legend>All hubs</legend>
-    <a class="btn btn-primary" href="{{pathFor route='hub.create'}}" role="button">New hub</a>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Hub</th>
-          <th>City</th>
-          <th>Origin</th>
-          <th>Nature</th>
-          <th>Sponsor</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each hubs}}
+    <h1>Hubs</h1>
+    {{#if Template.subscriptionsReady}}
+      <a class="ui button" href="{{pathFor route='hub.create'}}" role="button">New hub</a>
+      <table class="ui celled table">
+        <thead>
           <tr>
-              <td><a href="{{pathFor route='hub.edit'}}">{{ name }}</a></td>
-              <td>{{ city }}</td>
-              <td>{{ originToText origin }}</td>
-              <td>{{ nature }}</td>
-              <td> {{ isSponsor }}
-              </td>
+            <th>Hub</th>
+            <th>City</th>
+            <th>Origin</th>
+            <th>Nature</th>
+            <th>Sponsor</th>
           </tr>
-        {{/each}}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {{#each hubs}}
+            <tr>
+                <td><a href="{{pathFor route='hub.edit'}}">{{ name }}</a></td>
+                <td>{{ city }}</td>
+                <td>{{ originToText origin }}</td>
+                <td>{{ nature }}</td>
+                <td> {{ isSponsor }}
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      Loading...
+    {{/if}}
 </template>
