@@ -9,25 +9,25 @@ mobile-experience       # Packages for a great mobile UX
 mongo                   # The database Meteor supports right now
 blaze-html-templates    # Compile .html files into Meteor Blaze views
 session                 # Client-side reactive dictionary for your app
-jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 insecure                # Allow all DB writes from clients (for prototyping)
-meteorhacks:npm
 
 
-npm-container
 reactive-var
 iron:router
 check
-twbs:bootstrap
 aldeed:collection2
 aldeed:autoform
 accounts-password
-ian:accounts-ui-bootstrap-3
 zimme:iron-router-auth
 standard-minifier-css
 standard-minifier-js
+semantic:ui
+flemay:less-autoprefixer
+jquery
+fabienb4:autoform-semantic-ui
+meteorhacks:async
