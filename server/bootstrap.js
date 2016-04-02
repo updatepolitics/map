@@ -1,10 +1,9 @@
-var csv = Npm.require('csv');
 var fs = Npm.require('fs');
+var csv = Npm.require('csv');
 
 Meteor.startup(function(){
 
   function importHubs() {
-    var hubs;
 
     Async.runSync(function(doneImportHubs){
       rs = fs.createReadStream(process.env.PWD +'/data/hubs.csv');
@@ -18,6 +17,22 @@ Meteor.startup(function(){
 
     _.each(hubs, function(hub){
       hub.isSponsor = (hub.isSponsor == 'true') ? true : false;
+      Hubs.insert(hub);
+    });
+    Async.runSync(function(doneImportHubs){
+      rs = fs.createReadStream(process.env.PWD +'/data/hubs.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportHubs(err);
+        hubs = data;
+        doneImportHubs();
+      });
+      rs.pipe(parser);
+    });
+
+    _.each(hubs, function(hub){
+      hub.isSponsor = (hub.isSponsor == 'true') ? true : false;
+      hub.relatedHubs = [];
+      hub.parentHubs = [];
       Hubs.insert(hub);
     });
   }
