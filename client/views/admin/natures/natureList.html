@@ -1,0 +1,26 @@
+<template name="natureList">
+    <h1>Nature natures</h1>
+    {{#if Template.subscriptionsReady}}
+      <a class="btn btn-primary" href="{{pathFor route='nature.create'}}" role="button">New nature</a>
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>English</th>
+            <th>Spanish</th>
+            <th>Portuguese</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each natures}}
+            <tr>
+                <td><a href="{{pathFor route='nature.edit'}}">{{ en }}</a></td>
+                <td>{{ pt }}</td>
+                <td>{{ en }}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      Loading...
+    {{/if}}
+</template>

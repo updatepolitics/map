@@ -21,20 +21,13 @@ Router.route('/signals', { name: 'signals' });
  * Admin routes
  */
 
-Router.route('admin/hubs', {
-  name: 'hub.list',
-  waitOn: function() {
-    return Meteor.subscribe("hubs");
-  }
-});
-
+Router.route('admin/hubs', { name: 'hub.list' });
 Router.route("admin/hubs/create", {name: 'hub.create'});
-
 Router.route('admin/hubs/:_id/edit', {
   name: 'hub.edit',
   controller: 'HubController'
 });
 
 Router.route("admin/signals", { name: 'signals.list' });
-Router.route("admin/natures", { name: 'natures.list' });
+Router.route("admin/natures", { name: 'nature.list' });
 Router.route("admin/pages", { name: 'pages.list' });

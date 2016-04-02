@@ -8,13 +8,13 @@ Template.menu.helpers({
           "page": "hub.list",
           "_pt": "HUBS",
         }, {
-          "page": "natures.list",
+          "page": "nature.list",
           "_pt": "NATURES",
         }, {
-          "page": "signals.list",
+          "page": "signal.list",
           "_pt": "SIGNALS",
         }, {
-          "page": "pages.list",
+          "page": "page.list",
           "_pt": "PAGES",
         }]
     }

@@ -1,7 +1,10 @@
 <template name="hubEdit">
   {{#if Template.subscriptionsReady}}
     {{#autoForm collection="Hubs" doc=this id="hubEdit" type="update" template="semanticUI"}}
+
       <fieldset>
+        <button type="submit" class="ui button">Update</button>
+        <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back to index</a>
         <legend>Edit hub</legend>
         {{> afQuickField name='name'}}
         {{> afQuickField name='city'}}
@@ -15,8 +18,6 @@
         {{> afQuickField name='description_es' rows=6}}
         {{> afQuickField name='description_pt' rows=6}}
       </fieldset>
-      <button type="submit" class="ui button">Update</button>
-      <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back to index</a>
 
     {{/autoForm}}
   {{else}}
