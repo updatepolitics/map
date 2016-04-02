@@ -108,14 +108,5 @@ Template.menu.helpers({
           "page": "list",
         }]
       }]
-    },
-    submenuItems: function() {
-      var result = '<ul class="submenu"><li>eita</li></ul>';
-      // for (var submenuItem in this.submenu) {
-      //     result += submenuItem._pt;
-      //   }
-      // }
-      return result;
     }
-
 });

@@ -2,6 +2,10 @@ Meteor.publish('users', function () {
   return Meteor.users.find({}, {limit: 20});
 });
 
+/*
+ * Hubs
+ */
+
 Meteor.publish('hubs', function () {
   return Hubs.find({}, {sort: {name:1}});
 });
@@ -17,6 +21,17 @@ Meteor.publish('origins', function () {
   return Origins.find({});
 });
 
+/*
+ * Natures
+ */
+
 Meteor.publish('natures', function () {
-  return Natures.find({});
+  return Natures.find({},{});
+});
+
+Meteor.publish('nature', function (_id) {
+  check(_id, String);
+  return Natures.find({
+    _id: _id
+  });
 });

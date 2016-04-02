@@ -11,12 +11,10 @@ Template.hubEdit.helpers({
     });
   },
   hubsOptions: function(){
-    console.log('hubsOptions');
     var result = [];
     Hubs.find({}, {sort: {name: 1}, fields: {name: 1}}).forEach(function (h) {
       result.push({label: h.name, value: h._id});
     });
-    console.log(result);
     return result;
   },
   natureOptions: function(){

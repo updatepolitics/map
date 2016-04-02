@@ -1,0 +1,18 @@
+<template name="natureEdit">
+  {{#if Template.subscriptionsReady}}
+    {{#autoForm collection="Natures" doc=this id="natureEdit" type="update" template="semanticUI"}}
+
+      <fieldset>
+        <legend>Edit nature</legend>
+        {{> afQuickField name='en'}}
+        {{> afQuickField name='es'}}
+        {{> afQuickField name='pt'}}
+        <button type="submit" class="ui button">Update</button>
+        <a class="ui button" href="{{pathFor route='nature.list'}}" role="button">Back to index</a>
+      </fieldset>
+
+    {{/autoForm}}
+  {{else}}
+    Loading...
+  {{/if}}
+</template>
