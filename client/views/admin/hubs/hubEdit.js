@@ -1,6 +1,6 @@
 Template.hubEdit.onCreated(function (){
   this.subscribe('hubs');
-  this.subscribe('natures', {sort: {name: 1}});
+  this.subscribe('natures');
   this.subscribe('origins');
 });
 

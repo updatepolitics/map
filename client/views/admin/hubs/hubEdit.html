@@ -1,22 +1,25 @@
 <template name="hubEdit">
-  {{#autoForm collection="Hubs" doc=this id="hubEdit" type="update" template="semanticUI"}}
-    <fieldset>
-      <legend>Edit hub</legend>
-      {{> afQuickField name='name'}}
-      {{> afQuickField name='city'}}
-      {{> afQuickField name='origin' options=originsOptions type="basic-select"}}
-      {{> afQuickField name='incidencyReach' options=incidencyReachOptions}}
-      {{> afQuickField name='nature' options=natureOptions}}
+  {{#if Template.subscriptionsReady}}
+    {{#autoForm collection="Hubs" doc=this id="hubEdit" type="update" template="semanticUI"}}
+      <fieldset>
+        <legend>Edit hub</legend>
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='city'}}
+        {{> afQuickField name='origin' options=originsOptions type="basic-select"}}
+        {{> afQuickField name='incidencyReach' options=incidencyReachOptions}}
+        {{> afQuickField name='nature' options=natureOptions}}
+        {{> afQuickField name='relatedHubs' options=hubsOptions }}
+        {{> afQuickField name='parentHubs' options=hubsOptions }}
+        {{> afQuickField name='isSponsor'}}
+        {{> afQuickField name='description_en' rows=6}}
+        {{> afQuickField name='description_es' rows=6}}
+        {{> afQuickField name='description_pt' rows=6}}
+      </fieldset>
+      <button type="submit" class="ui button">Update</button>
+      <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back to index</a>
 
-      {{> afFieldInput name='relatedHubs' options=hubsOptions }}
-
-      {{> afQuickField name='isSponsor'}}
-      {{> afQuickField name='description_en' rows=6}}
-      {{> afQuickField name='description_es' rows=6}}
-      {{> afQuickField name='description_pt' rows=6}}
-    </fieldset>
-    <button type="submit" class="ui button">Update</button>
-    <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back to index</a>
-
-  {{/autoForm}}
+    {{/autoForm}}
+  {{else}}
+    Loading...
+  {{/if}}
 </template>
