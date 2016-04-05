@@ -31,6 +31,7 @@ Router.route('admin/hubs/:_id/edit', {
 /*
  * Natures admin
  */
+ Router.route("admin/natures/create", {name: 'nature.create'});
 Router.route("admin/natures", { name: 'nature.list' });
 Router.route('admin/natures/:_id/edit', {
   name: 'nature.edit',
