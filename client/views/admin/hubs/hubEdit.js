@@ -1,3 +1,4 @@
+
 Template.hubEdit.onCreated(function (){
   this.subscribe('hubs');
   this.subscribe('natures');
@@ -18,8 +19,8 @@ Template.hubEdit.helpers({
     return result;
   },
   natureOptions: function(){
-    return _.map(['Academy', 'Company','Constellation','Government','Informal','Multitalteral','NGO','Party'], function (i) {
-      return {label: i, value: i};
+    return Natures.find({}, { sort: {en: 1} }).map(function (n) {
+      return {label: n.en, value: n._id};
     });
   },
   incidencyReachOptions: function(){

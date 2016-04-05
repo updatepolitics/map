@@ -1,9 +1,9 @@
-Template.hubCreate.onCreated(function (){
+Template.natureCreate.onCreated(function (){
   this.subscribe('natures', {sort: {name: 1}});
   this.subscribe('origins');
 });
 
-Template.hubCreate.helpers({
+Template.natureCreate.helpers({
   originsOptions: function(){
     return Origins.find({}, {sort: {en: 1}}).map(function (c) {
       return {label: c.en, value: c._id};
