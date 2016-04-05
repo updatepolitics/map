@@ -11,8 +11,8 @@ Template.menu.helpers({
           "page": "nature.list",
           "_pt": "NATURES",
         }, {
-          "page": "signal.list",
-          "_pt": "SIGNALS",
+          "page": "theme.list",
+          "_pt": "THEMES",
         }, {
           "page": "page.list",
           "_pt": "PAGES",

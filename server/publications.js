@@ -35,3 +35,18 @@ Meteor.publish('nature', function (_id) {
     _id: _id
   });
 });
+
+/*
+ * Themes
+ */
+
+Meteor.publish('themes', function () {
+  return Themes.find({},{});
+});
+
+Meteor.publish('theme', function (_id) {
+  check(_id, String);
+  return Themes.find({
+    _id: _id
+  });
+});

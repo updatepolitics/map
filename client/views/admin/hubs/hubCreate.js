@@ -18,7 +18,6 @@ Template.hubCreate.helpers({
     return result;
   },
   natureOptions: function(){
-    console.log('alou alou');
     return Natures.find({}, { sort: {en: 1} }).map(function (n) {
       return {label: n.en, value: n._id};
     });

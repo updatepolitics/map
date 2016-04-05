@@ -31,11 +31,21 @@ Router.route('admin/hubs/:_id/edit', {
 /*
  * Natures admin
  */
- Router.route("admin/natures/create", {name: 'nature.create'});
+Router.route("admin/natures/create", {name: 'nature.create'});
 Router.route("admin/natures", { name: 'nature.list' });
 Router.route('admin/natures/:_id/edit', {
   name: 'nature.edit',
   controller: 'NatureController'
+});
+
+/*
+ * Themes admin
+ */
+Router.route("admin/themes/create", {name: 'theme.create'});
+Router.route("admin/themes", { name: 'theme.list' });
+Router.route('admin/themes/:_id/edit', {
+  name: 'theme.edit',
+  controller: 'ThemeController'
 });
 
 /*
