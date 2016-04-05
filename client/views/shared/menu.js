@@ -17,6 +17,9 @@ Template.menu.helpers({
           "page": "mechanism.list",
           "_pt": "MECHANISMS",
         }, {
+          "page": "method.list",
+          "_pt": "METHODS",
+        }, {
           "page": "page.list",
           "_pt": "PAGES",
         }]

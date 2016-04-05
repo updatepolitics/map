@@ -1,0 +1,19 @@
+<template name="methodEdit">
+  {{#if Template.subscriptionsReady}}
+    {{#autoForm collection="Methods" doc=this id="methodEdit" type="update" template="semanticUI"}}
+
+      <fieldset>
+        <legend>Edit method</legend>
+        {{> afQuickField name='en'}}
+        {{> afQuickField name='es'}}
+        {{> afQuickField name='pt'}}
+        {{> afQuickField name='mechanism' options=mechanismOptions}}
+        <button type="submit" class="ui button">Update</button>
+        <a class="ui button" href="{{pathFor route='method.list'}}" role="button">Back to index</a>
+      </fieldset>
+
+    {{/autoForm}}
+  {{else}}
+    Loading...
+  {{/if}}
+</template>

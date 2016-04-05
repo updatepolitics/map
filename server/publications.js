@@ -65,3 +65,18 @@ Meteor.publish('mechanism', function (_id) {
     _id: _id
   });
 });
+
+/*
+ * Methods
+ */
+
+Meteor.publish('methods', function () {
+  return Methods.find({},{});
+});
+
+Meteor.publish('method', function (_id) {
+  check(_id, String);
+  return Methods.find({
+    _id: _id
+  });
+});

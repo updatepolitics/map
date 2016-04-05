@@ -1,0 +1,13 @@
+<template name="methodCreate">
+  {{#autoForm collection="Methods" doc=this id="methodCreate" type="insert" template="semanticUI"}}
+    <fieldset>
+      <legend>Create method</legend>
+      {{> afQuickField name='en'}}
+      {{> afQuickField name='es'}}
+      {{> afQuickField name='pt'}}
+      {{> afQuickField name='mechanism' options=mechanismOptions}}
+    </fieldset>
+    <button type="submit" class="ui button">Create</button>
+    <a class="ui button" href="{{pathFor route='method.list'}}" role="button">Back to index</a>
+  {{/autoForm}}
+</template>

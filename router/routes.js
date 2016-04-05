@@ -59,6 +59,16 @@ Router.route('admin/mechanisms/:_id/edit', {
 });
 
 /*
+ * Methods admin
+ */
+Router.route("admin/methods/create", {name: 'method.create'});
+Router.route("admin/methods", { name: 'method.list' });
+Router.route('admin/methods/:_id/edit', {
+  name: 'method.edit',
+  controller: 'MethodController'
+});
+
+/*
  * Signals admin
  */
 Router.route("admin/signals", { name: 'signals.list' });
