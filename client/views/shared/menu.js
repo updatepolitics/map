@@ -19,9 +19,6 @@ Template.menu.helpers({
         }, {
           "page": "method.list",
           "_pt": "METHODS",
-        }, {
-          "page": "page.list",
-          "_pt": "PAGES",
         }]
     }
   },

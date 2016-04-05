@@ -31,3 +31,5 @@ flemay:less-autoprefixer
 jquery
 fabienb4:autoform-semantic-ui
 meteorhacks:async
+useraccounts:core
+useraccounts:semantic-ui
