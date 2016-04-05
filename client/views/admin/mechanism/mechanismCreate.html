@@ -1,0 +1,15 @@
+<template name="mechanismCreate">
+  {{#autoForm collection="Mechanisms" doc=this id="mechanismCreate" type="insert" template="semanticUI"}}
+    <fieldset>
+      <legend>Create mechanism</legend>
+      {{> afQuickField name='en'}}
+      {{> afQuickField name='description_en' rows=6}}
+      {{> afQuickField name='es'}}
+      {{> afQuickField name='description_es' rows=6}}
+      {{> afQuickField name='pt'}}
+      {{> afQuickField name='description_pt' rows=6}}
+    </fieldset>
+    <button type="submit" class="ui button">Create</button>
+    <a class="ui button" href="{{pathFor route='mechanism.list'}}" role="button">Back to index</a>
+  {{/autoForm}}
+</template>

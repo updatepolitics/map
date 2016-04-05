@@ -50,3 +50,18 @@ Meteor.publish('theme', function (_id) {
     _id: _id
   });
 });
+
+/*
+ * Mechanisms
+ */
+
+Meteor.publish('mechanisms', function () {
+  return Mechanisms.find({},{});
+});
+
+Meteor.publish('mechanism', function (_id) {
+  check(_id, String);
+  return Mechanisms.find({
+    _id: _id
+  });
+});

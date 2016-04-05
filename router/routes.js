@@ -49,6 +49,16 @@ Router.route('admin/themes/:_id/edit', {
 });
 
 /*
+ * Mechanisms admin
+ */
+Router.route("admin/mechanisms/create", {name: 'mechanism.create'});
+Router.route("admin/mechanisms", { name: 'mechanism.list' });
+Router.route('admin/mechanisms/:_id/edit', {
+  name: 'mechanism.edit',
+  controller: 'MechanismController'
+});
+
+/*
  * Signals admin
  */
 Router.route("admin/signals", { name: 'signals.list' });
