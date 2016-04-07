@@ -15,12 +15,52 @@ Meteor.startup(function(){
       rs.pipe(parser);
     });
 
-    _.each(hubs, function(hub){
-      hub.isSponsor = (hub.isSponsor == 'true') ? true : false;
-      hub.relatedHubs = [];
-      hub.parentHubs = [];
-      Hubs.insert(hub);
-    });
+    // variable to keep hub names and ids
+    var hubNamesToIds = {};
+
+    // import basic properties
+    for ( let i = 0; i < hubs.length; i++ ) {
+      var item = _.pick(hubs[i], 'name', 'description_en', 'description_pt', 'description_es', 'incidencyReach', 'nature', 'website', 'city');
+
+      var placesOfOriginIds = hubs[i].placesOfOriginIds;
+      if (placesOfOriginIds) {
+        item.placesOfOrigin = placesOfOriginIds.split(',');
+      }
+
+      hubNamesToIds[item.name] = Hubs.insert(item);
+    }
+
+    // set hub relations
+    for ( let i = 0; i < hubs.length; i++ ) {
+      var hubId = hubNamesToIds[hubs[i].name];
+
+      var relatedHubsNames = hubs[i].relatedHubsNames;
+      var relatedHubsIds = [];
+      if (relatedHubsNames) {
+        relatedHubsNames = relatedHubsNames.split(';');
+        _.each(relatedHubsNames, function(hubName){
+          var hubId = hubNamesToIds[hubName.trim()];
+          if (hubId) relatedHubsIds.push(hubId);
+        });
+      }
+
+      var parentHubNames = hubs[i].parentHubNames;
+      var parentHubIds = [];
+      if (parentHubNames) {
+        parentHubNames = parentHubNames.split(';');
+        _.each(parentHubNames, function(hubName){
+          var hubId = hubNamesToIds[hubName.trim()];
+          if (hubId) parentHubIds.push(hubId);
+        });
+      }
+
+      Hubs.update({_id: hubId}, {
+        $set: {
+          relatedHubs: relatedHubsIds,
+          parentHubs: parentHubIds
+        }
+      });
+    }
   }
 
   function importOrigins() {
@@ -66,5 +106,8 @@ Meteor.startup(function(){
   if (Origins.find({}).count() == 0) importOrigins();
   // if (Natures.find({}).count() != 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
+
+  Hubs.remove({});
+  importHubs();
 
 });

@@ -6,8 +6,6 @@
         <thead>
           <tr>
             <th>Hub</th>
-            <th>City</th>
-            <th>Origin</th>
             <th>Nature</th>
             <th>Sponsor</th>
           </tr>
@@ -16,8 +14,6 @@
           {{#each hubs}}
             <tr>
                 <td><a href="{{pathFor route='hub.edit'}}">{{ name }}</a></td>
-                <td>{{ city }}</td>
-                <td>{{ originToText origin }}</td>
                 <td>{{ nature.en }}</td>
                 <td> {{ isSponsor }}
                 </td>
