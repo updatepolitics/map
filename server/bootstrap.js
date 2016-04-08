@@ -27,6 +27,7 @@ Meteor.startup(function(){
         item.placesOfOrigin = placesOfOriginIds.split(',');
       }
 
+      item.nature = Natures.findOne({en: item.nature})._id;
       hubNamesToIds[item.name] = Hubs.insert(item);
     }
 
@@ -86,8 +87,6 @@ Meteor.startup(function(){
   function importNatures() {
     var natures;
 
-    Natures.remove({});
-
     Async.runSync(function(doneImportNatures){
       rs = fs.createReadStream(process.env.PWD +'/data/natures.csv');
       var parser = csv.parse({columns: true}, function(err, data){
@@ -104,10 +103,7 @@ Meteor.startup(function(){
   }
 
   if (Origins.find({}).count() == 0) importOrigins();
-  // if (Natures.find({}).count() != 0) importNatures();
+  if (Natures.find({}).count() == 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
-
-  Hubs.remove({});
-  importHubs();
 
 });
