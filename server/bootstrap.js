@@ -120,9 +120,46 @@ Meteor.startup(function(){
     });
   }
 
+  function importMethodsAndMechanisms() {
+    var methods;
+
+    Async.runSync(function(doneImportMethods){
+      rs = fs.createReadStream(process.env.PWD +'/data/methods.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportMethods(err);
+        methods = data;
+        doneImportMethods();
+      });
+      rs.pipe(parser);
+    });
+
+    var methodIds = {};
+    _.each(methods, function(method){
+      methodIds[method.pt] = Methods.insert(method);
+    });
+
+    var mechanisms;
+
+    Async.runSync(function(doneImportMechanisms){
+      rs = fs.createReadStream(process.env.PWD +'/data/mechanisms.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportMechanisms(err);
+        mechanisms = data;
+        doneImportMechanisms();
+      });
+      rs.pipe(parser);
+    });
+
+    _.each(mechanisms, function(mechanism){
+      mechanism.method = methodIds[mechanism.method];
+      Mechanisms.insert(mechanism);
+    });
+  }
+
   if (Origins.find({}).count() == 0) importOrigins();
   if (Natures.find({}).count() == 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
   if (Themes.find({}).count() == 0) importThemes();
+  if (Methods.find({}).count() == 0) importMethodsAndMechanisms();
 
 });

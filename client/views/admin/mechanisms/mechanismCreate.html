@@ -2,6 +2,7 @@
   {{#autoForm collection="Mechanisms" doc=this id="mechanismCreate" type="insert" template="semanticUI"}}
     <fieldset>
       <legend>Create mechanism</legend>
+      {{> afQuickField name='method' options=methodOptions}}
       {{> afQuickField name='en'}}
       {{> afQuickField name='description_en' rows=6}}
       {{> afQuickField name='es'}}
