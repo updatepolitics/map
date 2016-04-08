@@ -1,7 +1,9 @@
 <template name="natureCreate">
   {{#autoForm collection="Natures" doc=this id="natureCreate" type="insert" template="semanticUI"}}
-    <fieldset>
-      <legend>Create nature</legend>
+
+      <button type="submit" class="ui button">Create Nature</button>
+      <a class="ui button" href="{{pathFor route='nature.list'}}" role="button">Back to index</a>
+        <fieldset>
       {{> afQuickField name='en'}}
       {{> afQuickField name='description_en' rows=6}}
       {{> afQuickField name='es'}}

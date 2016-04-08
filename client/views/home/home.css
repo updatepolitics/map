@@ -1,0 +1,113 @@
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
+
+body, html{
+  background: #262c38;
+  color: #fff;
+	font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+html{
+  padding-top: 20px;
+  padding-right: 30px;
+}
+
+#nav_bar_logo{
+  width: 20%;
+  height: 40px;
+  background-image: url('layout/update_logo.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 100px;
+  position: fixed;
+  top: 20px;
+  left: 30px;
+}
+
+#nav_bar{
+  width: 25%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 80px;
+  left: 0;
+}
+
+h1{
+  font-size: 26px;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.admin_menu_li{
+  width: 100%;
+  padding: 3px 30px;
+  list-style: none;
+}
+
+.admin_menu_li:hover a{
+  color:#fff !important;
+}
+
+.nav_bt{
+  list-style: none;
+  display: inline-block;
+  padding: 0 10px;
+  height: 80px;
+  line-height: 80px;
+  color: #fff;
+}
+
+/* */
+
+
+.button{
+  background-color: #4183C4 !important;
+  color: #fff !important;
+}
+
+.button:hover{
+  background-color: #fff !important;
+  color: #4183C4 !important;
+}
+
+.table{
+  background: #2b3240 !important;
+  border: 0 !important;
+}
+
+fieldset{
+    background: #2b3240 !important;
+    border: 0 ;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+th{
+  background-color: #2b3240 !important;
+  color: #fff !important;
+  border-color: #262c38 !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  padding: 12px 20px !important;
+  box-shadow: none !important;
+}
+
+td{
+  color: #fff !important;
+  border-color: #262c38 !important;
+  padding: 12px 20px !important;
+}
+
+label{
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+
+.mt20{
+  margin-top: 20px;
+}

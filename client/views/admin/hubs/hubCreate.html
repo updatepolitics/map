@@ -1,12 +1,12 @@
 <template name="hubCreate">
   {{#autoForm collection="Hubs" doc=this id="hubCreate" type="insert" template="semanticUI"}}
-    <fieldset>
-      <button type="submit" class="ui button">Create</button>
+
+      <button type="submit" class="ui button">Create Hub</button>
       <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back to index</a>
-      <legend>New hub</legend>
+      <fieldset>
       {{> afQuickField name='name'}}
       {{> afQuickField name='city'}}
-      {{> afQuickField name='placesOfOrigin' options=originsOptions}}      
+      {{> afQuickField name='placesOfOrigin' options=originsOptions}}
       {{> afQuickField name='incidencyReach' options=incidencyReachOptions}}
       {{> afQuickField name='nature' options=natureOptions}}
       {{> afQuickField name='relatedHubs' options=hubsOptions }}

@@ -4,23 +4,28 @@
   {{> atForm}}
 
   <!-- GENERAL MENU  -->
-  <ul class="menu_bts">
+
+  <div id="nav_bar_logo">
+
+  </div>
+
+  <ul id="nav_bar" class="menu_bts">
     <!-- ADMIN AREA MENU  -->
     {{#if currentUser}}
-      <li>ADMIN</li>
+      <!-- <li>ADMIN</li> -->
       {{#with adminMenu}}
-        <ul>
+        <!-- <ul> -->
           {{#each menuItems}}
-            <li>
+            <li class='admin_menu_li'>
               <a href="{{ pathFor page }}">
                 {{ _pt }}
               </a>
             </li>
           {{/each}}
-        </ul>
+        <!-- </ul> -->
       {{/with}}
     {{/if}}
-
+<!--
     {{#each generalMenu}}
       <li>
         <a href="{{ pathFor page }}">
@@ -36,6 +41,6 @@
           {{/each}}
         </ul>
       </li>
-    {{/each}}
+    {{/each}} -->
   </ul>
 </template>

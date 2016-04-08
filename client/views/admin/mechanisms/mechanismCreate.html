@@ -1,7 +1,8 @@
 <template name="mechanismCreate">
   {{#autoForm collection="Mechanisms" doc=this id="mechanismCreate" type="insert" template="semanticUI"}}
+    <button type="submit" class="ui button">Create Mechanism</button>
+    <a class="ui button" href="{{pathFor route='theme.list'}}" role="button">Back to index</a>
     <fieldset>
-      <legend>Create mechanism</legend>
       {{> afQuickField name='en'}}
       {{> afQuickField name='description_en' rows=6}}
       {{> afQuickField name='es'}}

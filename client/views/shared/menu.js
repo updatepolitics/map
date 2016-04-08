@@ -19,6 +19,15 @@ Template.menu.helpers({
         }, {
           "page": "method.list",
           "_pt": "METHODS",
+        }, {
+          "page": "method.list",
+          "_pt": "SIGNALS",
+        }, {
+          "page": "method.list",
+          "_pt": "PAGES",
+        }, {
+          "page": "method.list",
+          "_pt": "USERS",
         }]
     }
   },

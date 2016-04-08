@@ -1,11 +1,10 @@
 <template name="hubEdit">
   {{#if Template.subscriptionsReady}}
-    {{#autoForm collection="Hubs" doc=this id="hubEdit" type="update" template="semanticUI"}}
+    {{#autoForm collection="Hubs" doc=this id="hubEdit" type="update" template="semanticUI"}} 
 
-      <fieldset>
-        <button type="submit" class="ui button">Update</button>
+        <button type="submit" class="ui button">Update Hub</button>
         <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back to index</a>
-        <legend>Edit hub</legend>
+      <fieldset>
         {{> afQuickField name='name'}}
         {{> afQuickField name='city'}}
         {{> afQuickField name='placesOfOrigin' options=originsOptions}}
