@@ -2,6 +2,9 @@
   "name": "update-politics",
   "description": "Update Politics Website",
   "version": "0.1.0",
+  "engines" : {
+    "node" : ">=0.10.41"
+  },
   "author": "Vitor George <vgeorge@codigogurbano.org",
   "repository": {
     "type": "git",
