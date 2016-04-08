@@ -29,6 +29,17 @@ Router.route('admin/hubs/:_id/edit', {
 });
 
 /*
+ * Signals admin
+ */
+
+Router.route('admin/signals', { name: 'signal.list' });
+// Router.route("admin/signals/create", {name: 'signal.create'});
+// Router.route('admin/signals/:_id/edit', {
+//   name: 'signal.edit',
+//   controller: 'SignalController'
+// });
+
+/*
  * Natures admin
  */
 Router.route("admin/natures/create", {name: 'nature.create'});
@@ -67,11 +78,6 @@ Router.route('admin/methods/:_id/edit', {
   name: 'method.edit',
   controller: 'MethodController'
 });
-
-/*
- * Signals admin
- */
-Router.route("admin/signals", { name: 'signals.list' });
 
 /*
  * Pages admin

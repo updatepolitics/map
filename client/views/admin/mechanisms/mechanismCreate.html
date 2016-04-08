@@ -3,6 +3,7 @@
     <button type="submit" class="ui button">Create Mechanism</button>
     <a class="ui button" href="{{pathFor route='theme.list'}}" role="button">Back to index</a>
     <fieldset>
+      {{> afQuickField name='method' options=methodOptions}}
       {{> afQuickField name='en'}}
       {{> afQuickField name='description_en' rows=6}}
       {{> afQuickField name='es'}}

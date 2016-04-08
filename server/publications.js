@@ -80,3 +80,18 @@ Meteor.publish('method', function (_id) {
     _id: _id
   });
 });
+
+/*
+ * Signals
+ */
+
+Meteor.publish('signals', function () {
+  return Signals.find({},{});
+});
+
+Meteor.publish('signal', function (_id) {
+  check(_id, String);
+  return Signals.find({
+    _id: _id
+  });
+});
