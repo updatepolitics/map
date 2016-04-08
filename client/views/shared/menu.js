@@ -19,6 +19,9 @@ Template.menu.helpers({
         }, {
           "page": "method.list",
           "_pt": "METHODS",
+        }, {
+          "page": "signal.list",
+          "_pt": "SIGNALS",
         }]
     }
   },

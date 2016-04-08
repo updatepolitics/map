@@ -3,6 +3,48 @@ var csv = Npm.require('csv');
 
 Meteor.startup(function(){
 
+  function importIncidencies(){
+    var incidencies =[{
+      en: "Local",
+      pt: "Local",
+      es: "Local"
+    },{
+      en: "Regional",
+      pt: "Regional",
+      es: "Regional"
+    },{
+      en: "National",
+      pt: "Nacional",
+      es: "Nacional"
+    },{
+      en: "International",
+      pt: "Internacional",
+      es: "Internacional"
+    }]
+
+    _.each(incidencies, function(i){
+      IncidencyReachs.insert(i);
+    });
+
+    var incidencyType =[{
+      en: "Executive",
+      pt: "Executivo",
+      es: "Executivo"
+    },{
+      en: "Legislative",
+      pt: "Legistativo",
+      es: "Legistativo"
+    },{
+      en: "Justice",
+      pt: "Judiciario",
+      es: "Judicial"
+    }]
+
+    _.each(incidencyType, function(i){
+      IncidencyTypes.insert(i);
+    });
+  }
+
   function importHubs() {
 
     Async.runSync(function(doneImportHubs){
@@ -156,10 +198,96 @@ Meteor.startup(function(){
     });
   }
 
+  function importSignals() {
+    var signals;
+
+    Async.runSync(function(doneImportMethods){
+      rs = fs.createReadStream(process.env.PWD +'/data/signals.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportMethods(err);
+        signals = data;
+        doneImportMethods();
+      });
+      rs.pipe(parser);
+    });
+
+    _.each(signals, function(signal){
+
+      // parse places
+      if (signal.placesOfOriginNames) {
+        var places = signal.placesOfOriginNames.split(',');
+        signal.placesOfOrigin = [];
+        _.each(places, function(place){
+          place = place.trim();
+          signal.placesOfOrigin.push(Origins.findOne({pt: place})._id);
+        });
+      }
+
+      // parse themes
+      if (signal.themes) {
+        var themes = signal.themes.split(',');
+        signal.mainThemes = [];
+        _.each(themes, function(theme){
+          signal.mainThemes.push(Themes.findOne({pt: theme})._id);
+        });
+      }
+
+      // parse secondaryThemes
+      if (signal.secondaryThemes) {
+        var secondaryThemes = signal.secondaryThemes.split(',');
+        signal.secondaryThemes = [];
+        _.each(secondaryThemes, function(theme){
+          signal.secondaryThemes.push(Themes.findOne({pt: theme})._id);
+        });
+      } else signal.themes = [];
+
+      // parse parentHub
+      if (signal.parentHub) {
+        var parentHubs = signal.parentHub.split(',');
+        signal.parentHubs = [];
+        _.each(parentHubs, function(hubName){
+          var hub = Hubs.findOne({pt: hubName});
+          if (hub) {
+            signal.parentHubs.push(hub._id);
+          }
+        });
+      } else signal.parentHubs = [];
+
+      if (signal.incidencyReach) {
+        signal.incidencyReach = IncidencyReachs.findOne({pt: signal.incidencyReach})._id;
+      }
+
+      // parse parentHub
+      if (signal.incidencyType) {
+        var incidencyTypes = signal.incidencyType.split(',');
+        signal.incidencyType = [];
+        _.each(incidencyTypes, function(typeName){
+          var type = IncidencyTypes.findOne({pt: typeName});
+          if (type) {
+            signal.incidencyType.push(type._id);
+          }
+        });
+      } else signal.incidencyType = [];
+
+      switch (signal.isOpenLicense) {
+        case 'TRUE':
+          signal.isOpenLicense = true;
+          break;
+        case 'false':
+          signal.isOpenLicense = false;
+          break;
+      }
+
+      Signals.insert(signal);
+    });
+  }
+
   if (Origins.find({}).count() == 0) importOrigins();
   if (Natures.find({}).count() == 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
   if (Themes.find({}).count() == 0) importThemes();
   if (Methods.find({}).count() == 0) importMethodsAndMechanisms();
+  if (IncidencyReachs.find({}).count() == 0) importIncidencies();
+  if (Signals.find({}).count() == 0) importSignals();
 
 });
