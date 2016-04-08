@@ -102,8 +102,27 @@ Meteor.startup(function(){
     });
   }
 
+  function importThemes() {
+    var themes;
+
+    Async.runSync(function(doneImportThemes){
+      rs = fs.createReadStream(process.env.PWD +'/data/themes.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportThemes(err);
+        themes = data;
+        doneImportThemes();
+      });
+      rs.pipe(parser);
+    });
+
+    _.each(themes, function(theme){
+      Themes.insert(theme);
+    });
+  }
+
   if (Origins.find({}).count() == 0) importOrigins();
   if (Natures.find({}).count() == 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
+  if (Themes.find({}).count() == 0) importThemes();
 
 });
