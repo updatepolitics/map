@@ -5,6 +5,7 @@ Template.signalEdit.onCreated(function (){
   this.subscribe('incidencyReachs');
   this.subscribe('origins');
   this.subscribe('purposes');
+  this.subscribe('methods');
   this.subscribe('themes');
 });
 
@@ -37,6 +38,11 @@ Template.signalEdit.helpers({
   hubsOptions: function(){
     return Hubs.find({}, {sort: {name: 1}}).map(function (h) {
       return {label: h.name, value: h._id};
+    });
+  },
+  methodOptions: function(){
+    return Methods.find({}, {sort: {en: 1}}).map(function (h) {
+      return {label: h.en, value: h._id};
     });
   },
   technologyType: function(){

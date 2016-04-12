@@ -223,17 +223,46 @@ Meteor.startup(function(){
   function importSignals() {
     var signals;
 
-    Async.runSync(function(doneImportMethods){
+    Async.runSync(function(doneImportSignals){
       rs = fs.createReadStream(process.env.PWD +'/data/signals.csv');
       var parser = csv.parse({columns: true}, function(err, data){
-        if (err) return doneImportMethods(err);
+        if (err) return doneImportSignals(err);
         signals = data;
-        doneImportMethods();
+        doneImportSignals();
       });
       rs.pipe(parser);
     });
 
     _.each(signals, function(signal){
+
+      signal.methods = [];
+
+      _.each(signal["Conexão e Diálogo "].split(';'), function(method){
+        if (method) {
+          signal.methods.push(Methods.findOne({pt: method.trim()})._id)
+        }
+      });
+
+      _.each([
+        "Coletiva (HUB)",
+        "Sensibilização",
+        "Formação",
+        "Produção de Conhecimento",
+        "Levantamento e Visualização de Informação",
+        "Fomento",
+        "Fiscalização e Monitoramento",
+        "Disseminação",
+        "Mobilização e Pressão",
+        "Contribuição e Colaboração"
+      ], function(mechanism) {
+        _.each(signal[mechanism].split(','), function(method){
+          if (method) {
+            signal.methods.push(Methods.findOne({pt: method.trim()})._id)
+          }
+        });
+      });
+
+
 
       // parse places
       if (signal.placesOfOriginNames) {
