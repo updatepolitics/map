@@ -1,8 +1,8 @@
-
 Template.hubEdit.onCreated(function (){
   this.subscribe('hubs');
   this.subscribe('natures');
   this.subscribe('origins');
+  this.subscribe('incidencyReachs');
 });
 
 Template.hubEdit.helpers({
@@ -24,8 +24,8 @@ Template.hubEdit.helpers({
     });
   },
   incidencyReachOptions: function(){
-    return _.map(['Local', 'National', 'Regional', 'International'], function (i) {
-      return {label: i, value: i};
+    return IncidencyReachs.find({}).map(function (i) {
+      return {label: i.en, value: i._id};
     });
   }
 });

@@ -2,6 +2,7 @@ Template.hubCreate.onCreated(function (){
   this.subscribe('hubs');
   this.subscribe('natures', {sort: {name: 1}});
   this.subscribe('origins');
+  this.subscribe('incidencyReachs');
 });
 
 Template.hubCreate.helpers({
@@ -23,8 +24,8 @@ Template.hubCreate.helpers({
     });
   },
   incidencyReachOptions: function(){
-    return _.map(['Local', 'National', 'Regional', 'International'], function (i) {
-      return {label: i, value: i};
+    return IncidencyReachs.find({}).map(function (i) {
+      return {label: i.en, value: i._id};
     });
   }
 });
