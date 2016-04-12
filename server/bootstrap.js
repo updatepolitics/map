@@ -255,7 +255,7 @@ Meteor.startup(function(){
         var secondaryThemes = signal.secondaryThemes.split(',');
         signal.secondaryThemes = [];
         _.each(secondaryThemes, function(theme){
-          signal.secondaryThemes.push(Themes.findOne({pt: theme})._id);
+          signal.secondaryThemes.push(Themes.findOne({pt: theme.trim()})._id);
         });
       } else signal.themes = [];
 
@@ -281,20 +281,14 @@ Meteor.startup(function(){
 
       // parse incidencyTypes
       if (signal.incidencyType) {
-        console.log('signal.name');
-        console.log(signal.name);
-        console.log(signal.incidencyType);
         var incidencyTypes = signal.incidencyType.split(',');
         signal.incidencyTypes = [];
         _.each(incidencyTypes, function(typeName){
-          console.log(typeName);
           var type = IncidencyTypes.findOne({pt: typeName.trim()});
           if (type) {
             signal.incidencyTypes.push(type._id);
           }
         });
-        console.log('signal.incidencyType')
-        console.log(signal.incidencyTypes)
       } else signal.incidencyTypes = [];
 
 

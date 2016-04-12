@@ -5,6 +5,7 @@ Template.signalEdit.onCreated(function (){
   this.subscribe('incidencyReachs');
   this.subscribe('origins');
   this.subscribe('purposes');
+  this.subscribe('themes');
 });
 
 Template.signalEdit.helpers({
@@ -14,8 +15,12 @@ Template.signalEdit.helpers({
     });
   },
   purposeOptions: function(){
-    console.log('eita');
     return Purposes.find({}, {sort: {en: 1}}).map(function (i) {
+      return {label: i.en, value: i._id};
+    });
+  },
+  themesOptions: function(){
+    return Themes.find({}, {sort: {en: 1}}).map(function (i) {
       return {label: i.en, value: i._id};
     });
   },
