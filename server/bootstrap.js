@@ -180,23 +180,7 @@ Meteor.startup(function(){
     });
   }
 
-  function importMethodsAndMechanisms() {
-    var methods;
-
-    Async.runSync(function(doneImportMethods){
-      rs = fs.createReadStream(process.env.PWD +'/data/methods.csv');
-      var parser = csv.parse({columns: true}, function(err, data){
-        if (err) return doneImportMethods(err);
-        methods = data;
-        doneImportMethods();
-      });
-      rs.pipe(parser);
-    });
-
-    var methodIds = {};
-    _.each(methods, function(method){
-      methodIds[method.pt] = Methods.insert(method);
-    });
+  function importMechanisms() {
 
     var mechanisms;
 
@@ -211,8 +195,28 @@ Meteor.startup(function(){
     });
 
     _.each(mechanisms, function(mechanism){
-      mechanism.method = methodIds[mechanism.method];
       Mechanisms.insert(mechanism);
+    });
+  }
+
+
+  function importMethods() {
+    var methods;
+
+    Async.runSync(function(doneImportMethods){
+      rs = fs.createReadStream(process.env.PWD +'/data/methods.csv');
+      var parser = csv.parse({columns: true}, function(err, data){
+        if (err) return doneImportMethods(err);
+        methods = data;
+        doneImportMethods();
+      });
+      rs.pipe(parser);
+    });
+
+    var methodIds = {};
+    _.each(methods, function(method){
+      method.mechanism = Mechanisms.findOne({pt: method.mechanism})._id;
+      methodIds[method.pt] = Methods.insert(method);
     });
   }
 
@@ -306,12 +310,15 @@ Meteor.startup(function(){
   }
 
   Signals.remove({});
+  Methods.remove({});
+  Mechanisms.remove({});
 
   if (Origins.find({}).count() == 0) importOrigins();
   if (Natures.find({}).count() == 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();
   if (Themes.find({}).count() == 0) importThemes();
-  if (Methods.find({}).count() == 0) importMethodsAndMechanisms();
+  if (Mechanisms.find({}).count() == 0) importMechanisms();
+  if (Methods.find({}).count() == 0) importMethods();
   if (IncidencyReachs.find({}).count() == 0) importIncidenciesReachs();
   if (IncidencyTypes.find({}).count() == 0) importIncidencyTypes();
   if (Purposes.find({}).count() == 0) importPurposes();

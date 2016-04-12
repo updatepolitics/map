@@ -5,12 +5,15 @@
       <fieldset>
         <legend>Edit method</legend>
         {{> afQuickField name='en'}}
+        {{> afQuickField name='description_en' rows=6}}
         {{> afQuickField name='es'}}
+        {{> afQuickField name='description_es' rows=6}}
         {{> afQuickField name='pt'}}
+        {{> afQuickField name='description_pt' rows=6}}
         {{> afQuickField name='mechanism' options=mechanismOptions}}
         <button type="submit" class="ui button">Update</button>
         <a class="ui button" href="{{pathFor route='method.list'}}" role="button">Back to index</a>
-      </fieldset>
+      </fieldset> 
 
     {{/autoForm}}
   {{else}}
