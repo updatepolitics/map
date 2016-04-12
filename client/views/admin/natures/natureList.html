@@ -1,32 +1,33 @@
 <template name="natureList">
     <h1>Nature listing</h1>
     {{#if Template.subscriptionsReady}}
-      <a class="ui button" href="{{pathFor route='nature.create'}}" role="button">New nature</a>
-      <table class="ui definition table">
+      <a class="ui button" href="{{pathFor route='nature.create'}}" role="button">New</a>
+      <table class="ui table">
         <thead>
           <tr>
-            <th></th>
-            <th class="four wide">English</th>
-            <th class="four wide">Spanish</th>
-            <th class="four wide">Portuguese</th>
+              <th class="four wide">English</th>
+              <th class="four wide">Spanish</th>
+              <th class="four wide">Portuguese</th>
           </tr>
         </thead>
         <tbody>
           {{#each natures}}
             <tr>
-              <td class="collapsing">
-                <div class="two ui buttons">
-                  <a class="ui button" href="{{ pathFor route='nature.edit' }}" role="button">
-                    Edit
+                <td>
+                  <a href="{{ pathFor route='nature.edit' }}">
+                    {{ en }}
                   </a>
-                  <a class="ui button" href="" role="button">
-                    Remove
+                </td>
+                <td>
+                  <a href="{{ pathFor route='nature.edit' }}">
+                    {{ es }}
                   </a>
-                </div>
-              </td>
-                <td>{{ en }}</td>
-                <td>{{ es }}</td>
-                <td>{{ pt }}</td>
+                </td>
+                <td>
+                  <a href="{{ pathFor route='nature.edit' }}">
+                    {{ pt }}
+                  </a>
+                </td>
             </tr>
           {{/each}}
         </tbody>

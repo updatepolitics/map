@@ -1,9 +1,11 @@
 <template name="natureEdit">
+
+  <h1>Edit nature</h1>
+
   {{#if Template.subscriptionsReady}}
     {{#autoForm collection="Natures" doc=this id="natureEdit" type="update" template="semanticUI"}}
 
       <fieldset>
-        <legend>Edit nature</legend>
         {{> afQuickField name='en'}}
         {{> afQuickField name='description_en' rows=6}}
         {{> afQuickField name='es'}}
