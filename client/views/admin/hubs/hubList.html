@@ -12,7 +12,9 @@
           {{#each hubs}}
             <tr>
                 <td>
-                  <a href="{{pathFor route='hub.edit'}}" role="button">{{name}}</a>
+                  <a href="{{pathFor route='hub.edit'}}">
+                    {{name}}
+                  </a>
                 </td>
             </tr>
           {{/each}}

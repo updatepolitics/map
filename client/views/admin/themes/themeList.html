@@ -1,11 +1,10 @@
 <template name="themeList">
     <h1>Theme listing</h1>
     {{#if Template.subscriptionsReady}}
-      <a class="ui button" href="{{pathFor route='theme.create'}}" role="button">New theme</a>
-      <table class="ui definition table">
+      <a class="ui button" href="{{pathFor route='theme.create'}}" role="button">New</a>
+      <table class="ui table">
         <thead>
           <tr>
-            <th></th>
             <th class="four wide">English</th>
             <th class="four wide">Spanish</th>
             <th class="four wide">Portuguese</th>
@@ -14,19 +13,21 @@
         <tbody>
           {{#each themes}}
             <tr>
-              <td class="collapsing">
-                <div class="two ui buttons">
-                  <a class="ui button" href="{{ pathFor route='theme.edit' }}" role="button">
-                    Edit
-                  </a>
-                  <a class="ui button" href="" role="button">
-                    Remove
-                  </a>
-                </div>
+              <td>
+                <a href="{{ pathFor route='theme.edit' }}">
+                  {{ en }}
+                </a>
               </td>
-                <td>{{ en }}</td>
-                <td>{{ es }}</td>
-                <td>{{ pt }}</td>
+              <td>
+                <a href="{{ pathFor route='theme.edit' }}">
+                  {{ es }}
+                </a>
+              </td>
+              <td>
+                <a href="{{ pathFor route='theme.edit' }}">
+                  {{ pt }}
+                </a>
+              </td>
             </tr>
           {{/each}}
         </tbody>

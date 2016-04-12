@@ -1,6 +1,8 @@
 <template name="methodCreate">
+  <h1>Create method</h1>
+
   {{#autoForm collection="Methods" doc=this id="methodCreate" type="insert" template="semanticUI"}}
-  <button type="submit" class="ui button">Create Method</button>
+  <button type="submit" class="ui button">Save</button>
   <a class="ui button" href="{{pathFor route='method.list'}}" role="button">Back to index</a>
   <fieldset>
       {{> afQuickField name='en'}}

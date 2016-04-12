@@ -338,10 +338,6 @@ Meteor.startup(function(){
     });
   }
 
-  Signals.remove({});
-  Methods.remove({});
-  Mechanisms.remove({});
-
   if (Origins.find({}).count() == 0) importOrigins();
   if (Natures.find({}).count() == 0) importNatures();
   if (Hubs.find({}).count() == 0) importHubs();

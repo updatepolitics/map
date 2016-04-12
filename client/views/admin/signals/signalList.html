@@ -1,7 +1,7 @@
 <template name="signalList">
     <h1>Signals</h1>
     {{#if Template.subscriptionsReady}}
-      <a class="ui button" href="{{pathFor route='signal.create'}}" role="button">New signal</a>
+      <a class="ui button" href="{{pathFor route='signal.create'}}" role="button">New</a>
       <table class="ui celled table">
         <thead>
           <tr>
@@ -13,7 +13,7 @@
             <tr>
                 <td>
                   <a href="{{pathFor route='signal.edit'}}">{{ name }}</a>
-                  
+
                 </td>
             </tr>
           {{/each}}

@@ -1,9 +1,8 @@
 <template name="themeEdit">
+  <h1>Edit theme</h1>
   {{#if Template.subscriptionsReady}}
     {{#autoForm collection="Themes" doc=this id="themeEdit" type="update" template="semanticUI"}}
-
       <fieldset>
-        <legend>Edit theme</legend>
         {{> afQuickField name='en'}}
         {{> afQuickField name='description_en' rows=6}}
         {{> afQuickField name='es'}}
