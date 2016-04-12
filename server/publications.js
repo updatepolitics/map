@@ -95,3 +95,48 @@ Meteor.publish('signal', function (_id) {
     _id: _id
   });
 });
+
+/*
+ * IncidencyReachs
+ */
+
+Meteor.publish('incidencyReachs', function () {
+  return IncidencyReachs.find({},{});
+});
+
+Meteor.publish('incidencyReach', function (_id) {
+  check(_id, String);
+  return IncidencyReachs.find({
+    _id: _id
+  });
+});
+
+/*
+ * IncidencyTypes
+ */
+
+Meteor.publish('incidencyTypes', function () {
+  return IncidencyTypes.find({},{});
+});
+
+Meteor.publish('incidencyType', function (_id) {
+  check(_id, String);
+  return IncidencyTypes.find({
+    _id: _id
+  });
+});
+
+/*
+ * Purposes
+ */
+
+Meteor.publish('purposes', function () {
+  return Purposes.find({},{});
+});
+
+Meteor.publish('purpose', function (_id) {
+  check(_id, String);
+  return Purposes.find({
+    _id: _id
+  });
+});

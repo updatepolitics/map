@@ -34,10 +34,10 @@ Router.route('admin/hubs/:_id/edit', {
 
 Router.route('admin/signals', { name: 'signal.list' });
 // Router.route("admin/signals/create", {name: 'signal.create'});
-// Router.route('admin/signals/:_id/edit', {
-//   name: 'signal.edit',
-//   controller: 'SignalController'
-// });
+Router.route('admin/signals/:_id/edit', {
+  name: 'signal.edit',
+  controller: 'SignalController'
+});
 
 /*
  * Natures admin

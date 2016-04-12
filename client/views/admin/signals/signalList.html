@@ -6,16 +6,14 @@
         <thead>
           <tr>
             <th>Signal</th>
-            <th>Nature</th>
-            <th>Sponsor</th>
           </tr>
         </thead>
         <tbody>
           {{#each signals}}
             <tr>
-                <td><a href="{{pathFor route='signal.edit'}}">{{ name }}</a></td>
-                <td>{{ nature.en }}</td>
-                <td> {{ isSponsor }}
+                <td>
+                  <a href="{{pathFor route='signal.edit'}}">{{ name }}</a>
+                  
                 </td>
             </tr>
           {{/each}}

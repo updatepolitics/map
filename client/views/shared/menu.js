@@ -20,7 +20,7 @@ Template.menu.helpers({
           "page": "method.list",
           "_pt": "METHODS",
         }, {
-          "page": "method.list",
+          "page": "signal.list",
           "_pt": "SIGNALS",
         }, {
           "page": "method.list",
