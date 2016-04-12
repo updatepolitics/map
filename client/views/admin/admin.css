@@ -133,13 +133,40 @@ td{
   background: #fff;
 }
 
-td:hover{
-  background: #313949;
-}
-
-td:hover .remove{
+tr:hover .remove{
   display: block;
 }
+
+.edit{
+  position: absolute;
+  right: 40px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  color: #fff;
+  background: #4183C4;
+  border-radius: 3px;
+  font-size: 24px;
+  font-weight: 100;
+  cursor: pointer;
+  display: none;
+}
+
+.edit:hover{
+  background: #fff;
+}
+
+tr:hover .edit{
+  display: block;
+}
+
+tr:hover td{
+  background: #313949;
+} 
 
 label{
   color: #fff !important;
