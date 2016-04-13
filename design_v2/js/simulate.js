@@ -46,13 +46,16 @@ function simulate_db(db){
 		sg.url = "http://sig_url.com";
 		sg.about = "Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ";
 		sg.name = livros[rand(livros.length-1)].titulo;
-		sg.theme = [ 44 + shift_rand(6) ];
+
+		sg.theme = [44 + shift_rand(6)];
+
 		var n_mechanisms = rand(4);
 		sg.mechanism = [];
 		for(a=1; a<=n_mechanisms; a++){
-			var rand_met = shift_rand(14);
+			var rand_met = shift_rand(11);
 			if( sg.mechanism.indexOf(rand_met) < 0) sg.mechanism.push(rand_met);
 		}
+
 		sg.origin = 39 + rand(5);
 		sg.coverage = 30 + rand(4);
 		sg.type = 34 + rand(5);

@@ -17,6 +17,7 @@ var filter_h = 25;
 var hub_filters = [];
 var sig_filters = [];
 var strict = {
+		'mechanism':[],
 		'theme':[],
 		'kind':[]
 	};
@@ -348,6 +349,8 @@ function check_filters() {
 		$(mode_lb_tx).html( check_num( n_hubs, 'sig' ) );
 	}
 
+	console.log(json.filters);
+
 }
 
 function check_trash(){
@@ -377,7 +380,7 @@ function update_list(data, cod){
 		for( i in json.filters ){
 			if( d[i] &&	d.visible && json.filters[i].active.length > 0 ){
 				var found = false;
-				if(i != 'theme' && i != 'kind'){
+				if(i != 'theme' && i != 'kind' && i != 'mechanism'){
 					if(	json.filters[i].active.indexOf( d[i] )  >= 0 ){
 						found = true;
 					}
@@ -505,9 +508,12 @@ function create_filters( data, target, group ){
 		li.data = d;
 
 		// compare to stored filters
-		if(cur_filters.indexOf(d.id.toString()) >= 0) li.data.on = true;
-		else li.data.on = false;
-
+		if(cur_filters.indexOf(d.id.toString()) >= 0) {
+			li.data.on = true;
+			data.active.push(d.id.toString());
+		}else{
+			li.data.on = false;
+		}
 	}
 }
 
@@ -981,6 +987,7 @@ $.ajax({
 	dataType: 'json',
 	success: function(data){
 		json = data;
+		console.log(json);
 		load();
 	}
 });

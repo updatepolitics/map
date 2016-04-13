@@ -160,147 +160,116 @@
 			"target":"sig",
 			"itens":[
 				{	"id":1,
-					"label": "diálogo",
-					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
+					"label": "Sensibilização",
+					"about":"Os Mecanismos de Sensibilização são ferramentas potentes de conscientização de cidadãos para evidenciar, aquecer, tornar atrativo, esclarecer o debate e atrair o opinião pública para um tema específico a partir de uma abordagem mais criativa e lúdica. ",
 					"itens":[
-						{ "label":"consulta popular"},
-						{ "label":"assembléia"},
-						{ "label":"diálogo social"},
-						{ "label":"debate público"},
-						{ "label":"Mediação/Facilitação"},
-						{ "label":"Circulo de Cidadania"}
+						{ "label":"Intervenção Artística"},
+						{ "label":"Atividades Culturais"},
+						{ "label":"Humor"},
+						{ "label":"Campanha de Sensibilização"},
+						{ "label":"Manifesto e Conscientização Eleitoral"}
 					]
 				},
 				{	"id":2,
-					"label": "Mobilização" ,
-					"about":"Rutrum iaculis mauris. Nullam fringilla orci. Enim nullam blandit. Pretium aliquam ac integer et iaculis. Eget quis habitasse arcu gravida ut. Vel sit egestas. Consectetuer erat massa. Quis libero malesuada. Imperdiet sollicitudin viverra rutrum diam luctus et nec ultricies aliquam placerat amet eu ut morbi.",
-					"itens":[
-						{ "label":"consulta popular"},
-						{ "label":"cidadania digital"},
-						{ "label":"ação cívica"},
-						{ "label":"ativismo digital"},
-						{ "label":"campanha"},
-						{ "label":"manifestações"},
-						{ "label":"mobilização"}
-					]
-				},
-				{	"id":3,
-					"label": "Sensibilização" ,
-					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
-					"itens":[
-						{ "label":"Culture Jaming"},
-						{ "label":"Intervenções"},
-						{ "label":"Choque Estético"},
-						{ "label":"Humor/Comédia"},
-						{ "label":"Atividades Culturais"}
-					]
-				},
-				{	"id":4,
 					"label": "Formação" ,
-					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
+					"about":"A educação e a pedagogia política são grandes aliados para o desenvolvimento de uma cidadania que busca mais participação dos cidadãos no debate político. Os Mecanismos de Formação estão voltados para a capacitação de indivíduos para a cidadania mais ativa, atuação política ou execução da função pública.",
 					"itens":[
 						{ "label":"Oficina"},
-						{ "label":"Formação"},
-						{ "label":"Pedagogia Política"},
+						{ "label":"Vivência"},
+						{ "label":"Curso"},
+						{ "label":"Manual"},
 						{ "label":"Jogo"}
 					]
 				},
-				{	"id":5,
+				{	"id":3,
 					"label": "Produção de Conhecimento" ,
-					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
+					"about":"A geração de análises sobre a política, democracia e questões de interesse público são cruciais para a emergência e o fortalecimento de novas práticas políticas. São estudos, pesquisas e conhecimento que desenvolvem reflexões sobre o campo ao mesmo tempo que o observa.",
 					"itens":[
-						{ "label":"Data viz"},
-						{ "label":"Análise de dados"},
-						{ "label":"Index/Indicadores"},
 						{ "label":"Pesquisa"},
+						{ "label":"Estudo"},
+						{ "label":"Análise de Dados"},
+						{ "label":"Ensaio"},
+						{ "label":"Sistematização de Conhecimento"}
+					]
+				},
+				{	"id":4,
+					"label": "Levantamento e Vizualização de dados" ,
+					"about":"A era digital gerou espaço para uma quantidade infinita de dados e informações brutas, e quando se trata da área pública, a complexidade dessa compreensão é elevada. Os mecanismos de levantamento de dados e visualização de informação são utilizados para coletar dados e transformá-los em informações compreensíveis e acessíveis a um público mais amplo.",
+					"itens":[
+						{ "label":"Banco de Dados"},
 						{ "label":"Georreferenciamento"},
-						{ "label":"Conhecimento Colaborativo"},
-						{ "label":"Wiki"},
-						{ "label":"Pesquisa colaborativa e participativa"},
-						{ "label":"Decodificação"}
+						{ "label":"Infográfico"},
+						{ "label":"Grafos de Rede"},
+						{ "label":"Gráficos"}
+					]
+				},
+				{	"id":5,
+					"label": "Fomento" ,
+					"about":"Para que o ecossistema ganhe força, são necessárias atividades que estimulem seu amadurecimento e desenvolvimento. Os mecanismos de fomento são atividades que fortalecem o trabalho das iniciativas seja por meio do incentivo financeiro, pela promoção de reconhecimento ou pelo aporte de inteligência em áreas específicas.",
+					"itens":[
+						{ "label":"Concurso"},
+						{ "label":"Aceleração e Incubação"},
+						{ "label":"Matchfunding"}
 					]
 				},
 				{	"id":6,
-					"label": "levantamento de dados" ,
-					"about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. ",
+					"label": "Fiscalização e Monitoramento" ,
+					"about":"Os mecanismos de fiscalização e monitoramento são ferramentas ou práticas que ajudam no controle social das atividades e responsabilidades do Estado ou candidatos, permitindo que a sociedade civil cumpra o papel de verificar e apontar os excessos e falhas do setor público, bem como as promessas e compromissos dos agentes públicos.",
 					"itens":[
-						{ "label":"Banco de dados"},
-						{ "label":"Repositório"},
-						{ "label":"Big Data"}
+						{ "label":"Indicadores"},
+						{ "label":"Monitoramento Descentralizado"},
+						{ "label":"Auditoria"},
+						{ "label":"Fact Checking"}
 					]
 				},
 				{	"id":7,
-					"label": "visualização de dados" ,
-					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
+					"label": "Disseminação" ,
+					"about":"As mídias investigativas e independentes tem papel importante na difusão de informações que empoderam o cidadão para cobrar o poder público. Os mecanismos de disseminação são formas de cobrir e reportar temas de interesse público, bem como a transmissão e os meios para que essa informação possa chegar até os cidadãos.",
 					"itens":[
-						{ "label":"Denúncia"},
-						{ "label":"Investigação"},
-						{ "label":"Monitoramento"},
-						{ "label":"Infoativismo"},
-						{ "label":"Relatório"},
 						{ "label":"Cobertura Colaborativa"},
-						{ "label":"Ação Judicial de interesse público"}
+						{ "label":"Portal de notícias/Blogs"},
+						{ "label":"Reportagem"},
+						{ "label":"Transmissão"}
 					]
 				},
 				{	"id":8,
-					"label": "Fomento" ,
-					"about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. ",
+					"label": "Conexão e Diálogo" ,
+					"about":"O reconhecimento e as trocas entre atores são práticas potentes para a articulação de iniciativas e de fortalecimento do ecossistema. Os mecanismos de conexão e diálogo são espaços ou momentos de intercâmbio onde atores têm a possibilidade de conhecer uns aos outros, trocar experiências e compartilhar aprendizados.",
 					"itens":[
-						{ "label":"Legislação participativa"},
-						{ "label":"Mandato interativo "}
+						{ "label":"Festival"},
+						{ "label":"Desconferência"},
+						{ "label":"Eventos (Seminário, Fórum, Colóquio, Conferência, Debate, Roda de Conversa e encontros )"},
+						{ "label":"Hackatons"}
 					]
 				},
 				{	"id":9,
-					"label": "Fiscalização" ,
-					"about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat.",
+					"label": "Mobilização e Pressão" ,
+					"about":"Através da articulação e do engajamento, os sinais que utilizam esse mecanismos demonstram poder de mobilização e chamam a atenção tanto de quem toma a decisão quanto da opinião pública para as causas e bandeiras que atuam. Os mecanismos de mobilização e pressão são meios pelos quais a sociedade civil busca influenciar a tomada de decisão sobre questões públicas.",
 					"itens":[
-						{ "label":"Resident Feedback"},
-						{ "label":"Governo Eletrônico"},
-						{ "label":"Mandato interativo"}
+						{ "label":"Protesto"},
+						{ "label":"Ocupação"},
+						{ "label":"Abaixo-assinado"},
+						{ "label":"Advocacy"},
+						{ "label":"Desobediência civil"},
+						{ "label":"Manifestação"},
+						{ "label":"Campanha de Mobilização"}
 					]
 				},
 				{	"id":10,
-					"label": "consulta" ,
-					"about":"Rutrum iaculis mauris. Nullam fringilla orci. Enim nullam blandit. Pretium aliquam ac integer et iaculis. Eget quis habitasse arcu gravida ut. Vel sit egestas. Consectetuer erat massa. Quis libero malesuada. Imperdiet sollicitudin viverra rutrum diam luctus et nec ultricies aliquam placerat amet eu ut morbi.",
+					"label": "Contribuição e Colaboração" ,
+					"about":"Os processos colaborativos e descentralizados ganharam grande importância no início do século XXI e novas metodologias e ferramentas estão sendo criadas a partir desse novo paradigma. Os Mecanismos de Contribuição e Colaboração são meios que possibilitam e estimulam a participação direta dos cidadãos na construção de políticas públicas, leis ou melhorias para sua cidade. ",
 					"itens":[
-						{ "label":"Resident Feedback"},
-						{ "label":"Governo Eletrônico"},
-						{ "label":"Mandato interativo"}
+						{ "label":"Cocriação"},
+						{ "label":"Rankeamento"},
+						{ "label":"Mandato interativo"},
+						{ "label":"Legislação Participativa"},
+						{ "label":"Crowdsourcing"},
+						{ "label":"Debate para Consenso"}
 					]
 				},
 				{	"id":11,
 					"label": "participação" ,
 					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
-					"itens":[
-						{ "label":"Resident Feedback"},
-						{ "label":"Governo Eletrônico"},
-						{ "label":"Mandato interativo"}
-					]
-				},
-				{	"id":12,
-					"hex":"#9e8fcc",
-					"label": "Governo 2.0" ,
-					"about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat.",
-					"itens":[
-						{ "label":"Resident Feedback"},
-						{ "label":"Governo Eletrônico"},
-						{ "label":"Mandato interativo"}
-					]
-				},
-				{	"id":13,
-					"hex":"#ae85bd",
-					"label": "Comunicação" ,
-					"about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat.",
-					"itens":[
-						{ "label":"Resident Feedback"},
-						{ "label":"Governo Eletrônico"},
-						{ "label":"Mandato interativo"}
-					]
-				},
-				{	"id":14,
-					"hex":"#ba7dac",
-					"label": "conexão" ,
-					"about":"<p>Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque.</p><p>lista, lista, lista, lista, lista e lista.</p>",
 					"itens":[
 						{ "label":"Resident Feedback"},
 						{ "label":"Governo Eletrônico"},

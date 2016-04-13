@@ -1421,7 +1421,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     .group{
         overflow: hidden;
         height: auto;
-        background: #2a303c;
+        background: #2a2f3b;
     }
 
 .filter{
@@ -2107,9 +2107,8 @@ hr{
 }
 
 .item{
-    font-family: 'Stardos Stencil';
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     width: 100%;
     text-align: center;
     vertical-align: middle;
@@ -2121,7 +2120,7 @@ hr{
     background-position: right;
     list-style: none;
     color: #fff;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 .item_plus{

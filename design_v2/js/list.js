@@ -13,6 +13,7 @@ var hub_filters = [];
 var sig_filters = [];
 var strict = {
 		'mechanism':[],
+		'theme':[],
 		'kind':[]
 	};
 
@@ -257,6 +258,49 @@ function open_popup (d){
 	$(popup_content).append(div);
 
 	if( d.code == 'sig' ){
+
+		// tema
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('section')
+			.html( json.labels.theme[lg] )
+		$(popup_content).append(div);
+
+		ul = document.createElement('div');
+		$(ul).addClass('list');
+		$(popup_content).append(ul);
+
+		node = arr_search( json.filters.theme.itens, d.theme[0] );
+
+		li = document.createElement('li');
+		li.open = false;
+		li.node = node;
+		$(li)
+			.on('click', function(){
+				toggle_plus(this);
+			})
+			.addClass('item')
+			.html(node.label)
+			.css({ backgroundColor:node.hex })
+		$(ul).append(li);
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('item_plus')
+			.css({ backgroundColor:node.hex, height:0})
+		$(ul).append(div);
+
+		div2 = document.createElement('div');
+		$(div2)
+			.html(node.about)
+		$(div).append(div2);
+
+		li.plus = div;
+		li.plus_tx = div2;
+
+		// mecanismos
+
 		if( d.mechanism.length > 0 ){
 
 			div = document.createElement('div');
@@ -272,6 +316,7 @@ function open_popup (d){
 			for( i in d.mechanism ){
 
 				node = arr_search( json.filters.mechanism.itens, d.mechanism[i] );
+
 				li = document.createElement('li');
 				li.open = false;
 				li.node = node;
@@ -281,13 +326,13 @@ function open_popup (d){
 					})
 					.addClass('item')
 					.html(node.label)
-					.css({ backgroundColor:node.hex })
+					.css({ backgroundColor:'#2b3240' })
 				$(ul).append(li);
 
 				div = document.createElement('div');
 				$(div)
 					.addClass('item_plus')
-					.css({ backgroundColor:node.hex, height:0})
+					.css({ backgroundColor:'#2b3240', height:0})
 				$(ul).append(div);
 
 				div2 = document.createElement('div');
@@ -538,7 +583,7 @@ function update_list(data, cod){
 		for( i in json.filters ){
 			if( d[i] &&	d.visible && json.filters[i].active.length > 0 ){
 				var found = false;
-				if(i != 'mechanism' && i != 'kind'){
+				if(i != 'theme' && i != 'kind' && i != 'mechanism'){
 					if(	json.filters[i].active.indexOf( d[i] )  >= 0 ){
 						found = true;
 					}
@@ -734,6 +779,7 @@ function load(){
 
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
+		create_filters(json.filters.theme, sig_filters, 'theme');
 		create_filters(json.filters.mechanism, sig_filters, 'mechanism');
 		create_filters(json.filters.purpose, sig_filters, false);
 		create_filters(json.filters.type, sig_filters, false);
