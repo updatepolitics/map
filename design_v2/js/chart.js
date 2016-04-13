@@ -187,7 +187,7 @@ function open_popup (d){
 	$(popup_content).html('');
 
 	$(popup).css({color:'#fff', backgroundColor:d.fill});
-	if(!mobile) $(popup).css({ maxHeight: '50%' });
+	if(!mobile) $(popup).css({ height: '40%' });
 	$(popup_x).css({ backgroundImage: 'url(layout/x.png)' });
 
 	div = document.createElement('div');
@@ -801,7 +801,7 @@ function load(){
 	// set_target
 	if(cur_code == "sig"){
 
-		scale = 10;
+		scale = 15;
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
 		create_filters(json.filters.theme, sig_filters, 'theme');

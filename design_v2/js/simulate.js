@@ -31,7 +31,7 @@ function simulate_db(db){
 		hb.url = "http://hub_url.com";
 		hb.about = "Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ";
 		hb.name = livros[rand(livros.length-1)].autor;
-		hb.kind = [ 14 + shift_rand(12) ];
+		hb.kind = [ 14 + shift_rand(8) ];
 		hb.origin = 39 + rand(5);
 		hb.coverage = 30 + rand(4);
 		hb.financier = 28 + shift_rand(2);

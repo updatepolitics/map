@@ -38,54 +38,54 @@
 	"help_text" : [
 		{
 			"title":"HUBS",
-			"text":"HUBS : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+			"text":"Clicando neste botão você estará visualizando os hubs, organismos - institucionalizados ou não - que desenvolvem ações e funcionam como “emissores” dos sinais de novas práticas políticas. A visualização a partir dos hubs evidencia quais são os atores que estão criando e executando esses sinais. Para observá-los, é possível filtrar os resultados a partir de: país, abrangência e natureza da sua constituição e se é um financiador ou não."
 		},
 		{
 			"title":"SINAIS",
-			"text":"SINAIS : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+			"text":"Clicando neste botão você estará visualizando os sinais, indícios e evidências de práticas políticas que reduzem a distância entre a sociedade civil e o poder público. São realizadas por múltiplos atores do ecossistema, que nesse mapeamento, denominamos de hubs. Para observá-los, é possível filtrar os resultados por: país, abrangência, tema, mecanismo, propósito e tecnologia."
 		},
 		{
 			"title":"FILTRAR RESULTADOS",
-			"text":" Filtros : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+			"text":" Os filtros permitem que o usuário explore os resultados do mapeamento a partir de múltiplas combinações das classificações tanto dos hubs como dos sinais. Os filtros se somam e dão a possibilidade de criar recortes específicos sobre esse ecossistema. A escolha dos filtros produzem diferentes resultados na representação gráfica da plataforma."
 		},
 		{
 			"title":"MUDAR MODO DE EXIBIÇÃO",
-			"text":" lista ou gráfico : Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+			"text":"Há duas maneiras de conhecer os resultados do mapeamento. A primeira é uma representação gráfica onde se tem uma visão sistêmica, ampla e visual do ecossistema. A segunda apresenta informações mais detalhadas sobre cada iniciativa que compõe os filtros selecionados."
 		}
 	],
 
 	"home_intro" : [
 		{
-			"title":"Problematização",
-			"text":"Lorem ipsum dolor. Sit amet sollicitudin. Pellentesque tortor cursus id ullamcorper in quisque elit lobortis. Phasellus velit faucibus laoreet blandit integer. Ac ornare eget mattis ut ultrices. Pulvinar et convallis. Eleifend ac ante aliquam nec eget. Egestas quis odio posuere id turpis magnis wisi laoreet. Ut tincidunt risus."
+			"title":"A Democracia na América Latina do séc XXI",
+			"text":"A democracia ainda está em processo de consolidação e amadurecimento na América Latina. A fragilidade das instituições democráticas, ameaças a direitos fundamentais e a interferência de diferentes tipos de elites nas decisões políticas influenciam diretamente a percepção e a confiança dos cidadãos no processo político, principalmente numa sociedade cada vez mais conectada e participativa."
 		},
 		{
-			"title":"Surgimento de um campo de práticas políticas emergentes",
-			"text":"Vitae leo risus maecenas nunc erat. Et amet ac. Vel vestibulum arcu. Ut nibh nulla nulla ante ipsum augue in maecenas. Ut odio montes sociosqu pulvinar sed. Odio tortor pulvinar facilisis velit velit. Lacinia nibh dui. Sociosqu magna blandit."
+			"title":"Uma sociedade conectada e participativa",
+			"text":"As dinâmicas da sociedade estão mudando mais intensamente no século XXI. As formas tradicionalmente conhecidas se somam às novas formas de produzir, consumir, comunicar e se relacionar. O acesso e distribuição do poder também são impactados por essas mudanças. O contexto de uma democracia em construção e as novas dinâmicas sociais possibilitam a emergência de novas práticas políticas."
 		},
 		{
-			"title":"Porque o Update",
-			"text":"Ante quam consequat. Fermentum lacus praesent. Mi in eu varius imperdiet feugiat. Vestibulum turpis adipiscing sit bibendum nulla et in a congue dolor pede magna nam ut. Arcu duis tincidunt. Rutrum nec dolor phasellus vehicula nulla cras ut sit. Rutrum blandit morbi faucibus auctor luctus praesent volutpat netus. Turpis integer pellentesque. Maecenas ac tellus orci sit nunc venenatis eu fermentum imperdiet nunc mi."
+			"title":"A emergência de práticas políticas",
+			"text":"Essas práticas atuam na fronteira dos processos democráticos, expandindo os limites de interação entre a sociedade civil e o poder público. Em todo o mundo, os atores do campo de inovação política estão desenvolvendo experimentos de diferentes formas e em diferentes contextos. Na América Latina, observamos que esses experimentos apontam possibilidades de caminhos para atualizar a política do século XXI."
 		},
 		{
-			"title":"Para que o Update",
-			"text":"Commodo elit magna. Nec sed fringilla dolor tellus quisque. Tempor ut pede integer lectus curabitur justo eu magna ligula urna pede. Vestibulum neque hymenaeos amet malesuada quis. In aliquet habitasse tincidunt aptent arcu. Hendrerit interdum neque. Sociis dolor volutpat. Urna mauris lacus dui a aliquet aenean ac consequat."
+			"title":"Ecossistema de práticas políticas emergentes",
+			"text":"O Update acredita que retratar e criar uma visualização para o ecossistema de práticas políticas emergentes é o primeiro passo para subsidiar a afirmação da existência desse campo e, a partir dessas evidências, potencializar uma visão de coletividade e pertencimento para os atores envolvidos nos processos políticos que contribuem para a redução da distância entre a sociedade civil e o poder público."
 		},
 		{
-			"title":"Porque o mapeamento",
-			"text":"Vitae leo risus maecenas nunc erat. Et amet ac. Vel vestibulum arcu. Ut nibh nulla nulla ante ipsum augue in maecenas. Ut odio montes sociosqu pulvinar sed. Odio tortor pulvinar facilisis velit velit. Lacinia nibh dui. Sociosqu magna blandit."
+			"title":"A plataforma",
+			"text":"Para dar luz a esse ecossistema, desenvolveu-se uma classificação própria representada nesta plataforma digital. São 700 iniciativas mapeadas, de 21 países da América Latina. Para ter visão das precisa sobre as práticas, as informações foram separada em duas formas diferentes de visualização. A primeira é por meio dos Hubs - os atores do ecossistema. A segunda é por meio dos sinais - são as práticas e projetos realizados pelos hubs. "
 		},
 		{
-			"title":"Para entender o mapeamento - estrutura",
-			"text":"Ante quam consequat. Fermentum lacus praesent. Mi in eu varius imperdiet feugiat. Vestibulum turpis adipiscing sit bibendum nulla et in a congue dolor pede magna nam ut. Arcu duis tincidunt. Rutrum nec dolor phasellus vehicula nulla cras ut sit. Rutrum blandit morbi faucibus auctor luctus praesent volutpat netus. Turpis integer pellentesque. Maecenas ac tellus orci sit nunc venenatis eu fermentum imperdiet nunc mi."
+			"title":"Hubs e sinais, os atores e as práticas do ecossistema",
+			"text":"Os hubs são organismos - institucionalizados ou não - que desenvolvem ações e funcionam como emissores dos sinais de inovação. Cada hub é capaz de realizar diversos sinais, os quais possuem métodos, abordagens e propósitos distintos. Olhar para os hubs sem especificar suas práticas e táticas de ação resultaria numa visão genérica e não ecossistêmica. Além disso, a observação a partir dos sinais permite compreender quais são as práticas mais utilizadas e de que maneira o ecossistema se desenvolve no sentido de reduzir a distância entre sociedade civil e poder público. "
 		},
 		{
-			"title":"Para entender o mapeamento - metodologia",
-			"text":"Commodo elit magna. Nec sed fringilla dolor tellus quisque. Tempor ut pede integer lectus curabitur justo eu magna ligula urna pede. Vestibulum neque hymenaeos amet malesuada quis. In aliquet habitasse tincidunt aptent arcu. Hendrerit interdum neque. Sociis dolor volutpat. Urna mauris lacus dui a aliquet aenean ac consequat."
+			"title":"Explore e conheça o ecossistema",
+			"text":"A proposta dessa plataforma é permitir que se conheça um pouco do universo das novas práticas políticas. O convite é para explorar os resultados variando as múltiplas combinações de filtros e permitindo análises próprias. Esse mapeamento é o primeiro esforço para compreender esse complexo ecossistema de natureza altamente dinâmica, onde iniciativas nascem e morrem do dia pra noite, e onde os contextos (sociais, políticos e econômicos) influenciam diretamente nas práticas locais."
 		}
 	],
 
-	"home":"O <b>UPDATE</b> é um laboratório para criar espaços de diálogo e reflexão entre Hackers da Política, com o intuito de reconhecer, potencializar e dar visibilidade às práticas emergentes de participação política no século XXI.",
+	"home":"Um mapeamento do ecossistema de práticas políticas emergentes na América Latina que retrata os atores (hubs) e as práticas (sinais) que contribuem para a redução da distância entre a sociedade civil e o poder público.",
 
 	"about":{
 		"staff_title" : "EQUIPE",
@@ -312,18 +312,14 @@
 		"kind":{
 			"label": "natureza" ,
 			"itens":[
-				{"id":15, "label":"pessoas", "hex":"#d87d7d", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
-				{"id":16, "label":"institutos/fundações", "hex":"#da8278", "about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. " },
-				{"id":17, "label":"Empresas", "hex":"#da8874", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." },
-				{"id":18, "label":"partidos", "hex":"#d98e70", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer." },
-				{"id":19, "label":"ONGs", "hex":"#d8946e", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
-				{"id":20, "label":"Orgãos Não governamentais", "hex":"#d59b6c", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. " },
-				{"id":21, "label":"Organismo Multilateral/internacional", "hex":"#d2a16c", "about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. " },
-				{"id":22, "label":"Coletivos", "hex":"#cea86d", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." },
-				{"id":23, "label":"Movimentos", "hex":"#caae6f", "about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. " },
-				{"id":24, "label":"Rede (p2p)", "hex":"#c4b573", "about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. " },
-				{"id":25, "label":"Aliança (1+1)", "hex":"#bfbb78", "about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat." },
-				{"id":26, "label":"Parcerias (1+2)", "hex":"#b9c17f", "about":"Vitae dapibus vestibulum. Pellentesque at a. Risus platea tempus. Blandit proin dignissim porta eu ut sollicitudin vel adipiscing. Neque nulla eleifend mauris wisi commodo amet tellus ligula nulla eleifend pellentesque." }
+				{"id":15, "label":"Empresas", "hex":"#d87d7d", "about":"Organizações estabelecidas no setor privado que emitem relevantes sinais que buscam reduzir a distância entre a sociedade civil e o poder público." },
+				{"id":16, "label":"Partidos", "hex":"#da8278", "about":"São partidos políticos que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público. " },
+				{"id":17, "label":"ONGs", "hex":"#da8874", "about":"Organizações da sociedade civil que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público. " },
+				{"id":18, "label":"Organismos Multilaterais", "hex":"#d98e70", "about":"São organizações internacionais compostas de diversos governos que buscam reduzir a distância entre a sociedade civil e o poder público. " },
+				{"id":19, "label":"Informal", "hex":"#d8946e", "about":"São movimentos, coletivos, grupos ou qualquer forma de organização não institucional que não tem ou não apresentam claramente uma formalidade jurídica." },
+				{"id":20, "label":"Constelações", "hex":"#d59b6c", "about":"São alianças, redes e/ou parcerias que conjuntamente emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público. " },
+				{"id":21, "label":"Governo", "hex":"#d2a16c", "about":"São organizações governamentais que podem pertencer as três esferas de poder (executivo, legislativo e judiciário) que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público. " },
+				{"id":22, "label":"Academia", "hex":"#cea86d", "about":"São instituições de educação e de desenvolvimento intelectual que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público." }
 			]
 		},
 		"purpose":{
