@@ -11,6 +11,7 @@ Router.plugin('auth',{
 });
 
 Router.route('/', { name: 'home' });
+Router.route('/chart', { name: 'chart' });
 Router.route('/about', { name: 'about' });
 Router.route('/countries', { name: 'countries' });
 Router.route('/hubs', { name: 'hubs' });

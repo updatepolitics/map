@@ -5,11 +5,15 @@
         {{ _pt }}
       </a>
       <ul>
-        {{#each submenu  }}
+        {{#each submenu }}
           <li>
-            <a href="{{ pathFor ../page }}#{{ anchor }}">
-              {{ _pt }}
-            </a>
+            {{#if anchor}}
+              <a href="{{ pathFor ../page }}#{{ anchor }}">
+                {{ _pt }}
+              </a>
+            {{else}}
+              {{#linkTo route=route }} {{ _pt }} {{/linkTo}}
+            {{/if}}
           </li>
         {{/each}}
       </ul>

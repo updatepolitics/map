@@ -82,10 +82,10 @@ Template.appMenu.helpers({
         "_en": "EXPLORE",
         "submenu": [{
           "_pt": "GRÁFICO",
-          "page": "chart"
+          "route": "chart"
         }, {
           "_pt": "LISTA",
-          "page": "list",
+          "route": "listing",
         }]
       }]
     }
