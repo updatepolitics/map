@@ -1,3 +1,3 @@
 Router.configure({
-  layoutTemplate: 'masterLayout'
+  layoutTemplate: 'appLayout'
 });
