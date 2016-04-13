@@ -17,69 +17,112 @@ Router.route('/hubs', { name: 'hubs' });
 Router.route('/methodology', { name: 'methodology' });
 Router.route('/signals', { name: 'signals' });
 
+Router.route('/admin', function(){
+  this.redirect('/admin/hubs');
+});
+
 /*
  * Hubs admin
  */
 
-Router.route('admin/hubs', { name: 'hub.list' });
-Router.route("admin/hubs/create", {name: 'hub.create'});
+Router.route('admin/hubs', {
+  controller: 'AdminController',
+  name: 'hub.list'
+});
+Router.route("admin/hubs/create", {
+  controller: 'AdminController',
+  name: 'hub.create'
+});
 Router.route('admin/hubs/:_id/edit', {
-  name: 'hub.edit',
-  controller: 'HubController'
+  controller: 'HubController',
+  name: 'hub.edit'
 });
 
 /*
  * Signals admin
  */
 
-Router.route('admin/signals', { name: 'signal.list' });
-Router.route("admin/signals/create", {name: 'signal.create'});
+Router.route('admin/signals', {
+  controller: 'AdminController',
+  name: 'signal.list'
+});
+Router.route("admin/signals/create", {
+  controller: 'AdminController',
+  name: 'signal.create'
+});
 Router.route('admin/signals/:_id/edit', {
-  name: 'signal.edit',
-  controller: 'SignalController'
+  controller: 'AdminController',
+  name: 'signal.edit'
 });
 
 /*
  * Natures admin
  */
-Router.route("admin/natures/create", {name: 'nature.create'});
-Router.route("admin/natures", { name: 'nature.list' });
+Router.route("admin/natures/create", {
+  controller: 'AdminController',
+  name: 'nature.create'
+});
+Router.route("admin/natures", {
+  controller: 'AdminController',
+  name: 'nature.list'
+});
 Router.route('admin/natures/:_id/edit', {
-  name: 'nature.edit',
-  controller: 'NatureController'
+  controller: 'AdminController',
+  name: 'nature.edit'
 });
 
 /*
  * Themes admin
  */
-Router.route("admin/themes/create", {name: 'theme.create'});
-Router.route("admin/themes", { name: 'theme.list' });
+Router.route("admin/themes/create", {
+  controller: 'AdminController',
+  name: 'theme.create'
+});
+Router.route("admin/themes", {
+  controller: 'AdminController',
+  name: 'theme.list'
+});
 Router.route('admin/themes/:_id/edit', {
-  name: 'theme.edit',
-  controller: 'ThemeController'
+  controller: 'AdminController',
+  name: 'theme.edit'
 });
 
 /*
  * Mechanisms admin
  */
-Router.route("admin/mechanisms/create", {name: 'mechanism.create'});
-Router.route("admin/mechanisms", { name: 'mechanism.list' });
+Router.route("admin/mechanisms/create", {
+  controller: 'AdminController',
+  name: 'mechanism.create'
+});
+Router.route("admin/mechanisms", {
+  controller: 'AdminController',
+  name: 'mechanism.list'
+});
 Router.route('admin/mechanisms/:_id/edit', {
-  name: 'mechanism.edit',
-  controller: 'MechanismController'
+  controller: 'AdminController',
+  name: 'mechanism.edit'
 });
 
 /*
  * Methods admin
  */
-Router.route("admin/methods/create", {name: 'method.create'});
-Router.route("admin/methods", { name: 'method.list' });
+Router.route("admin/methods/create", {
+  controller: 'AdminController',
+  name: 'method.create'
+});
+Router.route("admin/methods", {
+  controller: 'AdminController',
+  name: 'method.list'
+});
 Router.route('admin/methods/:_id/edit', {
-  name: 'method.edit',
-  controller: 'MethodController'
+  controller: 'AdminController',
+  name: 'method.edit'
 });
 
 /*
  * Pages admin
  */
-Router.route("admin/pages", { name: 'pages.list' });
+Router.route("admin/pages", {
+  controller: 'AdminController',
+  name: 'pages.list'
+});

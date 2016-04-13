@@ -1,9 +1,7 @@
-<template name="menu">
+<template name="adminMenu">
 
 
   {{> atForm}}
-
-  <!-- GENERAL MENU  -->
 
   <div id="nav_bar_logo">
 
@@ -25,22 +23,5 @@
         <!-- </ul> -->
       {{/with}}
     {{/if}}
-<!--
-    {{#each generalMenu}}
-      <li>
-        <a href="{{ pathFor page }}">
-          {{ _pt }}
-        </a>
-        <ul>
-          {{#each submenu  }}
-            <li>
-              <a href="{{ pathFor ../page }}#{{ anchor }}">
-                {{ _pt }}
-              </a>
-            </li>
-          {{/each}}
-        </ul>
-      </li>
-    {{/each}} -->
   </ul>
 </template>

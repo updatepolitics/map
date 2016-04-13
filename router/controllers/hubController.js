@@ -1,4 +1,4 @@
-HubController = RouteController.extend({
+HubController = AdminController.extend({
   waitOn: function(){
     return Meteor.subscribe('hub', this.params._id);
   },
