@@ -44,7 +44,7 @@ var pages = [
       {"_pt": "Tecnologia", "anchor":"tech" },
       {"_pt": "Temas", "anchor":"theme" },
       {"_pt": "Propósito", "anchor":"purpose" },
-      {"_pt": "Métodos", "anchor":"method" }
+      {"_pt": "Métodos", "anchor":"mechanism" }
    ]},
    { "_pt":"DOWNLOAD", "html":"download.html" },
    { "_pt":"CADASTRE SUA INICIATIVA", "html":"register.html" },

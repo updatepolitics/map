@@ -11,10 +11,8 @@
 		"sig": { "_pt":"sinal", "_en":"signal", "_es":"es_signal" },
 		"sigs": { "_pt":"sinais", "_en":"signals", "_es":"es_signals" },
 		"kind": { "_pt":"natureza", "_en":"kind", "_es":"es_kind" },
-		"theme": { "_pt":"tema", "_en":"theme", "_es":"es_tema" },
-		"themes": { "_pt":"temas", "_en":"themes", "_es":"es_temas" },
-		"mechanism": { "_pt":"mecanismo", "_en":"mechanism", "_es":"es_mechanism" },
-		"mechanisms": { "_pt":"mecanismos", "_en":"mechanism", "_es":"es_mechanisms" },
+		"method": { "_pt":"método", "_en":"method", "_es":"es_method" },
+		"methods": { "_pt":"métodos", "_en":"methods", "_es":"es_methods" },
 		"sig_list": { "_pt":"filtros de sinais", "_en":"signal filters", "_es":"es_signal filters" },
 		"hub_list": { "_pt":"filtros de hubs", "_en":"hub filters", "_es":"es_hub filters" },
 		"more": { "_pt":"saiba mais", "_en":"more info", "_es":"es_more" },
@@ -119,47 +117,12 @@
 	"hubs":[],
 	"signals":[],
 	"filters":{
-		"theme":{
-			"label":"temas",
-			"target":"sig",
-			"itens":[
-				{	"id":45,
-					"hex":"#adcc8f",
-					"label": "Participação Cidadã",
-					"about":"Os sinais que atuam no tema da Participaçao Cidadã são voltados a ampliar o universo de cidadãos capazes de influenciar as definições coletivas sobre o interesse público, visando à redução da centralização das tomadas de decisão e à ampliação das condições objetivas para a prática política cidadã."
-				},
-				{	"id":46,
-					"hex":"#7dcaa3",
-					"label": "Transparência & Accountability",
-					"about":"Os sinais que atuam no tema de Transparência ampliam o acesso público aos dados e as informações do Poder Público como forma de cobrar por suas responsabilidades, sejam elas ligadas a prestação de contas ou ao desenvolvimento de políticas públicas. "
-				},
-				{	"id":47,
-					"hex":"#50c4be",
-					"label": "Controle Social",
-					"about":"Os sinais relacionados ao Controle Social criam e ampliam as condições para que a sociedade monitore ações e políticas públicas do Poder Público desde a sua concepção, planejamento e a execução com a finalidade de identificar falhas e/ou garantir a realização das decisões."
-				},
-				{	"id":48,
-					"hex":"#3bb9d4",
-					"label": "Governo 2.0",
-					"about":"Os sinais relacionados ao tema Governo 2.0 incorporam novas práticas que transformam a forma como o Poder Público se relaciona com a sociedade. Possibilitam maior interação e colaboração com os cidadãos na criação de serviços públicos e acesso a informação, aumentando o conhecimento sobre as demandas e a necessidade de seus beneficiários. "
-				},
-				{	"id":49,
-					"hex":"#5cabdf",
-					"label": "Comunicação Independente",
-					"about":"Os sinais relacionados ao tema da Comunicação Independente contribuem para difusão de conhecimento e da formação da opinião pública livres de intereses particulares e grupos específicos. O uso da informação de forma estratégica a partir diferentes formas de transmissãoamplia seu alcance, produzindo novas visualizações que permitem maior comprensão sobre seu significado. "
-				},
-				{	"id":50,
-					"hex":"#8a99d7",
-					"label": "Cultura Política",
-					"about":"Os sinais relacionados ao tema da Cultura Política colaboram para o aumento do conhecimento sobre o funcionamento das instituições democráticas, os direitos civis, sociais e políticos, visando ao fortalecimento da cidadania e estímulam a reflexão crítica sobre a democracia na em seus países."
-				}
-			]
-		},
-		"mechanism":{
-			"label":"mecanismos",
+		"method":{
+			"label":"métodos",
 			"target":"sig",
 			"itens":[
 				{	"id":1,
+					"hex":"#adcc8f",
 					"label": "diálogo",
 					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
 					"itens":[
@@ -172,6 +135,7 @@
 					]
 				},
 				{	"id":2,
+					"hex":"#95cc98",
 					"label": "Mobilização" ,
 					"about":"Rutrum iaculis mauris. Nullam fringilla orci. Enim nullam blandit. Pretium aliquam ac integer et iaculis. Eget quis habitasse arcu gravida ut. Vel sit egestas. Consectetuer erat massa. Quis libero malesuada. Imperdiet sollicitudin viverra rutrum diam luctus et nec ultricies aliquam placerat amet eu ut morbi.",
 					"itens":[
@@ -185,6 +149,7 @@
 					]
 				},
 				{	"id":3,
+					"hex":"#7dcaa3",
 					"label": "Sensibilização" ,
 					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
 					"itens":[
@@ -196,6 +161,7 @@
 					]
 				},
 				{	"id":4,
+					"hex":"#66c7b0",
 					"label": "Formação" ,
 					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
 					"itens":[
@@ -206,6 +172,7 @@
 					]
 				},
 				{	"id":5,
+					"hex":"#50c4be",
 					"label": "Produção de Conhecimento" ,
 					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
 					"itens":[
@@ -221,6 +188,7 @@
 					]
 				},
 				{	"id":6,
+					"hex":"#3fbfca",
 					"label": "levantamento de dados" ,
 					"about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. ",
 					"itens":[
@@ -230,6 +198,7 @@
 					]
 				},
 				{	"id":7,
+					"hex":"#3bb9d4",
 					"label": "visualização de dados" ,
 					"about":"Tristique lacinia magna tellus hac aliquam lacinia amet dolor morbi vehicula diam. Maecenas vel semper tortor egestas sapien similique magna enim. Purus placerat a dolor erat volutpat. Curabitur commodo eu. Urna purus nec luctus purus per vestibulum elit habitasse ut pede integer. ",
 					"itens":[
@@ -243,6 +212,7 @@
 					]
 				},
 				{	"id":8,
+					"hex":"#47b3dc",
 					"label": "Fomento" ,
 					"about":"Aptent scelerisque eros. Dui sed purus. Donec id imperdiet. Torquent hac vel. Vulputate tellus volutpat molestie quisque eget lacus est et. Cras wisi vitae justo vivamus justo. Non lorem natoque sed molestie risus. Sit et pellentesque ipsum mi sed. Semper velit dui. Adipiscing purus sed mus vulputate et aliquet ligula mattis. Sit et curabitur class sed nec pellentesque vel habitant. Tincidunt velit proin eget accusantium venenatis. Integer blandit vitae in fringilla elit. ",
 					"itens":[
@@ -251,6 +221,7 @@
 					]
 				},
 				{	"id":9,
+					"hex":"#5cabdf",
 					"label": "Fiscalização" ,
 					"about":"Ut nullam leo quis diam egestas. Elit consequat morbi id eu congue nunc diam ante purus aenean condimentum amet praesent amet. Dolor id sit wisi eget diam pretium eu amet. Quis ante mi. Nunc et quisque. In sed ligula. Mi placerat nulla eu pretium morbi pretium mollis ipsum. Lacus ac vel. Convallis auctor penatibus eu gravida cubilia. Vel pede feugiat.",
 					"itens":[
@@ -260,6 +231,7 @@
 					]
 				},
 				{	"id":10,
+					"hex":"#74a2dd",
 					"label": "consulta" ,
 					"about":"Rutrum iaculis mauris. Nullam fringilla orci. Enim nullam blandit. Pretium aliquam ac integer et iaculis. Eget quis habitasse arcu gravida ut. Vel sit egestas. Consectetuer erat massa. Quis libero malesuada. Imperdiet sollicitudin viverra rutrum diam luctus et nec ultricies aliquam placerat amet eu ut morbi.",
 					"itens":[
@@ -269,6 +241,7 @@
 					]
 				},
 				{	"id":11,
+					"hex":"#8a99d7",
 					"label": "participação" ,
 					"about":"Cursus mauris in. Dictumst leo consectetuer nec porttitor gravida leo varius metus. Urna hymenaeos bibendum mi non ultricies egestas pellentesque dolor. Per esse risus. Magna felis facilisis cursus duis pede aliquam scelerisque tortor. Vivamus dictum arcu. Lacus habitasse amet. Tellus arcu taciti morbi aliquam risus vestibulum vehicula mauris consectetuer vel eget. ",
 					"itens":[

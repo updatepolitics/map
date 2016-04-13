@@ -5,10 +5,10 @@ var json,
 	scale;
 
 var scale_kind,
-	scale_method;
+	scale_mechanism;
 
 var strict = {
-		'method':[],
+		'theme':[],
 		'kind':[]
 	};
 
@@ -139,14 +139,15 @@ function create_map(){
 		if(mobile) scale = 50;
 		else scale = 75;
 	}else{
-		nodes = json.filters.method.itens;
+		nodes = json.filters.theme.itens;
 		list = json.signals;
-		group = "method";
+		group = "theme";
 		set_code("sig");
 		trg_total = json.signals.length;
 		if(mobile) scale = 30;
 		else scale = 50;
 	}
+
 
 	svg_map.selectAll("*").remove();
 
@@ -277,6 +278,8 @@ $(modal_home_x).on(bt_event, close_home_modal);
 
 function load(){
 
+	console.log(json);
+
 	//INTERFACE LANGUAGE
 	$(about).html( json.labels.about[lg].toUpperCase());
 	$(explore).html( json.labels.explore[lg].toUpperCase());
@@ -315,5 +318,6 @@ $.ajax({
 	success: function(data){
 		json = data;
 		load();
+
 	}
 });

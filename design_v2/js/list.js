@@ -12,7 +12,7 @@ var filter_h = 25;
 var hub_filters = [];
 var sig_filters = [];
 var strict = {
-		'method':[],
+		'mechanism':[],
 		'kind':[]
 	};
 
@@ -257,21 +257,21 @@ function open_popup (d){
 	$(popup_content).append(div);
 
 	if( d.code == 'sig' ){
-		if( d.method.length > 0 ){
+		if( d.mechanism.length > 0 ){
 
 			div = document.createElement('div');
 			$(div)
 				.addClass('section')
-				.html( json.labels.methods[lg] )
+				.html( json.labels.mechanisms[lg] )
 			$(popup_content).append(div);
 
 			ul = document.createElement('div');
 			$(ul).addClass('list');
 			$(popup_content).append(ul);
 
-			for( i in d.method ){
+			for( i in d.mechanism ){
 
-				node = arr_search( json.filters.method.itens, d.method[i] );
+				node = arr_search( json.filters.mechanism.itens, d.mechanism[i] );
 				li = document.createElement('li');
 				li.open = false;
 				li.node = node;
@@ -455,7 +455,7 @@ function reset_filters_score(clear){
 			for(b in json.filters[i].itens){
 				json.filters[i].itens[b].on = false;
 			}
-			strict.method = [];
+			strict.mechanism = [];
 			strict.kind = [];
 		}
 	}
@@ -538,7 +538,7 @@ function update_list(data, cod){
 		for( i in json.filters ){
 			if( d[i] &&	d.visible && json.filters[i].active.length > 0 ){
 				var found = false;
-				if(i != 'method' && i != 'kind'){
+				if(i != 'mechanism' && i != 'kind'){
 					if(	json.filters[i].active.indexOf( d[i] )  >= 0 ){
 						found = true;
 					}
@@ -734,7 +734,7 @@ function load(){
 
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
-		create_filters(json.filters.method, sig_filters, 'method');
+		create_filters(json.filters.mechanism, sig_filters, 'mechanism');
 		create_filters(json.filters.purpose, sig_filters, false);
 		create_filters(json.filters.type, sig_filters, false);
 
@@ -858,7 +858,7 @@ function load(){
 		if( cur_code == 'hub' ){
 			item = find_id(json.filters.kind.itens, fixed_filter_id);
 		}else{
-			item = find_id(json.filters.method.itens, fixed_filter_id);
+			item = find_id(json.filters.mechanism.itens, fixed_filter_id);
 		}
 
 		$(fixed_list_lb).html(item.label);

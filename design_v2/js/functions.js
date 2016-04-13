@@ -64,7 +64,7 @@ function load(){
 	}
 
 	if(cur_page == 'signals.html'){
-		list = json.filters.method.itens;
+		list = json.filters.mechanism.itens;
 		for(i in list){
 			create_item(list[i], 'sig');
 		}

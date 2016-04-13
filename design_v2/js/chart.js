@@ -6,9 +6,6 @@ var json,
 	n_signals = 0,
 	scale;
 
-var scale_kind,
-	scale_method;
-
 var cur_scale = 1;
 
 var zoom_limits = [ 0.1, 5 ];
@@ -20,7 +17,7 @@ var filter_h = 25;
 var hub_filters = [];
 var sig_filters = [];
 var strict = {
-		'method':[],
+		'theme':[],
 		'kind':[]
 	};
 
@@ -296,7 +293,7 @@ function reset_filters_score(clear){
 			for(b in json.filters[i].itens){
 				json.filters[i].itens[b].on = false;
 			}
-			strict.method = [];
+			strict.theme = [];
 			strict.kind = [];
 		}
 	}
@@ -380,7 +377,7 @@ function update_list(data, cod){
 		for( i in json.filters ){
 			if( d[i] &&	d.visible && json.filters[i].active.length > 0 ){
 				var found = false;
-				if(i != 'method' && i != 'kind'){
+				if(i != 'theme' && i != 'kind'){
 					if(	json.filters[i].active.indexOf( d[i] )  >= 0 ){
 						found = true;
 					}
@@ -633,9 +630,9 @@ function create_map(trg){
 	}
 
 	if(trg == 'sig'){
-		nodes = json.filters.method.itens;
+		nodes = json.filters.theme.itens;
 		list = json.signals;
-		group = "method";
+		group = "theme";
 		trg_total = json.signals.length;
 	}
 
@@ -761,9 +758,7 @@ function close_legend(){
 }
 
 
-
 //////////////////////////////// LOAD ////////////////////////////////
-
 
 
 function load(){
@@ -780,8 +775,8 @@ function load(){
 		dbody.appendChild(legends); // change legends DOM position
 		$(legends).hide();
 	}else{
-		$(legend_hub).height(json.filters.kind.itens.length * 21 );
-		$(legend_sig).height(json.filters.method.itens.length * 21 );
+		$(legend_hub).height(30 + json.filters.kind.itens.length * 20 );
+		$(legend_sig).height(20 + json.filters.theme.itens.length * 20 );
 	}
 
 	// mobile legend close bt
@@ -809,17 +804,18 @@ function load(){
 		scale = 10;
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
-		create_filters(json.filters.method, sig_filters, 'method');
+		create_filters(json.filters.theme, sig_filters, 'theme');
+		create_filters(json.filters.mechanism, sig_filters, 'mechanism');
 		create_filters(json.filters.purpose, sig_filters, false);
 		create_filters(json.filters.type, sig_filters, false);
 
 		// legend
-		//method legend
+		//mechanism legend
 
-		$(legend_sig_title).html( json.filters.method.label );
-		for( i in json.filters.method.itens ){
+		$(legend_sig_title).html( json.filters.theme.label );
+		for( i in json.filters.theme.itens ){
 			// legend
-			d = json.filters.method.itens[i];
+			d = json.filters.theme.itens[i];
 			li = document.createElement('li');
 			$(li)
 				.addClass('legend')
@@ -836,7 +832,7 @@ function load(){
 			li.appendChild(div);
 
 			// mobile legend bt
-			if( mobile && (i==0 || i==Math.round(json.filters.kind.itens.length/2) || i == json.filters.kind.itens.length - 1)){
+			if( mobile && (i==0 || i==Math.round(json.filters.theme.itens.length/2) || i == json.filters.theme.itens.length - 1)){
 				div = document.createElement('div');
 				$(div)
 					.addClass('legend_bt_color')
@@ -854,7 +850,7 @@ function load(){
 		}
 
 		// labels
-		$(circles_out).html(json.labels.method[lg].toUpperCase());
+		$(circles_out).html(json.labels.theme[lg].toUpperCase());
 		$(circles_in).html(json.labels.sigs[lg].toUpperCase());
 
 	}else{
