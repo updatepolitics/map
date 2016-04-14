@@ -1,7 +1,0 @@
-{
-  "mongodb": {
-    "url": "mongodb://localhost/update-dev",
-    "name": "mongodb",
-    "connector": "mongodb"
-  }
-}

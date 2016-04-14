@@ -1,5 +1,5 @@
 .env
-*.csv
+
 *.dat
 *.iml
 *.log
@@ -19,4 +19,4 @@ coverage
 node_modules
 npm-debug.log
 client-src/js/service.js
-data
+*#

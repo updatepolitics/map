@@ -1,0 +1,22 @@
+<template name="appMenu">
+  {{#each appMenu}}
+    <li>
+      <a href="{{ pathFor page }}">
+        {{ _pt }}
+      </a>
+      <ul>
+        {{#each submenu }}
+          <li>
+            {{#if anchor}}
+              <a href="{{ pathFor ../page }}#{{ anchor }}">
+                {{ _pt }}
+              </a>
+            {{else}}
+              {{#linkTo route=route }} {{ _pt }} {{/linkTo}}
+            {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    </li>
+  {{/each}}
+</template>

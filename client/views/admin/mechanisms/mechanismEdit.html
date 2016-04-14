@@ -1,0 +1,21 @@
+<template name="mechanismEdit">
+  <h1>Edit mechanism</h1>
+
+  {{#if Template.subscriptionsReady}}
+    {{#autoForm collection="Mechanisms" doc=this id="mechanismEdit" type="update" template="semanticUI"}}
+      <button type="submit" class="ui button">Update</button>
+      <a class="ui button" href="{{pathFor route='mechanism.list'}}" role="button">Back to index</a>
+      <fieldset>
+        {{> afQuickField name='en'}}
+        {{> afQuickField name='description_en' rows=6}}
+        {{> afQuickField name='es'}}
+        {{> afQuickField name='description_es' rows=6}}
+        {{> afQuickField name='pt'}}
+        {{> afQuickField name='description_pt' rows=6}}
+      </fieldset>
+
+    {{/autoForm}}
+  {{else}}
+    Loading...
+  {{/if}}
+</template>

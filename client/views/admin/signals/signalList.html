@@ -1,0 +1,26 @@
+<template name="signalList">
+    <h1>Signals</h1>
+    {{#if Template.subscriptionsReady}}
+      <a class="ui button" href="{{pathFor route='signal.create'}}" role="button">New</a>
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each signals}}
+            <tr>
+                <td>
+                  <a href="{{pathFor route='method.edit'}}">{{ name }}</a>
+                  <a href="{{ pathFor route='method.edit' }}" class="remove">&times;</a>
+                  <a class="edit">&plus;</a>
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      Loading...
+    {{/if}}
+</template>

@@ -1,0 +1,41 @@
+<template name="mechanismList">
+    <h1>Mechanism listing</h1>
+    {{#if Template.subscriptionsReady}}
+      <a class="ui button" href="{{pathFor route='mechanism.create'}}" role="button">New</a>
+      <table class="ui table">
+        <thead>
+          <tr>
+            <th>English</th>
+            <th>Spanish</th>
+            <th>Portuguese</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each mechanisms}}
+            <tr>
+              <td>
+                <a href="{{ pathFor route='mechanism.edit' }}">
+                  {{en}}
+                </a>
+              </td>
+              <td>
+                <a href="{{ pathFor route='mechanism.edit' }}">
+                  {{es}}
+                </a>
+              </td>
+              <td>
+                <a class="remove">&times;</a>
+                <a href="{{ pathFor route='mechanism.edit' }}" class="edit">&plus;</a>
+                <a href="{{ pathFor route='mechanism.edit' }}">
+                  {{pt}}
+                </a>
+              </td>
+
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      Loading...
+    {{/if}}
+</template>

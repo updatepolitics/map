@@ -1,0 +1,40 @@
+<template name="methodList">
+    <h1>Method listing</h1>
+    {{#if Template.subscriptionsReady}}
+      <a class="ui button" href="{{pathFor route='method.create'}}" role="button">New</a>
+      <table class="ui table">
+        <thead>
+          <tr>
+            <th class="four wide">English</th>
+            <th class="four wide">Spanish</th>
+            <th class="four wide">Portuguese</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each methods}}
+            <tr>
+              <td>
+                <a href="{{ pathFor route='method.edit' }}">
+                  {{ en }}
+                </a>
+              </td>
+              <td>
+                <a href="{{ pathFor route='method.edit' }}">
+                  {{ es }}
+                </a>
+              </td>
+              <td>
+                <a class="remove">&times;</a>
+                <a href="{{ pathFor route='method.edit' }}" class="edit">&plus;</a>
+                <a href="{{ pathFor route='method.edit' }}">
+                  {{ pt }}
+                </a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      Loading...
+    {{/if}}
+</template>

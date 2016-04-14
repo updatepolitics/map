@@ -1,0 +1,37 @@
+<head>
+  <meta charset="utf-8">
+  <title>Update Politics!</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, minimal-ui, maximum-scale=1, minimum-scale=1" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png?v1" sizes="16x16 32x32 64x64">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-precomposed.png">
+</head>
+
+<template name="header">
+  <div id="nav_bar" role="navigation">
+  	<div class="navbar-header">
+  		<a id="nav_bar_logo" class="" href="#"></a>
+      <button id='user' type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+  	</div>
+  	<div class="">
+  		<ul id='nav' >
+  			<li class="nav_bt"><a href="{{pathFor 'hub.list'}}">Hubs</a></li>
+  			<li class="nav_bt"><a href="#">Signals</a></li>
+  			<li class="nav_bt"><a href="#">Pages</a></li>
+
+        {{#if currentUser }}
+          <li class="nav_bt"><a href="{{pathFor 'admin'}}"><b>Admin</b></a></li>
+        {{/if}}
+
+  		</ul>
+  		<ul class="nav navbar-nav navbar-right">
+  			{{> loginButtons}} <!-- here -->
+  		</ul>
+  	</div>
+  </div>
+</template>

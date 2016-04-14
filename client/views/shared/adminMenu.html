@@ -1,0 +1,27 @@
+<template name="adminMenu">
+
+
+  {{> atForm}}
+
+  <div id="nav_bar_logo">
+
+  </div>
+
+  <ul id="nav_bar" class="menu_bts">
+    <!-- ADMIN AREA MENU  -->
+    {{#if currentUser}}
+      <!-- <li>ADMIN</li> -->
+      {{#with adminMenu}}
+        <!-- <ul> -->
+          {{#each menuItems}}
+            <li class='admin_menu_li'>
+              <a href="{{ pathFor page }}">
+                {{ _pt }}
+              </a>
+            </li>
+          {{/each}}
+        <!-- </ul> -->
+      {{/with}}
+    {{/if}}
+  </ul>
+</template>
