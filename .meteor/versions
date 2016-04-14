@@ -19,6 +19,7 @@ boilerplate-generator@1.0.6
 caching-compiler@1.0.2
 caching-html-compiler@1.0.4
 callback-hook@1.0.6
+cfs:http-methods@0.0.32
 check@1.1.2
 coffeescript@1.0.15
 ddp@1.2.3
@@ -60,6 +61,7 @@ mdg:validation-error@0.2.0
 meteor@1.1.12
 meteor-base@1.0.2
 meteorhacks:async@1.0.0
+meteorspark:util@0.2.0
 minifier-css@1.1.9
 minifier-js@1.1.9
 minimongo@1.0.12
@@ -94,6 +96,7 @@ spacebars-compiler@1.0.9
 srp@1.0.6
 standard-minifier-css@1.0.4
 standard-minifier-js@1.0.4
+tap:i18n@1.8.0
 templating@1.1.7
 templating-tools@1.0.2
 tracker@1.0.11

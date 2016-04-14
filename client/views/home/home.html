@@ -1,11 +1,11 @@
 <template name="home">
   <div id="ui container">
-    <div class="home_bt" id="about">Presentation</div>
-    <div class="home_bt" id="explore">Explore</div>
-    <div id="quotes">O <b>UPDATE</b> é um laboratório para criar espaços de diálogo e reflexão entre Hackers da Política, com o intuito de reconhecer, potencializar e dar visibilidade às práticas emergentes de participação política no século XXI.</div>
+    <div id="quotes">{{{_ "home.intro" }}}</div>
     <div id="credit">
       <span id="credit_who"></span>
       <span id="credit_what"></span>
     </div>
+    <div class="ui button" id="about">{{_ "home.buttons.intro" }}</div>
+    <div class="ui button" id="explore">{{_ "home.buttons.explore" }}</div>
   </div>
 </template>
