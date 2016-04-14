@@ -16,11 +16,6 @@ var filter_h = 25;
 
 var hub_filters = [];
 var sig_filters = [];
-var strict = {
-		'mechanism':[],
-		'theme':[],
-		'kind':[]
-	};
 
 check_code();
 
@@ -294,8 +289,6 @@ function reset_filters_score(clear){
 			for(b in json.filters[i].itens){
 				json.filters[i].itens[b].on = false;
 			}
-			strict.theme = [];
-			strict.kind = [];
 		}
 	}
 	if(clear){
@@ -424,15 +417,9 @@ function toggle_list(trg){
 function toggle_filter(trg){
 	if(trg.on){
 		trg.on = false;
-		if( trg.group && strict[trg.group].indexOf(trg.id) >= 0 ){
-			strict[trg.group].splice( strict[trg.group].indexOf(trg.id),1);
-		}
 		store_filter(trg.id, false);
 	}else{
 		trg.on = true;
-		if( trg.group && strict[trg.group].indexOf(trg.id) < 0 ){
-			strict[trg.group].push(trg.id);
-		}
 		store_filter(trg.id, true);
 	}
 	check_filters();
@@ -734,13 +721,11 @@ function set_all_circles(_dur){
 	svg_circles = svg_map.selectAll('g')
 	.each( function (d, i) {
 		d.partial = 0;
-		if(strict[d.group].length == 0 || strict[d.group].indexOf(d.id) >= 0){
-			d.list.forEach( function( sd, si ){
-				if(sd.visible){
-					d.partial ++;
-				}
-			});
-		}
+		d.list.forEach( function( sd, si ){
+			if(sd.visible){
+				d.partial ++;
+			}
+		});
 
 		var pc = Math.round(d.partial/d.trg_total*1000)/10;
 		d.pc_val = pc;

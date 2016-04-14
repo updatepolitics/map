@@ -235,13 +235,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         background-size: 60px;
         background-repeat: no-repeat;
         background-position: center;
-        opacity: .2;
         cursor: pointer;
     }
 
 #contact
     .bt:hover{
-      opacity: 1;
+      opacity: .3;
     }
 
 
@@ -288,7 +287,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   width: 45px;
   height: 45px;
   background-color: #fff;
-  opacity: .3;
   background-image: url('../layout/send.png');
   background-repeat: no-repeat;
   background-position: center;
@@ -298,7 +296,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 #send_newsletter:hover{
-  opacity: 1;
+  opacity: .3;
 }
 
 /* //////////////////////////  POPUP ////////////////////////// */
@@ -1980,7 +1978,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 .content{
     width: 100%;
-    padding:50px;
+    padding:100px 50px;
 }
 
 .light_bg
@@ -1999,13 +1997,11 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   }
 
 .content_title {
-    font-family: 'Stardos Stencil';
     font-size: 30px;
-    opacity: .2;
-    font-weight: 700;
+    font-weight: 100;
     width: 100%;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     text-transform: uppercase;
  }
 
@@ -2019,11 +2015,17 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   .subtitle {
     font-size:20px;
     text-transform: uppercase;
-    font-family: 'Stardos Stencil';
-    font-weight: 700;
+    font-weight: 300;
     margin-top: 40px;
-    text-align: center;
   }
+
+.content table{
+  width: 100%;
+}
+
+.content td{
+  padding: 3px;
+}
 
 .mt40{
     margin-top:40px;
@@ -2048,14 +2050,12 @@ hr{
     height: 1px;
     border:none;
     background: #000;
-    opacity: .3;
+    opacity: .2;
     margin: 40px 0;
 }
 
-
-
 .subtitle {
-    font-size: 16px;
+    font-size: 18px;
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 20px;
@@ -2181,15 +2181,27 @@ hr{
 	user-select: all;
 }
 
-.text{
-    margin-top: 20px;
+.content p, .content li{
+    margin-bottom: 20px;
     font-size: 18px;
     line-height: 24px;
     font-weight: 300;
 }
 
-.light1 .text, .light2 .text{
+.light1 p, .light2 p, .light1 li, .light2 li {
   font-weight: 400;
+}
+
+.content ul{
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.content .list{
+  margin-bottom: 5px;
+  list-style: disc;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .download_bt{
@@ -2254,12 +2266,6 @@ hr{
     position: relative;
     margin-bottom: 15px;
   }
-
-.staff_name{
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
 
 .staff_about{
     font-size: 18px;

@@ -24,11 +24,21 @@ var bar_h = 80;
 var pages = [
    { "_pt":"IN&Iacute;CIO", "html":"index.html",},
    { "_pt":"UPDATE", "_en":"UPDATE", "html":"update.html", "submenu" : [
-     {"_pt": "Sobre o Update", "anchor":"intro" },
-     {"_pt": "Quem somos", "anchor":"who" },
-     {"_pt": "Quem nos financia + parceiros", "anchor":"partners" }
+     {"_pt": "Sobre o Update", "anchor":"a_intro" },
+     {"_pt": "Contexto em que surge o Update", "anchor":"a_context" },
+     {"_pt": "Equipe do Update", "anchor":"a_who" },
+     {"_pt": "Financiadores", "anchor":"a_financer" },
+     {"_pt": "Transparência", "anchor":"a_transparency" },
+     {"_pt": "Colaboradores", "anchor":"a_partners" }
    ]},
-   { "_pt":"METODOLOGIA", "_en":"METODOLOGY", "html":"methodology.html"},
+   { "_pt":"MAPEAMENTO", "_en":"MAPPING", "html":"mapping.html", "submenu" : [
+      {"_pt": "Sobre o mapeamento", "anchor":"a_about" },
+      {"_pt": "Metodologia", "anchor":"a_methodology" },
+      {"_pt": "Abrangência", "anchor":"a_coverage" },
+      {"_pt": "Equipe do Mapeamento", "anchor":"a_staff" },
+      {"_pt": "Desenvolvimento da plataforma", "anchor":"a_developers" },
+      {"_pt": "Parceiros", "anchor":"a_partners" }
+   ]},
    { "_pt":"PAÍSES", "_en":"COUNTRIES", "html":"countries.html", "submenu" : [
       {"_pt": "Introdução / O que é", "anchor":"intro" },
       {"_pt": "Paises/Iniciativas", "anchor":"countries" },
