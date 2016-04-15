@@ -34,3 +34,4 @@ meteorhacks:async
 useraccounts:core
 useraccounts:semantic-ui
 tap:i18n
+useraccounts:iron-routing
