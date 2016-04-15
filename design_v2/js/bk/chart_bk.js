@@ -3,9 +3,10 @@ var json,
 	node,
 	cur_filters,
 	n_hubs = 0,
-	n_signals = 0;
+	n_signals = 0,
+	scale;
 
-var scale = 1;
+var cur_scale = 1;
 
 var zoom_limits = [ 0.1, 5 ];
 var zoom_factor = 1.5;
@@ -23,13 +24,11 @@ check_code();
 
 var svg_map_area;
 var svg_map;
-var list;
-var group_by;
-var n_nodes;
 
 var svg_nodes;
 var svg_force;
 var svg_circles;
+
 
 //////////////////////////////// OBJECTS ////////////////////////////////
 
@@ -151,16 +150,16 @@ function sep(tx){
 ////////////////////////////////  zoom  ////////////////////////////////
 
 $(zoom_out).on(bt_event, function(){
-	if(scale > zoom_limits[0]){
-
-		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ scale +')');
+	if(cur_scale > zoom_limits[0]){
+		cur_scale = cur_scale/zoom_factor;
+		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
 	}
 });
 
 $(zoom_in).on(bt_event, function(){
-	if(scale < zoom_limits[1]){
-
-		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ scale +')');
+	if(cur_scale < zoom_limits[1]){
+		cur_scale *= zoom_factor;
+		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
 	}
 });
 
@@ -564,144 +563,156 @@ function resize_explore(){
 //////////////////////////////// circles ////////////////////////////////
 
 function calc_radius(area){
-	return 3 * Math.sqrt(area / Math.PI);
+	return scale * Math.sqrt(area / Math.PI);
 }
 
-function get_hex(id, target){
-	for(i in target){
-		if(target[i].id == id) {
-			return target[i].hex;
-		}
-	}
+function tick(e) {
+	svg_circles.each(gravity(0.07 * e.alpha))
+	.each(collide(0.05))
+	.attr('transform', function (d) {
+		return 'translate(' + d.x + ' ' + d.y + ')';
+	});
 }
 
-function check_radius(d){
-	 if(cur_code == 'hub'){
-			return calc_radius(d.signals.length);
-	 }else{
-		var n_hubs = 1; // minimum radius
-		for(i in json.hubs){
-			if( json.hubs[i].signals.indexOf(d.id) >= 0) n_hubs ++;
-		}
-		return calc_radius(n_hubs);
-	}
+function gravity(alpha) {
+	return function (d) {
+		d.y += (d.cy - d.y) * alpha;
+		d.x += (d.cx - d.x) * alpha;
+	};
 }
 
+function collide(alpha) {
+	var quadtree = d3.geom.quadtree(svg_nodes);
+	return function (d) {
+		var r = d.radius,
+		nx1 = d.x - r,
+		nx2 = d.x + r,
+		ny1 = d.y - r,
+		ny2 = d.y + r;
+		quadtree.visit(function (quad, x1, y1, x2, y2) {
+			if (quad.point && (quad.point !== d)) {
+				var x = d.x - quad.point.x,
+				y = d.y - quad.point.y,
+				l = Math.sqrt(x * x + y * y),
+				r = d.radius + quad.point.radius + (d.color !== quad.point.color);
+				if (l < r) {
+					l = (l - r) / l * alpha;
+					d.x -= x *= l;
+					d.y -= y *= l;
+					quad.point.x += x;
+					quad.point.y += y;
+				}
+			}
+			return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+		});
+	};
+}
 
 function create_map(trg){
+
+	var list;
 	var nodes;
 	var color;
 	var group;
 
-	var rand_cod = Math.random();
+	if(trg == 'hub'){
+		nodes = json.filters.kind.itens;
+		list = json.hubs;
+		group = "kind";
+		trg_total = json.hubs.length;
+	}
+
+	if(trg == 'sig'){
+		nodes = json.filters.theme.itens;
+		list = json.signals;
+		group = "theme";
+		trg_total = json.signals.length;
+	}
 
 	svg_map.selectAll("*").remove();
 
-	////////////////////// map
-
-	var width = 1,
-	    height = 1,
-	    padding = .1, // separation between same-color nodes
-	    clusterPadding = 1; // separation between different-color nodes
-
-	// The largest node for each cluster.
-	var clusters = [];
-
-	var nodes = list.map(function(d,i) {
-	  var clt = d[group_by][0],
-				hex = get_hex( d[group_by], json.filters[group_by].itens),
-	      rds = check_radius(d),
-	      obj = {cluster: clt, radius: rds,  hex: hex};
-	  if (!clusters[clt] || (rds > clusters[clt].radius)) clusters[clt] = obj;
-	  return obj;
+	svg_nodes = nodes.map(function (d,i) {
+		return {
+			node:d,
+			id:d.id,
+			fill: d.hex,
+			// pc: d.pc,
+			partial:0,
+			total:0,
+			cx: 0,
+			cy: 0,
+		};
 	});
 
-	// Use the pack layout to initialize node positions.
-	d3.layout.pack()
-	    .sort(null)
-	    .size([width, height])
-	    .children(function(d) { return d.values; })
-	    .value(function(d) { return d.radius * d.radius; })
-	    .nodes({values: d3.nest()
-	      .key(function(d) { return d.cluster; })
-	      .entries(nodes)});
+	svg_force = d3.layout.force()
+		.nodes(svg_nodes)
+		.on('tick', tick)
+		.gravity(0)
+		.charge(1)
+		.friction(0.85)
 
-	var force = d3.layout.force()
-	    .nodes(nodes)
-	    .size([width, height])
-	    .gravity(.01)
-    	.friction(0.9)
-	    .charge(0)
-	    .on("tick", tick)
-	    .start();
+	// circles
 
-	var node = svg_map.selectAll("circle")
-	    .data(nodes)
-	  	.enter().append("circle")
-	    .style("fill", function(d) { return d.hex })
-	  	// .call(force.drag);
+	svg_circles = svg_map.selectAll('g')
+	.data(svg_nodes)
+	.enter()
+	.append('g')
+	.attr('style', 'cursor:pointer')
+	.on('click', function(d){
+		open_popup(d);
+	})
+	.on('mouseover', function(d){
+		var val = d.partial +  '/' + d.trg_total + ' ' + check_num(d.partial, cur_code) + ' (' + d.pc_val + '%)';
+		if(!mobile) tt(d.node.label, val, d.fill);
+	})
+	.on('mouseout', function(d){
+		if(!mobile) tt(false);
+	})
+	//.call(svg_force.drag)
+	.each(function (d, i) {
+		c_total = d3.select(this)
+			.append('circle')
+			.attr('fill-opacity', 0.1)
+			.attr('fill', d.fill);
 
-	node.transition()
-	    .duration(1000)
-	    .delay(function(d, i) { return i * (1000/n_nodes); })
-	    .attrTween("r", function(d) {
-	      var i = d3.interpolate(0, d.radius);
-	      return function(t) { return d.radius = i(t); };
-	    });
+		c_partial = d3.select(this)
+			.append('circle')
+			.attr('r',0)
+			.attr('fill', d.fill)
+			.attr('fill-opacity', 0)
 
-	function tick(e) {
-	  node
-	      .each(cluster(3 * e.alpha * e.alpha))
-	      .each(collide(.15))
-	      .attr("cx", function(d) { return d.x; })
-	      .attr("cy", function(d) { return d.y; });
-	}
+		d.c_total = c_total;
+		d.c_partial = c_partial;
+		d.group = group;
+		d.trg_total = trg_total;
 
-	// Move d to be adjacent to the cluster node.
-	function cluster(alpha) {
-	  return function(d) {
-	    var cluster = clusters[d.cluster];
-	    if (cluster === d) return;
-	    var x = d.x - cluster.x,
-	        y = d.y - cluster.y,
-	        l = Math.sqrt(x * x + y * y),
-	        r = d.radius + cluster.radius;
-	    if (l != r) {
-	      l = (l - r) / l * alpha;
-	      d.x -= x *= l;
-	      d.y -= y *= l;
-	      cluster.x += x;
-	      cluster.y += y;
-	    }
-	  };
-	}
+		d.list = [];
+		list.forEach( function( sd, si ){
+			if(sd[group].indexOf( d.node.id ) >= 0) {
+				d.total ++;
+				d.list.push(sd);
+			}
+		});
 
-	// Resolves collisions between d and all other circles.
-	function collide(alpha) {
-	  var quadtree = d3.geom.quadtree(nodes);
-	  return function(d) {
-	    var r = d.radius + Math.max(padding, clusterPadding),
-	        nx1 = d.x - r,
-	        nx2 = d.x + r,
-	        ny1 = d.y - r,
-	        ny2 = d.y + r;
-	    quadtree.visit(function(quad, x1, y1, x2, y2) {
-	      if (quad.point && (quad.point !== d)) {
-	        var x = d.x - quad.point.x,
-	            y = d.y - quad.point.y,
-	            l = Math.sqrt(x * x + y * y),
-	            r = d.radius + quad.point.radius + (d.cluster === quad.point.cluster ? padding : clusterPadding);
-	        if (l < r) {
-	          l = (l - r) / l * alpha;
-	          d.x -= x *= l;
-	          d.y -= y *= l;
-	          quad.point.x += x;
-	          quad.point.y += y;
-	        }
-	      }
-	      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-	    });
-	  };
+		d.radius = calc_radius(d.total) + 1;
+		d.c_total
+			.attr('r',0)
+			.transition().duration(dur2)
+			.attr('r', calc_radius(d.total));
+
+	});
+
+	svg_map
+		.attr('opacity', 0)
+		.transition().duration(1000)
+		.attr('opacity', 1);
+
+	svg_force.alpha(0).start();
+  set_all_circles(1000);
+
+	if(mobile) {
+		cur_scale = 0.5;
+		svg_map.attr('transform', 'translate(1000 1000) scale('+ cur_scale +')');
 	}
 
 }
@@ -781,11 +792,7 @@ function load(){
 	// set_target
 	if(cur_code == "sig"){
 
-	 	list = json.signals;
-	 	group_by = "theme";
-
-		scale = 6;
-
+		scale = 15;
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
 		create_filters(json.filters.theme, sig_filters, 'theme');
@@ -839,10 +846,7 @@ function load(){
 
 	}else{
 
-		list = json.hubs;
-		group_by = "kind";
-		scale = 7;
-
+		scale = 20;
 		$(control_hub).addClass('on');
 		sep(json.labels.hub_list[lg].toUpperCase());
 		create_filters(json.filters.kind, hub_filters, 'kind');
@@ -902,9 +906,6 @@ function load(){
 	// start data
 	simulate_db(json);
 
-	if(cur_code == 'sig') n_nodes = json.signals.length;
-	else n_nodes = json.signals.length;
-
 	// SVG MAP
 	svg_map_area = d3.select('#map')
 		.append('svg')
@@ -912,7 +913,7 @@ function load(){
 
 	svg_map = svg_map_area
 		.append('g')
-		.attr('transform','translate(1000 1000) scale('+ scale +')');
+		.attr('transform','translate(1000 1000)');
 
 	resize();
 	create_map(cur_code);

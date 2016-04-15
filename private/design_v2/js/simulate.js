@@ -35,6 +35,14 @@ function simulate_db(db){
 		hb.origin = 39 + rand(5);
 		hb.coverage = 30 + rand(4);
 		hb.financier = 28 + shift_rand(2);
+
+		var ns = shift_rand(4);
+		hb.signals = [];
+		for(a=1; a<=ns; a++){
+			var rand_s = shift_rand(445);
+			if( hb.signals.indexOf(rand_s) < 0)hb.signals.push(rand_s);
+		}
+
 		db.hubs.push(hb);
 	}
 
