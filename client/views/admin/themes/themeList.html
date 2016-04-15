@@ -5,9 +5,7 @@
       <table class="ui table">
         <thead>
           <tr>
-            <th class="four wide">English</th>
-            <th class="four wide">Spanish</th>
-            <th class="four wide">Portuguese</th>
+            <th>Name</th>
           </tr>
         </thead>
         <tbody>
@@ -17,18 +15,8 @@
                 <a href="{{ pathFor route='theme.edit' }}">
                   {{ en }}
                 </a>
-              </td>
-              <td>
-                <a href="{{ pathFor route='theme.edit' }}">
-                  {{ es }}
-                </a>
-              </td>
-              <td>
-                <a href="{{ pathFor route='method.edit' }}">
-                <a href="{{ pathFor route='method.edit' }}" class="remove">&times;</a>
+                <a class="remove">&times;</a>
                 <a class="edit">&plus;</a>
-                  {{ pt }}
-                </a>
               </td>
             </tr>
           {{/each}}

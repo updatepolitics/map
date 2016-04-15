@@ -8,3 +8,9 @@ Template.methodList.helpers({
     return Methods.find({},{sort: {en: 1}});
   },
 });
+
+Template.methodList.events({
+  'click .remove': function(event, template){
+    Methods.remove({_id: this._id})
+  }
+});

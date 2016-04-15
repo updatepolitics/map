@@ -15,3 +15,9 @@ Template.hubList.helpers({
     else return 'undefined';
   }
 });
+
+Template.hubList.events({
+  'click .remove': function(event, template){
+    Hubs.remove({_id: this._id})
+  }
+});

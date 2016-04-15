@@ -16,3 +16,9 @@ Template.signalList.helpers({
     else return 'undefined';
   }
 });
+
+Template.signalList.events({
+  'click .remove': function(event, template){
+    Signals.remove({_id: this._id})
+  }
+});
