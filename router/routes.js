@@ -5,6 +5,7 @@ Router.plugin('auth',{
     'login',
     'resetPassword',
     'signup',
+    'signin',
     'verifyEmail',
     'hub.list'
   ]
@@ -32,10 +33,13 @@ Router.route('admin/hubs', {
 });
 Router.route("admin/hubs/create", {
   controller: 'AdminController',
+  template: 'hubForm',
   name: 'hub.create'
 });
+
 Router.route('admin/hubs/:_id/edit', {
   controller: 'HubController',
+  template: 'hubForm',
   name: 'hub.edit'
 });
 
