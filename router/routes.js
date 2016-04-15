@@ -53,11 +53,21 @@ Router.route('admin/signals', {
 });
 Router.route("admin/signals/create", {
   controller: 'AdminController',
+  template: 'signalForm',
   name: 'signal.create'
 });
 Router.route('admin/signals/:_id/edit', {
   controller: 'AdminController',
-  name: 'signal.edit'
+  template: 'signalForm',
+  name: 'signal.edit',
+  waitOn: function(){
+    return Meteor.subscribe('signal', this.params._id);
+  },
+  data: function(){
+    return Signals.findOne({
+      _id: this.params._id
+    });
+  }
 });
 
 /*

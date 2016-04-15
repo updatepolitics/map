@@ -11,11 +11,11 @@
         <tbody>
           {{#each signals}}
             <tr>
-                <td>
-                  <a href="{{pathFor route='method.edit'}}">{{ name }}</a>
-                  <a href="{{ pathFor route='method.edit' }}" class="remove">&times;</a>
-                  <a class="edit">&plus;</a>
-                </td>
+              <td>
+                <a href="{{pathFor route='signal.edit'}}">{{ name }}</a>
+                <a href="{{ pathFor route='signal.edit' }}" class="remove">&times;</a>
+                <a class="edit">&plus;</a>
+              </td>
             </tr>
           {{/each}}
         </tbody>

@@ -4,8 +4,8 @@
   {{#if Template.subscriptionsReady}}
     {{#autoForm collection="Hubs" doc=this id="hubForm" type=formType template="semanticUI"}}
 
-        <button type="submit" class="ui button">{{ formType }}</button>
-        <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back</a>
+      <button type="submit" class="ui button">{{ formType }}</button>
+      <a class="ui button" href="{{pathFor route='hub.list'}}" role="button">Back</a>
       <fieldset>
         {{> afQuickField name='name'}}
         {{> afQuickField name='city'}}
