@@ -127,10 +127,13 @@ td{
   font-weight: 100;
   cursor: pointer;
   display: none;
+  background-image: url('layout/icon_trash.png');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .remove:hover{
-  background: #fff;
+  background-color: #e12525;
 }
 
 tr:hover .remove{
@@ -154,10 +157,13 @@ tr:hover .remove{
   font-weight: 100;
   cursor: pointer;
   display: none;
+  background-image: url('layout/icon_edit.png');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .edit:hover{
-  background: #fff;
+  background-color: #3494f3;
 }
 
 tr:hover .edit{
@@ -166,7 +172,7 @@ tr:hover .edit{
 
 tr:hover td{
   background: #313949;
-} 
+}
 
 label{
   color: #fff !important;
