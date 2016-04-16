@@ -11,13 +11,13 @@
         <tbody>
           {{#each hubs}}
             <tr>
-                <td>
-                  <a class="remove"></a>
-                  <a href="{{pathFor route='hub.edit'}}" class="edit"></a>
-                  <a href="{{pathFor route='hub.edit'}}">
-                    {{name}}
-                  </a>
-                </td>
+              <td>
+                <a href="{{pathFor route='hub.edit'}}">
+                  {{name}}
+                </a>
+                <a href="{{pathFor route='hub.edit'}}" class="edit"></a>
+                <a class="remove"></a>
+              </td>
             </tr>
           {{/each}}
         </tbody>
