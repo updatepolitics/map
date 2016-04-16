@@ -1,16 +1,18 @@
-<template name="themeEdit">
-  <h1>Edit theme</h1>
+<template name="themeForm">
+  <h1>{{ formType }} theme</h1>
+
   {{#if Template.subscriptionsReady}}
-    {{#autoForm collection="Themes" doc=this id="themeEdit" type="update" template="semanticUI"}}
+    {{#autoForm collection="Themes" doc=this id="themeForm" type=formType template="semanticUI"}}
+
       <fieldset>
+        <button type="submit" class="ui button">{{ formType }}</button>
+        <a class="ui button" href="{{pathFor route='theme.list'}}" role="button">back</a>
         {{> afQuickField name='en'}}
         {{> afQuickField name='description_en' rows=6}}
         {{> afQuickField name='es'}}
         {{> afQuickField name='description_es' rows=6}}
         {{> afQuickField name='pt'}}
         {{> afQuickField name='description_pt' rows=6}}
-        <button type="submit" class="ui button">Update</button>
-        <a class="ui button" href="{{pathFor route='theme.list'}}" role="button">Back to index</a>
       </fieldset>
 
     {{/autoForm}}

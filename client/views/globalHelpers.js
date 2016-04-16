@@ -61,3 +61,9 @@ Template.registerHelper("technologyTypeOptions", function(){
     return {label: i, value: i};
   });
 });
+
+Template.registerHelper("mechanismOptions", function(argument){
+  return Mechanisms.find({}, {sort: {en: 1}}).map(function (c) {
+    return {label: c.en, value: c._id};
+  });
+});
