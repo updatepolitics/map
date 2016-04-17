@@ -23,7 +23,6 @@ check
 aldeed:collection2
 aldeed:autoform
 accounts-password
-zimme:iron-router-auth
 standard-minifier-css
 standard-minifier-js
 semantic:ui
@@ -35,3 +34,4 @@ useraccounts:core
 useraccounts:semantic-ui
 tap:i18n
 useraccounts:iron-routing
+tap:i18n-db

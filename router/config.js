@@ -3,16 +3,25 @@ Router.configure({
 });
 
 AccountsTemplates.configure({
-  defaultLayout: 'authLayout',
-  onLogoutHook: function() {
-    Router.go('/login');
-  }
+    defaultLayout: 'adminLayout',
+    onLogoutHook: function() {
+      Router.go('/admin');
+    }
 });
 
 AccountsTemplates.configureRoute('signIn', {
-    name: 'signin',
-    path: '/login',
-    template: 'login',
-    layoutTemplate: 'authLayout',
-    redirect: '/admin',
+  path: '/admin',
+  redirect: '/admin/hubs'
+});
+
+Router.route('/', { name: 'home' });
+Router.route('/chart', { name: 'chart' });
+Router.route('/about', { name: 'about' });
+Router.route('/countries', { name: 'countries' });
+Router.route('/hubs', { name: 'hubs' });
+Router.route('/methodology', { name: 'methodology' });
+Router.route('/signals', { name: 'signals' });
+
+Router.plugin('ensureSignedIn', {
+  except: ['home', 'admin']
 });
