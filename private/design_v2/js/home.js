@@ -19,6 +19,7 @@ var svg_circles;
 reg('container');
 
 reg('home');
+reg('update_logo_home');
 reg('quotes');
 reg('about');
 reg('explore');
@@ -50,7 +51,7 @@ function map_rotation(delay,rotate){
 		rot_delay = setTimeout( function(){
 			rotation = setInterval(function(){
 				rot += 0.02;
-				svg_map.attr('transform', 'translate(1000 1000) scale('+scale+') rotate(' + rot + ')');
+				svg_map.attr('transform', 'translate(1000 1000) rotate(' + rot + ')');
 			},20)
 		}, delay);
 	}else{
@@ -95,117 +96,73 @@ function create_map(){
 
 	var nodes;
 	var color;
-	var group;
-	var n_nodes;
+	var color_scale;
 
 	var rand_cod = Math.random();
 
  	if(rand_cod > 0.5){
-			list = json.hubs;
-			group_by = "kind";
-			set_code("hub");
-
-			n_nodes = json.hubs.length;
-
-	 	 if(mobile) scale = 13;
-	 	 else scale = 13;
-	 }else{
-			list = json.signals
-			group_by = "theme";
-			set_code("sig");
-
-			n_nodes = json.signals.length;
-
-	 	 if(mobile) scale = 10;
-	 	 else scale = 10;
-	 }
+		color_scale  = ['#adcc8f','#8a99d7'];
+	}else{
+		color_scale = ['#d87d7d','#cea86d'];
+	}
 
 	svg_map.selectAll("*").remove();
 
 	////////////////////// map
 
-	var width = 1,
-	    height = 1,
-	    padding = .1, // separation between same-color nodes
-	    clusterPadding = 1; // separation between different-color nodes
+	var padding = .1 // separation between same-color nodes
 
-	// The largest node for each cluster.
-	var clusters = [];
+	var n = 200, // total number of nodes
+  m = 5; // number of distinct clusters
 
-	var nodes = list.map(function(d,i) {
-	  var clt = d[group_by][0],
-				hex = get_hex( d[group_by], json.filters[group_by].itens),
-	      rds = check_radius(d),
-	      obj = {cluster: clt, radius: rds,  hex: hex};
-	  if (!clusters[clt] || (rds > clusters[clt].radius)) clusters[clt] = obj;
+	var color = d3.scale.linear()
+	    .domain([0,m])
+			.interpolate(d3.interpolateHcl)
+		  .range(color_scale);
+
+	var nodes = d3.range(n).map(function(d,i) {
+	  var
+			hex = color(Math.floor(Math.random()*m)),
+      rds = 20 + Math.random()*200,
+      obj = { radius: rds,  hex: hex};
 	  return obj;
 	});
 
 	// Use the pack layout to initialize node positions.
-	d3.layout.pack()
-	    .sort(null)
-	    .size([width, height])
-	    .children(function(d) { return d.values; })
-	    .value(function(d) { return d.radius * d.radius; })
-	    .nodes({values: d3.nest()
-	      .key(function(d) { return d.cluster; })
-	      .entries(nodes)});
 
 	var force = d3.layout.force()
-	    .nodes(nodes)
-	    .size([width, height])
-	    .gravity(.01)
-    	.friction(0.9)
-	    .charge(0)
-	    .on("tick", tick)
-	    .start();
+    .nodes(nodes)
+    .gravity(.1)
+  	.friction(0.2)
+    .charge(0)
+    .on("tick", tick)
+    .start();
 
 	var node = svg_map.selectAll("circle")
-	    .data(nodes)
-	  	.enter().append("circle")
-	    .style("fill", function(d) { return d.hex })
-	    // .call(force.drag);
+    .data(nodes)
+  	.enter().append("circle")
+    .style("fill", function(d) { return d.hex })
 
 	node.transition()
-	    .duration(1000)
-	    .delay(function(d, i) { return i * (1000/n_nodes); })
-	    .attrTween("r", function(d) {
-	      var i = d3.interpolate(0, d.radius);
-	      return function(t) { return d.radius = i(t); };
-	    });
+    .duration(1000)
+    .delay(function(d, i) { return i * 5; })
+    .attrTween("r", function(d) {
+      var i = d3.interpolate(0, d.radius);
+      return function(t) { return d.radius = i(t); };
+    });
 
 	function tick(e) {
 	  node
-	      .each(cluster(3 * e.alpha * e.alpha))
-	      .each(collide(.15))
-	      .attr("cx", function(d) { return d.x; })
-	      .attr("cy", function(d) { return d.y; });
-	}
-
-	// Move d to be adjacent to the cluster node.
-	function cluster(alpha) {
-	  return function(d) {
-	    var cluster = clusters[d.cluster];
-	    if (cluster === d) return;
-	    var x = d.x - cluster.x,
-	        y = d.y - cluster.y,
-	        l = Math.sqrt(x * x + y * y),
-	        r = d.radius + cluster.radius;
-	    if (l != r) {
-	      l = (l - r) / l * alpha;
-	      d.x -= x *= l;
-	      d.y -= y *= l;
-	      cluster.x += x;
-	      cluster.y += y;
-	    }
-	  };
+      .each(collide(.15))
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
 	}
 
 	// Resolves collisions between d and all other circles.
 	function collide(alpha) {
 	  var quadtree = d3.geom.quadtree(nodes);
 	  return function(d) {
-	    var r = d.radius + Math.max(padding, clusterPadding),
+	    var r = d.radius + padding,
 	        nx1 = d.x - r,
 	        nx2 = d.x + r,
 	        ny1 = d.y - r,
@@ -215,7 +172,7 @@ function create_map(){
 	        var x = d.x - quad.point.x,
 	            y = d.y - quad.point.y,
 	            l = Math.sqrt(x * x + y * y),
-	            r = d.radius + quad.point.radius + (d.cluster === quad.point.cluster ? padding : clusterPadding);
+	            r = d.radius;
 	        if (l < r) {
 	          l = (l - r) / l * alpha;
 	          d.x -= x *= l;
@@ -317,15 +274,10 @@ function load(){
 
 	svg_map = svg_map_area
 		.append('g')
-			.attr('transform','translate(1000 1000)')
-			.attr('opacity', 0);
+			.attr('opacity', 0.75)
 
 	resize();
-	create_map()
-
-	svg_map
-		.transition().duration(2000)
-		.attr('opacity', 0.3);
+	create_map();
 
 	map_rotation(0, true);
 
@@ -334,6 +286,9 @@ function load(){
 
 
 } // load
+
+
+$(update_logo_home).on('click', create_map);
 
 //////////////////////////////// LOAD EXTERNAL DATA ////////////////////////////////
 

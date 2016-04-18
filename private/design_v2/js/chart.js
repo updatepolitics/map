@@ -5,10 +5,11 @@ var json,
 	n_hubs = 0,
 	n_signals = 0;
 
-var scale = 1;
+var scale;
+var initial_scale;
 
-var zoom_limits = [ 0.1, 5 ];
 var zoom_factor = 1.5;
+var zoom_limits = [1,20];
 
 var zoom_r = 25;
 var filter_h = 25;
@@ -18,6 +19,8 @@ var sig_filters = [];
 
 check_code();
 
+var gray = '#2b3240';
+
 
 // map vars
 
@@ -26,6 +29,7 @@ var svg_map;
 var list;
 var group_by;
 var n_nodes;
+var layout_ready = false;
 
 var svg_nodes;
 var svg_force;
@@ -147,22 +151,6 @@ function sep(tx){
 	filters_list.appendChild(div);
 }
 
-
-////////////////////////////////  zoom  ////////////////////////////////
-
-$(zoom_out).on(bt_event, function(){
-	if(scale > zoom_limits[0]){
-
-		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ scale +')');
-	}
-});
-
-$(zoom_in).on(bt_event, function(){
-	if(scale < zoom_limits[1]){
-
-		svg_map.transition().duration(dur2).ease('exp-out').attr('transform', 'translate(1000 1000) scale('+ scale +')');
-	}
-});
 
 
 //////////////////////////////// popup ////////////////////////////////
@@ -342,8 +330,6 @@ function check_filters() {
 		$(mode_lb_num).html( n_signals );
 		$(mode_lb_tx).html( check_num( n_hubs, 'sig' ) );
 	}
-
-	console.log(json.filters);
 
 }
 
@@ -560,7 +546,6 @@ function resize_explore(){
 
 }
 
-
 //////////////////////////////// circles ////////////////////////////////
 
 function calc_radius(area){
@@ -587,142 +572,108 @@ function check_radius(d){
 	}
 }
 
+function create_map(){
 
-function create_map(trg){
-	var nodes;
-	var color;
-	var group;
+	// built map_data nodes
+	map_data = { "children":[]};
 
-	var rand_cod = Math.random();
-
-	svg_map.selectAll("*").remove();
-
-	////////////////////// map
-
-	var width = 1,
-	    height = 1,
-	    padding = .1, // separation between same-color nodes
-	    clusterPadding = 1; // separation between different-color nodes
-
-	// The largest node for each cluster.
-	var clusters = [];
-
-	var nodes = list.map(function(d,i) {
-	  var clt = d[group_by][0],
-				hex = get_hex( d[group_by], json.filters[group_by].itens),
-	      rds = check_radius(d),
-	      obj = {cluster: clt, radius: rds,  hex: hex};
-	  if (!clusters[clt] || (rds > clusters[clt].radius)) clusters[clt] = obj;
-	  return obj;
-	});
-
-	// Use the pack layout to initialize node positions.
-	d3.layout.pack()
-	    .sort(null)
-	    .size([width, height])
-	    .children(function(d) { return d.values; })
-	    .value(function(d) { return d.radius * d.radius; })
-	    .nodes({values: d3.nest()
-	      .key(function(d) { return d.cluster; })
-	      .entries(nodes)});
-
-	var force = d3.layout.force()
-	    .nodes(nodes)
-	    .size([width, height])
-	    .gravity(.01)
-    	.friction(0.9)
-	    .charge(0)
-	    .on("tick", tick)
-	    .start();
-
-	var node = svg_map.selectAll("circle")
-	    .data(nodes)
-	  	.enter().append("circle")
-	    .style("fill", function(d) { return d.hex })
-	  	// .call(force.drag);
-
-	node.transition()
-	    .duration(1000)
-	    .delay(function(d, i) { return i * (1000/n_nodes); })
-	    .attrTween("r", function(d) {
-	      var i = d3.interpolate(0, d.radius);
-	      return function(t) { return d.radius = i(t); };
-	    });
-
-	function tick(e) {
-	  node
-	      .each(cluster(3 * e.alpha * e.alpha))
-	      .each(collide(.15))
-	      .attr("cx", function(d) { return d.x; })
-	      .attr("cy", function(d) { return d.y; });
-	}
-
-	// Move d to be adjacent to the cluster node.
-	function cluster(alpha) {
-	  return function(d) {
-	    var cluster = clusters[d.cluster];
-	    if (cluster === d) return;
-	    var x = d.x - cluster.x,
-	        y = d.y - cluster.y,
-	        l = Math.sqrt(x * x + y * y),
-	        r = d.radius + cluster.radius;
-	    if (l != r) {
-	      l = (l - r) / l * alpha;
-	      d.x -= x *= l;
-	      d.y -= y *= l;
-	      cluster.x += x;
-	      cluster.y += y;
-	    }
-	  };
-	}
-
-	// Resolves collisions between d and all other circles.
-	function collide(alpha) {
-	  var quadtree = d3.geom.quadtree(nodes);
-	  return function(d) {
-	    var r = d.radius + Math.max(padding, clusterPadding),
-	        nx1 = d.x - r,
-	        nx2 = d.x + r,
-	        ny1 = d.y - r,
-	        ny2 = d.y + r;
-	    quadtree.visit(function(quad, x1, y1, x2, y2) {
-	      if (quad.point && (quad.point !== d)) {
-	        var x = d.x - quad.point.x,
-	            y = d.y - quad.point.y,
-	            l = Math.sqrt(x * x + y * y),
-	            r = d.radius + quad.point.radius + (d.cluster === quad.point.cluster ? padding : clusterPadding);
-	        if (l < r) {
-	          l = (l - r) / l * alpha;
-	          d.x -= x *= l;
-	          d.y -= y *= l;
-	          quad.point.x += x;
-	          quad.point.y += y;
-	        }
-	      }
-	      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-	    });
-	  };
-	}
-
-}
-
-function set_all_circles(_dur){
-	svg_circles = svg_map.selectAll('g')
-	.each( function (d, i) {
-		d.partial = 0;
-		d.list.forEach( function( sd, si ){
-			if(sd.visible){
-				d.partial ++;
+	for( i in json.filters[group_by].itens ){
+		var d = json.filters[group_by].itens[i];
+		var group = { "id": d.id, "hex":d.hex, "name":d.label, "children":[]};
+		for( a in list ){
+			var item = list[a];
+			if(item[group_by][0] == d.id){
+				group.children.push( { "id":item.id, 'node':item, "hex":d.hex, "name":item.name, "size":Math.random()*4 });
 			}
-		});
+		}
+		map_data.children.push( group );
+	}
 
-		var pc = Math.round(d.partial/d.trg_total*1000)/10;
-		d.pc_val = pc;
+	// built map
+	var width = 100;
+	var height = 100;
 
-		d.c_partial
-			.transition().duration(_dur)
-			.attr('r', calc_radius(d.partial))
-			.attr('fill-opacity', 1);
+	var pack = d3.layout.pack()
+		.value(function(d) { return d.size; })
+		.sort(comparator)
+		.padding(.3)
+		.size([width, height]);
+
+	var nodes = pack.nodes(map_data);
+
+	function comparator(a, b) {
+	  return a.value + b.value;
+	}
+
+
+	svg_map.selectAll('circle')
+		.data(nodes)
+		.enter()
+			.append('circle')
+			.attr('cx', function(d) { return d.x })
+			.attr('cy', function(d) { return d.y })
+			.attr('transform','translate(-50 -50)')
+			.attr('r', 0 )
+			.attr('stroke-width', '0')
+			.attr('opacity', function(d){
+				if(d.depth == 1) return 0.1;
+				if(d.depth == 2) return 1;
+			})
+			.attr('fill', function (d){
+				if(d.name) return d.hex;
+				else return 'none';
+			})
+			.each(function (d, i) {
+				c = d3.select(this);
+				c.node = d.node;
+				d.circle = c;
+			})
+			.style('cursor', 'pointer')
+			.on('mouseover', function(d){
+				if(!mobile && d.depth == 2){
+					if(d.node.visible) tt("Nome do grupo", d.node.name, d.hex);
+					else tt("Nome do grupo", d.node.name, gray);
+				}
+			})
+			.on('mouseout', function(d){
+				if(!mobile) tt(false);
+			})
+			.on('click', function(d){
+				console.log(d);
+			})
+		 	.transition().duration(1000)
+			.attr('r', function(d) { return d.r } )
+
+	}
+
+
+function set_all_circles(){
+	svg_map.selectAll('circle')
+	.each( function (d, i) {
+		if(d.depth == 2){
+			if(layout_ready){
+				if(d.node.visible){
+					d.circle
+						.transition()
+						.duration(dur/2)
+						.attr('opacity', 1)
+				}else{
+					d.circle
+						.transition()
+						.duration(dur/2)
+						.attr('opacity', .1)
+				}
+			}else{
+				if(d.node.visible){
+					d.circle
+						.attr('opacity', 1)
+				}else{
+					d.circle
+						.attr('opacity', .1)
+				}
+			}
+
+		}
 	});
 }
 
@@ -754,9 +705,11 @@ function load(){
 	if(mobile){
 		dbody.appendChild(legends); // change legends DOM position
 		$(legends).hide();
+		scale = 2;
 	}else{
 		$(legend_hub).height(30 + json.filters.kind.itens.length * 20 );
 		$(legend_sig).height(20 + json.filters.theme.itens.length * 20 );
+		scale = 5;
 	}
 
 	// mobile legend close bt
@@ -783,8 +736,6 @@ function load(){
 
 	 	list = json.signals;
 	 	group_by = "theme";
-
-		scale = 6;
 
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
@@ -841,7 +792,6 @@ function load(){
 
 		list = json.hubs;
 		group_by = "kind";
-		scale = 7;
 
 		$(control_hub).addClass('on');
 		sep(json.labels.hub_list[lg].toUpperCase());
@@ -905,21 +855,75 @@ function load(){
 	if(cur_code == 'sig') n_nodes = json.signals.length;
 	else n_nodes = json.signals.length;
 
-	// SVG MAP
+	// svg
+
 	svg_map_area = d3.select('#map')
 		.append('svg')
 		.attr('id', 'svg_map_area')
 
 	svg_map = svg_map_area
 		.append('g')
-		.attr('transform','translate(1000 1000) scale('+ scale +')');
+		.attr("transform","translate( 1000, 1000 ) scale(" + scale + ")")
 
 	resize();
 	create_map(cur_code);
 
+
+	////////////////////////////////  zoom  ////////////////////////////////
+
+
+		// $(zoom_in).on('click', function(){
+		// 	if(scale < zoom_limits[1]){
+		// 		zoom_start();
+		// 		scale *= zoom_factor;
+		// 		zoom.scale(scale).event(svg_map.transition().duration(dur));
+		// 	}
+		// });
+		//
+		// $(zoom_out).on('click', function(){
+		// 	if(scale > zoom_limits[0]){
+		// 		zoom_start();
+		// 		scale = scale/zoom_factor;
+		// 		zoom.scale(scale).event(svg_map.transition().duration(dur));
+		// 	}
+		// });
+
+		function zoom_start(){
+			clicked_zoom = true;
+		}
+
+		function zoom_end(){
+			clicked_zoom = false;
+			scale = zoom.scale();
+		}
+
+  var zoom = d3.behavior.zoom()
+      .scaleExtent(zoom_limits)
+      .center([1000, 1000])
+      .on("zoom", zoomed)
+      .translate([1000,1000])
+      .scale(scale);
+
+	zoom.translate([1000, 1000]).scale(scale).event(svg_map);
+  svg_map.attr("transform","translate( 1000, 1000 ) scale(" + scale + ")");
+
+  function zoomed() {
+    translation = [ // max translation
+        Math.max(Math.min(d3.event.translate[0], 1600), 400),
+        Math.max(Math.min(d3.event.translate[1], 1600), 400)
+    ];
+    zoom.translate(translation);
+		zoom.scale(d3.event.scale);
+		scale = d3.event.scale;
+    svg_map.attr("transform", "translate(" + translation + ") scale(" + d3.event.scale + ")");
+  }
+
+	svg_map_area.call(zoom);
+
 	// initial layout
 	check_filters();
 	check_trash();
+	layout_ready = true;
 
 	// need help
 	$(need_help).hide();

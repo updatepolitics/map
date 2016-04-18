@@ -502,7 +502,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #quotes{
     position: absolute;
     top: 50%;
-    width: 60%;
+    width: 50%;
     left: 0;
     right: 0;
     margin: auto;
