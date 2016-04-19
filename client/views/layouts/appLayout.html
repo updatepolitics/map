@@ -1,12 +1,10 @@
 <template name="appLayout">
-  {{> yield 'header'}}
-  <div class="ui grid">
-    <div class="four wide column">
-      {{> appMenu }}
-    </div>
 
-    <div class="twelve wide column">
-        {{> yield}}
-    </div>
+  {{> appHeader}}
+
+  {{> appMenu}}
+
+  <div class="twelve wide column">
+      {{> yield}}
   </div>
 </template>

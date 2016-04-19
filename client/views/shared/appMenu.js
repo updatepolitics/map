@@ -1,92 +1,51 @@
+Template.appMenu.onRendered(function(){
+  this.$(".ui.accordion").accordion();
+});
+
+Template.appMenu.events({
+  "click #menu_close_button": function(event, template){
+    $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, 'swing');
+  }
+});
+
 Template.appMenu.helpers({
-  appMenu: function(){
+  menuItens: function(){
     return [
-      {
-        "page": "home",
-        "_pt": "INÍCIO"
-      }, {
-        "page": "about",
-        "_pt": "UPDATE",
-        "_en": "UPDATE",
-        "submenu": [{
-          "anchor": "intro",
-          "_pt": "Sobre o Update",
-        }, {
-          "anchor": "who",
-          "_pt": "Quem somos",
-        }, {
-          "anchor": "partners",
-          "_pt": "Quem nos financia + parceiros",
-        }]
-      }, {
-        "page": "methodology",
-        "_pt": "METODOLOGIA",
-        "_en": "METHODOLOGY",
-      }, {
-        "_pt": "PAÍSES",
-        "_en": "COUNTRIES",
-        "page": "countries",
-        "submenu": [{
-          "anchor": "intro",
-          "_pt": "Introdução / O que é",
-        }, {
-          "anchor": "countries",
-          "_pt": "Paises/Iniciativas",
-        }, {
-          "anchor": "coverage",
-          "_pt": "Abrangência",
-        }]
-      }, {
-        "page": "hubs",
-        "_pt": "HUBS",
-        "_en": "HUBS",
-        "submenu": [{
-          "anchor": "intro",
-          "_pt": "Introdução / O que é",
-        }, {
-          "anchor": "kind",
-          "_pt": "Natureza",
-        }, {
-          "anchor": "financer",
-          "_pt": "Financiador",
-        }]
-      }, {
-        "_pt": "SINAIS",
-        "_en": "SIGNALS",
-        "page": "signals",
-        "submenu": [{
-          "anchor": "intro",
-          "_pt": "Introdução / O que é",
-        }, {
-          "anchor": "tech",
-          "_pt": "Tecnologia",
-        }, {
-          "anchor": "theme",
-          "_pt": "Temas",
-        }, {
-          "anchor": "purpose",
-          "_pt": "Propósito",
-        }, {
-          "anchor": "method",
-          "_pt": "Métodos",
-        }]
-      }, {
-        "page": "download",
-        "_pt": "DOWNLOAD",
-        "html": "download.html",
-      }, {
-        "page": "register",
-        "_pt": "CADASTRE SUA INICIATIVA",
-      }, {
-        "_pt": "EXPLORAR",
-        "_en": "EXPLORE",
-        "submenu": [{
-          "_pt": "GRÁFICO",
-          "route": "chart"
-        }, {
-          "_pt": "LISTA",
-          "route": "listing",
-        }]
-      }]
-    }
+      { "label": "HOME", "route": "home" },
+      { "label": "UPDATE", "route": "about", "subItems" : [
+        {"label": "About Update", "anchor": "a_intro" },
+        {"label": "Context", "anchor": "a_context" },
+        {"label": "Team", "anchor": "a_who" },
+        {"label": "Sponsors", "anchor": "a_financer" },
+        {"label": "Transparency", "anchor": "a_transparency" },
+        {"label": "Partners", "anchor": "a_partners" }
+      ]},
+      { "label": "MAPPING", "_en": "MAPPING", "route": "mapping", "subItems" : [
+         {"label": "About", "anchor": "a_about" },
+         {"label": "Methodology", "anchor": "a_methodology" },
+         {"label": "Scope", "anchor": "a_coverage" },
+         {"label": "Mapping team", "anchor": "a_staff" },
+         {"label": "Software", "anchor": "a_developers" },
+         {"label": "Partners", "anchor": "a_partners" }
+      ]},
+      { "label": "COUNTRIES", "route": "countries", "subItems" : [
+         {"label": "Introduction", "anchor": "intro" },
+         {"label": "Countries & Iniciatives", "anchor": "countries" },
+         {"label": "Scope", "anchor": "coverage" }
+      ]},
+      { "label": "HUBS", "route": "hubs", "subItems" : [
+         {"label": "Introduction", "anchor": "intro" },
+         {"label": "Nature", "anchor": "kind" },
+         {"label": "Sponsor", "anchor": "financer" }
+      ]},
+      { "label": "SIGNALS", "route": "signals", "subItems" : [
+         {"label": "Introduction", "anchor": "intro" },
+         {"label": "Tecnology", "anchor": "tech" },
+         {"label": "Themes", "anchor": "theme" },
+         {"label": "Purpose", "anchor": "purpose" },
+         {"label": "Methods", "anchor": "mechanism" }
+      ]},
+      { "label": "EXPLORE", "route": "EXPLORE"}
+    ];
+  }
 });
