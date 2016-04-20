@@ -11,19 +11,19 @@
           </a>
         </div>
 
-        {{#if subItems}}
-          <div class="content">
-              <ul>
-                {{#each subItems}}
-                  <li>
-                    <a href="{{ pathFor ../path }}#{{ anchor }}">
-                      {{label}}
-                    </a>
-                  </li>
-                {{/each}}
-              </ul>
-          </div>
-        {{/if}}
+        <div class="content">
+          {{#if subItems}}
+            <ul>
+              {{#each subItems}}
+                <li>
+                  <a href="{{ pathFor ../path }}#{{ anchor }}">
+                    {{label}}
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </div>
       {{/each}}
     </div>
   </div>

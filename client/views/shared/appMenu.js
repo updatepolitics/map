@@ -5,7 +5,11 @@ Template.appMenu.onRendered(function(){
 Template.appMenu.events({
   "click #menu_close_button": function(event, template){
     $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, 'swing');
-  }
+  },
+  "mouseleave #menu": function(event, template){
+    $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, 'swing');
+  },
+
 });
 
 Template.appMenu.helpers({
