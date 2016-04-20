@@ -28,11 +28,6 @@ Template.appMenu.helpers({
          {"label": "Software", "anchor": "a_developers" },
          {"label": "Partners", "anchor": "a_partners" }
       ]},
-      { "label": "COUNTRIES", "route": "countries", "subItems" : [
-         {"label": "Introduction", "anchor": "intro" },
-         {"label": "Countries & Iniciatives", "anchor": "countries" },
-         {"label": "Scope", "anchor": "coverage" }
-      ]},
       { "label": "HUBS", "route": "hubs", "subItems" : [
          {"label": "Introduction", "anchor": "intro" },
          {"label": "Nature", "anchor": "kind" },
