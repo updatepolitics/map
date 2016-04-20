@@ -22,3 +22,19 @@ Router.route("/hubs", {
   }
 });
 Router.route("/signals", {name: "signals"});
+
+Router.plugin('ensureSignedIn', {
+  except: ['home', 'admin']
+});
+
+AccountsTemplates.configure({
+  defaultLayout: 'authLayout',
+  onLogoutHook: function() {
+    Router.go('/admin');
+  }
+});
+
+AccountsTemplates.configureRoute('signIn', {
+  path: '/admin',
+  redirect: '/admin/hubs'
+});

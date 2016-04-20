@@ -24,9 +24,6 @@ Template.adminMenu.helpers({
           "_pt": "SIGNALS",
         }, {
           "page": "method.list",
-          "_pt": "PAGES",
-        }, {
-          "page": "method.list",
           "_pt": "USERS",
         }]
     }
