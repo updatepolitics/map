@@ -238,24 +238,10 @@ function open_popup_group (d){
 
 }
 
-function toggle_plus(trg){
-	if(trg.open){
-		trg.open = false;
-		$(trg.plus).animate({ height:0 },dur, in_out);
-		$(trg).css({ backgroundImage:'url(layout/plus_white.png)' })
-	}else{
-		trg.open = true;
-		$(trg.plus).animate({ height: $(trg.plus_tx).height() + 30 },dur, in_out);
-		$(trg).css({ backgroundImage:'url(layout/minus_white.png)' })
-	}
-}
-
-
 function open_popup (d){
 
 	console.log(d);
 	$(popup_content).html('');
-
 
 	if(filters.open) close_filters();
 
@@ -276,156 +262,28 @@ function open_popup (d){
 		.html( info( d, false ))
 	popup_content.appendChild(div);
 
-	// hr = document.createElement('hr');
-	// popup_content.appendChild(hr);
-
 	div = document.createElement('div');
 	$(div)
 		.addClass('about mt40')
 		.html(d.about);
 	$(popup_content).append(div);
 
-	if( d.code == 'sig' ){
-
-		// tema
-
-		div = document.createElement('div');
-		$(div)
-			.addClass('section')
-			.html( json.labels.theme[lg] )
-		$(popup_content).append(div);
-
-		ul = document.createElement('div');
-		$(ul).addClass('list');
-		$(popup_content).append(ul);
-
-		node = arr_search( json.filters.theme.itens, d.theme[0] );
-
-		li = document.createElement('li');
-		li.open = false;
-		li.node = node;
-		$(li)
-			.on('click', function(){
-				toggle_plus(this);
-			})
-			.addClass('item')
-			.html(node.label)
-			.css({ backgroundColor:node.hex })
-		$(ul).append(li);
-
-		div = document.createElement('div');
-		$(div)
-			.addClass('item_plus')
-			.css({ backgroundColor:node.hex, height:0})
-		$(ul).append(div);
-
-		div2 = document.createElement('div');
-		$(div2)
-			.html(node.about)
-		$(div).append(div2);
-
-		li.plus = div;
-		li.plus_tx = div2;
-
-		// mecanismos
-
-		if( d.mechanism.length > 0 ){
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('section')
-				.html( json.labels.mechanisms[lg] )
-			$(popup_content).append(div);
-
-			ul = document.createElement('div');
-			$(ul).addClass('list');
-			$(popup_content).append(ul);
-
-			for( i in d.mechanism ){
-
-				node = arr_search( json.filters.mechanism.itens, d.mechanism[i] );
-
-				li = document.createElement('li');
-				li.open = false;
-				li.node = node;
-				$(li)
-					.on('click', function(){
-						toggle_plus(this);
-					})
-					.addClass('item')
-					.html(node.label)
-					.css({ backgroundColor:'#2b3240' })
-				$(ul).append(li);
-
-				div = document.createElement('div');
-				$(div)
-					.addClass('item_plus')
-					.css({ backgroundColor:'#2b3240', height:0})
-				$(ul).append(div);
-
-				div2 = document.createElement('div');
-				$(div2)
-					.html(node.about)
-				$(div).append(div2);
-
-				li.plus = div;
-				li.plus_tx = div2;
-			}
-		}
-
-	}else if(d.code =='hub'){
-
-		div = document.createElement('div');
-		$(div)
-			.addClass('section')
-			.html(json.filters.kind.label)
-		$(popup_content).append(div);
-
-		ul = document.createElement('div');
-		$(ul).addClass('list');
-		$(popup_content).append(ul);
-
-		node = arr_search( json.filters.kind.itens, d.kind );
-		li = document.createElement('li');
-		li.open = false;
-		li.node = node;
-		$(li)
-			.on('click', function(){
-				toggle_plus(this);
-			})
-			.addClass('item')
-			.html(node.label)
-			.css({ backgroundColor:node.hex })
-		$(ul).append(li);
-
-		div = document.createElement('div');
-		$(div)
-			.addClass('item_plus')
-			.css({ backgroundColor:node.hex, height:0})
-		$(ul).append(div);
-
-		div2 = document.createElement('div');
-		$(div2)
-			.html(node.about)
-		$(div).append(div2);
-
-		li.plus = div;
-		li.plus_tx = div2;
-
-	}
-
 	div = document.createElement('div');
 	$(div)
-		.addClass('section')
-		.html(json.labels.more[lg])
-	$(popup_content).append(div);
-
-	div = document.createElement('div');
-	$(div)
-		.addClass('link')
+		.addClass('pop_bt link')
 		.html(d.url)
 		.on('click', function(){
 			alert(d.url);
+		});
+	$(popup_content).append(div);
+
+	div = document.createElement('div');
+	div.id = d.id;
+	$(div)
+		.addClass('pop_bt details')
+		.html('DETALHES')
+		.on('click', function(){
+			navigate( 'initiative.html', 'id=' + this.id + '&code=' + cur_code );
 		});
 	$(popup_content).append(div);
 
@@ -903,7 +761,9 @@ function create_map(){
 				}
 			})
 			.on('mouseout', function(d){
-				if(!mobile) tt(false);
+				if(!mobile){
+					tt(false);
+				}
 			})
 			.on('click', function(d){
 				if(!dragging() && d.depth == 1) open_popup_group(d.node);

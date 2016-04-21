@@ -81,12 +81,11 @@ var resize_list = false;
 
 // location
 
-function navigate( html, filter_id ){
+function navigate( html, get ){
   var new_loc = root + html;
-  if(filter_id) new_loc += "?filter_id=" + filter_id;
+  if(get) new_loc += "?" + get;
   document.location.href = new_loc;
 }
-
 
 // MOBILE
 
@@ -347,12 +346,44 @@ function contact_bts(contact_data){
 
     contact.appendChild(li);
 
-  }
+    var footer_contact = document.getElementById('footer_contact');
+    var footer = document.getElementById('footer');
 
-  var contact_name = document.createElement('div');
-  contact_name.id = 'contact_name';
-  menu.appendChild(contact_name);
+    if(footer_contact){
+      li = document.createElement('li');
+      li.url = d.url;
+      li.name = d.name;
+      li.id = d.icon;
+      $(li)
+        .addClass('bt')
+        .on("mouseover", function(){
+          $(footer_contact_name).html(this.name + " (" + this.url + ")");
+        })
+        .on("mouseout", function(){
+          $(footer_contact_name).html('');
+        })
+        .on(bt_event, function(){
+          if(this.name == 'e-mail'){
+            window.location.href = "mailto:" + this.url;
+          }else{
+            window.open(this.url, '_blank');
+          }
+        });
 
+        footer_contact.appendChild(li);
+      }
+
+      var contact_name = document.createElement('div');
+      contact_name.id = 'contact_name';
+      menu.appendChild(contact_name);
+
+      if(footer){
+        var footer_contact_name = document.createElement('div');
+        footer_contact_name.id = 'footer_contact_name';
+        footer.appendChild(footer_contact_name);
+      }
+
+   }
 }
 
 for( i in pages ){

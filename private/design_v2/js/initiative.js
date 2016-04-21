@@ -8,7 +8,42 @@ var i, a, item, li, div, p, list;
 reg('container');
 reg('content_list');
 
+reg('initiative_ico');
+reg('initiative_title');
+
 //////////////////////////////// funcions ////////////////////////////////
+
+function initiative_item(d, code, target){
+
+	li = document.createElement('li');
+	li.node = d;
+	$(li)
+		.addClass('list_item ' + code)
+		.on('click', function(){
+			open_popup(this.node);
+		});
+
+	d.li = li;
+
+	img = new Image();
+	img.src = "layout/plus_gray.png";
+	li.appendChild(img);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('title')
+		.html(d.name)
+	li.appendChild(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('info')
+		.html( info( d, true ))
+	li.appendChild(div);
+
+	target.appendChild(li);
+}
+
 
 function create_item( item, code ){
 
@@ -22,7 +57,7 @@ function create_item( item, code ){
 			.on('click', function(){
 				sessionStorage.setItem('cur_filters', this.ID);
 				sessionStorage.setItem('code', this.code);
-				navigate("list.html",this.ID);
+				navigate("list.html",'filter_id=' + this.ID);
 		});
 		content_list.appendChild(li);
 
@@ -64,10 +99,15 @@ function load(){
 	}
 
 	if(cur_page == 'signals.html'){
-		list = json.filters.mechanism.itens;
+		list = json.filters.theme.itens;
 		for(i in list){
 			create_item(list[i], 'sig');
 		}
+	}
+
+	if(cur_page == 'initiative.html'){
+		if($_GET()['code'] == 'hub') $(initiative_ico).css({backgroundImage:'url(layout/hub3.png)'})
+		else $(initiative_ico).css({backgroundImage:'url(layout/sig3.png)'})
 	}
 
 	// create contact bts in menu

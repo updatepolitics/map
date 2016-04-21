@@ -196,7 +196,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   opacity: 1;
 }
 
-#contact_name{
+#contact_name, #footer_contact_name{
   width: 100%;
   height: 25px;
   position: absolute;
@@ -204,6 +204,10 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   font-size: 14px;
   text-align: center;
   left: 0;
+}
+
+#footer_contact_name{
+  top: 25px;
 }
 
 #contact{
@@ -216,6 +220,17 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     line-height: 0;
 }
 
+#footer_contact{
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
+}
+
+
 .land
   #contact{
     top: 0;
@@ -227,8 +242,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     line-height: 0;
   }
 
-#contact
-    .bt{
+#contact .bt, footer .bt{
         display: inline-block;
         width: 45px;
         height: 45px;
@@ -238,13 +252,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
         cursor: pointer;
     }
 
-#contact
-    .bt:hover{
+#contact .bt:hover, footer .bt:hover{
       opacity: .3;
     }
 
 
-.mobile #contact_name{
+.mobile #contact_name, .mobile #footer_contact_name{
   display: none;
 }
 
@@ -266,7 +279,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   width: 350px;
   height: 45px;
   position: absolute;
-  bottom: 7%;
+  bottom: 5%;
   left: 0;
   right: 0;
   margin: auto;
@@ -275,20 +288,26 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 }
 
 #footer_newsletter{
-  width: 350px;
+  width: 450px;
   height: 45px;
   position: absolute;
-  bottom: 7%;
+  bottom: 40px;
   left: 0;
   right: 0;
   margin: auto;
-  border: #fff 1px solid;
   overflow: hidden;
 }
 
+footer{
+  width: 100%;
+  padding: 100px 0;
+  background: #262c38;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
 
 #newsletter_email{
-  background: none;
   color: #fff;
   width: 100%;
   height: 100%;
@@ -299,9 +318,12 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   outline: none;
 }
 
+#home_newsletter #newsletter_email { background: none; }
+#footer_newsletter #newsletter_email { background: #2b3240; }
+
 #send_newsletter{
-  width: 44px;
-  height: 44px;
+  width: 45px;
+  height: 45px;
   background-image: url('../layout/send.png');
   background-repeat: no-repeat;
   background-position: center;
@@ -310,6 +332,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   right: 0;
   border: none;
 }
+
 
 
 /* //////////////////////////  POPUP ////////////////////////// */
@@ -2030,6 +2053,17 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     text-transform: uppercase;
  }
 
+#initiative_title {
+    font-weight: 700;
+ }
+
+ #initiative_ico{
+   width: 100%;
+   height: 70px;
+   background-position: center;
+   background-repeat: no-repeat;
+ }
+
 .mobile
   .content_title {
       font-size: 20px;
@@ -2172,28 +2206,35 @@ hr{
     text-align: center;
 }
 
-.link{
+.pop_bt{
     font-weight: 400;
-    width: 100%;
+    width: 47%;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     line-height: 34px;
-    background-image: url('../layout/popup.png');
     background-repeat: no-repeat;
-    background-position: right;
     list-style: none;
     color: #fff;
     background-color: #2b3240;
     padding: 15px 40px;
-    margin-bottom: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    position: absolute;
+    bottom: 20px;
 }
 
-.link:hover{
-    background-color: #2a303c;
+.pop_bt.link{
+  right: 20px;
+  background-image: url('../layout/popup.png');
+  background-position: right;
+}
+
+.pop_bt.details{
+  left: 20px;
+  background-image: url('../layout/plus_white.png');
+  background-position: left;
 }
 
 .sub_content{
@@ -2206,10 +2247,21 @@ hr{
 	user-select: all;
 }
 
-.content p, .content li{
+.sub_content table{
+  font-size: 16px;
+}
+
+.content p{
     margin-bottom: 20px;
     font-size: 18px;
     line-height: 24px;
+    font-weight: 300;
+}
+
+.content li{
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 18px;
     font-weight: 300;
 }
 
@@ -2218,8 +2270,9 @@ hr{
 }
 
 .content ul{
-  margin-left: 20px;
+  margin-left: 10px;
   margin-bottom: 20px;
+
 }
 
 .content .list{
@@ -2261,11 +2314,12 @@ hr{
 #staff{
     width: 100%;
     font-size: 0;
+    margin: 0;
 }
 
-.staff{
+#staff li{
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     position: relative;
     padding-left: 180px;
     min-height: 150px;
