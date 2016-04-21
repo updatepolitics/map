@@ -36,11 +36,11 @@ function simulate_db(db){
 		hb.coverage = 30 + rand(4);
 		hb.financier = 28 + shift_rand(2);
 
-		var ns = shift_rand(4);
+		var ns = shift_rand(7);
 		hb.signals = [];
 		for(a=1; a<=ns; a++){
 			var rand_s = shift_rand(445);
-			if( hb.signals.indexOf(rand_s) < 0)hb.signals.push(rand_s);
+			if( hb.signals.indexOf(rand_s) < 0) hb.signals.push(rand_s);
 		}
 
 		db.hubs.push(hb);
@@ -56,6 +56,13 @@ function simulate_db(db){
 		sg.name = livros[rand(livros.length-1)].titulo;
 
 		sg.theme = [44 + shift_rand(6)];
+
+		var nh = shift_rand(4);
+		sg.hubs = [];
+		for(a=1; a<=nh; a++){
+			var rand_h = shift_rand(215);
+			if( sg.hubs.indexOf(rand_h) < 0) sg.hubs.push(rand_h);
+		}
 
 		var n_mechanisms = rand(4);
 		sg.mechanism = [];

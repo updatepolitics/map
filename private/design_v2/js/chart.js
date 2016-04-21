@@ -5,11 +5,12 @@ var json,
 	n_hubs = 0,
 	n_signals = 0;
 
+
 var scale;
 var initial_scale;
 
 var zoom_factor = 1.5;
-var zoom_limits = [1,20];
+var zoom_limits = [1,30];
 
 var zoom_r = 25;
 var filter_h = 25;
@@ -60,6 +61,7 @@ reg('legend_sig_bt');
 reg('legend_hub_bt');
 reg('zoom_control');
 reg('zoom_in');
+reg('zoom_ext');
 reg('zoom_out');
 
 reg('control');
@@ -164,27 +166,71 @@ $(document).keyup(function(e) {
 
 popup.open = false;
 
-function open_popup (d){
+function info(d, inline){
+
+	var sub = "";
+	sub += "<span class='bold'>" + json.filters.origin.label + "</span> ";
+	sub += arr_search( json.filters.origin.itens, d.origin ).label;
+
+	if(inline)	sub += " | ";
+	else sub += "<br>";
+
+	sub +=  "<span class='bold'>" + json.filters.coverage.label + "</span> ";
+	sub += arr_search( json.filters.coverage.itens, d.coverage ).label;
+
+	if(d.code == 'sig'){
+
+		if(inline)	sub += " | ";
+		else sub += "<br>";
+
+		sub +=  "<span class='bold'>" + json.filters.purpose.label + "</span> ";
+		sub += arr_search( json.filters.purpose.itens, d.purpose ).label;
+
+		if(inline)	sub += " | ";
+		else sub += "<br>";
+
+		sub +=  "<span class='bold'>" + json.filters.type.label + "</span> ";
+		sub += arr_search( json.filters.type.itens, d.type ).label;
+
+	}
+
+	if( d.code == 'hub' ){
+
+		if(inline)	sub += " | ";
+		else sub += "<br>";
+
+		sub +=  "<span class='bold'>" + json.filters.financier.label + "</span> ";
+		sub += arr_search( json.filters.financier.itens, d.financier ).label;
+
+	}
+
+	return sub;
+
+}
+
+function open_popup_group (d){
+
+	console.log(d);
 
 	if(filters.open) close_filters();
 
 	popup.open = true;
 	$(popup_content).html('');
 
-	$(popup).css({color:'#fff', backgroundColor:d.fill});
+	$(popup).css({color:'#fff', backgroundColor:d.hex});
 	if(!mobile) $(popup).css({ height: '40%' });
 	$(popup_x).css({ backgroundImage: 'url(layout/x.png)' });
 
 	div = document.createElement('div');
 		$(div)
 			.addClass('title')
-			.html(d.node.label);
+			.html(d.label);
 		$(popup_content).append(div);
 
 		div = document.createElement('div');
 		$(div)
 			.addClass('about')
-			.html( d.node.about )
+			.html( d.about )
 		popup_content.appendChild(div);
 
 	$(popup).fadeIn(dur,_out);
@@ -192,6 +238,210 @@ function open_popup (d){
 
 }
 
+function toggle_plus(trg){
+	if(trg.open){
+		trg.open = false;
+		$(trg.plus).animate({ height:0 },dur, in_out);
+		$(trg).css({ backgroundImage:'url(layout/plus_white.png)' })
+	}else{
+		trg.open = true;
+		$(trg.plus).animate({ height: $(trg.plus_tx).height() + 30 },dur, in_out);
+		$(trg).css({ backgroundImage:'url(layout/minus_white.png)' })
+	}
+}
+
+
+function open_popup (d){
+
+	console.log(d);
+	$(popup_content).html('');
+
+
+	if(filters.open) close_filters();
+
+	popup.open = true;
+
+	$(popup).css({color:'', backgroundColor:'', height: ''});
+	$(popup_x).css({ backgroundImage: '' });
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('title')
+		.html(d.name);
+	$(popup_content).append(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('info')
+		.html( info( d, false ))
+	popup_content.appendChild(div);
+
+	// hr = document.createElement('hr');
+	// popup_content.appendChild(hr);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('about mt40')
+		.html(d.about);
+	$(popup_content).append(div);
+
+	if( d.code == 'sig' ){
+
+		// tema
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('section')
+			.html( json.labels.theme[lg] )
+		$(popup_content).append(div);
+
+		ul = document.createElement('div');
+		$(ul).addClass('list');
+		$(popup_content).append(ul);
+
+		node = arr_search( json.filters.theme.itens, d.theme[0] );
+
+		li = document.createElement('li');
+		li.open = false;
+		li.node = node;
+		$(li)
+			.on('click', function(){
+				toggle_plus(this);
+			})
+			.addClass('item')
+			.html(node.label)
+			.css({ backgroundColor:node.hex })
+		$(ul).append(li);
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('item_plus')
+			.css({ backgroundColor:node.hex, height:0})
+		$(ul).append(div);
+
+		div2 = document.createElement('div');
+		$(div2)
+			.html(node.about)
+		$(div).append(div2);
+
+		li.plus = div;
+		li.plus_tx = div2;
+
+		// mecanismos
+
+		if( d.mechanism.length > 0 ){
+
+			div = document.createElement('div');
+			$(div)
+				.addClass('section')
+				.html( json.labels.mechanisms[lg] )
+			$(popup_content).append(div);
+
+			ul = document.createElement('div');
+			$(ul).addClass('list');
+			$(popup_content).append(ul);
+
+			for( i in d.mechanism ){
+
+				node = arr_search( json.filters.mechanism.itens, d.mechanism[i] );
+
+				li = document.createElement('li');
+				li.open = false;
+				li.node = node;
+				$(li)
+					.on('click', function(){
+						toggle_plus(this);
+					})
+					.addClass('item')
+					.html(node.label)
+					.css({ backgroundColor:'#2b3240' })
+				$(ul).append(li);
+
+				div = document.createElement('div');
+				$(div)
+					.addClass('item_plus')
+					.css({ backgroundColor:'#2b3240', height:0})
+				$(ul).append(div);
+
+				div2 = document.createElement('div');
+				$(div2)
+					.html(node.about)
+				$(div).append(div2);
+
+				li.plus = div;
+				li.plus_tx = div2;
+			}
+		}
+
+	}else if(d.code =='hub'){
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('section')
+			.html(json.filters.kind.label)
+		$(popup_content).append(div);
+
+		ul = document.createElement('div');
+		$(ul).addClass('list');
+		$(popup_content).append(ul);
+
+		node = arr_search( json.filters.kind.itens, d.kind );
+		li = document.createElement('li');
+		li.open = false;
+		li.node = node;
+		$(li)
+			.on('click', function(){
+				toggle_plus(this);
+			})
+			.addClass('item')
+			.html(node.label)
+			.css({ backgroundColor:node.hex })
+		$(ul).append(li);
+
+		div = document.createElement('div');
+		$(div)
+			.addClass('item_plus')
+			.css({ backgroundColor:node.hex, height:0})
+		$(ul).append(div);
+
+		div2 = document.createElement('div');
+		$(div2)
+			.html(node.about)
+		$(div).append(div2);
+
+		li.plus = div;
+		li.plus_tx = div2;
+
+	}
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('section')
+		.html(json.labels.more[lg])
+	$(popup_content).append(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('link')
+		.html(d.url)
+		.on('click', function(){
+			alert(d.url);
+		});
+	$(popup_content).append(div);
+
+	scroll(popup_content, 0, 0);
+
+	$(popup).fadeIn(dur,_out);
+	$(curtain).fadeIn( dur, _out);
+}
+
+function scroll(trg, to, dur){
+	$(trg).scrollTo( to, {
+		duration: dur2,
+		easing: in_out,
+		axis:'y'
+	});
+}
 
 function close_popup(){
 	popup.open = false;
@@ -562,13 +812,11 @@ function get_hex(id, target){
 
 function check_radius(d){
 	 if(cur_code == 'hub'){
-			return calc_radius(d.signals.length);
+		 if(d.signals.length == 0) return 1;
+	   else return calc_radius(d.signals.length);
 	 }else{
-		var n_hubs = 1; // minimum radius
-		for(i in json.hubs){
-			if( json.hubs[i].signals.indexOf(d.id) >= 0) n_hubs ++;
-		}
-		return calc_radius(n_hubs);
+		 if(d.hubs.length == 0) return 1;
+		 else return calc_radius(d.hubs.length);
 	}
 }
 
@@ -579,11 +827,18 @@ function create_map(){
 
 	for( i in json.filters[group_by].itens ){
 		var d = json.filters[group_by].itens[i];
-		var group = { "id": d.id, "hex":d.hex, "name":d.label, "children":[]};
+		var group = { "id": d.id, "hex":d.hex, 'node':d, "name":d.label, "children":[]};
 		for( a in list ){
 			var item = list[a];
 			if(item[group_by][0] == d.id){
-				group.children.push( { "id":item.id, 'node':item, "hex":d.hex, "name":item.name, "size":Math.random()*4 });
+
+				if(cur_code == 'hub'){
+
+				}else{
+
+				}
+
+				group.children.push( { "id":item.id, 'group':d.label, 'node':item, "hex":d.hex, "name":item.name, "size":check_radius(item) });
 			}
 		}
 		map_data.children.push( group );
@@ -619,6 +874,9 @@ function create_map(){
 				if(d.depth == 1) return 0.1;
 				if(d.depth == 2) return 1;
 			})
+			.attr('id', function (d){
+				return 'c' + d.id;
+			})
 			.attr('fill', function (d){
 				if(d.name) return d.hex;
 				else return 'none';
@@ -626,26 +884,35 @@ function create_map(){
 			.each(function (d, i) {
 				c = d3.select(this);
 				c.node = d.node;
+				c.d = d;
 				d.circle = c;
+				if(d.depth == 1) {
+					map_data['c'+d.id] = d;
+				}
 			})
 			.style('cursor', 'pointer')
 			.on('mouseover', function(d){
-				if(!mobile && d.depth == 2){
-					if(d.node.visible) tt("Nome do grupo", d.node.name, d.hex);
-					else tt("Nome do grupo", d.node.name, gray);
+				if(!mobile){
+					if(d.depth == 2){
+						if(d.node.visible) tt(d.group, d.node.name, d.hex);
+						else tt(d.group, d.node.name, gray);
+					}
+					if(d.depth == 1){
+						tt(d.node.label, '', d.hex);
+					}
 				}
 			})
 			.on('mouseout', function(d){
 				if(!mobile) tt(false);
 			})
 			.on('click', function(d){
-				console.log(d);
+				if(!dragging() && d.depth == 1) open_popup_group(d.node);
+				if(!dragging() && d.depth == 2) open_popup(d.node);
 			})
 		 	.transition().duration(1000)
 			.attr('r', function(d) { return d.r } )
 
 	}
-
 
 function set_all_circles(){
 	svg_map.selectAll('circle')
@@ -677,6 +944,45 @@ function set_all_circles(){
 	});
 }
 
+// zoom funcs
+
+var zoom = d3.behavior.zoom()
+		.scaleExtent(zoom_limits)
+		.center([win_w/2,win_h/2])
+		.on("zoom", zoomed)
+		.translate([win_w/2,win_h/2])
+		.scale(scale);
+
+function center_group(c) {
+
+	var target = map_data[c];
+
+	scale = win_w/target.r/5;
+	if(scale > zoom_limits[1]) scale = zoom_limits[1];
+
+	var center_x = win_w/2 - ((target.x-50)*scale );
+	var center_y = win_h/2 - ((target.y-50)*scale );
+
+	zoom.translate([ center_x, center_y ]).scale(scale).event(svg_map.transition().duration(dur2));
+}
+
+function zoomed() {
+	svg_map.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+	scale = d3.event.scale;
+}
+
+var delta_drag = 3;
+var drag1 = [];
+var drag2 = [];
+
+function dragging() {
+	return (
+		( drag1[0] >= drag2[0] + delta_drag || drag1[0] <= drag2[0] - delta_drag  ) &&
+		( drag1[1] >= drag2[1] + delta_drag || drag1[1] <= drag2[1] - delta_drag  )
+	);
+}
+
+// legend
 
 function open_legend(){
 	legends.open = true;
@@ -705,11 +1011,10 @@ function load(){
 	if(mobile){
 		dbody.appendChild(legends); // change legends DOM position
 		$(legends).hide();
-		scale = 2;
+		scale = initial_scale = 2;
 	}else{
-		$(legend_hub).height(30 + json.filters.kind.itens.length * 20 );
-		$(legend_sig).height(20 + json.filters.theme.itens.length * 20 );
-		scale = 5;
+		$(legends).show();
+		scale = initial_scale = 5;
 	}
 
 	// mobile legend close bt
@@ -736,6 +1041,7 @@ function load(){
 
 	 	list = json.signals;
 	 	group_by = "theme";
+		$(legends).height(50 + json.filters.theme.itens.length * 20 );
 
 		$(control_sig).addClass('on');
 		sep(json.labels.sig_list[lg].toUpperCase());
@@ -752,8 +1058,18 @@ function load(){
 			// legend
 			d = json.filters.theme.itens[i];
 			li = document.createElement('li');
+			li.d = d;
 			$(li)
 				.addClass('legend')
+				.on('mouseover', function(){
+					$(this).css({ color: this.d.hex})
+				})
+				.on('mouseout', function(){
+					$(this).css({ color:''})
+				})
+				.on('click', function(){
+					center_group('c' + this.d.id);
+				})
 			legend_sig.appendChild(li);
 			div = document.createElement('div');
 			$(div)
@@ -792,6 +1108,7 @@ function load(){
 
 		list = json.hubs;
 		group_by = "kind";
+		$(legends).height(50 + json.filters.kind.itens.length * 20 );
 
 		$(control_hub).addClass('on');
 		sep(json.labels.hub_list[lg].toUpperCase());
@@ -804,8 +1121,18 @@ function load(){
 		for( i in json.filters.kind.itens ){
 			d = json.filters.kind.itens[i];
 			li = document.createElement('li');
+			li.d = d;
 			$(li)
 				.addClass('legend')
+				.on('mouseover', function(){
+					$(this).css({ color: this.d.hex})
+				})
+				.on('mouseout', function(){
+					$(this).css({ color:''})
+				})
+				.on('click', function(){
+					center_group('c' + this.d.id);
+				})
 			legend_hub.appendChild(li);
 
 			div = document.createElement('div');
@@ -855,72 +1182,64 @@ function load(){
 	if(cur_code == 'sig') n_nodes = json.signals.length;
 	else n_nodes = json.signals.length;
 
+	resize();
+
 	// svg
 
 	svg_map_area = d3.select('#map')
 		.append('svg')
-		.attr('id', 'svg_map_area')
+		.attr('id', 'svg_map_area');
 
 	svg_map = svg_map_area
 		.append('g')
-		.attr("transform","translate( 1000, 1000 ) scale(" + scale + ")")
-
-	resize();
-	create_map(cur_code);
 
 
 	////////////////////////////////  zoom  ////////////////////////////////
 
 
-		// $(zoom_in).on('click', function(){
-		// 	if(scale < zoom_limits[1]){
-		// 		zoom_start();
-		// 		scale *= zoom_factor;
-		// 		zoom.scale(scale).event(svg_map.transition().duration(dur));
-		// 	}
-		// });
-		//
-		// $(zoom_out).on('click', function(){
-		// 	if(scale > zoom_limits[0]){
-		// 		zoom_start();
-		// 		scale = scale/zoom_factor;
-		// 		zoom.scale(scale).event(svg_map.transition().duration(dur));
-		// 	}
-		// });
+	svg_map.on( "mousedown", function(){
+		drag1 = zoom.translate();
+	});
+	svg_map.on( "mouseup", function(){
+		drag2 = zoom.translate();
+	});
 
-		function zoom_start(){
-			clicked_zoom = true;
+
+	svg_map_area.on("mousedown.zoom", null);
+	svg_map_area.on("mousemove.zoom", null);
+	svg_map_area.on("dblclick.zoom", null);
+	svg_map_area.on("touchstart.zoom", null);
+	svg_map_area.on("wheel.zoom", null);
+	svg_map_area.on("mousewheel.zoom", null);
+	svg_map_area.on("MozMousePixelScroll.zoom", null);
+
+	$(zoom_in).on('click', function(){
+		if(scale < zoom_limits[1]){
+			scale *= zoom_factor;
+			zoom.scale(scale).event(svg_map.transition().duration(dur));
 		}
+	});
 
-		function zoom_end(){
-			clicked_zoom = false;
-			scale = zoom.scale();
+	$(zoom_ext).on('click', function(){
+		scale = initial_scale;
+		zoom.translate([win_w/2,win_h/2]).scale(scale).event(svg_map.transition().duration(dur2));
+	});
+
+	$(zoom_out).on('click', function(){
+		if(scale > zoom_limits[0]){
+			scale = scale/zoom_factor;
+			zoom.scale(scale).event(svg_map.transition().duration(dur));
 		}
+	});
 
-  var zoom = d3.behavior.zoom()
-      .scaleExtent(zoom_limits)
-      .center([1000, 1000])
-      .on("zoom", zoomed)
-      .translate([1000,1000])
-      .scale(scale);
-
-	zoom.translate([1000, 1000]).scale(scale).event(svg_map);
-  svg_map.attr("transform","translate( 1000, 1000 ) scale(" + scale + ")");
-
-  function zoomed() {
-    translation = [ // max translation
-        Math.max(Math.min(d3.event.translate[0], 1600), 400),
-        Math.max(Math.min(d3.event.translate[1], 1600), 400)
-    ];
-    zoom.translate(translation);
-		zoom.scale(d3.event.scale);
-		scale = d3.event.scale;
-    svg_map.attr("transform", "translate(" + translation + ") scale(" + d3.event.scale + ")");
-  }
+	zoom.translate([win_w/2,win_h/2]).scale(scale).event(svg_map);
+  svg_map.attr("transform","translate( "+win_w/2+", "+win_h/2+" ) scale(" + scale + ")");
 
 	svg_map_area.call(zoom);
 
 	// initial layout
+
+	create_map(cur_code);
 	check_filters();
 	check_trash();
 	layout_ready = true;

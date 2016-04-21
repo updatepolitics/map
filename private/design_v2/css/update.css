@@ -200,7 +200,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   width: 100%;
   height: 25px;
   position: absolute;
-  bottom: 120px;
+  bottom: 15px;
   font-size: 14px;
   text-align: center;
   left: 0;
@@ -208,7 +208,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 #contact{
     position: absolute;
-    bottom: 70px;
+    bottom: 50px;
     width: 100%;
     height: 50px;
     text-align: center;
@@ -262,42 +262,55 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #github{ background-image: url('../layout/github.png') }
 
 
-#newsletter{
-  width: 100%;
+#home_newsletter{
+  width: 350px;
   height: 45px;
   position: absolute;
-  bottom: 20px;
-  border-right: #1c212b 20px solid;
-  border-left: #1c212b 20px solid;
+  bottom: 7%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: #fff 1px solid;
+  overflow: hidden;
 }
 
+#footer_newsletter{
+  width: 350px;
+  height: 45px;
+  position: absolute;
+  bottom: 7%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: #fff 1px solid;
+  overflow: hidden;
+}
+
+
 #newsletter_email{
-  background: #262c38;
+  background: none;
   color: #fff;
   width: 100%;
   height: 100%;
   border: none;
   font-size: 14px;
-  padding-left: 20px;
+  padding-left: 15px;
   padding-right: 50px;
   outline: none;
 }
 
 #send_newsletter{
-  width: 45px;
-  height: 45px;
-  background-color: #fff;
+  width: 44px;
+  height: 44px;
   background-image: url('../layout/send.png');
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
   position: absolute;top: 0;
   right: 0;
+  border: none;
 }
 
-#send_newsletter:hover{
-  opacity: .3;
-}
 
 /* //////////////////////////  POPUP ////////////////////////// */
 
@@ -449,7 +462,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     border-radius: 2px;
     text-align: center;
     background-repeat: no-repeat;
-    bottom: 10%;
+    bottom: 15%;
     z-index: 2;
 }
 .mobile
@@ -502,7 +515,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #quotes{
     position: absolute;
     top: 50%;
-    width: 50%;
+    width: 650px;
     left: 0;
     right: 0;
     margin: auto;
@@ -1407,7 +1420,6 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     font-size: 12px;
     font-weight: 300;
     opacity: .3;
-    border-top: rgba(255,255,255,.3) 1px solid
 }
 
 .mobile
@@ -1573,28 +1585,29 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 #map{
     position: absolute;
-    width: 50%;
-    height: 50%;
-    left: 50%;
-    top: 50%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #svg_map_area{
     position: absolute;
-    left: -1000px;
-    top: -1000px;
-    width: 2000px;
-    height: 2000px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #legends{
-    width: 300px;
-    height: 100%;
+    width: 240px;
+    height: 0;
     position: absolute;
     top: 0;
+    bottom: 0;
+    margin: auto 0;
     left: 30px;
     z-index: 1;
-    pointer-events: none;
 }
 
 .mobile
@@ -1660,11 +1673,13 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     height: 100%;
     position: absolute;
     left: -300px;
-    top: 0;
+    top: 30px;
     bottom:0;
     margin: auto;
+    background: rgba(38,44,56,.8);
+    border-radius: 4px;
+    padding: 15px;
 }
-
 
 .mobile
     .legend_list{
@@ -1693,6 +1708,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 .legend{
     width: 100%;
     margin-bottom: 7px;
+    cursor: pointer;
 }
 
 .mobile
@@ -1727,7 +1743,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 #zoom_control{
     position: absolute;
     width: 35px;
-    height: 71px;
+    height: 105px;
     right: 35px;
     top: 0;
     bottom:0;
@@ -1746,6 +1762,15 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     height: 35px;
     margin-bottom: 1px;
     background-image: url("../layout/zoom_in.png");
+    background-position: center;
+    border-radius: 1px;
+}
+
+#zoom_ext{
+    width: 35px;
+    height: 35px;
+    margin-bottom: 1px;
+    background-image: url("../layout/chart.png");
     background-position: center;
     border-radius: 1px;
 }

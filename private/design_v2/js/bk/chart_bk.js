@@ -175,7 +175,7 @@ $(document).keyup(function(e) {
 
 popup.open = false;
 
-function open_popup (d){
+function open_popup_group (d){
 
 	if(filters.open) close_filters();
 

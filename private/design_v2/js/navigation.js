@@ -39,11 +39,6 @@ var pages = [
       {"_pt": "Desenvolvimento da plataforma", "anchor":"a_developers" },
       {"_pt": "Parceiros", "anchor":"a_partners" }
    ]},
-   { "_pt":"PAÍSES", "_en":"COUNTRIES", "html":"countries.html", "submenu" : [
-      {"_pt": "Introdução / O que é", "anchor":"intro" },
-      {"_pt": "Paises/Iniciativas", "anchor":"countries" },
-      {"_pt": "Abrangência", "anchor":"coverage" }
-   ]},
    { "_pt":"HUBS", "_en":"HUBS", "html":"hubs.html", "submenu" : [
       {"_pt": "Introdução / O que é", "anchor":"intro" },
       {"_pt": "Natureza", "anchor":"kind" },
@@ -264,7 +259,7 @@ function scroll(trg, to, dur){
   var pos = $(to).offset().top - bar_h;
 
 	$(trg).scrollTo( pos, {
-		duration: dur2,
+		duration: dur,
 		easing: in_out,
 		axis:'y'
 	});

@@ -23,6 +23,7 @@ reg('update_logo_home');
 reg('quotes');
 reg('about');
 reg('explore');
+reg('home_newsletter');
 reg('credit_who');
 reg('credit_what');
 
@@ -51,7 +52,7 @@ function map_rotation(delay,rotate){
 		rot_delay = setTimeout( function(){
 			rotation = setInterval(function(){
 				rot += 0.02;
-				svg_map.attr('transform', 'translate(1000 1000) rotate(' + rot + ')');
+				svg_map.attr('transform', 'translate(' + win_w/2 + ', ' + win_h/2 + ') rotate(' + rot + ')');
 			},20)
 		}, delay);
 	}else{
@@ -232,6 +233,7 @@ function open_home_modal(){
 	$(credit).fadeOut(dur);
 	$(about).fadeOut(dur);
 	$(explore).fadeOut(dur);
+	$(home_newsletter).fadeOut(dur);
 	modal_pos(0);
 }
 
@@ -244,6 +246,7 @@ function close_home_modal(){
 	$(credit).fadeIn(dur);
 	$(about).fadeIn(dur);
 	$(explore).fadeIn(dur);
+	$(home_newsletter).fadeIn(dur);
 }
 
 $(about).on(bt_event, open_home_modal);
