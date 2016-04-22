@@ -241,7 +241,7 @@ function open_popup (d){
 	div = document.createElement('div');
 	$(div)
 		.addClass('info')
-		.html( info( d, false ))
+		.html( info( d, true ))
 	popup_content.appendChild(div);
 
 	div = document.createElement('div');
@@ -285,6 +285,8 @@ function close_popup(){
 $(popup_x).on(bt_event, function(){
 	close_popup();
 });
+
+$(curtain).on( 'click', close_popup);
 
 function toggle_plus(trg){
 	if(trg.open){
@@ -608,7 +610,7 @@ function resize_list(){
 			filter_h = 25;
 		}
 
-		$(popup_content).height($(popup).height() - 50);
+		$(popup_content).height($(popup).height() - 150);
 		$(filters).height(win_h - bar_h - 40);
 		$(filters_list).height(win_h - bar_h - 97);
 

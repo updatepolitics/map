@@ -23,14 +23,8 @@ var bar_h = 80;
 
 var pages = [
    { "_pt":"IN&Iacute;CIO", "html":"index.html",},
-   { "_pt":"UPDATE", "_en":"UPDATE", "html":"update.html", "submenu" : [
-     {"_pt": "Sobre o Update", "anchor":"a_intro" },
-     {"_pt": "Contexto em que surge o Update", "anchor":"a_context" },
-     {"_pt": "Equipe do Update", "anchor":"a_who" },
-     {"_pt": "Financiadores", "anchor":"a_financer" },
-     {"_pt": "Transparência", "anchor":"a_transparency" },
-     {"_pt": "Colaboradores", "anchor":"a_partners" }
-   ]},
+   { "_pt":"EXPLORAR GRÁFICO", "_en":"EXPLORE CHART", "html":"chart.html"},
+   { "_pt":"EXPLORAR LISTA", "_en":"EXPLORE LIST", "html":"list.html"},
    { "_pt":"MAPEAMENTO", "_en":"MAPPING", "html":"mapping.html", "submenu" : [
       {"_pt": "Sobre o mapeamento", "anchor":"a_about" },
       {"_pt": "Metodologia", "anchor":"a_methodology" },
@@ -53,9 +47,13 @@ var pages = [
    ]},
    { "_pt":"DOWNLOAD", "html":"download.html" },
    { "_pt":"CADASTRE SUA INICIATIVA", "html":"register.html" },
-   { "_pt":"EXPLORAR", "_en":"EXPLORE", "submenu" : [
-       {"_pt": "GRÁFICO", "html":"chart.html" },
-       {"_pt": "LISTA",  "html":"list.html", }
+   { "_pt":"SOBRE", "_en":"ABOUT", "html":"update.html", "submenu" : [
+     {"_pt": "Sobre o Update", "anchor":"a_intro" },
+     {"_pt": "Contexto em que surge o Update", "anchor":"a_context" },
+     {"_pt": "Equipe do Update", "anchor":"a_who" },
+     {"_pt": "Financiadores", "anchor":"a_financer" },
+     {"_pt": "Transparência", "anchor":"a_transparency" },
+     {"_pt": "Colaboradores", "anchor":"a_partners" }
    ]},
 ];
 
@@ -78,6 +76,7 @@ for(i=0; i<path.length-1; i++){
 // placeholders for local functions
 var resize_explore = false;
 var resize_list = false;
+var resize_initiative = false;
 
 // location
 
@@ -239,6 +238,7 @@ function resize(){
     // local resize
 	if(resize_explore) resize_explore();
 	if(resize_list) resize_list();
+	if(resize_initiative) resize_initiative();
 
 }
 
@@ -404,7 +404,7 @@ for( i in pages ){
 
     menu_bts.appendChild(li);
 
-    if( pages[i].html == cur_page || ( !pages[i].html && check_submenu(pages[i].submenu)) ){
+    if( pages[i].html == cur_page ){
 
       $(li).addClass('selected');
 

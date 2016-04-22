@@ -259,13 +259,13 @@ function open_popup (d){
 	div = document.createElement('div');
 	$(div)
 		.addClass('info')
-		.html( info( d, false ))
+		.html( info( d, true ))
 	popup_content.appendChild(div);
 
 	div = document.createElement('div');
 	$(div)
 		.addClass('about mt40')
-		.html(d.about);
+		.html( d.about );
 	$(popup_content).append(div);
 
 	div = document.createElement('div');
@@ -310,6 +310,8 @@ function close_popup(){
 $(popup_x).on(bt_event, function(){
 	close_popup();
 });
+
+$(curtain).on( 'click', close_popup);
 
 
 //////////////////////////////// HELP ////////////////////////////////
@@ -647,7 +649,7 @@ function resize_explore(){
 			filter_h = 25;
 		}
 
-		$(popup_content).height($(popup).height() - 50);
+		$(popup_content).height($(popup).height() - 150);
 		$(map_container).height(win_h - bar_h);
 		$(filters).height(win_h - bar_h - 40);
 		$(filters_list).height(win_h - bar_h - 97);

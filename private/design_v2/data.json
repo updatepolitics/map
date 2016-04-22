@@ -17,6 +17,8 @@
 		"mechanisms": { "_pt":"mecanismos", "_en":"mechanism", "_es":"es_mechanisms" },
 		"sig_list": { "_pt":"filtros de sinais", "_en":"signal filters", "_es":"es_signal filters" },
 		"hub_list": { "_pt":"filtros de hubs", "_en":"hub filters", "_es":"es_hub filters" },
+		"signal_hubs": { "_pt":"hubs que emitiram esse sinal", "_en":"hubs", "_es":"es_hub filters" },
+		"hub_signals": { "_pt":"sinais emitidos por esse hub", "_en":"hubs", "_es":"es_hub filters" },
 		"more": { "_pt":"saiba mais", "_en":"more info", "_es":"es_more" },
 		"list": { "_pt":"lista", "_en":"list", "_es":"es_list" },
 		"chart": { "_pt":"gráfico", "_en":"chart", "_es":"es_chart" },
