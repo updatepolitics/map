@@ -1,4 +1,20 @@
 {
+  "menu": {
+    "items": {
+      "home": "Home",
+      "about": "About"
+    },
+    "sub_items": {
+      "about": {
+        "intro": "Introduction",
+        "context": "Context",
+        "who": "Team",
+        "sponsors": "Sponsos",
+        "transparency": "Transparency",
+        "partners": "Partners"
+      }
+    }
+  },
   "home": {
     "intro": "<b>UPDATE</b> is a laboratory to create spaces for dialogue and reflection among Hackers Policy, in order to recognize, empower and give visibility to emerging practices of political participation in the twenty-first century.",
     "buttons": {

@@ -5,27 +5,10 @@
 
     <ul id="menu_bts">
       {{#each menuItens}}
-        <li class="bt">{{ label }}</li>
-
-        <!-- <div class="title">
-
-
-          </a>
-        </div>
-
-        <div class="content">
-          {{#if subItems}}
-            <ul>
-              {{#each subItems}}
-                <li>
-                  <a href="{{ pathFor ../path }}#{{ anchor }}">
-                    {{label}}
-                  </a>
-                </li>
-              {{/each}}
-            </ul>
-          {{/if}}
-        </div> -->
+        <li class="bt {{ isSelected }}">{{_ menuItemLabel }}</li>
+        {{#each anchors }}
+          <li class="sub_bt selected">{{_ subMenuItemLabel }}</li>
+        {{/each}}
       {{/each}}
     </ul>
   </div>
