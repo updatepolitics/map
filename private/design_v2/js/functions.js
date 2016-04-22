@@ -6,6 +6,10 @@ var cur_code;
 var cur_id;
 var list;
 
+var popup_x = false;
+var popup_content = false;
+var popup = false;
+
 var i, a, item, li, div, p, list;
 
 //////////////////////////////// OBJECTS ////////////////////////////////
@@ -13,6 +17,9 @@ var i, a, item, li, div, p, list;
 reg('container');
 reg('content_list');
 reg('lists');
+reg('popup_x');
+reg('popup_content');
+reg('popup');
 
 reg('initiative_ico');
 reg('initiative_title');
@@ -180,6 +187,75 @@ function toggle_bg(){
 	else cur_bg = 'light1';
 }
 
+function resize_initiative(){
+		$(popup_content).height($(popup).height() - 150);
+}
+
+function open_popup (d){
+
+	console.log(d);
+	$(popup_content).html('');
+
+	popup.open = true;
+
+	$(popup).css({color:'', backgroundColor:'', height: ''});
+	$(popup_x).css({ backgroundImage: '' });
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('title')
+		.html(d.name);
+	$(popup_content).append(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('info')
+		.html( info( d, true ))
+	popup_content.appendChild(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('about mt40')
+		.html(d.about);
+	$(popup_content).append(div);
+
+	div = document.createElement('div');
+	$(div)
+		.addClass('pop_bt link')
+		.html(d.url)
+		.on('click', function(){
+			alert(d.url);
+		});
+	$(popup_content).append(div);
+
+	div = document.createElement('div');
+	div.id = d.id;
+	div.code = d.code;
+	$(div)
+		.addClass('pop_bt details')
+		.html('DETALHES')
+		.on('click', function(){
+			navigate( 'initiative.html', 'id=' + this.id + '&code=' + this.code );
+		});
+	$(popup_content).append(div);
+
+	$(popup).fadeIn(dur,_out);
+	$(curtain).fadeIn( dur, _out);
+}
+
+function close_popup(){
+	popup.open = false;
+	$(popup).fadeOut( dur,_out );
+	$(curtain).fadeOut( dur, _out);
+}
+
+$(popup_x).on(bt_event, function(){
+	close_popup();
+});
+
+$(curtain).on( 'click', close_popup);
+
+
 function load(){
 
 	// start data
@@ -188,109 +264,43 @@ function load(){
 
 	if(cur_page == 'hubs.html'){
 
+		cur_bg = 'light1';
 		toggle_bg();
 
 		target_content = create_section(lists, json.labels.kind[lg] );
 
 		for( i in json.filters.kind.itens ){
 			node =  json.filters.kind.itens[i];
-			li = create_item(node, false, target_content);
+			li = create_item(node, 'hub', target_content);
 		}
 
 	}
 
 	if(cur_page == 'signals.html'){
 
+		cur_bg = 'light2';
 		toggle_bg();
 
 		target_content = create_section(lists, json.labels.themes[lg] );
 
-		for( i in d.mechanism ){
-			node = arr_search( json.filters.kind.itens, d.mechanism[i] );
-			li = create_item(node, false, target_content);
+		for( i in json.filters.theme.itens ){
+			node = json.filters.theme.itens[i];
+			li = create_item(node, 'sig', target_content);
 		}
 
 		toggle_bg();
 
-		target_content = create_section(lists, json.labels.kind[lg] );
+		target_content = create_section(lists, json.labels.mechanisms[lg] );
 
-		for( i in d.mechanism ){
-			node = arr_search( json.filters.kind.itens, d.mechanism[i] );
+		for( i in json.filters.mechanism.itens ){
+			node = json.filters.mechanism.itens[i];
 			li = create_item(node, false, target_content);
 		}
+
 
 	}
 
 	if(cur_page == 'initiative.html'){
-
-		function resize_initiative(){
-				$(popup_content).height($(popup).height() - 150);
-		}
-
-		function open_popup (d){
-
-			console.log(d);
-			$(popup_content).html('');
-
-			popup.open = true;
-
-			$(popup).css({color:'', backgroundColor:'', height: ''});
-			$(popup_x).css({ backgroundImage: '' });
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('title')
-				.html(d.name);
-			$(popup_content).append(div);
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('info')
-				.html( info( d, true ))
-			popup_content.appendChild(div);
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('about mt40')
-				.html(d.about);
-			$(popup_content).append(div);
-
-			div = document.createElement('div');
-			$(div)
-				.addClass('pop_bt link')
-				.html(d.url)
-				.on('click', function(){
-					alert(d.url);
-				});
-			$(popup_content).append(div);
-
-			div = document.createElement('div');
-			div.id = d.id;
-			div.code = d.code;
-			$(div)
-				.addClass('pop_bt details')
-				.html('DETALHES')
-				.on('click', function(){
-					navigate( 'initiative.html', 'id=' + this.id + '&code=' + this.code );
-				});
-			$(popup_content).append(div);
-
-			$(popup).fadeIn(dur,_out);
-			$(curtain).fadeIn( dur, _out);
-		}
-
-		function close_popup(){
-			popup.open = false;
-			$(popup).fadeOut( dur,_out );
-			$(curtain).fadeOut( dur, _out);
-		}
-
-		$(popup_x).on(bt_event, function(){
-			close_popup();
-		});
-
-		$(curtain).on( 'click', close_popup);
-
 
 		cur_id = $_GET()['id'];
 	  cur_code = $_GET()['code'];
@@ -414,7 +424,7 @@ function load(){
 				$(target_content).append(li);
 
 			}
-		} 
+		}
 	}
 
 	// create contact bts in menu
