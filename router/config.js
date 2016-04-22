@@ -24,7 +24,7 @@ Router.route("/hubs", {
 Router.route("/signals", {name: "signals"});
 
 Router.plugin('ensureSignedIn', {
-  except: ['home', 'admin']
+  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'signals']
 });
 
 AccountsTemplates.configure({
