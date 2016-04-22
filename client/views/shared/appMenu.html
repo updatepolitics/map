@@ -1,13 +1,15 @@
 <template name="appMenu">
   <div id="menu">
 
-    <div id="menu_close_button"></div>
+    <div id="menu_close"></div>
 
-    <div class="ui accordion" id="menu_bts">
+    <ul id="menu_bts">
       {{#each menuItens}}
-        <div class="title">
-          <a href="{{ pathFor route }}" class=".bt">
-            {{ label }}
+        <li class="bt">{{ label }}</li>
+
+        <!-- <div class="title">
+
+
           </a>
         </div>
 
@@ -23,8 +25,8 @@
               {{/each}}
             </ul>
           {{/if}}
-        </div>
+        </div> -->
       {{/each}}
-    </div>
+    </ul>
   </div>
 </template>

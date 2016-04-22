@@ -1,11 +1,18 @@
 <template name="home">
-  <div id="ui container">
+  <div id="container">
+    <img src="layout/update_home.png" id="update_logo_home">
+
     <div id="quotes">{{{_ "home.intro" }}}</div>
     <div id="credit">
       <span id="credit_who"></span>
       <span id="credit_what"></span>
     </div>
-    <div class="ui button" id="about">{{_ "home.buttons.intro" }}</div>
-    <div class="ui button" id="explore">{{_ "home.buttons.explore" }}</div>
+    <div class="home_bt" id="about">APRESENTAÇÃO</div>
+    <div class="home_bt" id="explore">EXPLORAR</div>
+
+		<div id="home_newsletter">
+			<input id="newsletter_email" placeholder="Cadastre seu e-mail na nossa newsletter" />
+			<div id="send_newsletter"></div>
+		</div>
   </div>
 </template>

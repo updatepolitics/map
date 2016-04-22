@@ -1,4 +1,4 @@
-#menu {
+/*#menu {
   background: #1c212b;
   width: 400px;
   height: 100%;
@@ -14,7 +14,7 @@
     left: -80%;
   }
 
-#menu_close_button {
+#menu_close {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -25,7 +25,7 @@
 }
 
 .mobile
-  #menu_close_button {
+  #menu_close {
     top: 0;
     left: 5px;
   }
@@ -98,4 +98,4 @@
 
 .sub_bt:hover, .sub_bt.selected{
   opacity: 1;
-}
+}*/
