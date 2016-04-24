@@ -1,8 +1,21 @@
+/*
+ * Default layout
+ */
+
 Router.configure({
   layoutTemplate: 'appLayout'
 });
 
+/*
+ * Home route
+ */
+
 Router.route("/", {name: "home"});
+
+/*
+ * Static pages routes
+ */
+
 Router.route("/about", {name: "about"});
 Router.route("/mapping", { name: "mapping" });
 Router.route("/countries", {name: "countries"});
@@ -23,8 +36,27 @@ Router.route("/hubs", {
 });
 Router.route("/signals", {name: "signals"});
 
+/*
+ * Explore route
+ */
+
+Router.route("/explore", {
+  waitOn: function() {
+    return [
+      Meteor.subscribe('themes'),
+      Meteor.subscribe('signals'),
+      Meteor.subscribe('incidencyReachs')
+    ];
+  },
+  name: "explore"
+});
+
+/*
+ * Auth config
+ */
+
 Router.plugin('ensureSignedIn', {
-  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'signals']
+  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'signals', 'explore']
 });
 
 AccountsTemplates.configure({

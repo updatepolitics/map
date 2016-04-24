@@ -22,6 +22,7 @@ callback-hook@1.0.6
 cfs:http-methods@0.0.32
 check@1.1.2
 coffeescript@1.0.15
+d3js:d3@3.5.8
 ddp@1.2.3
 ddp-client@1.2.3
 ddp-common@1.2.3

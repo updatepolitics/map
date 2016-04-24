@@ -1,9 +1,9 @@
-pt,es,en,plural,institutional
-Empresa,,Company,true,true
-Partido,,Party,true,true
-Organismo multilateral / Internacional,,Multilateral,true,true
-Orgão Governamental,,Government,true,true
-ONGs,,NGO,true,true
-Academia,,Academy,true,true
-Constelações,,Constellations,true,
-Informal,,Informal,true,false
+pt,es,en,plural,institutional,color
+Empresa,Companía,Company,true,true,#d87d7d
+Partido,Partido,Party,true,true,#da8278
+Organismo multilateral / Internacional,Organismo Multilateral,Multilateral,true,true,#d98e70
+Orgão Governamental,,Government,true,true,#d2a16c
+ONGs,,NGO,true,true,#da8874
+Academia,,Academy,true,true,#cea86d
+Constelações,,Constellations,true,,#d59b6c
+Informal,,Informal,true,false,#d8946e
