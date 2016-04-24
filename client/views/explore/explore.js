@@ -6,6 +6,17 @@ Template.explore.rendered = function(){
     return 3 * Math.sqrt(level / Math.PI);
   }
 
+  function setTooltip(title, val, color){
+  	if(title){
+  		$(tooltip_title).html(title);
+  		$(tooltip_value).html(val);
+  		$(tooltip).css({background:color}).show();
+  	}else{
+  		$(tooltip).hide();
+  	}
+  }
+
+
   var scale = 5;
   var zoom_factor = 1.5;
   var zoom_limits = [1,30];
@@ -31,6 +42,7 @@ Template.explore.rendered = function(){
       id: theme._id,
       color: theme.color,
       node: theme,
+      label: theme.en,
       name: theme.en,
       children: []
     }
@@ -40,6 +52,7 @@ Template.explore.rendered = function(){
         id: signal._id,
         color: theme.color,
         group: group.name,
+        node: signal,
         name: signal.name,
         label: signal.name,
         size: reachToRadius(signal.incidencyReach)
@@ -85,27 +98,18 @@ Template.explore.rendered = function(){
 				c.node = d.node;
 				c.d = d;
 				d.circle = c;
-				// if(d.depth == 1) {
-				// 	map_data['c'+d.id] = d;
-				// }
 			})
 			.style('cursor', 'pointer')
-	// 		.on('mouseover', function(d){
-	// 			if(!mobile){
-	// 				if(d.depth == 2){
-	// 					if(d.node.visible) tt(d.group, d.node.name, d.hex);
-	// 					else tt(d.group, d.node.name, gray);
-	// 				}
-	// 				if(d.depth == 1){
-	// 					tt(d.node.label, '', d.hex);
-	// 				}
-	// 			}
-	// 		})
-	// 		.on('mouseout', function(d){
-	// 			if(!mobile){
-	// 				tt(false);
-	// 			}
-	// 		})
+			.on('mouseover', function(d){
+				if(d.depth == 2){
+					setTooltip(d.group, d.node.name, d.color);
+				} else if(d.depth == 1) {
+					setTooltip(d.label, '', d.color);
+				}
+			})
+			.on('mouseout', function(d){
+				setTooltip(false);
+			})
 			.on('click', function(d){
 				if(!dragging() && d.depth == 1) open_popup_group(d.node);
 				if(!dragging() && d.depth == 2) open_popup(d.node);
@@ -128,5 +132,20 @@ Template.explore.rendered = function(){
 
   zoom.translate([win_w/2,win_h/2]).scale(scale).event(svg_map);
   svg_map.attr("transform","translate( "+win_w/2+", "+win_h/2+" ) scale(" + scale + ")");
+
+
+
+  /*
+   * Tool tip
+   */
+
+  $(window).mousemove(function( event ){
+    mouse_x = event.clientX - $(tooltip).width()/2 - 30;
+    mouse_y = event.clientY - 60;
+    $(tooltip).css({ left:mouse_x, top:mouse_y });
+  });
+
+
+
 
 }

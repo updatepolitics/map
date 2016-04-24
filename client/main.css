@@ -191,7 +191,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   margin-bottom: 12px;
   cursor: pointer;
   opacity: 0.3
-  text-transform: uppercase;  
+  text-transform: uppercase;
 }
 
 .sub_bt:hover, .sub_bt.selected{
@@ -1585,14 +1585,14 @@ footer{
   pointer-events: none;
 }
 
-#tt_title{
+#tooltip_title{
     width: 100%;
     font-weight: 600;
 	font-size: 13px;
     margin-bottom: 3px;
 }
-
-#tt_val{
+ 
+#tooltip_val{
     width: 100%;
     font-weight: 300;
 	font-size: 16px;
