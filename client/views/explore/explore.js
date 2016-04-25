@@ -1,5 +1,24 @@
+Template.explore.onCreated(function() {
+  this.currentView = new ReactiveVar('map');
+  this.currentContext = new ReactiveVar('signals');
+  this.showPopup = new ReactiveVar(false);
+  this.popupContent = new ReactiveVar();
+});
 
-Template.explore.rendered = function(){
+Template.explore.onRendered(function(){
+  var self = this;
+
+  /*
+   *  Bind 'esc' key to popup close
+   */
+
+  $(document).keyup(function(e) {
+    if (e.keyCode == 27) {
+      e.preventDefault();
+      self.showPopup.set(false);
+    }
+  });
+
 
   function reachToRadius(reach) {
     var level = IncidencyReachs.findOne(reach).level;
@@ -20,6 +39,8 @@ Template.explore.rendered = function(){
   var scale = 5;
   var zoom_factor = 1.5;
   var zoom_limits = [1,30];
+  var dur = 350;
+  var dur2 = 550;
 
   var svg_map_area = d3.select('#map')
     .append('svg')
@@ -111,29 +132,16 @@ Template.explore.rendered = function(){
 				setTooltip(false);
 			})
 			.on('click', function(d){
-				if(!dragging() && d.depth == 1) open_popup_group(d.node);
-				if(!dragging() && d.depth == 2) open_popup(d.node);
+        if (!dragging()) {
+          self.popupContent.set(d);
+          self.showPopup.set(true);
+        }
 			})
 		 	.transition().duration(1000)
 			.attr('r', function(d) { return d.r } )
 
   var win_w = $(window).width();
   var win_h = $(window).height();
-
-  var zoom = d3.behavior.zoom()
-  		.scaleExtent(zoom_limits)
-  		.center([win_w/2,win_h/2])
-  		.on("zoom", function(){
-        svg_map.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-      	scale = d3.event.scale;
-      })
-  		.translate([win_w/2,win_h/2])
-  		.scale(scale);
-
-  zoom.translate([win_w/2,win_h/2]).scale(scale).event(svg_map);
-  svg_map.attr("transform","translate( "+win_w/2+", "+win_h/2+" ) scale(" + scale + ")");
-
-
 
   /*
    * Tool tip
@@ -145,7 +153,146 @@ Template.explore.rendered = function(){
     $(tooltip).css({ left:mouse_x, top:mouse_y });
   });
 
+  /*
+   * Zoom & Pan
+   */
+
+  var zoom = d3.behavior.zoom()
+  		.scaleExtent(zoom_limits)
+  		.center([win_w/2,win_h/2])
+  		.on("zoom", function(){
+        svg_map.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+      	scale = d3.event.scale;
+      })
+  		.translate([win_w/2,win_h/2])
+  		.scale(scale);
+
+  function center_group(c) {
+
+  	var target = map_data[c];
+
+  	scale = win_w/target.r/5;
+  	if(scale > zoom_limits[1]) scale = zoom_limits[1];
+
+  	var center_x = win_w/2 - ((target.x-50)*scale );
+  	var center_y = win_h/2 - ((target.y-50)*scale );
+
+  	zoom.translate([ center_x, center_y ]).scale(scale).event(svg_map.transition().duration(dur2));
+  }
+
+  function zoomed() {
+  	svg_map.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+  	scale = d3.event.scale;
+  }
+
+  var delta_drag = 3;
+  var drag1 = [];
+  var drag2 = [];
+
+  function dragging() {
+  	return (
+  		( drag1[0] >= drag2[0] + delta_drag || drag1[0] <= drag2[0] - delta_drag  ) &&
+  		( drag1[1] >= drag2[1] + delta_drag || drag1[1] <= drag2[1] - delta_drag  )
+  	);
+  }
+
+  svg_map.on( "mousedown", function(){
+  	drag1 = zoom.translate();
+  });
+  svg_map.on( "mouseup", function(){
+  	drag2 = zoom.translate();
+  });
+
+	svg_map_area.on("mousedown.zoom", null);
+	svg_map_area.on("mousemove.zoom", null);
+	svg_map_area.on("dblclick.zoom", null);
+	svg_map_area.on("touchstart.zoom", null);
+	svg_map_area.on("wheel.zoom", null);
+	svg_map_area.on("mousewheel.zoom", null);
+	svg_map_area.on("MozMousePixelScroll.zoom", null);
+
+	$(zoom_in).on('click', function(){
+		if(scale < zoom_limits[1]){
+			scale *= zoom_factor;
+			zoom.scale(scale).event(svg_map.transition().duration(dur));
+		}
+	});
+
+	$(zoom_ext).on('click', function(){
+		scale = initial_scale;
+		zoom.translate([win_w/2,win_h/2]).scale(scale).event(svg_map.transition().duration(dur2));
+	});
+
+	$(zoom_out).on('click', function(){
+		if(scale > zoom_limits[0]){
+			scale = scale/zoom_factor;
+			zoom.scale(scale).event(svg_map.transition().duration(dur));
+		}
+	});
+
+  zoom.translate([win_w/2,win_h/2]).scale(scale).event(svg_map);
+  svg_map.attr("transform","translate( "+win_w/2+", "+win_h/2+" ) scale(" + scale + ")");
+
+  svg_map_area.call(zoom);
+
+});
 
 
+Template.explore.helpers({
+  showPopup: function(){
+    return Template.instance().showPopup.get();
+  },
+  popupContent: function() {
+    console.log('popupContent');
+    var d = Template.instance().popupContent.get();
+    var signal = Signals.findOne(d.id);
+    console.log(signal);
+    return signal;
+  },
+  getOrigins: function() {
+    var ids = this.placesOfOrigin;
+    var origins = Origins
+                    .find({ _id: { $in: ids }})
+                    .map(function(item){
+                      return item.en
+                    });
 
-}
+    if (origins.length > 0) return origins.join(', ')
+    else return '';
+  },
+  getIncidencyTypes: function() {
+    var ids = this.incidencyTypes
+    var types = IncidencyTypes
+                  .find({ _id: { $in: ids }})
+                  .map(function(type){
+                    return type.en
+                  });
+    if (types.length > 0) {
+      return types.join(', ')
+    } else return '';
+  },
+  getReach: function(id) {
+    var reach = IncidencyReachs.findOne(this.incidencyReach);
+    return reach.en;
+  },
+  getPurpose: function(id) {
+    var purpose = Purposes.findOne(this.purpose);
+    return purpose.en;
+  },
+  hubControlOn: function() {
+    if (Template.instance().currentContext.get() == 'hubs') {
+      return 'on';
+    }
+  },
+  signalControlOn: function() {
+    if (Template.instance().currentContext.get() == 'signals') {
+      return 'on';
+    }
+  }
+});
+
+Template.explore.events({
+  "click #popup_x": function(event, template){
+    template.showPopup.set(false);
+  }
+});

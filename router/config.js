@@ -45,7 +45,10 @@ Router.route("/explore", {
     return [
       Meteor.subscribe('themes'),
       Meteor.subscribe('signals'),
-      Meteor.subscribe('incidencyReachs')
+      Meteor.subscribe('incidencyReachs'),
+      Meteor.subscribe('incidencyTypes'),
+      Meteor.subscribe('origins'),
+      Meteor.subscribe('purposes')
     ];
   },
   name: "explore"

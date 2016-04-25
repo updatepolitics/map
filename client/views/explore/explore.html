@@ -8,10 +8,91 @@
     <div id="tooltip_value"></div>
   </div>
 
+  {{# if showPopup }}
+      <div id="popup" style="height: '40%';">
+        <div id="popup_nav">
+          <div id="popup_x"></div>
+        </div>
+        {{# with popupContent }}
+          <div id="popup_content">
+            <div class="title">{{ name }}</div>
+            <div class="info">
+              <span class="bold">origem</span> {{ getOrigins }} |
+              <span class="bold">abrangência</span> {{ getReach }} |
+              <span class="bold">propósito</span> {{ getPurpose }} |
+              <span class="bold">tipo</span> {{ getIncidencyTypes }}
+            </div>
+            <div class="about mt40">
+              {{ description_en }}
+            </div>
+            <div class="pop_bt link">WEBSITE</div>
+            <div class="pop_bt details" id="417">DETALHES</div>
+          </div>
+        {{/with}}
+      </div>
+  {{/if}}
+
+  <div id="curtain"></div>
+
+
+  <!-- FILTERS  -->
+
+  <div id="filters">
+  	<div id="filters_header">
+  		<div id="trash"></div>
+  		<div id="filters_x"></div>
+  	</div>
+  	<div id="filters_list"></div>
+  </div>
+
+  <!-- CONTROLS -->
+
+  <div id="control">
+
+    <div id="need_help" >
+      <span id="need_help_lb">PRECISA DE AJUDA?</span>
+      <div id="need_help_x"></div>
+    </div>
+    <div id="help_bt" ></div>
+
+    <div id="circles">
+      <div id="circles_out"></div>
+      <div id="circles_in"></div>
+    </div>
+
+    <div id="control_filters" class="control">
+      <span id="filters_lb" class="control_lb"></span>
+      <span class="counter" id="filters_counter"></span>
+    </div>
+
+    <div id="control_center">
+
+      <div id="control_hub" class="control {{ hubControlOn }} ">
+        <div class="flap" id="flap_hub"></div>
+        <span id="control_hub_lb" class="control_lb">HUBS</span>
+      </div>
+
+      <div id="mode">
+        <div id="mode_chart" class="mode selected"></div>
+        <div id="mode_list" class="mode"></div>
+        <div id="mode_lb">
+          <span id="mode_lb_num"></span>
+          <span id="mode_lb_tx"></span>
+        </div>
+      </div>
+
+      <div id="control_sig" class="control {{ signalControlOn }}">
+        <div class="flap" id="flap_sig"></div>
+        <span id="control_sig_lb" class="control_lb">SINAIS</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
   <div id="map_container">
     <div id="map"></div>
   </div>
-
-  {{> control }}
 
 </template>

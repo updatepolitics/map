@@ -354,7 +354,7 @@ footer{
     top: 0;
     bottom:0;
     color: #262c38;
-    display: none;
+    display: block;
     overflow: hidden;
     text-align: center;
 }
@@ -1591,7 +1591,7 @@ footer{
 	font-size: 13px;
     margin-bottom: 3px;
 }
- 
+
 #tooltip_val{
     width: 100%;
     font-weight: 300;
