@@ -296,8 +296,11 @@ Template.explore.helpers({
   },
   popupContent: function() {
     var d = Template.instance().popupContent.get();
-    var signal = Signals.findOne(d.id);
-    return signal;
+    if (Template.instance().currentContext.get() == 'signals') {
+      return Signals.findOne(d.id);
+    } else {
+      return Hubs.findOne(d.id);
+    }
   },
   getOrigins: function() {
     var ids = this.placesOfOrigin;

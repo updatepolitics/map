@@ -18,9 +18,16 @@
             <div class="title">{{ name }}</div>
             <div class="info">
               <span class="bold">origem</span> {{ getOrigins }} |
-              <span class="bold">abrangência</span> {{ getReach }} |
-              <span class="bold">propósito</span> {{ getPurpose }} |
-              <span class="bold">tipo</span> {{ getIncidencyTypes }}
+              <span class="bold">abrangência</span> {{ getReach }}
+              {{# if purpose }}
+                | <span class="bold">propósito</span> {{ getPurpose }}
+              {{/if}}
+              {{# if incidencyType }}
+                | <span class="bold">tipo</span> {{ getIncidencyTypes }}
+              {{/if }}
+              {{# if isSponsor }}
+                | <span class="bold">sponsor</span> SPONSOR
+              {{/if }}
             </div>
             <div class="about mt40">
               {{ description_en }}
