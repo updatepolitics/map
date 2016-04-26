@@ -5,59 +5,61 @@ Template.explore.onCreated(function() {
   this.popupContent = new ReactiveVar();
 });
 
-Template.explore.onRendered(function(){
-  var self = this;
+/*
+ * Helper functions
+ */
 
-  /*
-   *  Bind 'esc' key to popup close
-   */
+function reachToRadius(reach) {
+  var level = IncidencyReachs.findOne(reach).level;
+  return 3 * Math.sqrt(level / Math.PI);
+}
 
-  $(document).keyup(function(e) {
-    if (e.keyCode == 27) {
-      e.preventDefault();
-      self.showPopup.set(false);
-    }
-  });
-
-
-  function reachToRadius(reach) {
-    var level = IncidencyReachs.findOne(reach).level;
-    return 3 * Math.sqrt(level / Math.PI);
+function setTooltip(title, val, color){
+  if(title){
+    $(tooltip_title).html(title);
+    $(tooltip_value).html(val);
+    $(tooltip).css({background:color}).show();
+  }else{
+    $(tooltip).hide();
   }
+}
 
-  function setTooltip(title, val, color){
-  	if(title){
-  		$(tooltip_title).html(title);
-  		$(tooltip_value).html(val);
-  		$(tooltip).css({background:color}).show();
-  	}else{
-  		$(tooltip).hide();
-  	}
-  }
+var delta_drag = 3;
+var drag1 = [];
+var drag2 = [];
+
+function dragging() {
+	return (
+		( drag1[0] >= drag2[0] + delta_drag || drag1[0] <= drag2[0] - delta_drag  ) &&
+		( drag1[1] >= drag2[1] + delta_drag || drag1[1] <= drag2[1] - delta_drag  )
+	);
+}
 
 
-  var scale = 5;
-  var zoom_factor = 1.5;
-  var zoom_limits = [1,30];
-  var dur = 350;
-  var dur2 = 550;
+/*
+ * Variables & Configs
+ */
 
-  var svg_map_area = d3.select('#map')
-    .append('svg')
-    .attr('id', 'svg_map_area');
+var scale = 5;
+var zoom_factor = 1.5;
+var zoom_limits = [1,30];
+var dur = 350;
+var dur2 = 550;
+var svg_map_area;
+var svg_map;
+var data = {};
+var nodes;
+var pack = d3.layout.pack()
+  .value(function(d) { return d.size; })
+  .sort(function(a,b){ return a.value + b.value; })
+  .padding(.3)
+  .size([100, 100]);
 
-  var svg_map = svg_map_area
-    .append('g');
+/*
+ * Data
+ */
 
-  var pack = d3.layout.pack()
-    .value(function(d) { return d.size; })
-    .sort(function(a,b){ return a.value + b.value; })
-    .padding(.3)
-    .size([100, 100]);
-
-  // define hierarchy
-
-  var data = {};
+function getSignalData() {
   data.children = Themes.find({}).map(function(theme){
     var group = {
       id: theme._id,
@@ -83,16 +85,51 @@ Template.explore.onRendered(function(){
     return group;
   });
 
-  var nodes = pack.nodes(data);
+  nodes = pack.nodes(data);
 
-  // init map
+}
 
-  svg_map_area = d3.select('#map')
-    .append('svg')
-    .attr('id', 'svg_map_area');
+function getHubData() {
 
-  svg_map = svg_map_area
-    .append('g')
+  data = {};
+
+  data.children = Natures.find({}).map(function(nature){
+    var group = {
+      id: nature._id,
+      color: nature.color,
+      node: nature,
+      label: nature.en,
+      name: nature.en,
+      children: []
+    }
+
+    group.children = Hubs.find({nature: nature._id}).map(function(hub){
+      return {
+        id: hub._id,
+        color: nature.color,
+        group: group.name,
+        node: hub,
+        name: hub.name,
+        label: hub.name,
+        size: reachToRadius(hub.incidencyReach)
+      }
+    });
+
+    return group;
+  });
+
+
+  nodes = pack.nodes(data);
+
+}
+
+/*
+ * Map
+ */
+
+function refreshMap(template) {
+
+  svg_map.selectAll('circle').remove();
 
   svg_map.selectAll('circle')
 		.data(nodes)
@@ -133,12 +170,38 @@ Template.explore.onRendered(function(){
 			})
 			.on('click', function(d){
         if (!dragging()) {
-          self.popupContent.set(d);
-          self.showPopup.set(true);
+          template.popupContent.set(d);
+          template.showPopup.set(true);
         }
 			})
 		 	.transition().duration(1000)
 			.attr('r', function(d) { return d.r } )
+
+}
+
+Template.explore.onRendered(function(){
+  var self = this;
+
+  /*
+   *  Bind 'esc' key to popup close
+   */
+
+  $(document).keyup(function(e) {
+    if (e.keyCode == 27) {
+      e.preventDefault();
+      self.showPopup.set(false);
+    }
+  });
+
+  svg_map_area = d3.select('#map')
+    .append('svg')
+    .attr('id', 'svg_map_area');
+
+  svg_map = svg_map_area
+    .append('g')
+
+  getSignalData();
+  refreshMap(self);
 
   var win_w = $(window).width();
   var win_h = $(window).height();
@@ -183,17 +246,6 @@ Template.explore.onRendered(function(){
   function zoomed() {
   	svg_map.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
   	scale = d3.event.scale;
-  }
-
-  var delta_drag = 3;
-  var drag1 = [];
-  var drag2 = [];
-
-  function dragging() {
-  	return (
-  		( drag1[0] >= drag2[0] + delta_drag || drag1[0] <= drag2[0] - delta_drag  ) &&
-  		( drag1[1] >= drag2[1] + delta_drag || drag1[1] <= drag2[1] - delta_drag  )
-  	);
   }
 
   svg_map.on( "mousedown", function(){
@@ -243,10 +295,8 @@ Template.explore.helpers({
     return Template.instance().showPopup.get();
   },
   popupContent: function() {
-    console.log('popupContent');
     var d = Template.instance().popupContent.get();
     var signal = Signals.findOne(d.id);
-    console.log(signal);
     return signal;
   },
   getOrigins: function() {
@@ -294,5 +344,15 @@ Template.explore.helpers({
 Template.explore.events({
   "click #popup_x": function(event, template){
     template.showPopup.set(false);
+  },
+  "click #control_sig": function(event, template){
+    getSignalData();
+    refreshMap(template);
+    template.currentContext.set('signals');
+  },
+  "click #control_hub": function(event, template){
+    getHubData();
+    refreshMap(template);
+    template.currentContext.set('hubs');
   }
 });
