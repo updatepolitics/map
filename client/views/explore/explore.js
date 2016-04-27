@@ -2,7 +2,14 @@ Template.explore.onCreated(function() {
   this.currentView = new ReactiveVar('map');
   this.currentContext = new ReactiveVar('signals');
   this.showPopup = new ReactiveVar(false);
+  this.showFilters = new ReactiveVar(false);
+  this.showOriginsFilterOptions = new ReactiveVar(false);
   this.popupContent = new ReactiveVar();
+
+  this.filters = new ReactiveVar();
+  this.filters.signals = {
+    origins: []
+  };
 });
 
 /*
@@ -27,12 +34,27 @@ function setTooltip(title, val, color){
 var delta_drag = 3;
 var drag1 = [];
 var drag2 = [];
+var win_w;
+var win_h;
+var bar_h = 80;
+var filter_h = 25;
+
 
 function dragging() {
 	return (
 		( drag1[0] >= drag2[0] + delta_drag || drag1[0] <= drag2[0] - delta_drag  ) &&
 		( drag1[1] >= drag2[1] + delta_drag || drag1[1] <= drag2[1] - delta_drag  )
 	);
+}
+
+
+function resize_explore(){
+
+	// $(popup_content).height($(popup).height() - 150);
+	$(map_container).height(win_h - bar_h);
+	$(filters).height(win_h - bar_h - 40);
+	$(filters_list).height(win_h - bar_h - 97);
+
 }
 
 
@@ -203,8 +225,8 @@ Template.explore.onRendered(function(){
   getSignalData();
   refreshMap(self);
 
-  var win_w = $(window).width();
-  var win_h = $(window).height();
+  win_w = $(window).width();
+  win_h = $(window).height();
 
   /*
    * Tool tip
@@ -287,6 +309,8 @@ Template.explore.onRendered(function(){
 
   svg_map_area.call(zoom);
 
+  resize_explore();
+
 });
 
 
@@ -341,7 +365,30 @@ Template.explore.helpers({
     if (Template.instance().currentContext.get() == 'signals') {
       return 'on';
     }
+  },
+  showFilters: function(){
+    return Template.instance().showFilters.get();
+  },
+  filterCountStyle: function() {
+    return 'opacity: 0.2;';
+  },
+  filterCount: function() {
+    return 0;
+  },
+  showOriginsFilterOptions: function() {
+    return Template.instance().showOriginsFilterOptions.get();
+  },
+  signalOriginsFilterOptions: function() {
+    var originsId = [];
+    Signals.find({}, {
+      fields: { placesOfOrigin: true }
+    }).forEach(function(signal){
+      originsId = originsId.concat(signal.placesOfOrigin);
+    });
+    originsId = _.uniq(originsId);
+    return Origins.find({_id: { $in: originsId }}, {$sort: { en: 1 } });
   }
+
 });
 
 Template.explore.events({
@@ -357,5 +404,17 @@ Template.explore.events({
     getHubData();
     refreshMap(template);
     template.currentContext.set('hubs');
+  },
+  "click #control_filters": function(event, template){
+    $(filters).animate({right:20}, dur);
+    template.showFilters.set(!template.showFilters.get());
+  },
+  "click #originsFilter": function(event, template){
+    event.preventDefault();
+    var ul = $(event.currentTarget).next();
+    var lis = ul.children();
+    var height = 30 + lis.length * filter_h;
+    if (ul.height() > 0) ul.animate({height: 0 }, dur);
+    else ul.animate({height: height }, dur);
   }
 });

@@ -39,18 +39,33 @@
       </div>
   {{/if}}
 
-  <div id="curtain"></div>
-
-
   <!-- FILTERS  -->
 
   <div id="filters">
   	<div id="filters_header">
-  		<div id="trash"></div>
+      <div id="trash" class="empty">Nenhum filtro ativado</div>
   		<div id="filters_x"></div>
   	</div>
-  	<div id="filters_list"></div>
+  	<div id="filters_list">
+      <div class="filter_title" id="originsFilter">
+        origem
+        <span style="opacity: 0.2;" class="counter">0</span>
+      </div>
+      <ul class="group" style="height: 0;">
+        {{#each signalOriginsFilterOptions }}
+        <li class="filter" style="opacity: 1;">
+          {{ en }}
+        </li>
+        {{/each}}
+      </ul>
+      <div class="filter_title">
+        reach
+        <span style="opacity: 0.2;" class="counter">0</span>
+      </div>
+    </div>
   </div>
+
+  <div id="curtain"></div>
 
   <!-- CONTROLS -->
 
@@ -68,8 +83,8 @@
     </div>
 
     <div id="control_filters" class="control">
-      <span id="filters_lb" class="control_lb"></span>
-      <span class="counter" id="filters_counter"></span>
+      <span id="filters_lb" class="control_lb">FILTROS</span>
+      <span class="counter" id="filters_counter" style="{{ filterCountStyle }}" >{{ filterCount }}</span>
     </div>
 
     <div id="control_center">
