@@ -6,10 +6,27 @@ Template.explore.onCreated(function() {
   this.showOriginsFilterOptions = new ReactiveVar(false);
   this.popupContent = new ReactiveVar();
 
-  this.filters = new ReactiveVar();
-  this.filters.signals = {
-    origins: []
-  };
+  this.filters = new ReactiveVar({
+    signals: {
+      origins: []
+    }
+  });
+  this.signalOriginFilterOptions = new ReactiveVar();
+
+
+  // get distinct origins for signals
+  var originsId = [];
+  Signals.find({}, {
+    fields: { placesOfOrigin: true }
+  }).forEach(function(signal){
+    originsId = originsId.concat(signal.placesOfOrigin);
+  });
+  originsId = _.uniq(originsId);
+  this.signalOriginFilterOptions.set(Origins.find({_id: { $in: originsId }}, {$sort: { en: 1 } }));
+
+
+
+
 });
 
 /*
@@ -375,18 +392,8 @@ Template.explore.helpers({
   filterCount: function() {
     return 0;
   },
-  showOriginsFilterOptions: function() {
-    return Template.instance().showOriginsFilterOptions.get();
-  },
-  signalOriginsFilterOptions: function() {
-    var originsId = [];
-    Signals.find({}, {
-      fields: { placesOfOrigin: true }
-    }).forEach(function(signal){
-      originsId = originsId.concat(signal.placesOfOrigin);
-    });
-    originsId = _.uniq(originsId);
-    return Origins.find({_id: { $in: originsId }}, {$sort: { en: 1 } });
+  signalOriginFilterOptions: function() {
+    return Template.instance().signalOriginFilterOptions.get();
   }
 
 });
@@ -411,10 +418,68 @@ Template.explore.events({
   },
   "click #originsFilter": function(event, template){
     event.preventDefault();
-    var ul = $(event.currentTarget).next();
+
+    var target = $(event.currentTarget);
+
+    var ul = target.next();
     var lis = ul.children();
     var height = 30 + lis.length * filter_h;
-    if (ul.height() > 0) ul.animate({height: 0 }, dur);
-    else ul.animate({height: height }, dur);
+    if (ul.height() > 0) {
+      ul.animate({height: 0 }, dur);
+      target.css({ backgroundImage: 'url(layout/plus_white.png)'});
+    } else {
+      ul.animate({height: height }, dur);
+      target.css({ backgroundImage: 'url(layout/minus_white.png)'});
+    }
+  },
+  "click .filter": function(event, template) {
+    event.preventDefault();
+
+    var self = this;
+
+    var filters = template.filters.get();
+
+    var target = $(event.target);
+
+    // filter is already selected
+    if (_.contains(filters.signals.origins, self._id)) {
+
+      // remove it from filters list
+      filters.signals.origins = _.without(filters.signals.origins, self._id);
+      target.removeClass('selected').css({opacity: 0.2 });
+
+      // if no filter is selected, change opacity from all filters to 1
+      if (filters.signals.origins.length == 0)
+        target.parent().children().css({opacity: 1 });
+
+    // filter is not selected
+    } else {
+
+      // add it to filters list
+      filters.signals.origins.push(self._id);
+      target.addClass('selected');
+
+      // if this is the first selected, change opacity of other filters
+      if (filters.signals.origins.length == 1)
+        target.parent().children().css({opacity: 0.2 });
+
+      // set opacity from filter itself
+      target.css({opacity: 1 })
+    }
+
+    // update filter counter
+    var counter = target.parent().prev().children('span');
+    counter.html(filters.signals.origins.length);
+
+    if (filters.signals.origins.length > 0) {
+      counter.css({opacity: 1});
+      $(trash).html('Remover filtros').removeClass('empty');
+    } else {
+      counter.css({opacity: 0.2});
+      $(trash).html('Nenhum filtro selecionado').addClass('empty');
+    }
+
+
+    template.filters.set(filters);
   }
 });
