@@ -479,8 +479,20 @@ Template.explore.events({
     template.currentContext.set('hubs');
   },
   "click #control_filters": function(event, template){
-    $(filters).animate({right:20}, dur);
-    template.showFilters.set(!template.showFilters.get());
+    var target = $(filters);
+    var showFilters = !template.showFilters.get();
+
+    if (showFilters) {
+      target.animate({ right: 20}, dur);
+    } else {
+      target.animate({ right: -350}, dur);
+    }
+
+    template.showFilters.set(showFilters);
+  },
+  "click #filters_x": function(event, template) {
+    template.showFilters.set(false);
+    $(filters).animate({ right: -350}, dur);
   },
   "click #trash": function(event, template) {
     var context = template.currentContext.get();
