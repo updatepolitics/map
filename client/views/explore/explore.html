@@ -43,25 +43,27 @@
 
   <div id="filters">
   	<div id="filters_header">
-      <div id="trash" class="empty">Nenhum filtro ativado</div>
-  		<div id="filters_x"></div>
+      {{#if filterCount }}
+        <div id="trash">Remover filtros</div>
+      {{else}}
+        <div id="trash" class="empty">Nenhum filtro ativado</div>
+      {{/if}}
+      <div id="filters_x"></div>
   	</div>
   	<div id="filters_list">
-      <div class="filter_title" id="originsFilter">
-        origem
-        <span style="opacity: 0.2;" class="counter">0</span>
-      </div>
-      <ul class="group" style="height: 0;">
-        {{#each signalOriginFilterOptions }}
-          <li class="filter" style="opacity: 1;">
-            {{ en }}
-          </li>
-        {{/each}}
-      </ul>
-      <div class="filter_title">
-        reach
-        <span style="opacity: 0.2;" class="counter">0</span>
-      </div>
+      {{#each filterTargetFields }}
+        <div class="filter_title">
+          {{ id }}
+          <span style="opacity: 0.2;" class="counter">0</span>
+        </div>
+        <ul class="group" style="height: 0;">
+          {{#each options }}
+            <li class="filter" style="opacity: 1;">
+              {{ en }}
+            </li>
+          {{/each}}
+        </ul>
+      {{/each }}
     </div>
   </div>
 

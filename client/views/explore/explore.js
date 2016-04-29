@@ -1,31 +1,85 @@
 Template.explore.onCreated(function() {
-  this.currentView = new ReactiveVar('map');
-  this.currentContext = new ReactiveVar('signals');
-  this.showPopup = new ReactiveVar(false);
-  this.showFilters = new ReactiveVar(false);
-  this.showOriginsFilterOptions = new ReactiveVar(false);
-  this.popupContent = new ReactiveVar();
+  var self = this;
 
-  this.filters = new ReactiveVar({
-    signals: {
-      origins: []
-    }
+  self.currentView = new ReactiveVar('map');
+  self.currentContext = new ReactiveVar('signals');
+  self.showPopup = new ReactiveVar(false);
+  self.showFilters = new ReactiveVar(false);
+  self.showOriginsFilterOptions = new ReactiveVar(false);
+  self.filterCount = new ReactiveVar({
+    hubs: 0,
+    signals: 0
   });
-  this.signalOriginFilterOptions = new ReactiveVar();
+  self.popupContent = new ReactiveVar();
 
+  /*
+   * FILTERS SETUP
+   */
 
-  // get distinct origins for signals
-  var originsId = [];
+  self.filters = new ReactiveVar({
+    signals: { }
+  });
+
+  /*
+   * SIGNAL FILTERS OPTIONS
+   */
+
+  var filters = self.filters.get();
+
+  // avoid huge list of origins
+  filters.signals.origins = [];
   Signals.find({}, {
-    fields: { placesOfOrigin: true }
+    fields: {
+      placesOfOrigin: true
+    }
   }).forEach(function(signal){
-    originsId = originsId.concat(signal.placesOfOrigin);
+    filters.signals.origins =
+      filters.signals.origins.concat(signal.placesOfOrigin);
   });
-  originsId = _.uniq(originsId);
-  this.signalOriginFilterOptions.set(Origins.find({_id: { $in: originsId }}, {$sort: { en: 1 } }));
 
+  filters.signals.origins = Origins
+    .find({_id: {$in: _.uniq(filters.signals.origins)}})
+    .map(function(i){
+      i.selected = false;
+      return i;
+    });
 
+  filters.signals.reaches = IncidencyReachs
+    .find({})
+    .map(function(i){
+      i.selected = false;
+      return i;
+    });
 
+  filters.signals.themes = Themes
+    .find({})
+    .map(function(i){
+      i.selected = false;
+      return i;
+    });
+
+  filters.signals.mechanisms = Mechanisms
+    .find({})
+    .map(function(i){
+      i.selected = false;
+      return i;
+    });
+
+  filters.signals.purposes = Purposes
+    .find({})
+    .map(function(i){
+      i.selected = false;
+      return i;
+    });
+
+  filters.signals.incidencyTypes = IncidencyTypes
+    .find({})
+    .map(function(i){
+      i.selected = false;
+      return i;
+    });
+
+  self.filters.set(filters);
 
 });
 
@@ -386,11 +440,23 @@ Template.explore.helpers({
   showFilters: function(){
     return Template.instance().showFilters.get();
   },
+  filterTargetFields: function() {
+    var context = Template.instance().currentContext.get();
+    var filters = Template.instance().filters.get()[context];
+
+    return _.map( _.keys(filters), function(i){
+      return {
+        id: i,
+        options: filters[i]
+      }
+    });
+  },
   filterCountStyle: function() {
     return 'opacity: 0.2;';
   },
   filterCount: function() {
-    return 0;
+    var context = Template.instance().currentContext.get();
+    return Template.instance().filterCount.get()[context];;
   },
   signalOriginFilterOptions: function() {
     return Template.instance().signalOriginFilterOptions.get();
@@ -416,7 +482,25 @@ Template.explore.events({
     $(filters).animate({right:20}, dur);
     template.showFilters.set(!template.showFilters.get());
   },
-  "click #originsFilter": function(event, template){
+  "click #trash": function(event, template) {
+    var context = template.currentContext.get();
+
+    var filters = template.filters.get();
+    _.each(_.keys(filters[context]), function(filterGroup){
+      for (var i = 0; i < filters[context][filterGroup].length; i++) {
+        filters[context][filterGroup][i].selected = false;
+      }
+    });
+    template.filters.set(filters);
+
+    $('#filters li.filter').removeClass('selected').css({ opacity: 1 });
+    $('#filters span').html(0);
+
+    var filterCount = template.filterCount.get();
+    filterCount[context] = 0;
+    template.filterCount.set(filterCount);
+  },
+  "click .filter_title": function(event, template){
     event.preventDefault();
 
     var target = $(event.currentTarget);
@@ -436,50 +520,37 @@ Template.explore.events({
     event.preventDefault();
 
     var self = this;
-
-    var filters = template.filters.get();
-
     var target = $(event.target);
 
-    // filter is already selected
-    if (_.contains(filters.signals.origins, self._id)) {
+    // get global filter count for current context
+    var context = template.currentContext.get();
+    var filterCount = template.filterCount.get();
 
-      // remove it from filters list
-      filters.signals.origins = _.without(filters.signals.origins, self._id);
+    // get filter count for field
+    var counterSpan = target.parent().prev().children('span');
+    var selectedFiltersCount = parseInt(counterSpan.html());
+
+    if (self.selected) {
+      self.selected = false;
+      selectedFiltersCount -= 1;
+      filterCount[context] -= 1;
       target.removeClass('selected').css({opacity: 0.2 });
-
-      // if no filter is selected, change opacity from all filters to 1
-      if (filters.signals.origins.length == 0)
+      if (selectedFiltersCount == 0) {
         target.parent().children().css({opacity: 1 });
-
-    // filter is not selected
+      }
     } else {
-
-      // add it to filters list
-      filters.signals.origins.push(self._id);
-      target.addClass('selected');
-
-      // if this is the first selected, change opacity of other filters
-      if (filters.signals.origins.length == 1)
+      self.selected = true;
+      selectedFiltersCount += 1;
+      filterCount[context] += 1;
+      if (selectedFiltersCount == 1) {
         target.parent().children().css({opacity: 0.2 });
-
-      // set opacity from filter itself
-      target.css({opacity: 1 })
+      }
+      target.addClass('selected').css({opacity: 1 });
     }
 
-    // update filter counter
-    var counter = target.parent().prev().children('span');
-    counter.html(filters.signals.origins.length);
+    // update global filter count for current context
+    template.filterCount.set(filterCount);
+    counterSpan.html(selectedFiltersCount);
 
-    if (filters.signals.origins.length > 0) {
-      counter.css({opacity: 1});
-      $(trash).html('Remover filtros').removeClass('empty');
-    } else {
-      counter.css({opacity: 0.2});
-      $(trash).html('Nenhum filtro selecionado').addClass('empty');
-    }
-
-
-    template.filters.set(filters);
   }
 });
