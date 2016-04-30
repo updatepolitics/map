@@ -17,7 +17,8 @@ Template.explore.onCreated(function() {
    */
 
   self.filters = new ReactiveVar({
-    signals: { }
+    signals: {},
+    hubs: {}
   });
 
   /*
@@ -78,6 +79,48 @@ Template.explore.onCreated(function() {
       i.selected = false;
       return i;
     });
+
+  /*
+   * HUBS FILTERS OPTIONS
+   */
+
+  // avoid huge list of origins
+  filters.hubs.placesOfOrigin = [];
+  Hubs.find({}, {
+   fields: {
+     placesOfOrigin: true
+   }
+  }).forEach(function(hub){
+   filters.hubs.placesOfOrigin =
+     filters.hubs.placesOfOrigin.concat(hub.placesOfOrigin);
+  });
+
+  filters.hubs.placesOfOrigin = Origins
+    .find({_id: {$in: _.uniq(filters.hubs.placesOfOrigin)}})
+    .map(function(i){
+      i.selected = false;
+      return i;
+    });
+
+
+  filters.hubs.incidencyReach = filters.signals.incidencyReach;
+
+  filters.hubs.nature = Natures
+      .find({})
+      .map(function(i){
+        i.selected = false;
+        return i;
+      });
+
+  filters.hubs.isSponsor = [{
+    selected: false,
+    _id: true,
+    en: 'SIM'
+  }, {
+    selected: false,
+    _id: false,
+    en: 'NÃO'
+  }];
 
   self.filters.set(filters);
 
