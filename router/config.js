@@ -51,6 +51,7 @@ Router.route("/explore", {
       Meteor.subscribe('incidencyTypes'),
       Meteor.subscribe('origins'),
       Meteor.subscribe('mechanisms'),
+      Meteor.subscribe('methods'),
       Meteor.subscribe('purposes')
     ];
   },

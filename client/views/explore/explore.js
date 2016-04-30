@@ -27,31 +27,31 @@ Template.explore.onCreated(function() {
   var filters = self.filters.get();
 
   // avoid huge list of origins
-  filters.signals.origins = [];
+  filters.signals.placesOfOrigin = [];
   Signals.find({}, {
     fields: {
       placesOfOrigin: true
     }
   }).forEach(function(signal){
-    filters.signals.origins =
-      filters.signals.origins.concat(signal.placesOfOrigin);
+    filters.signals.placesOfOrigin =
+      filters.signals.placesOfOrigin.concat(signal.placesOfOrigin);
   });
 
-  filters.signals.origins = Origins
-    .find({_id: {$in: _.uniq(filters.signals.origins)}})
+  filters.signals.placesOfOrigin = Origins
+    .find({_id: {$in: _.uniq(filters.signals.placesOfOrigin)}})
     .map(function(i){
       i.selected = false;
       return i;
     });
 
-  filters.signals.reaches = IncidencyReachs
+  filters.signals.incidencyReach = IncidencyReachs
     .find({})
     .map(function(i){
       i.selected = false;
       return i;
     });
 
-  filters.signals.themes = Themes
+  filters.signals.mainThemes = Themes
     .find({})
     .map(function(i){
       i.selected = false;
@@ -65,7 +65,7 @@ Template.explore.onCreated(function() {
       return i;
     });
 
-  filters.signals.purposes = Purposes
+  filters.signals.purpose = Purposes
     .find({})
     .map(function(i){
       i.selected = false;
@@ -269,6 +269,60 @@ function refreshMap(template) {
 			})
 		 	.transition().duration(1000)
 			.attr('r', function(d) { return d.r } )
+
+}
+
+function updateMap(filters) {
+  var selectedFilters = {};
+  var fields = _.keys(filters);
+
+  // get filters ids into arrays
+  _.each(fields, function(field){
+    var fieldValues = [];
+    _.each(filters[field], function(f){
+      if (f.selected) fieldValues.push(f._id);
+    })
+    if (fieldValues.length > 0) {
+      selectedFilters[field] = fieldValues;
+    }
+  })
+
+  // get methods after mechanisms
+  if (selectedFilters['mechanisms']) {
+    selectedFilters['methods'] = Methods
+      .find({mechanism: {$in: selectedFilters['mechanisms']}}, {fields: {_id: true}})
+      .map(function(i) {return i._id} );
+
+    delete selectedFilters.mechanisms;
+  }
+
+  fields = _.keys(selectedFilters);
+
+  svg_map.selectAll('circle')
+    .each( function (d, i) {
+      if (d.depth == 2) {
+        var selected = true;
+
+        // check if node belongs to all filters
+        _.each(fields, function(field){
+          if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
+            selected = false
+          }
+        });
+
+        if (selected) {
+          d.circle
+            .transition()
+            .duration(dur/2)
+            .attr('opacity', 1)
+        } else {
+          d.circle
+            .transition()
+            .duration(dur/2)
+            .attr('opacity', .1)
+        }
+      }
+    });
 
 }
 
@@ -511,6 +565,8 @@ Template.explore.events({
     var filterCount = template.filterCount.get();
     filterCount[context] = 0;
     template.filterCount.set(filterCount);
+    updateMap(filters);
+
   },
   "click .filter_title": function(event, template){
     event.preventDefault();
@@ -563,6 +619,8 @@ Template.explore.events({
     // update global filter count for current context
     template.filterCount.set(filterCount);
     counterSpan.html(selectedFiltersCount);
+
+    updateMap(template.filters.get()[context]);
 
   }
 });
