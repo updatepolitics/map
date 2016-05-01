@@ -1,0 +1,32 @@
+<template name="list">
+
+  <div id="search">
+    <input type="text" id="search_str" tabindex="-1" placeholder="BUSCAR NA SELEÇÃO"/>
+    <div id="search_x" style="display: none;"></div>
+  </div>
+
+  <div id='list'>
+    {{#each listItems}}
+      <li class="list_item sig"><img src="layout/plus_gray.png">
+        <div class="title">{{ name }}</div>
+        <div class="info">
+          <span class="bold">origem</span> {{ originNames }}
+          | <span class="bold">abrangência</span> {{ incidencyReachLabel }}
+          {{#if isSignalContext }}
+            | <span class="bold">propósito</span> {{ purposeLabel }}
+            {{#if incidencyTypes.length }}
+              | <span class="bold">tipo</span> {{ incidencyTypesLabel }}
+            {{/if}}
+          {{else}}
+            {{# if isSponsor }}
+              | <span class="bold">apoiador</span>
+            {{/if }}
+          {{/if}}
+        </div>
+      </li>
+    {{/each}}
+  </div>
+
+  {{> viewControl }}
+
+</template>

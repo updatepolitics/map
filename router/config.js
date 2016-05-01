@@ -59,11 +59,33 @@ Router.route("/explore", {
 });
 
 /*
+ * List route
+ */
+
+Router.route("/list", {
+  waitOn: function() {
+    return [
+      // Meteor.subscribe('themes'),
+      // Meteor.subscribe('natures'),
+      Meteor.subscribe('incidencyReachs'),
+      Meteor.subscribe('incidencyTypes'),
+      Meteor.subscribe('origins'),
+      // Meteor.subscribe('mechanisms'),
+      // Meteor.subscribe('methods'),
+      Meteor.subscribe('purposes'),
+      Meteor.subscribe('signals'),
+      Meteor.subscribe('hubs'),
+    ];
+  },
+  name: "list"
+});
+
+/*
  * Auth config
  */
 
 Router.plugin('ensureSignedIn', {
-  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'signals', 'explore']
+  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'signals', 'explore', 'list']
 });
 
 AccountsTemplates.configure({

@@ -67,3 +67,62 @@ Template.registerHelper("mechanismOptions", function(argument){
     return {label: c.en, value: c._id};
   });
 });
+
+/*
+ * LABELS (from ids)
+ */
+
+Template.registerHelper("originNames", function(){
+  var self = this;
+
+  var ids = [].concat(self.placesOfOrigin);
+  var origins = Origins
+                  .find({ _id: { $in: ids }})
+                  .map(function(item){
+                    return item.en
+                  });
+
+  if (origins.length > 0) return origins.join(', ')
+  else return 'Não informado';
+});
+
+Template.registerHelper("incidencyReachLabel", function(){
+  var reach = IncidencyReachs.findOne(this.incidencyReach);
+  return reach.en;
+});
+
+Template.registerHelper("incidencyTypesLabel", function(){
+  var self = this;
+  var ids = [].concat(self.incidencyTypes);
+  var types = IncidencyTypes
+                .find({ _id: { $in: ids }})
+                .map(function(item){
+                  return item.en
+                });
+
+  if (types.length > 0) return types.join(', ')
+  else return '';
+});
+
+Template.registerHelper("purposeLabel", function(){
+  var purpose = Purposes.findOne(this.purpose);
+  if (purpose) return purpose.en;
+  else return '';
+});
+
+
+/*
+ * MAP & LIST helpers
+ */
+
+Template.registerHelper("currentContext", function(argument){
+  return Session.get('currentContext');
+});
+
+Template.registerHelper("isSignalContext", function(argument){
+  return (Session.get('currentContext') == 'signals');
+});
+
+Template.registerHelper("itemsCount", function(argument){
+  return Session.get('itemsCount');
+});

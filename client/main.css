@@ -824,6 +824,7 @@ footer{
 #mode_lb_tx{
   font-weight: 300;
   margin-left: 5px;
+  text-transform: uppercase;
 }
 
 /* ////////////////////////// resiter input ////////////////////////// */
