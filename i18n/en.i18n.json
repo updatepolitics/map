@@ -1,18 +1,32 @@
 {
   "menu": {
     "items": {
-      "home": "Home",
-      "about": "About"
+      "home": "Início",
+      "map": "Explorar Mapa",
+      "mapping": "Mapeamento",
+      "about": "Sobre",
+      "hubs": "Hubs",
+      "signals": "Sinais"
     },
     "sub_items": {
+      "mapping": {
+        "a_about": "Sobre",
+        "a_methodology": "Metodologia"
+      },
       "about": {
-        "intro": "Introduction",
-        "context": "Context",
-        "who": "Team",
-        "sponsors": "Sponsos",
-        "transparency": "Transparency",
-        "partners": "Partners"
+        "a_intro": "Sobre o Update",
+        "a_context": "Contexto em que surge o Update",
+        "a_who": "Equipe do Update",
+        "a_financer": "Financiadores",
+        "a_transparency": "Transparência",
+        "a_partners": "Colaboradores"
+      },
+      "hubs": {
+        "a_intro": "Sobre",
+        "a_natures": "Naturezas",
+        "a_sponsor": "Financiadores"
       }
+
     }
   },
   "home": {

@@ -29,30 +29,18 @@ Template.appMenu.helpers({
     return [{
       route: 'home'
     }, {
-      route: 'about',
-      anchors: [
-        'a_intro',
-        'a_context',
-        'a_who',
-        'a_financer',
-        'a_transparency',
-        'a_partners'
-      ]
+      route: 'map'
     }, {
       route: 'mapping',
       anchors: [
-        'about',
-        'methodology',
-        'coverage',
-        'staff',
-        'developers',
-        'partners'
+        "a_about",
+        "a_methodology"
       ]
     }, {
       route: 'hubs',
       anchors: [
           'a_intro',
-          'a_kind',
+          'a_natures',
           'a_sponsor'
       ]
     }, {
@@ -65,9 +53,15 @@ Template.appMenu.helpers({
         "mechanism"
       ]
     }, {
-      route: 'download'
-    }, {
-      route: 'explore'
+      route: 'about',
+      anchors: [
+        "a_intro",
+        "a_context",
+        "a_who",
+        "a_financer",
+        "a_transparency",
+        "a_partners"
+      ]
     }];
   },
   anchors: function() {
