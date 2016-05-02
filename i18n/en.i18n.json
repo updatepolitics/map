@@ -33,10 +33,6 @@
         "purpose": "Propósito",
         "mechanisms": "Mecanismos"
       }
-
-
-
-
     }
   },
   "home": {
@@ -45,5 +41,11 @@
       "intro": "Intro",
       "explore": "Explore"
     }
-  }
+  },
+  "placesOfOrigin": "Origem",
+  "incidencyReach": "Abrangência",
+  "mainThemes": "Temas",
+  "mechanisms": "Mecanismos",
+  "purpose": "Propósito",
+  "incidencyTypes": "Tipos de incidência"
 }
