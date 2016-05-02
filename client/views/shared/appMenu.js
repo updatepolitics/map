@@ -33,34 +33,33 @@ Template.appMenu.helpers({
     }, {
       route: 'mapping',
       anchors: [
-        "a_about",
-        "a_methodology"
+        "about",
+        "methodology"
       ]
     }, {
       route: 'hubs',
       anchors: [
-          'a_intro',
-          'a_natures',
-          'a_sponsor'
+          'intro',
+          'natures'
       ]
     }, {
       route: 'signals',
       anchors: [
         "intro",
         "tech",
-        "theme",
-        "purpose",
-        "mechanism"
+        "themes",
+        "mechanisms",
+        "purpose"
       ]
     }, {
       route: 'about',
       anchors: [
-        "a_intro",
-        "a_context",
-        "a_who",
-        "a_financer",
-        "a_transparency",
-        "a_partners"
+        "intro",
+        "context",
+        "who",
+        "financer",
+        "transparency",
+        "partners"
       ]
     }];
   },

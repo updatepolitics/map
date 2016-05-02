@@ -1,24 +1,89 @@
 <template name="hubs">
+  <div id="container">
 
+    <div id="fake_header"></div>
 
-  <h1>
-    Introduction
-  </h1>
-
-  <p>
-    Hubs are organisms – institutional or not – that develop actions and work as innovation signal emitters. Considering that the signal is the priority indicator in this mapping, the categorization of hubs aims to evidence the actors which are creating and executing these signals and their configuration. For observation, they were classified through the use of two criteria: nature of their constitution and if they are a financer or not.
-  </p>
-
-  <h1>
-    Natures
-  </h1>
-
-  {{#each natures }}
-    <h2>{{ en }}</h2>
-    <p>
-      {{ description_en }}
-    </p>
-  {{/each}}
-
-
+    <div class="content light1">
+      <div class="sub_content">
+        <div class="content_title" id="intro">HUBS
+        </div>
+        <p class="text">Os hubs são organismos - institucionalizados ou não - que desenvolvem ações e funcionam como emissores dos sinais de inovação. Considerando que o sinal é o indicador prioritário desse mapeamento, a classificação dos hubs pretende evidenciar os atores que estão criando e executando esses sinais e suas configurações. Para que sejam observados foram classificados a partir de dois critérios: a natureza da sua constituição e se é um financiador ou não.
+        </p>
+      </div>
+    </div>
+    <div id="lists">
+      <div class="content light2">
+        <div class="sub_content">
+          <div class="content_title" id="natures">natureza
+          </div>
+          <ul class="list">
+            <li style="background-color: rgb(216, 125, 125);" class="box">
+              <div class="box_title">EMPRESAS
+              </div>
+              <p>Organizações estabelecidas no setor privado que emitem relevantes sinais que buscam reduzir a distância entre a sociedade civil e o poder público.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+            <li style="background-color: rgb(218, 130, 120);" class="box">
+              <div class="box_title">PARTIDOS
+              </div>
+              <p>São partidos políticos que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+            <li style="background-color: rgb(218, 136, 116);" class="box">
+              <div class="box_title">ONGS
+              </div>
+              <p>Organizações da sociedade civil que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+            <li style="background-color: rgb(217, 142, 112);" class="box">
+              <div class="box_title">ORGANISMOS MULTILATERAIS
+              </div>
+              <p>São organizações internacionais compostas de diversos governos que buscam reduzir a distância entre a sociedade civil e o poder público.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+            <li style="background-color: rgb(216, 148, 110);" class="box">
+              <div class="box_title">INFORMAL
+              </div>
+              <p>São movimentos, coletivos, grupos ou qualquer forma de organização não institucional que não tem ou não apresentam claramente uma formalidade jurídica.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+            <li style="background-color: rgb(213, 155, 108);" class="box">
+              <div class="box_title">CONSTELAÇÕES
+              </div>
+              <p>São alianças, redes e/ou parcerias que conjuntamente emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+            <li style="background-color: rgb(210, 161, 108);" class="box">
+              <div class="box_title">GOVERNO
+              </div>
+              <p>São organizações governamentais que podem pertencer as três esferas de poder (executivo, legislativo e judiciário) que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+            <li style="background-color: rgb(206, 168, 109);" class="box">
+              <div class="box_title">ACADEMIA
+              </div>
+              <p>São instituições de educação e de desenvolvimento intelectual que emitem sinais relevantes que buscam reduzir a distância entre a sociedade civil e o poder público.
+              </p>
+              <p class="examples">
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

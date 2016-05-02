@@ -2142,29 +2142,44 @@ hr{
     line-height: 22px;
     margin-bottom: 1px;
     font-weight: 400;
-    cursor: pointer;
     background-position: right;
     background-repeat: no-repeat;
+    list-style: none;
+    cursor: pointer;
 }
 
 .box p{
   margin-bottom: 20px;
 }
 
-.examples{
+.box .examples{
   font-size: 14px;
   line-height: 20px;
+}
+
+.box.off{
+  color: #262c38;
+  cursor: default;
+}
+
+.light1 .box.off{
+  background: #f7f7f7;
+}
+.light2 .box.off{
+  background: #fff;
 }
 
 .box:hover{
    background-image: url('../layout/next.png');
 }
+.box.off:hover{
+  background-image: none;
+}
 
 .box_title{
-    font-family: 'Stardos Stencil';
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: center;
 }
 

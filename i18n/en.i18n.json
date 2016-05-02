@@ -10,22 +10,32 @@
     },
     "sub_items": {
       "mapping": {
-        "a_about": "Sobre",
-        "a_methodology": "Metodologia"
+        "about": "Sobre",
+        "methodology": "Metodologia"
       },
       "about": {
-        "a_intro": "Sobre o Update",
-        "a_context": "Contexto em que surge o Update",
-        "a_who": "Equipe do Update",
-        "a_financer": "Financiadores",
-        "a_transparency": "Transparência",
-        "a_partners": "Colaboradores"
+        "intro": "Sobre o Update",
+        "context": "Contexto em que surge o Update",
+        "who": "Equipe do Update",
+        "financer": "Financiadores",
+        "transparency": "Transparência",
+        "partners": "Colaboradores"
       },
       "hubs": {
-        "a_intro": "Sobre",
-        "a_natures": "Naturezas",
-        "a_sponsor": "Financiadores"
+        "intro": "Sobre",
+        "natures": "Naturezas",
+        "sponsor": "Financiadores"
+      },
+      "signals": {
+        "intro": "Introdução / O que é",
+        "tech": "Tecnologia",
+        "themes": "Temas",
+        "purpose": "Propósito",
+        "mechanisms": "Mecanismos"
       }
+
+
+
 
     }
   },
