@@ -87,6 +87,7 @@ reactive-var@1.0.7
 reload@1.1.6
 retry@1.0.5
 routepolicy@1.0.8
+sacha:spin@2.3.1
 semantic:ui@2.1.8
 semantic:ui-data@2.1.8
 service-configuration@1.0.7

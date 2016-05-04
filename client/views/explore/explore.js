@@ -1,3 +1,7 @@
+Meteor.Spinner.options = {
+  color: '#fff'
+}
+
 Template.explore.onCreated(function() {
   var self = this;
 
@@ -200,8 +204,8 @@ function getSignalData() {
       id: theme._id,
       color: theme.color,
       node: theme,
-      label: theme.en,
-      name: theme.en,
+      label: theme.pt,
+      name: theme.pt,
       children: []
     }
 
@@ -233,8 +237,8 @@ function getHubData() {
       id: nature._id,
       color: nature.color,
       node: nature,
-      label: nature.en,
-      name: nature.en,
+      label: nature.pt,
+      name: nature.pt,
       children: []
     }
 
@@ -585,7 +589,9 @@ Template.explore.helpers({
   },
   popupContent: function() {
     var d = Template.instance().popupContent.get();
-    if (Template.instance().currentContext.get() == 'signals') {
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var currentContext = exploreConfig.context;
+    if (currentContext == 'signals') {
       return Signals.findOne(d.id);
     } else {
       return Hubs.findOne(d.id);
@@ -596,7 +602,7 @@ Template.explore.helpers({
     var origins = Origins
                     .find({ _id: { $in: ids }})
                     .map(function(item){
-                      return item.en
+                      return item.pt
                     });
 
     if (origins.length > 0) return origins.join(', ')
@@ -607,7 +613,7 @@ Template.explore.helpers({
     var types = IncidencyTypes
                   .find({ _id: { $in: ids }})
                   .map(function(type){
-                    return type.en
+                    return type.pt
                   });
     if (types.length > 0) {
       return types.join(', ')
@@ -615,11 +621,11 @@ Template.explore.helpers({
   },
   getReach: function(id) {
     var reach = IncidencyReachs.findOne(this.incidencyReach);
-    return reach.en;
+    return reach.pt;
   },
   getPurpose: function(id) {
     var purpose = Purposes.findOne(this.purpose);
-    return purpose.en;
+    return purpose.pt;
   },
   hubControlOn: function() {
     if (Template.instance().currentContext.get() == 'hubs') {

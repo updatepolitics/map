@@ -41,6 +41,7 @@ Router.route("/signals", {name: "signals"});
  */
 
 Router.route("/explore", {
+  loadingTemplate: 'loading',
   waitOn: function() {
     return [
       Meteor.subscribe('themes'),
