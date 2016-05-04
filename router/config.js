@@ -49,6 +49,7 @@ Router.route("/explore", {
       Meteor.subscribe('natures'),
       Meteor.subscribe('incidencyReachs'),
       Meteor.subscribe('incidencyTypes'),
+      Meteor.subscribe('technologyTypes'),
       Meteor.subscribe('origins'),
       Meteor.subscribe('mechanisms'),
       Meteor.subscribe('methods'),

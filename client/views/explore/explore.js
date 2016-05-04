@@ -18,16 +18,7 @@ Template.explore.onCreated(function() {
     mainThemes: {},
     mechanisms: {},
     purpose: {},
-    technologyType: {
-      'digital': {
-        _id: 'digital',
-        pt: 'Digital'
-      },
-      'social': {
-        _id: 'social',
-        pt: 'Social'
-      }
-    },
+    technologyType: {},
     nature: {},
     isSponsor: {
       'true': {
@@ -74,6 +65,13 @@ Template.explore.onCreated(function() {
     .forEach(function(i){
       i.selected = false;
       filters.incidencyReach[i._id] = i;
+    });
+
+  TechnologyTypes
+    .find({})
+    .forEach(function(i){
+      i.selected = false;
+      filters.technologyType[i._id] = i;
     });
 
   Themes

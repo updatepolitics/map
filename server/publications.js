@@ -119,6 +119,10 @@ Meteor.publish('incidencyTypes', function () {
   return IncidencyTypes.find({},{});
 });
 
+Meteor.publish('technologyTypes', function () {
+  return TechnologyTypes.find({},{});
+});
+
 Meteor.publish('incidencyType', function (_id) {
   check(_id, String);
   return IncidencyTypes.find({

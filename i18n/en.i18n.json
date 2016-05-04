@@ -49,5 +49,6 @@
   "purpose": "Propósito",
   "incidencyTypes": "Tipos de incidência",
   "nature": "Natureza",
-  "isSponsor": "Apoiador"
+  "isSponsor": "Apoiador",
+  "technologyType": "Tecnologia"
 }
