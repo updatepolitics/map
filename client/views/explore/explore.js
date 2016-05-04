@@ -398,7 +398,7 @@ function refreshMap(template, filters) {
             template.showPopup.set(true);
           }
   			})
-  		 	.transition().duration(1000)
+  		 	// .transition().duration(1000)
   			.attr('r', function(d) { return d.r } )
 
 
