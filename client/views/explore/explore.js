@@ -593,13 +593,8 @@ Template.explore.helpers({
   },
   popupContent: function() {
     var d = Template.instance().popupContent.get();
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var currentContext = exploreConfig.context;
-    if (currentContext == 'signals') {
-      return Signals.findOne(d.id);
-    } else {
-      return Hubs.findOne(d.id);
-    }
+    d.visible = (d.depth == 2) ? true : false;
+    return d;
   },
   getOrigins: function() {
     var ids = this.placesOfOrigin;

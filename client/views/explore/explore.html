@@ -88,34 +88,39 @@
 
 
   {{# if showPopup }}
-      <div id="popup" style="height: '40%';">
-        <div id="popup_nav">
-          <div id="popup_x"></div>
-        </div>
-        {{# with popupContent }}
-            <div id="popup_content">
-              <div class="title">{{ name }}</div>
-              <div class="info">
-                <span class="bold">origem</span> {{ getOrigins }} |
-                <span class="bold">abrangência</span> {{ getReach }}
-                {{# if purpose }}
-                  | <span class="bold">propósito</span> {{ getPurpose }}
-                {{/if}}
-                {{# if incidencyType }}
-                  | <span class="bold">tipo</span> {{ getIncidencyTypes }}
-                {{/if }}
-                {{# if isSponsor }}
-                  | <span class="bold">FINANCIADOR</span>
-                {{/if }}
-              </div>
-              <div class="about mt40">
-                {{ description_pt }}
-              </div>
-              <div class="pop_bt link">WEBSITE</div>
-              <div class="pop_bt details" id="417">DETALHES</div>
+    {{# with popupContent }}
+      {{#if visible }}
+        {{#with node }}
+
+          <div id="popup" style="height: '40%';">
+            <div id="popup_nav">
+              <div id="popup_x"></div>
             </div>
+              <div id="popup_content">
+                <div class="title">{{ name }}</div>
+                <div class="info">
+                  <span class="bold">origem</span> {{ getOrigins }} |
+                  <span class="bold">abrangência</span> {{ getReach }}
+                  {{# if purpose }}
+                    | <span class="bold">propósito</span> {{ getPurpose }}
+                  {{/if}}
+                  {{# if incidencyType }}
+                    | <span class="bold">tipo</span> {{ getIncidencyTypes }}
+                  {{/if }}
+                  {{# if isSponsor }}
+                    | <span class="bold">FINANCIADOR</span>
+                  {{/if }}
+                </div>
+                <div class="about mt40">
+                  {{ description_pt }}
+                </div>
+                <div class="pop_bt link">WEBSITE</div>
+                <div class="pop_bt details" id="417">DETALHES</div>
+              </div>
+            </div>
+            {{/with}}
+          {{/if}}
         {{/with}}
-      </div>
   {{/if}}
 
   <!-- FILTERS  -->
