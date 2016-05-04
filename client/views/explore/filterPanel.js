@@ -190,5 +190,19 @@ Template.filterPanel.events({
     exploreConfig.filters[self.filterGroup][self._id].selected = self.selected;
 
     Session.set('exploreConfig', JSON.stringify(exploreConfig));
+  },
+  "click #filters_x": function(event, template) {
+    event.stopImmediatePropagation();
+    var target = $(filters);
+
+    var showFilterPanel = !Session.get('showFilterPanel');
+
+    if (showFilterPanel) {
+      target.animate({ right: 20}, 350);
+    } else {
+      target.animate({ right: -350}, 350);
+    }
+
+    Session.set('showFilterPanel', showFilterPanel);
   }
 });
