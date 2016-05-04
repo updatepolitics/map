@@ -46,19 +46,6 @@ Template.filterPanel.helpers({
 
     return _.where(filters[id], {selected: true}).length;
   },
-  // filterGroupHeight: function(filterGroup) {
-  //   var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-  //   var filters = exploreConfig.filters.general;
-  //   if (exploreConfig.context == 'signals')
-  //     filters = _.extend(filters, exploreConfig.filters.signals);
-  //   else
-  //     filters = _.extend(filters, exploreConfig.filters.hubs);
-  //
-  //   var selectedCount = _.where(filters[filterGroup], {selected: true}).length;
-  //   if (selectedCount) {
-  //     return 30 + selectedCount * filter_h;
-  //   } else return 0;
-  // },
   filterGroupOptions: function(filterGroup) {
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
     var filters = exploreConfig.filters.general;

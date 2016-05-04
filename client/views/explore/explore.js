@@ -27,12 +27,14 @@ Template.explore.onCreated(function() {
       nature: {},
       isSponsor: {
         'true': {
-          _id: 'true',
-          pt: 'Sim'
+          _id: true,
+          pt: 'Sim',
+          selected: false
         },
         'false': {
-          _id: 'false',
-          pt: 'Não'
+          _id: false,
+          pt: 'Não',
+          selected: false
         }
       }
     }
@@ -108,17 +110,6 @@ Template.explore.onCreated(function() {
       i.selected = false;
       filters.hubs.nature[i._id] = i;
     });
-  //
-  // filters.hubs.isSponsor = [{
-  //   selected: false,
-  //   _id: true,
-  //   en: 'SIM'
-  // }, {
-  //   selected: false,
-  //   _id: false,
-  //   en: 'NÃO'
-  // }];
-
 
   var exploreConfig = {
     context: 'signals',
@@ -292,6 +283,7 @@ function refreshMap(template, filters) {
         }
       });
 
+
       // get methods after mechanisms
       if (selectedFilters['mechanisms']) {
         selectedFilters['methods'] = Methods
@@ -299,6 +291,11 @@ function refreshMap(template, filters) {
           .map(function(i) {return i._id} );
 
         delete selectedFilters.mechanisms;
+      }
+
+      var isSponsor = _.map(_.where(filters['isSponsor'], {selected: true}), function(i){return i._id});
+      if (isSponsor.length > 0) {
+        selectedFilters['isSponsor'] = isSponsor;
       }
 
       fields = _.keys(selectedFilters);
@@ -339,18 +336,7 @@ function refreshMap(template, filters) {
               // check if node belongs to all filters
               _.each(fields, function(field){
 
-                if (field == 'isSponsor') {
-                  if (selectedFilters[field].length == 1) {
-                    selectedFilters[field][0] = selectedFilters[field][0] == 'true' ? true : false;
-                    // console.log('selectedFilters[field][0]');
-                    // console.log(typeof(selectedFilters[field][0]));
-                    if (d.node[field] != selectedFilters[field][0]) {
-                      console.log(selectedFilters[field][0]);
-                      console.log(d.node[field]);
-                      selected = false
-                    }
-                  }
-                } else if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
+                if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
                   selected = false
                 }
               });

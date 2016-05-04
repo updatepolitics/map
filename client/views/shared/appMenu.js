@@ -29,7 +29,7 @@ Template.appMenu.helpers({
     return [{
       route: 'home'
     }, {
-      route: 'map'
+      route: 'explore'
     }, {
       route: 'mapping',
       anchors: [

@@ -2,7 +2,7 @@
   "menu": {
     "items": {
       "home": "Início",
-      "map": "Explorar Mapa",
+      "explore": "Explorar Mapa",
       "mapping": "Mapeamento",
       "about": "Sobre",
       "hubs": "Hubs",
@@ -49,6 +49,7 @@
   "purpose": "Propósito",
   "incidencyTypes": "Tipos de incidência",
   "nature": "Natureza",
-  "isSponsor": "Apoiador",
-  "technologyType": "Tecnologia"
+  "isSponsor": "Financiador",
+  "technologyType": "Tecnologia",
+  "signals": "sinais"
 }
