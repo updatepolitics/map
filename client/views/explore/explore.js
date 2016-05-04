@@ -6,123 +6,126 @@ Template.explore.onCreated(function() {
   self.showPopup = new ReactiveVar(false);
   self.showFilters = new ReactiveVar(false);
   self.showOriginsFilterOptions = new ReactiveVar(false);
-  self.filterCount = new ReactiveVar({
-    hubs: 0,
-    signals: 0
-  });
   self.popupContent = new ReactiveVar();
 
   /*
    * FILTERS SETUP
    */
 
-  self.filters = new ReactiveVar({
-    signals: {},
-    hubs: {}
-  });
-
-  /*
-   * SIGNAL FILTERS OPTIONS
-   */
-
-  var filters = self.filters.get();
+  var filters = {
+    placesOfOrigin: {
+    },
+    incidencyReach: {
+    }
+  }
 
   // avoid huge list of origins
-  filters.signals.placesOfOrigin = [];
+  var placesOfOrigin = [];
   Signals.find({}, {
     fields: {
       placesOfOrigin: true
     }
   }).forEach(function(signal){
-    filters.signals.placesOfOrigin =
-      filters.signals.placesOfOrigin.concat(signal.placesOfOrigin);
+    placesOfOrigin =
+      placesOfOrigin.concat(signal.placesOfOrigin);
   });
 
-  filters.signals.placesOfOrigin = Origins
-    .find({_id: {$in: _.uniq(filters.signals.placesOfOrigin)}})
-    .map(function(i){
+  Hubs.find({}, {
+    fields: {
+      placesOfOrigin: true
+    }
+  }).forEach(function(hub){
+    placesOfOrigin =
+      placesOfOrigin.concat(hub.placesOfOrigin);
+  });
+
+  var placesOfOriginOptions = [];
+  Origins
+    .find({_id: {$in: _.uniq(placesOfOrigin)}})
+    .forEach(function(i){
       i.selected = false;
-      return i;
+      filters.placesOfOrigin[i._id] = i;
     });
 
-  filters.signals.incidencyReach = IncidencyReachs
+  IncidencyReachs
     .find({})
-    .map(function(i){
+    .forEach(function(i){
       i.selected = false;
-      return i;
+      filters.incidencyReach[i._id] = i;
     });
 
-  filters.signals.mainThemes = Themes
-    .find({})
-    .map(function(i){
-      i.selected = false;
-      return i;
-    });
 
-  filters.signals.mechanisms = Mechanisms
-    .find({})
-    .map(function(i){
-      i.selected = false;
-      return i;
-    });
-
-  filters.signals.purpose = Purposes
-    .find({})
-    .map(function(i){
-      i.selected = false;
-      return i;
-    });
-
-  filters.signals.incidencyTypes = IncidencyTypes
-    .find({})
-    .map(function(i){
-      i.selected = false;
-      return i;
-    });
+  //
+  // filters.signals.mainThemes = Themes
+  //   .find({})
+  //   .map(function(i){
+  //     i.selected = false;
+  //     return i;
+  //   });
+  //
+  // filters.signals.mechanisms = Mechanisms
+  //   .find({})
+  //   .map(function(i){
+  //     i.selected = false;
+  //     return i;
+  //   });
+  //
+  // filters.signals.purpose = Purposes
+  //   .find({})
+  //   .map(function(i){
+  //     i.selected = false;
+  //     return i;
+  //   });
+  //
+  // filters.signals.incidencyTypes = IncidencyTypes
+  //   .find({})
+  //   .map(function(i){
+  //     i.selected = false;
+  //     return i;
+  //   });
+  //
 
   /*
    * HUBS FILTERS OPTIONS
    */
 
   // avoid huge list of origins
-  filters.hubs.placesOfOrigin = [];
-  Hubs.find({}, {
-   fields: {
-     placesOfOrigin: true
-   }
-  }).forEach(function(hub){
-   filters.hubs.placesOfOrigin =
-     filters.hubs.placesOfOrigin.concat(hub.placesOfOrigin);
-  });
 
-  filters.hubs.placesOfOrigin = Origins
-    .find({_id: {$in: _.uniq(filters.hubs.placesOfOrigin)}})
-    .map(function(i){
-      i.selected = false;
-      return i;
-    });
+  // placesOfOrigin = [];
+  //
+  // Origins
+  //   .find({_id: {$in: _.uniq(placesOfOrigin)}})
+  //   .forEach(function(i){
+  //     i.selected = false;
+  //     filters.hubs.placesOfOrigin.options[i._id] = i;
+  //   });
+  //
+  // filters.hubs.incidencyReach = filters.signals.incidencyReach;
+  //
+  // filters.hubs.nature = Natures
+  //     .find({})
+  //     .map(function(i){
+  //       i.selected = false;
+  //       return i;
+  //     });
+  //
+  // filters.hubs.isSponsor = [{
+  //   selected: false,
+  //   _id: true,
+  //   en: 'SIM'
+  // }, {
+  //   selected: false,
+  //   _id: false,
+  //   en: 'NÃO'
+  // }];
 
 
-  filters.hubs.incidencyReach = filters.signals.incidencyReach;
+  var exploreConfig = {
+    context: 'signals',
+    filters: filters
+  }
+  Session.set('exploreConfig', JSON.stringify(exploreConfig));
 
-  filters.hubs.nature = Natures
-      .find({})
-      .map(function(i){
-        i.selected = false;
-        return i;
-      });
-
-  filters.hubs.isSponsor = [{
-    selected: false,
-    _id: true,
-    en: 'SIM'
-  }, {
-    selected: false,
-    _id: false,
-    en: 'NÃO'
-  }];
-
-  self.filters.set(filters);
 
 });
 
@@ -263,59 +266,126 @@ function getHubData() {
  * Map
  */
 
-function refreshMap(template) {
+function refreshMap(template, filters) {
 
-  svg_map.selectAll('circle').remove();
+  if (svg_map) {
+    svg_map.selectAll('circle').remove();
 
-  svg_map.selectAll('circle')
-		.data(nodes)
-		.enter()
-			.append('circle')
-			.attr('cx', function(d) { return d.x })
-			.attr('cy', function(d) { return d.y })
-			.attr('transform','translate(-50 -50)')
-			.attr('r', 0 )
-			.attr('stroke-width', '0')
-			.attr('opacity', function(d){
-				if(d.depth == 1) return 0.1;
-				if(d.depth == 2) return 1;
-			})
-			.attr('id', function (d){
-				return 'c' + d.id;
-			})
-			.attr('fill', function (d){
-				if (d.name) return d.color;
-				else return 'none';
-			})
-			.each(function (d, i) {
-				c = d3.select(this);
-				c.node = d.node;
-				c.d = d;
-				d.circle = c;
-			})
-			.style('cursor', 'pointer')
-			.on('mouseover', function(d){
-				if(d.depth == 2){
-					setTooltip(d.group, d.node.name, d.color);
-				} else if(d.depth == 1) {
-					setTooltip(d.label, '', d.color);
-				}
-			})
-			.on('mouseout', function(d){
-				setTooltip(false);
-			})
-			.on('click', function(d){
-        if (!dragging()) {
-          template.popupContent.set(d);
-          template.showPopup.set(true);
+    if (filters) {
+
+      var selectedFilters = {};
+      var fields = _.keys(filters);
+
+      // get filters ids into arrays
+      _.each(fields, function(field){
+        var fieldValues = [];
+        _.each(filters[field], function(f){
+          if (f.selected) fieldValues.push(f._id);
+        })
+        if (fieldValues.length > 0) {
+          selectedFilters[field] = fieldValues;
         }
-			})
-		 	.transition().duration(1000)
-			.attr('r', function(d) { return d.r } )
+      });
+
+      // get methods after mechanisms
+      if (selectedFilters['mechanisms']) {
+        selectedFilters['methods'] = Methods
+          .find({mechanism: {$in: selectedFilters['mechanisms']}}, {fields: {_id: true}})
+          .map(function(i) {return i._id} );
+
+        delete selectedFilters.mechanisms;
+      }
+
+      fields = _.keys(selectedFilters);
+
+    }
+
+
+
+    svg_map.selectAll('circle')
+  		.data(nodes)
+  		.enter()
+  			.append('circle')
+  			.attr('cx', function(d) { return d.x })
+  			.attr('cy', function(d) { return d.y })
+  			.attr('transform','translate(-50 -50)')
+  			.attr('r', 0 )
+  			.attr('stroke-width', '0')
+  			.attr('opacity', function(d){
+  				if(d.depth == 1) return 0.1;
+  				if(d.depth == 2) return 1;
+  			})
+  			.attr('id', function (d){
+  				return 'c' + d.id;
+  			})
+  			.attr('fill', function (d){
+  				if (d.name) return d.color;
+  				else return 'none';
+  			})
+  			.each(function (d, i) {
+  				c = d3.select(this);
+  				c.node = d.node;
+  				c.d = d;
+  				d.circle = c;
+
+          if (d.depth == 2) {
+            if (filters) {
+
+              var selected = true;
+
+              // check if node belongs to all filters
+              _.each(fields, function(field){
+                if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
+                  selected = false
+                }
+              });
+
+              if (selected) {
+                d.circle
+                  .attr('opacity', 1)
+              } else {
+                d.circle
+                  .attr('opacity', .1)
+              }
+
+
+            }
+          }
+
+
+
+  			})
+  			.style('cursor', 'pointer')
+  			.on('mouseover', function(d){
+  				if(d.depth == 2){
+  					setTooltip(d.group, d.node.name, d.color);
+  				} else if(d.depth == 1) {
+  					setTooltip(d.label, '', d.color);
+  				}
+  			})
+  			.on('mouseout', function(d){
+  				setTooltip(false);
+  			})
+  			.on('click', function(d){
+          if (!dragging()) {
+            template.popupContent.set(d);
+            template.showPopup.set(true);
+          }
+  			})
+  		 	.transition().duration(1000)
+  			.attr('r', function(d) { return d.r } )
+
+
+  }
 
 }
 
-function updateMap(filters) {
+function applyFilters(filters) {
+
+  if (!filters) return;
+  console.log('applyFilters');
+  console.log(filters);
+
   var selectedFilters = {};
   var fields = _.keys(filters);
 
@@ -328,7 +398,7 @@ function updateMap(filters) {
     if (fieldValues.length > 0) {
       selectedFilters[field] = fieldValues;
     }
-  })
+  });
 
   // get methods after mechanisms
   if (selectedFilters['mechanisms']) {
@@ -341,31 +411,39 @@ function updateMap(filters) {
 
   fields = _.keys(selectedFilters);
 
-  svg_map.selectAll('circle')
-    .each( function (d, i) {
-      if (d.depth == 2) {
-        var selected = true;
+  console.log('selectedFilters');
+  console.log(selectedFilters);
 
-        // check if node belongs to all filters
-        _.each(fields, function(field){
-          if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
-            selected = false
+  // if map has been drawn
+  if (svg_map) {
+    svg_map.selectAll('circle')
+      .each( function (d, i) {
+        if (d.depth == 2) {
+          var selected = true;
+
+          // check if node belongs to all filters
+          _.each(fields, function(field){
+            if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
+              selected = false
+            }
+          });
+
+          if (selected) {
+            d.circle
+              .transition()
+              .duration(dur/2)
+              .attr('opacity', 1)
+          } else {
+            d.circle
+              .transition()
+              .duration(dur/2)
+              .attr('opacity', .1)
           }
-        });
-
-        if (selected) {
-          d.circle
-            .transition()
-            .duration(dur/2)
-            .attr('opacity', 1)
-        } else {
-          d.circle
-            .transition()
-            .duration(dur/2)
-            .attr('opacity', .1)
         }
-      }
-    });
+      });
+  }
+
+
 
 }
 
@@ -483,6 +561,19 @@ Template.explore.onRendered(function(){
 
 
 Template.explore.helpers({
+  changeContext: function() {
+    console.log('changeContext');
+    var context = Session.get('currentContext');
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var currentContext = exploreConfig.context;
+    if (currentContext == 'signals') {
+      getSignalData();
+    } else {
+      getHubData();
+    }
+    refreshMap(Template.instance(), exploreConfig.filters);
+    Session.set('currentContext', currentContext);
+  },
   showPopup: function(){
     return Template.instance().showPopup.get();
   },
@@ -547,123 +638,11 @@ Template.explore.helpers({
         options: filters[i]
       }
     });
-  },
-  filterCountStyle: function() {
-    return 'opacity: 0.2;';
-  },
-  filterCount: function() {
-    var context = Template.instance().currentContext.get();
-    return Template.instance().filterCount.get()[context];;
-  },
-  signalOriginFilterOptions: function() {
-    return Template.instance().signalOriginFilterOptions.get();
   }
-
 });
 
 Template.explore.events({
   "click #popup_x": function(event, template){
     template.showPopup.set(false);
   },
-  "click #control_sig": function(event, template){
-    getSignalData();
-    refreshMap(template);
-    template.currentContext.set('signals');
-  },
-  "click #control_hub": function(event, template){
-    getHubData();
-    refreshMap(template);
-    template.currentContext.set('hubs');
-  },
-  "click #control_filters": function(event, template){
-    var target = $(filters);
-    var showFilters = !template.showFilters.get();
-
-    if (showFilters) {
-      target.animate({ right: 20}, dur);
-    } else {
-      target.animate({ right: -350}, dur);
-    }
-
-    template.showFilters.set(showFilters);
-  },
-  "click #filters_x": function(event, template) {
-    template.showFilters.set(false);
-    $(filters).animate({ right: -350}, dur);
-  },
-  "click #trash": function(event, template) {
-    var context = template.currentContext.get();
-
-    var filters = template.filters.get();
-    _.each(_.keys(filters[context]), function(filterGroup){
-      for (var i = 0; i < filters[context][filterGroup].length; i++) {
-        filters[context][filterGroup][i].selected = false;
-      }
-    });
-    template.filters.set(filters);
-
-    $('#filters li.filter').removeClass('selected').css({ opacity: 1 });
-    $('#filters span').html(0);
-
-    var filterCount = template.filterCount.get();
-    filterCount[context] = 0;
-    template.filterCount.set(filterCount);
-    updateMap(filters);
-
-  },
-  "click .filter_title": function(event, template){
-    event.preventDefault();
-
-    var target = $(event.currentTarget);
-
-    var ul = target.next();
-    var lis = ul.children();
-    var height = 30 + lis.length * filter_h;
-    if (ul.height() > 0) {
-      ul.animate({height: 0 }, dur);
-      target.css({ backgroundImage: 'url(layout/plus_white.png)'});
-    } else {
-      ul.animate({height: height }, dur);
-      target.css({ backgroundImage: 'url(layout/minus_white.png)'});
-    }
-  },
-  "click .filter": function(event, template) {
-    event.preventDefault();
-
-    var self = this;
-    var target = $(event.target);
-
-    // get global filter count for current context
-    var context = template.currentContext.get();
-    var filterCount = template.filterCount.get();
-
-    // get filter count for field
-    var counterSpan = target.parent().prev().children('span');
-    var selectedFiltersCount = parseInt(counterSpan.html());
-
-    if (self.selected) {
-      self.selected = false;
-      selectedFiltersCount -= 1;
-      filterCount[context] -= 1;
-      target.removeClass('selected').css({opacity: 0.2 });
-      if (selectedFiltersCount == 0) {
-        target.parent().children().css({opacity: 1 });
-      }
-    } else {
-      self.selected = true;
-      selectedFiltersCount += 1;
-      filterCount[context] += 1;
-      if (selectedFiltersCount == 1) {
-        target.parent().children().css({opacity: 0.2 });
-      }
-      target.addClass('selected').css({opacity: 1 });
-    }
-
-    // update global filter count for current context
-    template.filterCount.set(filterCount);
-    counterSpan.html(selectedFiltersCount);
-
-    updateMap(template.filters.get()[context]);
-
-  }
 });

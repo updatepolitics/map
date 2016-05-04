@@ -41,82 +41,20 @@
 
   <!-- FILTERS  -->
 
-  <div id="filters">
-  	<div id="filters_header">
-      {{#if filterCount }}
-        <div id="trash">REMOVER FILTROS</div>
-      {{else}}
-        <div id="trash" class="empty">NENHUM FILTRO ATIVADO</div>
-      {{/if}}
-      <div id="filters_x"></div>
-  	</div>
-  	<div id="filters_list">
-      {{#each filterTargetFields }}
-        <div class="filter_title">
-          {{_ id }}
-          <span style="opacity: 0.2;" class="counter">0</span>
-        </div>
-        <ul class="group" style="height: 0;">
-          {{#each options }}
-            <li class="filter" style="opacity: 1;">
-              {{ pt }}
-            </li>
-          {{/each}}
-        </ul>
-      {{/each }}
-    </div>
-  </div>
+  {{> filterPanel }}
 
   <div id="curtain"></div>
 
   <!-- CONTROLS -->
 
-  <div id="control">
-
-    <div id="need_help" >
-      <span id="need_help_lb">PRECISA DE AJUDA?</span>
-      <div id="need_help_x"></div>
-    </div>
-    <div id="help_bt" ></div>
-
-    <div id="circles">
-      <div id="circles_out"></div>
-      <div id="circles_in"></div>
-    </div>
-
-    <div id="control_filters" class="control">
-      <span id="filters_lb" class="control_lb">FILTROS</span>
-      <span class="counter" id="filters_counter" style="{{ filterCountStyle }}" >{{ filterCount }}</span>
-    </div>
-
-    <div id="control_center">
-
-      <div id="control_hub" class="control {{ hubControlOn }} ">
-        <div class="flap" id="flap_hub"></div>
-        <span id="control_hub_lb" class="control_lb">HUBS</span>
-      </div>
-
-      <div id="mode">
-        <div id="mode_chart" class="mode selected"></div>
-        <div id="mode_list" class="mode"></div>
-        <div id="mode_lb">
-          <span id="mode_lb_num"></span>
-          <span id="mode_lb_tx"></span>
-        </div>
-      </div>
-
-      <div id="control_sig" class="control {{ signalControlOn }}">
-        <div class="flap" id="flap_sig"></div>
-        <span id="control_sig_lb" class="control_lb">SINAIS</span>
-      </div>
-
-    </div>
-
-  </div>
-
+  {{> viewControl }}
 
   <div id="map_container">
     <div id="map"></div>
+  </div>
+
+  <div style="display: none;">
+    {{ changeContext }}
   </div>
 
 </template>

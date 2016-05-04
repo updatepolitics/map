@@ -1,0 +1,29 @@
+<template name="filterPanel">
+  <div id="filters">
+  	<div id="filters_header">
+      {{#if filterCount }}
+        <div id="trash">REMOVER FILTROS</div>
+      {{else}}
+        <div id="trash" class="empty">NENHUM FILTRO ATIVADO</div>
+      {{/if}}
+      <div id="filters_x"></div>
+  	</div>
+  	<div id="filters_list">
+      {{#each generalFilterGroups }}
+        <div class="filter_title">
+          {{_ this }}
+          <span style="opacity: 0.2;" class="counter">0</span>
+        </div>
+        <ul class="group" style="height: 0;">
+          {{#each filterGroupOptions }}
+            <li class="filter" style="opacity: 1;">
+              {{ pt }}
+            </li>
+          {{/each}}
+        </ul>
+      {{/each }}
+    </div>
+
+    <div style="display: none;">{{ resize }} {{ currentContext }}</div>
+  </div>
+</template>

@@ -1,3 +1,11 @@
+Session.set("resize", null);
+
+Meteor.startup(function () {
+  window.addEventListener('resize', function(){
+    Session.set("resize", new Date());
+  });
+});
+
 Template.registerHelper("formType", function(){
   if(_.isEmpty(this)) {
     return 'insert'
@@ -125,4 +133,12 @@ Template.registerHelper("isSignalContext", function(argument){
 
 Template.registerHelper("itemsCount", function(argument){
   return Session.get('itemsCount');
+});
+
+/*
+* FILTER helpers
+*/
+
+Template.registerHelper("filterCount", function(argument){
+  return Session.get('filterCount')[Session.get('currentContext')];
 });
