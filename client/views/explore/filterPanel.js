@@ -24,7 +24,12 @@ Template.filterPanel.helpers({
     return 0;
   },
   generalFilterGroups: function() {
-    return ['placesOfOrigin', 'incidencyReach'];
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    if (exploreConfig.context == 'signals') {
+      return ['placesOfOrigin', 'incidencyReach','mainThemes', 'mechanisms', 'purpose', 'technologyType']
+    } else {
+      return ['placesOfOrigin', 'incidencyReach', 'nature', 'isSponsor']
+    }
   },
   // filterGroups: function() {
   //   var context = Session.get('currentContext');
@@ -154,7 +159,6 @@ Template.filterPanel.events({
   },
   "click .filter": function(event, template) {
     event.preventDefault();
-    var context = Session.get('currentContext');
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
 
     var self = this;

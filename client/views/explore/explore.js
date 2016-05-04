@@ -13,9 +13,31 @@ Template.explore.onCreated(function() {
    */
 
   var filters = {
-    placesOfOrigin: {
+    placesOfOrigin: {},
+    incidencyReach: {},
+    mainThemes: {},
+    mechanisms: {},
+    purpose: {},
+    technologyType: {
+      'digital': {
+        _id: 'digital',
+        pt: 'Digital'
+      },
+      'social': {
+        _id: 'social',
+        pt: 'Social'
+      }
     },
-    incidencyReach: {
+    nature: {},
+    isSponsor: {
+      'true': {
+        _id: 'true',
+        pt: 'Sim'
+      },
+      'false': {
+        _id: 'false',
+        pt: 'Não'
+      }
     }
   }
 
@@ -54,36 +76,26 @@ Template.explore.onCreated(function() {
       filters.incidencyReach[i._id] = i;
     });
 
+  Themes
+    .find({})
+    .forEach(function(i){
+      i.selected = false;
+      filters.mainThemes[i._id] = i;
+    });
 
-  //
-  // filters.signals.mainThemes = Themes
-  //   .find({})
-  //   .map(function(i){
-  //     i.selected = false;
-  //     return i;
-  //   });
-  //
-  // filters.signals.mechanisms = Mechanisms
-  //   .find({})
-  //   .map(function(i){
-  //     i.selected = false;
-  //     return i;
-  //   });
-  //
-  // filters.signals.purpose = Purposes
-  //   .find({})
-  //   .map(function(i){
-  //     i.selected = false;
-  //     return i;
-  //   });
-  //
-  // filters.signals.incidencyTypes = IncidencyTypes
-  //   .find({})
-  //   .map(function(i){
-  //     i.selected = false;
-  //     return i;
-  //   });
-  //
+  Mechanisms
+    .find({})
+    .forEach(function(i){
+      i.selected = false;
+      filters.mechanisms[i._id] = i;
+    });
+
+  Purposes
+    .find({})
+    .forEach(function(i){
+      i.selected = false;
+      filters.purpose[i._id] = i;
+    });
 
   /*
    * HUBS FILTERS OPTIONS
@@ -102,12 +114,12 @@ Template.explore.onCreated(function() {
   //
   // filters.hubs.incidencyReach = filters.signals.incidencyReach;
   //
-  // filters.hubs.nature = Natures
-  //     .find({})
-  //     .map(function(i){
-  //       i.selected = false;
-  //       return i;
-  //     });
+  Natures
+    .find({})
+    .forEach(function(i){
+      i.selected = false;
+      filters.nature[i._id] = i;
+    });
   //
   // filters.hubs.isSponsor = [{
   //   selected: false,
@@ -124,6 +136,9 @@ Template.explore.onCreated(function() {
     context: 'signals',
     filters: filters
   }
+
+  console.log('exploreConfig');
+  console.log(exploreConfig);
   Session.set('exploreConfig', JSON.stringify(exploreConfig));
 
 
@@ -300,7 +315,8 @@ function refreshMap(template, filters) {
 
     }
 
-
+    console.log('selectedFilters');
+    console.log(selectedFilters);
 
     svg_map.selectAll('circle')
   		.data(nodes)
@@ -335,7 +351,19 @@ function refreshMap(template, filters) {
 
               // check if node belongs to all filters
               _.each(fields, function(field){
-                if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
+
+                if (field == 'isSponsor') {
+                  if (selectedFilters[field].length == 1) {
+                    selectedFilters[field][0] = selectedFilters[field][0] == 'true' ? true : false;
+                    // console.log('selectedFilters[field][0]');
+                    // console.log(typeof(selectedFilters[field][0]));
+                    if (d.node[field] != selectedFilters[field][0]) {
+                      console.log(selectedFilters[field][0]);
+                      console.log(d.node[field]);
+                      selected = false
+                    }
+                  }
+                } else if (selected && !_.intersection(selectedFilters[field], [].concat( d.node[field] )).length) {
                   selected = false
                 }
               });

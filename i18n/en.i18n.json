@@ -47,5 +47,7 @@
   "mainThemes": "Temas",
   "mechanisms": "Mecanismos",
   "purpose": "Propósito",
-  "incidencyTypes": "Tipos de incidência"
+  "incidencyTypes": "Tipos de incidência",
+  "nature": "Natureza",
+  "isSponsor": "Apoiador"
 }
