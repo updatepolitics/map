@@ -9,22 +9,31 @@
       <div id="filters_x"></div>
   	</div>
   	<div id="filters_list">
-      {{#each generalFilterGroups }}
+      {{#each filterGroups }}
         <div class="filter_title">
           {{_ this }}
-          <span style="opacity: 0.2;" class="counter">0</span>
+          <span style="opacity: 0.2;" class="counter">{{ filterGroupCount this }}</span>
         </div>
         <ul class="group" style="height: 0;">
-          {{#each filterGroupOptions }}
-            <li class="filter" style="opacity: 1;">
-              {{ pt }}
-            </li>
+          {{#each filterGroupOptions this }}
+            {{#if selected}}
+              <li class="filter selected" style="opacity: 1;">
+                {{ pt }}
+              </li>
+            {{else}}
+              <li class="filter" style="opacity: .3;">
+                {{ pt }}
+              </li>
+            {{/if}}
           {{/each}}
         </ul>
       {{/each }}
 
     </div>
 
-    <div style="display: none;">{{ resize }} {{ currentContext }}</div>
+    <div style="display: none;">
+      {{ resize }}
+      {{ currentContext }}
+    </div>
   </div>
 </template>

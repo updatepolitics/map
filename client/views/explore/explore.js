@@ -13,21 +13,27 @@ Template.explore.onCreated(function() {
    */
 
   var filters = {
-    placesOfOrigin: {},
-    incidencyReach: {},
-    mainThemes: {},
-    mechanisms: {},
-    purpose: {},
-    technologyType: {},
-    nature: {},
-    isSponsor: {
-      'true': {
-        _id: 'true',
-        pt: 'Sim'
-      },
-      'false': {
-        _id: 'false',
-        pt: 'Não'
+    general: {
+      placesOfOrigin: {},
+      incidencyReach: {},
+    },
+    signals: {
+      mainThemes: {},
+      mechanisms: {},
+      purpose: {},
+      technologyType: {},
+    },
+    hubs: {
+      nature: {},
+      isSponsor: {
+        'true': {
+          _id: 'true',
+          pt: 'Sim'
+        },
+        'false': {
+          _id: 'false',
+          pt: 'Não'
+        }
       }
     }
   }
@@ -57,66 +63,50 @@ Template.explore.onCreated(function() {
     .find({_id: {$in: _.uniq(placesOfOrigin)}})
     .forEach(function(i){
       i.selected = false;
-      filters.placesOfOrigin[i._id] = i;
+      filters.general.placesOfOrigin[i._id] = i;
     });
 
   IncidencyReachs
     .find({})
     .forEach(function(i){
       i.selected = false;
-      filters.incidencyReach[i._id] = i;
+      filters.general.incidencyReach[i._id] = i;
     });
 
   TechnologyTypes
     .find({})
     .forEach(function(i){
       i.selected = false;
-      filters.technologyType[i._id] = i;
+      filters.signals.technologyType[i._id] = i;
     });
 
   Themes
     .find({})
     .forEach(function(i){
       i.selected = false;
-      filters.mainThemes[i._id] = i;
+      filters.signals.mainThemes[i._id] = i;
     });
 
   Mechanisms
     .find({})
     .forEach(function(i){
       i.selected = false;
-      filters.mechanisms[i._id] = i;
+      filters.signals.mechanisms[i._id] = i;
     });
 
   Purposes
     .find({})
     .forEach(function(i){
       i.selected = false;
-      filters.purpose[i._id] = i;
+      filters.signals.purpose[i._id] = i;
     });
 
-  /*
-   * HUBS FILTERS OPTIONS
-   */
 
-  // avoid huge list of origins
-
-  // placesOfOrigin = [];
-  //
-  // Origins
-  //   .find({_id: {$in: _.uniq(placesOfOrigin)}})
-  //   .forEach(function(i){
-  //     i.selected = false;
-  //     filters.hubs.placesOfOrigin.options[i._id] = i;
-  //   });
-  //
-  // filters.hubs.incidencyReach = filters.signals.incidencyReach;
-  //
   Natures
     .find({})
     .forEach(function(i){
       i.selected = false;
-      filters.nature[i._id] = i;
+      filters.hubs.nature[i._id] = i;
     });
   //
   // filters.hubs.isSponsor = [{
@@ -132,11 +122,13 @@ Template.explore.onCreated(function() {
 
   var exploreConfig = {
     context: 'signals',
+    filterCount: {
+      signals: 0,
+      hubs: 0
+    },
     filters: filters
   }
 
-  console.log('exploreConfig');
-  console.log(exploreConfig);
   Session.set('exploreConfig', JSON.stringify(exploreConfig));
 
 
@@ -312,9 +304,6 @@ function refreshMap(template, filters) {
       fields = _.keys(selectedFilters);
 
     }
-
-    console.log('selectedFilters');
-    console.log(selectedFilters);
 
     svg_map.selectAll('circle')
   		.data(nodes)
@@ -588,16 +577,21 @@ Template.explore.onRendered(function(){
 
 Template.explore.helpers({
   changeContext: function() {
-    console.log('changeContext');
     var context = Session.get('currentContext');
+
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var filters = exploreConfig.filters.general;
     var currentContext = exploreConfig.context;
+
     if (currentContext == 'signals') {
+      filters = _.extend(filters, exploreConfig.filters.signals);
       getSignalData();
     } else {
+      filters = _.extend(filters, exploreConfig.filters.hubs);
       getHubData();
     }
-    refreshMap(Template.instance(), exploreConfig.filters);
+
+    refreshMap(Template.instance(), filters);
     Session.set('currentContext', currentContext);
   },
   showPopup: function(){

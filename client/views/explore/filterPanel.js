@@ -1,14 +1,11 @@
 var dur = 350;
 var filter_h = 25;
 
-Template.filterPanel.onCreated(function(){
-
-
-});
-
 Template.filterPanel.onRendered(function(){
   // trigger resize
   Session.set("resize", new Date());
+
+  $('ul.group').height(0);
 });
 
 Template.filterPanel.helpers({
@@ -21,123 +18,61 @@ Template.filterPanel.helpers({
     return Session.get('resize');
   },
   filterCount: function () {
-    return 0;
-  },
-  generalFilterGroups: function() {
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    if (exploreConfig.context == 'signals') {
-      return ['placesOfOrigin', 'incidencyReach','mainThemes', 'mechanisms', 'purpose', 'technologyType']
-    } else {
-      return ['placesOfOrigin', 'incidencyReach', 'nature', 'isSponsor']
-    }
+    var context = exploreConfig.context;
+    return exploreConfig.filterCount[context];
   },
-  // filterGroups: function() {
-  //   var context = Session.get('currentContext');
-  //   var filters = JSON.parse(Session.get('filters'))[context];
-  //   return _.keys(filters);
+  filterGroups: function() {
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var filters = exploreConfig.filters.general;
+    var currentContext = exploreConfig.context;
+    if (currentContext == 'signals') {
+      filters = _.extend(filters, exploreConfig.filters.signals);
+    } else {
+      filters = _.extend(filters, exploreConfig.filters.hubs);
+    }
+
+    return _.keys(filters);
+  },
+  filterGroupCount: function(id) {
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var filters = exploreConfig.filters.general;
+    var currentContext = exploreConfig.context;
+    if (currentContext == 'signals') {
+      filters = _.extend(filters, exploreConfig.filters.signals);
+    } else {
+      filters = _.extend(filters, exploreConfig.filters.hubs);
+    }
+
+    return _.where(filters[id], {selected: true}).length;
+  },
+  // filterGroupHeight: function(filterGroup) {
+  //   var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+  //   var filters = exploreConfig.filters.general;
+  //   if (exploreConfig.context == 'signals')
+  //     filters = _.extend(filters, exploreConfig.filters.signals);
+  //   else
+  //     filters = _.extend(filters, exploreConfig.filters.hubs);
+  //
+  //   var selectedCount = _.where(filters[filterGroup], {selected: true}).length;
+  //   if (selectedCount) {
+  //     return 30 + selectedCount * filter_h;
+  //   } else return 0;
   // },
-  // filterGroupSelectedCount: function() {
-    // var context = Session.get('currentContext');
-    // var filters = JSON.parse(Session.get('filters'))[context];
-    //
-    // var filterGroupName = this;
-    //
-    // var filterGroup = filters[filterGroupName];
-    //
-    // var count = 0
-    // for (var i = 0; i < filterGroup.length; i++) {
-    //   if (filterGroup[i].selected) count +=1;
-    // }
+  filterGroupOptions: function(filterGroup) {
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var filters = exploreConfig.filters.general;
+    if (exploreConfig.context == 'signals')
+      filters = _.extend(filters, exploreConfig.filters.signals);
+    else
+      filters = _.extend(filters, exploreConfig.filters.hubs);
 
-  //   return 0;
-  // },
-  filterGroupOptions: function() {
-    var filters = JSON.parse(Session.get('exploreConfig')).filters;
-
-    var filterGroup = this;
-
-    var result =  _.map(_.keys(filters[filterGroup]), function(i){
+    return _.map(_.keys(filters[filterGroup]), function(i){
       var option = filters[filterGroup][i];
       option.filterGroup = filterGroup;
       return option;
     });
-
-    return result;
-
   }
-
-
-    // {{#each filterGroupOptions this }}
-    //   {{#if selected}}
-    //     <li class="filter selected" style="opacity: 1;">
-    //       {{ pt }}
-    //     </li>
-    //   {{else}}
-    //     <li class="filter" style="opacity: 0.2;">
-    //       {{ en }} eita
-    //     </li>
-    //   {{/if}}
-    // {{/each}}
-
-
-    //
-    // filters = _.map(_.keys(filters), function(filterGroup){
-    //   return {
-    //     label: filterGroup,
-    //     options: filters[filterGroup],
-    //     selectedCount: _.reduce(filters[filterGroup], function(count, item){
-    //       if (item.selected) return count + 1;
-    //       else return count;
-    //     }, 0)
-    //   }
-    // });
-    //
-    //
-    // // <ul class="group" style="height: 0;">
-    // //     {{ selected }}
-    // //       <li class="filter" style="opacity: 1;">
-    // //         {{ en }}
-    // //       </li>
-    // //   </ul>
-    // // {{/each}}
-    //
-    //
-    // // filters = _.map(filters, function(filter){
-    // //   return {
-    // //     label: filter,
-    // //     options: filters[filter]
-    // //     // selectedCount: _.reduce(filters[filter], function(count, item){
-    // //     //   if (item.selected) return count + 1;
-    // //     // })
-    // //   }
-    // // });
-    // console.log(filters);
-    // return filters;
-  // filterGroupOptions: function(filterGroup) {
-  //   var context = Session.get('currentContext');
-  //   var filters = Session.get('filters')[context];
-  //
-  //   return filters[filterGroup];
-  // }
-  // },
-  // filterGroupLabel: function() {
-  //   console.log();
-  //   return 'eita'
-  // },
-  // filterGroupOptions: function(filterGroup) {
-  //   var context = Session.get('currentContext');
-  //   var filters = Session.get('filters')[context];
-  //   console.log('filterGroup');
-  //   console.log(filterGroup);
-  //   console.log('filters');
-  //   console.log(filters);
-  //   console.log('filters[filterGroup]');
-  //   console.log(filters[filterGroup]);
-  //
-  //
-  //
-  //   return filters[filterGroup];
-  // }
 });
 
 Template.filterPanel.events({
@@ -160,34 +95,29 @@ Template.filterPanel.events({
   "click .filter": function(event, template) {
     event.preventDefault();
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var context = exploreConfig.context;
 
     var self = this;
 
     var target = $(event.target);
 
-    // get filter count for field
-    var counterSpan = target.parent().prev().children('span');
-    var selectedFiltersCount = parseInt(counterSpan.html());
-
     if (self.selected) {
       self.selected = false;
-      selectedFiltersCount -= 1;
-      target.removeClass('selected').css({opacity: 0.2 });
-      if (selectedFiltersCount == 0) {
-        target.parent().children().css({opacity: 1 });
-      }
+      target.removeClass('selected').css({opacity: 0.3 });
     } else {
       self.selected = true;
-      selectedFiltersCount += 1;
-      if (selectedFiltersCount == 1) {
-        target.parent().children().css({opacity: 0.2 });
-      }
       target.addClass('selected').css({opacity: 1 });
     }
 
-    counterSpan.html(selectedFiltersCount);
-
-    exploreConfig.filters[self.filterGroup][self._id].selected = self.selected;
+    // check if filter is context specific
+    if (exploreConfig.filters[context][self.filterGroup]) {
+      exploreConfig.filters[context][self.filterGroup][self._id].selected = self.selected;
+      exploreConfig.filterCount[context] += self.selected ? 1 : -1;
+    } else {
+      exploreConfig.filters['general'][self.filterGroup][self._id].selected = self.selected;
+      exploreConfig.filterCount['hubs'] += self.selected ? 1 : -1;
+      exploreConfig.filterCount['signals'] += self.selected ? 1 : -1;
+    }
 
     Session.set('exploreConfig', JSON.stringify(exploreConfig));
   },
@@ -204,5 +134,24 @@ Template.filterPanel.events({
     }
 
     Session.set('showFilterPanel', showFilterPanel);
+  },
+  "click #trash": function(event, template) {
+    event.stopImmediatePropagation();
+
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var filters = exploreConfig.filters;
+
+    _.each(_.keys(filters), function (type) {
+      _.each(_.keys(filters[type]), function(group){
+        _.each(_.keys(filters[type][group]), function(id){
+          filters[type][group][id].selected = false;
+        })
+      })
+    })
+
+    exploreConfig.filters = filters;
+
+    Session.set('exploreConfig', JSON.stringify(exploreConfig));
+
   }
 });

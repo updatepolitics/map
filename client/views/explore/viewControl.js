@@ -13,6 +13,11 @@ Template.viewControl.helpers({
   },
   hubControlOn: function() {
     if (Session.get('currentContext') == 'hubs') return 'on';
+  },
+  filterCount: function () {
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    var context = exploreConfig.context;
+    return exploreConfig.filterCount[context];
   }
 });
 
