@@ -566,6 +566,10 @@ Template.explore.onRendered(function(){
 
 
 Template.explore.helpers({
+  signalContext: function() {
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    return (exploreConfig.context == 'signals') ? true : false;
+  },
   changeContext: function() {
     var context = Session.get('currentContext');
 
