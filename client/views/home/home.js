@@ -1,5 +1,8 @@
 var duration = 350;
 
+var svg_map_area;
+var svg_map;
+
 var modalPages = [
   {
     title: "A Democracia na América Latina do séc XXI",
@@ -31,6 +34,102 @@ var modalPages = [
   }
 ]
 
+function createMap(){
+
+	var nodes;
+	var color;
+	var color_scale;
+
+	var rand_cod = Math.random();
+
+ 	if(rand_cod > 0.5){
+		color_scale  = ['#adcc8f','#8a99d7'];
+	}else{
+		color_scale = ['#d87d7d','#cea86d'];
+	}
+
+	svg_map.selectAll("*").remove();
+
+	////////////////////// map
+
+	var padding = .1 // separation between same-color nodes
+
+	var n = 200, // total number of nodes
+  m = 5; // number of distinct clusters
+
+	var color = d3.scale.linear()
+	    .domain([0,m])
+			.interpolate(d3.interpolateHcl)
+		  .range(color_scale);
+
+	var nodes = d3.range(n).map(function(d,i) {
+	  var
+			hex = color(Math.floor(Math.random()*m)),
+      rds = 20 + Math.random()*200,
+      obj = { radius: rds,  hex: hex};
+	  return obj;
+	});
+
+	// Use the pack layout to initialize node positions.
+
+	var force = d3.layout.force()
+    .nodes(nodes)
+    .gravity(.1)
+  	.friction(0.2)
+    .charge(0)
+    .on("tick", tick)
+    .start();
+
+	var node = svg_map.selectAll("circle")
+    .data(nodes)
+  	.enter().append("circle")
+    .style("fill", function(d) { return d.hex })
+
+	node.transition()
+    .duration(1000)
+    .delay(function(d, i) { return i * 5; })
+    .attrTween("r", function(d) {
+      var i = d3.interpolate(0, d.radius);
+      return function(t) { return d.radius = i(t); };
+    });
+
+	function tick(e) {
+	  node
+      .each(collide(.15))
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+	}
+
+	// Resolves collisions between d and all other circles.
+	function collide(alpha) {
+	  var quadtree = d3.geom.quadtree(nodes);
+	  return function(d) {
+	    var r = d.radius + padding,
+	        nx1 = d.x - r,
+	        nx2 = d.x + r,
+	        ny1 = d.y - r,
+	        ny2 = d.y + r;
+	    quadtree.visit(function(quad, x1, y1, x2, y2) {
+	      if (quad.point && (quad.point !== d)) {
+	        var x = d.x - quad.point.x,
+	            y = d.y - quad.point.y,
+	            l = Math.sqrt(x * x + y * y),
+	            r = d.radius;
+	        if (l < r) {
+	          l = (l - r) / l * alpha;
+	          d.x -= x *= l;
+	          d.y -= y *= l;
+	          quad.point.x += x;
+	          quad.point.y += y;
+	        }
+	      }
+	      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+	    });
+	  };
+	}
+
+}
+
 Template.home.onCreated(function(){
   this.showModal = new ReactiveVar(false);
   this.modalPage = new ReactiveVar(1);
@@ -38,6 +137,20 @@ Template.home.onCreated(function(){
 
 Template.home.onRendered(function (){
   $('#update_logo').hide()
+
+  $(map).css({backgroundSize:'100%'});
+
+  // SVG MAP
+	svg_map_area = d3.select('#map')
+		.append('svg')
+		.attr('id', 'svg_map_area')
+
+	svg_map = svg_map_area
+		.append('g')
+			.attr('opacity', 0.75)
+
+  createMap();
+
 });
 
 Template.home.onDestroyed(function (){
@@ -93,5 +206,8 @@ Template.home.events({
     if (page == 1) $(modal_home_prev).css({opacity: 0.2, cursor: 'default'});
     if (page == 6) $(modal_home_next).css({opacity: 1, cursor: 'pointer'});
     template.modalPage.set(page);
+  },
+  "click #update_logo_home": function() {
+    createMap();
   }
 });
