@@ -76,6 +76,55 @@
     "intro": "Los hubs son organismos - institucionalizados o no - que desarrollan acciones y funcionan como emisores de las señales de innovación. Considerando que la señal es el indicador prioritario de ese levantamiento, la clasificación de los hubs pretende evidenciar los actores que están creando y ejecutando esas señales y sus configuraciones. Para que sean observados fueron clasificados a partir de dos criterios: la naturaleza de su constitución y si es un financiador o no.",
     "natures": "Naturalezas"
   },
+  "mappingPage": {
+    "about": {
+      "title": "Sobre el mapeo",
+      "text": "<p>Update cree que retratar y crear una visualización para el ecosistema de prácticas políticas emergentes es un paso relevante para subsidiar la afirmación de la existencia de ese campo y, a partir de esas evidencias, potencializar una visión de colectividad y de pertenencia para los actores que participan en los procesos políticos de profundización y actualización de la democracia en la región latinoamericana.</p>
+
+      <p>A través de investigación, análisis y visualización de datos sobre el desarrollo de las prácticas políticas emergentes, Update pretende generar insights y compartir ideas que contribuyan para el fortalecimiento del ecosistema, así como en el fomento a nuevos experimentos.</p>
+
+      <p>Para llegar a este objetivo, Update disponibiliza este mapeo permanente de las iniciativas que componen este campo, identificando los autores (hubs) que lo integran y creando un retrato dinámico que permita dar visibilidad a sus acciones (señales). Para facilitar la visualización de las iniciativas mapeadas creamos esta plataforma interactiva que ayuda a navegar por las terminologías y filtros de forma más fácil.</p>
+
+      <p>Iniciamos el mapeo en junio de 2015, y llegamos a 700 iniciativas inscritas en noviembre del mismo año. En enero de 2016 más de 150 iniciativas dejaron de existir, lo que demuestra la dinámica altamente volátil de este campo. Al mismo tiempo, a cada semana identificamos iniciativas recién creadas que se suman a esta visión de ecosistema. La plataforma de visualización del mapeo fue lanzada en abril de 2016 y continúa siendo actualizada diariamente por el equipo de Update.</p>"
+    },
+  "methodology": {
+    "title": "Metodología",
+    "text": "<p>A partir de la hipótesis de que un nuevo ecosistema de participación política surge en América Latina, realizamos a lo largo de 10 meses una investigación de carácter exploratorio que mapeó indicios y evidencias que contribuyen para la creación de un Estado más permeable y de una ciudadanía más activa, en donde las distancias entre sociedad civil y poder público están reducidas.</p>
+
+
+    <p>Considerando la complejidad de este contexto, la ausencia de bibliografía específica, el desconocimiento sobre la extensión de este campo y la relevancia en establecer un proceso más empírico y permanente, se optó por la realización de una investigación de datos secundarios, que colectó una serie de informaciones publicadas, sobre todo en Internet, por organizaciones, grupos, iniciativas e individuos que están experimentando nuevas formas de participación e incidencia en el campo político.</p>
+
+    <p>Los criterios iniciales para el mapeo fueron:</p>
+
+    <ul>
+      <li class=\"list\">Geografía: iniciativas que se originan o actúan directamente en América Latina.</li>
+      <li class=\"list\">Temática: iniciativas que actúan en temas relacionados con la reducción de la distancia entre sociedad civil y el poder público – participación ciudadana; transparencia y accountability; control social; cultura política; medios independientes; y gobierno 2.0. Estos temas están explicados en la sección Señales de la plataforma.</li>
+    </ul>
+
+    <p>La base de datos integra también informaciones colectadas por colaboradores, tales como Sonho Brasileiro da Política (Sueño Brasileño de la Política), Civic Stack (Pila Ciudadana) y Manifesto do Ecossistema Brasileiro da Participação Social (Manifiesto del Ecosistema Brasileño de la Participación Social), a partir de las cuales fueron identificados grados variados de afinidades con la propuesta de este mapeo.</p>
+
+    <p>A partir de la exploración libre de los datos, se vio la necesidad de que fueran creados algunos criterios, como la ponderación entre los países [Brasil representa ⅓ de la base de datos por su dimensión geográfica y 21 países independientes y bajo regímenes democráticos fueron contemplados] y la estandarización de la taxonomía, de tal forma que se asegurase la observación de pequeños grupos de discusión con especialistas.</p>
+
+    <p>Los indicios y evidencias identificados a lo largo del proceso de exploración fueron denominados señales y son los indicadores más relevantes para este mapeo. Esas señales son emitidas por múltiplos actores, los hubs, que también fueron clasificados para facilitar el entendimiento y facilitar la construcción de nuevas hipótesis.</p>
+
+    <p>Esta plataforma, inédita y experimental, revela aproximadamente 700 hubs y señales clasificados a partir de criterios como:</p>
+
+    <ul>
+      <li class=\"list\">Hubs: naturaleza, país, alcance [local, nacional, regional e internacional] y si es financiador del ecosistema.</li>
+
+      <li class=\"list\">Señales: país, alcance [local, nacional, regional e internacional], tipo de tecnología [social o digital], propósito de impacto [empoderamiento o incidencia] temática relacionada y tipo de mecanismo que se utiliza [métodos].
+    </li></ul>
+
+
+    <p>El objetivo, por tanto, es mirar de forma amplia para este ecosistema, identificando actores y prácticas y facilitando la visualización de la base de datos. Como desdoblamiento, Update prevé la realización de otros estudios para profundizar las hipótesis formuladas en esta fase.</p>
+
+    <p>Este mapeo es una muestra, de carácter exploratorio, de las iniciativas de América Latina. No sería posible mapear todas las iniciativas por cuenta de la naturaleza altamente dinámica de este campo, o sea, la velocidad que surgen, se transforman o son discontinuadas. Aparte de eso, existe una fuerte influencia de contexto social, político y económico de cada país sobre las iniciativas que surgen en estos locales, tornando profundamente complejo el entendimiento sobre las iniciativas mapeadas.</p>
+
+    <p>Las informaciones presentadas en los descriptivos de las iniciativas son originales de las fuentes, extraídas de sitios, medios sociales y presentaciones institucionales.</p>
+
+    "
+    }
+  },
   "signalsPage": {
     "title": "Señales",
     "intro": "<p class=\"text\">Las señales son indicios y evidencias de prácticas políticas que reducen la distancia entre la sociedad civil y el poder público. Son realizadas por múltiples actores del ecosistema que en ese levantamiento denominamos de hubs.</p>
