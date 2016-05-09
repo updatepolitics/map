@@ -1,0 +1,135 @@
+{
+  "home": {
+    "quote": "Un levantamiento del ecosistema de prácticas emergentes en América Latina que retrata los actores (hubs) y las prácticas (señales) que contribuyen para la reducción de la distancia entre la sociedad civil y el poder público.",
+    "buttons": {
+      "intro": "Introducción",
+      "explore": "Explorar"
+    }
+  },
+  "presentation": {
+    "1": {
+      "title": "La Democracia en América Latina del siglo XXI",
+      "text": "La democracia aún está en proceso de consolidación y maduración en América Latina. La fragilidad de las instituciones democráticas, amenazas a derechos fundamentales y la interferencia de diferentes tipos de elites en las decisiones políticas influyen directamente la percepción y la confianza de los ciudadanos en el proceso político, principalmente en una sociedad cada vez más conectada y participativa."
+    },
+    "2": {
+      "title": "Una sociedad conectada y participativa",
+      "text": "Las dinámicas de la sociedad están cambiando más con mayor intensidad en el siglo XXI. Las maneras tradicionalmente conocidas se suman a las nuevas maneras de producir, consumir, comunicarse y relacionarse. El acceso y distribución del poder también son impactados por esos cambios. El contexto de una democracia en construcción y las nuevas dinámicas sociales posibilitan la emergencia de nuevas prácticas políticas."
+    },
+    "3": {
+      "title": "La emergencia de prácticas políticas",
+      "text": "Esas prácticas actúan en la frontera de los procesos democráticos, extendiendo los límites de interacción entre la sociedad civil y el poder público. En todo el mundo, los actores del campo de innovación política están desarrollando diferentes experiencias en diferentes contextos. En América Latina, observamos que eses experimentos apuntan posibilidades de caminos para actualizar la política del siglo XXI."
+    },
+    "4": {
+      "title": "Ecosistema de prácticas políticas emergentes",
+      "text": "El Update cree que retratar y crear una visualización para el ecosistema de prácticas políticas emergentes es el primer paso para subsidiar la afirmación de la existencia de ese campo y, desde esas evidencias, potenciar una visión de colectividad e integración para los actores implicados en los procesos políticos que contribuyen para la reducción de la distancia entre la sociedad civil y el poder público."
+    },
+    "5": {
+      "title": "La plataforma",
+      "text": "Para dar a la luz ese ecosistema, se desarrolló una clasificación propia representada en esta plataforma digital. Son 700 iniciativas levantadas, de 21 países de América Latina. Para que tú tengas una visión más precisa sobre las prácticas, las informaciones fueron separadas en dos maneras diferentes de visualización. La primera es por medio de los Hubs - los actores del ecosistema. La segunda es por medio de las señales - son las prácticas y proyectos realizados por los hubs."
+    },
+    "6": {
+      "title": "Hubs y señales, los actores y las prácticas del ecosistema",
+      "text": "Los hubs son organismos - institucionalizados o no - que desarrollan acciones y funcionan como emisores de las señales de innovación. Cada hub es capaz de realizar diversas señales, que poseen métodos, abordajes y propósitos distintos. Mirar para los hubs sin especificar sus prácticas y tácticas de acción resultaría en una visión genérica y no ecosistémica. Además, la observación desde las señales permite comprender cuáles son las prácticas más utilizadas y de qué manera el ecosistema se desarrolla con la intención de reducir la distancia entre sociedad civil y poder público."
+    },
+    "7": {
+      "title": "Explora y conoce el ecosistema",
+      "text": "La propuesta de esa plataforma es permitir que se conozca un poco del universo de las nuevas prácticas políticas. La invitación es para explorar los resultados variando las múltiplas combinaciones de filtros y permitiendo análisis propios. Ese levantamiento es el primer esfuerzo para comprender ese complejo ecosistema de naturaleza altamente dinámica, donde iniciativas nacen y mueren de un día para otro, y donde los contextos (sociales, políticos y económicos) influyen directamente en las prácticas locales."
+    }
+  },
+  "menu": {
+    "items": {
+      "home": "Início",
+      "explore": "Explorar Mapa",
+      "mapping": "Mapeamento",
+      "about": "Sobre",
+      "hubs": "Hubs",
+      "signals": "Sinais"
+    },
+    "sub_items": {
+      "mapping": {
+        "about": "Sobre",
+        "methodology": "Metodologia"
+      },
+      "about": {
+        "intro": "Sobre o Update",
+        "context": "Contexto em que surge o Update",
+        "who": "Equipe do Update",
+        "financer": "Financiadores",
+        "transparency": "Transparência",
+        "partners": "Colaboradores"
+      },
+      "hubs": {
+        "intro": "Sobre",
+        "natures": "Naturezas",
+        "sponsor": "Financiadores"
+      },
+      "signals": {
+        "intro": "Introdução / O que é",
+        "tech": "Tecnologia",
+        "themes": "Temas",
+        "purpose": "Propósito",
+        "mechanisms": "Mecanismos"
+      }
+    }
+  },
+  "hubs": {
+    "intro": "Los hubs son organismos - institucionalizados o no - que desarrollan acciones y funcionan como emisores de las señales de innovación. Considerando que la señal es el indicador prioritario de ese levantamiento, la clasificación de los hubs pretende evidenciar los actores que están creando y ejecutando esas señales y sus configuraciones. Para que sean observados fueron clasificados a partir de dos criterios: la naturaleza de su constitución y si es un financiador o no.",
+    "natures": "Naturalezas"
+  },
+  "signalsPage": {
+    "title": "Señales",
+    "intro": "<p class=\"text\">Las señales son indicios y evidencias de prácticas políticas que reducen la distancia entre la sociedad civil y el poder público. Son realizadas por múltiples actores del ecosistema que en ese levantamiento denominamos de hubs.</p>
+
+    <p class=\"text\">La separación del ecosistema en esas dos categorías [señales y hubs] permite el análisis más preciso de las herramientas, tácticas y estrategias de ese campo.</p>
+
+    <p class=\"text\">Para que las señales sean observados de manera más profunda, fueran clasificados desde algunos criterios: Tema, Mecanismo que utiliza [métodos y herramientas], Tipo, Propósito [fortalecimiento o incidencia] y Tecnología [social o digital].</p>
+    ",
+    "types": {
+      "title": "Tipo",
+      "intro": "Cuando se habla de innovación política, pensamos automáticamente en tecnología. Sin embargo, al mapear el ecosistema, se hace necesario separar las tecnologías digitales de las tecnologías sociales.",
+      "social": "Tecnologías sociales son procesos, metodologías o prácticas utilizadas en las señales de innovación política que no se centran en el digital.",
+      "digital": "Tecnologías digitales son aplicaciones, plataformas o prácticas dependientes de los medios digitales como herramienta de las acciones propuestas."
+    },
+    "themes": {
+      "title": "Temas",
+      "intro": "<p class=\"text\">Las prácticas políticas emergen en la perspectiva de los grandes temas del campo político, determinados por el momento histórico y el contexto político social que se encuentra. Al hablar de temas, no dice respecto a las agendas de derechos humanos, desigualdad, sustentabilidad o otras, sino de los temas ligados a la reducción de la distancia entre sociedad civil y el poder público.</p>
+
+<p class=\"text\">Al observar las señales de ese ecosistema en la América Latina, se observó que frecuentemente la actuación de las señales se da, a priori, en seis principales temas: la participación ciudadana, transparencia, control social, gobierno 2.0, comunicación independiente y la cultura política.</p>
+"
+    },
+    "mechanisms": {
+      "title": "Mecanismos",
+      "intro": "<p class=\"text\">Las prácticas políticas actuales se hacen insuficientes para atender a los deseos y demandas de la sociedad actual. Por lo tanto, comprender las herramientas y estrategias del ecosistema posibilita entender la emergencia de nuevas prácticas y los posibles caminos para actualizar el sistema democrático en América Latina. Los mecanismos son conjuntos de métodos utilizados por las señales que evidencian las tácticas dispendidas para impactar la realidad.</p>
+
+<p class=\"text\">Para llegar a la definición de los mecanismos, los métodos fuero n agrupados por afinidad desde sus características en común. Como recorte, se determinó que cada señal tendría al mínimo un mecanismo y al máximo tres. Esa orientación tiene como objetivo dar a la luz las estrategias centrales de las señales, posibilitando una comprensión más precisa sobre el ecosistema.</p>
+"
+    },
+    "purpose": {
+      "title": "Propósito",
+      "intro": "<p class=\"text\">
+                Las señales buscan impactar las realidades que se encuentran desde diferentes abordajes. Esas diferencias pertenecen a dos grandes padrones de acción: las más enfocadas en el ciudadano y las más enfocadas en las instituciones.
+              </p>
+              <p class=\"text\">
+                Aunque no sean abordajes excluyentes, se buscó una clasificación binaria, orientada por la intención de la señal: fortalecimiento o incidencia.
+              </p>",
+     "empowerment": {
+       "title": "Fortalecimiento",
+       "description": "Son señales cuyo objeto es el ciudadano. Promueven condiciones para que el ciudadano desarrolle la ciudadanía y conozca, comprenda, analice y/o cuestione el ejercicio del poder. El conocimiento sobre el papel social del ciudadano - responsabilidades y derechos -  posibilita la emancipación individual y mayor conciencia colectiva."
+     },
+     "incidency": {
+       "title": "Incidencia",
+       "description": "Son señales cuyo objeto es la institucionalización. Promueven condiciones para que la participación del ciudadano pueda directa o indirectamente impactar o influenciar la política institucional. Aproximar ciudadanos de las instituciones permite gobiernos más permeables y garantizan un cambio más frecuente entre ciudadanos y gobierno."
+     }
+    }
+  },
+  "placesOfOrigin": "Origem",
+  "incidencyReach": "Abrangência",
+  "mainThemes": "Temas",
+  "mechanisms": "Mecanismos",
+  "purpose": "Propósito",
+  "incidencyTypes": "Tipos de incidência",
+  "nature": "Natureza",
+  "isSponsor": "Financiador",
+  "technologyType": "Tecnologia",
+  "signals": "Señales"
+}

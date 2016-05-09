@@ -25,16 +25,18 @@ Router.route("/hubs", {
     return [
       Meteor.subscribe('natures')
     ];
-  },
-  data: function() {
-    return {
-      natures: Natures.find({}, {
-        sort: { en: 1 }
-      })
-    }
   }
 });
-Router.route("/signals", {name: "signals"});
+Router.route("/signals", {
+  name: "signals",
+  waitOn: function() {
+    return [
+      Meteor.subscribe('themes'),
+      Meteor.subscribe('mechanisms'),
+      Meteor.subscribe('purposes')      
+    ];
+  }
+});
 
 /*
  * Explore route

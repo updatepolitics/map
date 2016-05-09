@@ -162,12 +162,10 @@ Template.home.helpers({
     return Template.instance().modalPage.get();
   },
   modalTitle: function() {
-    var page = Template.instance().modalPage.get();
-    return modalPages[page - 1].title;
+    return TAPi18n.__('presentation.'+Template.instance().modalPage.get()+'.title');
   },
   modalText: function() {
-    var page = Template.instance().modalPage.get();
-    return modalPages[page - 1].text;
+    return TAPi18n.__('presentation.'+Template.instance().modalPage.get()+'.text');
   }
 });
 

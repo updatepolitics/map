@@ -2,5 +2,16 @@
   <div id="header">
     <div id="menu_bt"></div>
     <div id="update_logo"></div>
+
+    <ul id="language">
+      {{#each availableLanguages}}
+        <li class="lang {{ selected }}"> {{ id }}</li>
+        <li class="lg_sep"></li>
+      {{/each}}
+    </ul>
+
+    <div id="cur_lang">
+			<div id="cur_lang_lb" class="lang selected">{{languageTag}}</div>
+		</div>
   </div>
 </template>

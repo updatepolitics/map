@@ -509,6 +509,7 @@ footer{
     right: 50.2%;
     background-image: url("../layout/play1.png");
     background-position: right;
+    text-transform: uppercase;
  }
 
 .port
@@ -525,6 +526,7 @@ footer{
     left: 50.2%;
     background-image: url("../layout/compass1.png");
     background-position: left;
+    text-transform: uppercase;
 }
 
 .port
@@ -672,6 +674,7 @@ footer{
   right: 25px;
   top: 25px;
   display: table;
+  text-transform: uppercase;
 }
 
 .mobile
@@ -693,6 +696,7 @@ footer{
     }
 
 .lang{
+    text-transform: uppercase;
     display: table-cell;
     vertical-align: middle;
     text-align: center;

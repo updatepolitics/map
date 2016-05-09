@@ -1,4 +1,41 @@
 {
+  "home": {
+    "quote": "Emerging political practices ecosystem map in Latin America displays actors (hubs) and practices (signals) that contribute to reduce the gap between civil society and public power.",
+    "buttons": {
+      "intro": "Introduction",
+      "explore": "Explore"
+    }
+  },
+  "presentation": {
+    "1": {
+      "title": "Democracy in Latin America in the 21 st century",
+      "text": "Democracy is still in a process of maturation and consolidation in Latin America. The fragility of democratic institutions, threats to fundamental rights and interference from different kinds of elites in political decisions directly influence citizen perception and trust in the political process, especially in an increasingly connected and participative society."
+    },
+    "2": {
+      "title": "A connected and participative society",
+      "text": "Society’s dynamics are changing rapidly in the 21 st century. Traditional methods are joined by new ways of producing, consuming and relating. Distribution and access to power are also impacted by these changes. This context of a budding democracy and new social dynamics fosters the emergency of new political practices."
+    },
+    "3": {
+      "title": "The emergency of political practices",
+      "text": "These practices act on the frontier of democratic processes, expanding the interaction limits of civil society and public power. All over the world, actors in the political innovation field are developing experiments with different formats and in different contexts. In Latin America, we observe these experiments indicate possible paths to update politics in the 21 st century."
+    },
+    "4": {
+      "title": "Ecosystem of emerging political practices",
+      "text": "Update believes that portraying and creating visualization for the ecosystem of emerging political practices is the first step to support this field’s existence affirmation and, from these evidences, strengthen a vision of collectiveness and belonging to actors involved in political processes that contribute to reduce the distance between civil society and public power."
+    },
+    "5": {
+      "title": "The platform",
+      "text": "To make this ecosystem alive, a particular categorization was developed and is represented in this digital platform. There are 700 mapped initiatives, from 21 Latin American countries. To have a precise view of practices, the information was split in two different visualization modes. The first is through Hubs – the actors in the ecosystem. The second is through Signals – which are practices and projects led by the hubs."
+    },
+    "6": {
+      "title": "Hubs and signals, the actors and the practices of the ecosystem",
+      "text": "The hubs are organisms – institutional or not – which develop actions and work as innovation signal “emitters”. To look into the hubs without specifying their practices and tactics would result in a generic view, instead of an ecosystem view. Besides, the observation through the signals allows to comprehend which are the most used practices and in which way the ecosystem is developed in the sense of reducing the distance between civil society and public power."
+    },
+    "7": {
+      "title": "Explore and get to know the ecosystem",
+      "text": "This platform’s proposition is to allow familiarization with the universe of new political practices. It’s an invitation to explore results using multiple filter combinations to envision this very dynamic and complex ecosystem, in which initiatives appear and dissolve overnight, and in which the contexts (social, political and economic) directly influence local practices."
+    }
+  },
   "menu": {
     "items": {
       "home": "Início",
@@ -35,11 +72,54 @@
       }
     }
   },
-  "home": {
-    "intro": "<b>UPDATE</b> is a laboratory to create spaces for dialogue and reflection among Hackers Policy, in order to recognize, empower and give visibility to emerging practices of political participation in the twenty-first century.",
-    "buttons": {
-      "intro": "Intro",
-      "explore": "Explore"
+  "hubs": {
+    "intro": "Hubs are organisms – institutional or not – that develop actions and work as innovation signal emitters. Considering that the signal is the priority indicator in this mapping, the categorization of hubs aims to evidence the actors which are creating and executing these signals and their configuration. For observation, they were classified through the use of two criteria: nature of their constitution and if they are a financer or not.",
+    "natures": "Natures"
+  },
+  "signalsPage": {
+    "title": "Signals",
+    "intro": "<p class=\"text\">Signals are traces and evidences of political practices that reduce the distance between civil society and public power. They are carried out by multiple actors of the ecosystem which in this mapping we call hubs.</p>
+
+    <p class=\"text\">The separation of the ecosystem in two categories [signals and hubs] allows for a more precise analysis of the tools, tactics and strategies of this field.</p>
+
+    <p class=\"text\">So that signals can be observed in a more profound way, they were categorized following some criteria: Theme, Mechanism used [methods and tools], Type, Purpose [empowerment or incidence] and Technology [social or digital].</p>
+    ",
+    "types": {
+      "title": "Type",
+      "intro": "When approaching the theme of political innovation, we automatically think of technology. But, when mapping the ecosystem, it is necessary to think digital technology separately from social technology.",
+      "social": "Social technologies are processes, methodologies or practices used in signals of political innovation that are not centered around the digital environment.",
+      "digital": "Digital technologies are apps, platforms or practices that rely on digital medias as tool for proposed action."
+    },
+    "themes": {
+      "title": "Themes",
+      "intro": "<p class=\"text\">Political practices emerge in the perspective of the great themes of the political field, determined by the historical moment and the sociopolitical context in which they find themselves. When talking about themes, the references are not agendas like human rights, inequality, sustainability or others, but themes linked to reducing the distance between civil society and public power.</p>
+
+<p class=\"text\">When observing themes of this ecosystem in Latin America, it was observed that frequently the effect of signals happens, primarily, in six main themes: citizen participation, transparency, social control, government 2.0, independent communication and political culture.</p>
+"
+    },
+    "mechanisms": {
+      "title": "Mechanisms",
+      "intro": "<p class=\"text\">Nowadays political practices are insufficient to answer to the whishes and demands of society. Therefore, understanding tools and strategies of the ecosystem makes it possible to envision the emergency of new practices and the possible paths to update the democratic system in Latin America. The mechanisms are sets of methods used by the signals to evidence tactics employed to impact reality.</p>
+
+<p class=\"text\">To reach a definition of the mechanism, methods were grouped by affinity from their common characteristics. As a cut, it was determined that each signal would have at least one mechanism and at most three. This orientation intends to enlighten the main strategies of the signals, making comprehension about the ecosystem more precise.</p>
+"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "intro": "<p class=\"text\">
+                Signals seek to impact realities that come together via different approaches. These differences belong to two great patterns of action: the mostly citizen-focused and the mostly institution-focused.
+              </p>
+              <p class=\"text\">
+                Despite not being mutually exclusive, the binary classification was chosen, oriented by the intention of the signal: empowerment or incidence.
+              </p>",
+     "empowerment": {
+       "title": "Empowerment",
+       "description": "These are signals of which the citizen is the object. They promote conditions for citizens to develop citizenship and get to know, comprehend, analyze and/or question the exercise of power. The knowledge about the social role of the citizen – responsibilities and rights – makes individual emancipation and bigger collective conscience possible."
+     },
+     "incidency": {
+       "title": "Incidency",
+       "description": "Institutions are the object of these signals. They promote conditions so that citizen participation can direct or indirectly influence institutional policies. Getting citizens closer to institutions allows more permeable governments and ensures more frequent exchange between government and citizen."
+     }
     }
   },
   "placesOfOrigin": "Origem",
@@ -51,5 +131,5 @@
   "nature": "Natureza",
   "isSponsor": "Financiador",
   "technologyType": "Tecnologia",
-  "signals": "sinais"
+  "signals": "Signals"
 }
