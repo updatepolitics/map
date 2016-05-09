@@ -38,12 +38,12 @@
   },
   "menu": {
     "items": {
-      "home": "Início",
+      "home": "Inicio",
       "explore": "Explorar Mapa",
       "mapping": "Mapeamento",
       "about": "Sobre",
       "hubs": "Hubs",
-      "signals": "Sinais"
+      "signals": "Señales"
     },
     "sub_items": {
       "mapping": {
@@ -51,20 +51,20 @@
         "methodology": "Metodologia"
       },
       "about": {
-        "intro": "Sobre o Update",
-        "context": "Contexto em que surge o Update",
-        "who": "Equipe do Update",
+        "intro": "Sobre el Update",
+        "context": "Contexto em que surge el Update",
+        "who": "Equipo del Update",
         "financer": "Financiadores",
-        "transparency": "Transparência",
+        "transparency": "Transparencia",
         "partners": "Colaboradores"
       },
       "hubs": {
         "intro": "Sobre",
-        "natures": "Naturezas",
+        "natures": "Naturalezas",
         "sponsor": "Financiadores"
       },
       "signals": {
-        "intro": "Introdução / O que é",
+        "intro": "Introdución",
         "tech": "Tecnologia",
         "themes": "Temas",
         "purpose": "Propósito",

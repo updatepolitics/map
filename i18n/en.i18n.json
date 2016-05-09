@@ -38,37 +38,37 @@
   },
   "menu": {
     "items": {
-      "home": "Início",
-      "explore": "Explorar Mapa",
-      "mapping": "Mapeamento",
-      "about": "Sobre",
+      "home": "Home",
+      "explore": "Explore Map",
+      "mapping": "Mapping",
+      "about": "About",
       "hubs": "Hubs",
-      "signals": "Sinais"
+      "signals": "Signals"
     },
     "sub_items": {
       "mapping": {
-        "about": "Sobre",
-        "methodology": "Metodologia"
+        "about": "About",
+        "methodology": "Methodology"
       },
       "about": {
-        "intro": "Sobre o Update",
-        "context": "Contexto em que surge o Update",
-        "who": "Equipe do Update",
-        "financer": "Financiadores",
-        "transparency": "Transparência",
-        "partners": "Colaboradores"
+        "intro": "About Update",
+        "context": "Context in which Update emerges",
+        "who": "Update Staff",
+        "financer": "Financiers",
+        "transparency": "Transparency",
+        "partners": "Partners"
       },
       "hubs": {
-        "intro": "Sobre",
-        "natures": "Naturezas",
-        "sponsor": "Financiadores"
+        "intro": "About",
+        "natures": "Natures",
+        "sponsor": "Financiers"
       },
       "signals": {
-        "intro": "Introdução / O que é",
-        "tech": "Tecnologia",
-        "themes": "Temas",
-        "purpose": "Propósito",
-        "mechanisms": "Mecanismos"
+        "intro": "Introduction",
+        "tech": "Techonology",
+        "themes": "Themes",
+        "purpose": "Purpose",
+        "mechanisms": "Mechanisms"
       }
     }
   },
