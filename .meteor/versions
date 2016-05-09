@@ -38,6 +38,7 @@ es5-shim@4.5.8
 fabienb4:autoform-semantic-ui@0.9.3
 fastclick@1.0.9
 flemay:less-autoprefixer@1.2.0
+gadicohen:headers@0.0.31
 geojson-utils@1.0.6
 hot-code-push@1.0.2
 html-tools@1.0.7
@@ -63,6 +64,7 @@ mdg:validation-error@0.2.0
 meteor@1.1.12
 meteor-base@1.0.2
 meteorhacks:async@1.0.0
+meteorhacks:inject-initial@1.0.4
 meteorspark:util@0.2.0
 minifier-css@1.1.9
 minifier-js@1.1.9
