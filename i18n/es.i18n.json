@@ -125,6 +125,50 @@
     "
     }
   },
+  "aboutPage": {
+    "about": {
+      "title": "Sobre Update",
+      "text": "<p><b>UPDATE</b> busca contribuir para la actualización de la democracia latinoamericana a través del fortalecimiento del campo de innovación política y de las prácticas políticas emergentes que actúan en la región y promueven experimentos disruptivos. Para tal, Update se configura como un laboratorio de comprensión, difusión y promoción, de intercambio entre actores del campo, en busca de una América Latina más democrática, con prácticas políticas renovadas y más participativas, organizaciones e individuos más actuantes, para la construcción de sociedades menos desiguales, más justas y más inclusivas.
+      </p>"
+    },
+    "context": {
+      "title": "Contexto en que surge Update",
+      "text": "<p>El siglo XXI presenta nuevas demandas y posibilidades para la política.</p>
+      <p>De acuerdo con Yoshai Benkler, autor de La Riqueza de las Redes, vivimos una transición de la sociedad industrial para la sociedad interconectada. En el campo de la política, esa transformación se presenta en la posibilidad de una democracia más participativa. Moisés Naim, autor de El fin del poder, afirma que estamos viendo el surgimiento de una onda avasalladora de innovación política en el mundo que se equipara en carácter disruptivo a lo que se observa en otros sectores económicos y sociales y que presenta la posibilidad de recuperar la creencia de los ciudadanos en las instituciones democráticas.</p>
+      <p>La necesidad de esa reinvención se presenta bajo la forma de una crisis de representatividad globalizada, evidenciada a partir de la crisis financiera de 2008. Desde entonces hemos visto, como síntomas de una crisis de representatividad, centenas de protestas que vienen ocurriendo en todo el mundo.</p>
+      <p>Aparte de eso, también podemos observar otra crisis, institucional, que se manifiesta en la dificultad de las instituciones en responder a los anhelos colectivos de los individuos. En este sentido, los partidos políticos perdieron la capacidad de atraer personas para dar continuidad a sus construcciones, y mismo las ONGs y movimientos sociales, que comenzaron a suplir esta carencia en los últimos 20 años, han sentido cada vez más la misma dificultad.</p>
+      <p>Como telón de fondo de las crisis institucionales y de representatividad, observamos un aspecto peligroso: la escasez de referencias positivas. Esta dificultad en encontrar posibles soluciones para los desafíos vividos en la política del siglo XXI y la falta de referencia aleja los ciudadanos de la construcción de alternativas y alarga la crisis institucional y la de representatividad.</p>
+      <p>Entretanto, al mirar con cuidado el escenario mundial, observamos el surgimiento de un campo que apunta para nuevas posibilidades – el campo de las prácticas políticas emergentes. Ese campo actúa en la frontera de los procesos democráticos, expandiendo los límites de posibilidades de interacción entre el ciudadano y el Estado.</p>
+      <p>Los actores del campo de la innovación política están desarrollando experimentos en todo el mundo, de diferentes formas, en diferentes contextos, con diferentes objetivos. Observamos que esos experimentos apuntan posibilidades de caminos para actualizar la política del siglo XXI. En este sentido, comprender con cuidado ese campo posibilita visualizar con más clareza los caminos para la superación de la crisis de representatividad y de la crisis institucional, así como la creación de referencias para potencializar esa onda avasalladora de transformación en la política.</p>
+        "
+    },
+    "team": {
+      "beatriz": " es científica social. Posee 11 años de experiencia en innovación pública y política. Recientemente fue co-realizadora de la investigación Sonho Brasileiro da Política (Sueño Brasileño de la Política) y del proyecto Jogo da Política, uma metodologia de educação política para jovens (Juego de la Política, una metodología de educación para jóvenes).",
+      "caio": " es economista y apasionado por proyectos colectivos de impacto positivo en la sociedad. Participó de la red Fora do Eixo (Fuera de Eje), co-fundó Toque no Brasil (Toque en Brasil), el Canal Wings for Change (Alas para un Cambio), el Instituto Companheiros do Txai (Compañeros de Txai) y el partido Rede Sustentabilidade (Red Sostenibilidad).",
+      "rafael": " es abogado y activista de causas socioambientales y de fortalecimiento de la democracia. Trabajó en el Ministerio Público, en organizaciones no gubernamentales y siempre actuó en proyectos colectivos de defensa de derechos, promoción de la sostenibilidad y de la ciudadanía. Recientemente fue asesor de Marina Silva en la campaña presidencial de 2014.",
+      "tulio": " es graduado en comunicación social con especialización en marketing, trabaja como consultor en planeamiento estratégico y movilización. Es fundador de SustentaLab y colaborador en Escola de Ativismo (Escuela de Activismo)."
+    },
+    "financer": "
+      <div class=\"content_title\">Financiadores</div>
+      <p>Desde su fundación, Update recibió inversiones de fundaciones y recursos financieros de personas físicas.</p>
+
+      <div class=\"subtitle\">Persona Física</div>
+      <ul>
+        <li>Drica Guzzi</li>
+        <li>Maria Alice Setubal</li>
+        <li>Gisela Moreau</li>
+      </ul>
+
+      <div class=\"subtitle\">Persona Jurídica</div>
+      <ul>
+        <li>Fundação AVINA</li>
+        <li>Fundação Porticus</li>
+        <li>Instituto Arapyau</li>
+        <li>Instituto PDR</li>
+        <li>Open Society Foundation</li>
+      </ul>
+    "
+  },
   "signalsPage": {
     "title": "Señales",
     "intro": "<p class=\"text\">Las señales son indicios y evidencias de prácticas políticas que reducen la distancia entre la sociedad civil y el poder público. Son realizadas por múltiples actores del ecosistema que en ese levantamiento denominamos de hubs.</p>
