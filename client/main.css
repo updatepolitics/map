@@ -2245,7 +2245,13 @@ hr{
     white-space: nowrap;
     position: absolute;
     bottom: 20px;
+    text-transform: uppercase;
 }
+
+a:link#popup_bt { color:#fff }
+a:hover#popup_bt { color:#fff }
+a:active#popup_bt { color:#fff }
+a:visited#popup_bt { color:#fff }
 
 .pop_bt.link{
   right: 20px;

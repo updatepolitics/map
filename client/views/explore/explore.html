@@ -99,23 +99,27 @@
               <div id="popup_content">
                 <div class="title">{{ name }}</div>
                 <div class="info">
-                  <span class="bold">origem</span> {{ getOrigins }} |
-                  <span class="bold">abrangência</span> {{ getReach }}
+                  <span class="bold">{{_ "popup.origin" }}</span> {{ getOrigins }} |
+                  <span class="bold">{{_ "popup.reach" }}</span> {{ getReach }}
                   {{# if purpose }}
-                    | <span class="bold">propósito</span> {{ getPurpose }}
+                    | <span class="bold">{{_ "popup.purpose" }}</span> {{ getPurpose }}
                   {{/if}}
                   {{# if incidencyType }}
-                    | <span class="bold">tipo</span> {{ getIncidencyTypes }}
+                    | <span class="bold">{{_ "popup.type" }}</span> {{ getIncidencyTypes }}
                   {{/if }}
                   {{# if isSponsor }}
-                    | <span class="bold">FINANCIADOR</span>
+                    | <span class="bold">{{_ "popup.financer" }}</span>
                   {{/if }}
                 </div>
                 <div class="about mt40">
-                  {{ description_pt }}
+                  {{ getDescription }}
                 </div>
-                <div class="pop_bt link">WEBSITE</div>
-                <div class="pop_bt details" id="417">DETALHES</div>
+                <a id="popup_bt" href="{{ website }}" target="_blank" class="pop_bt link">WEBSITE</a>
+                {{#if signalContext }}
+                  <a id="popup_bt" href="signals/{{ _id }}" class="pop_bt details">{{_ "popup.details" }}</a>
+                {{else}}
+                  <a id="popup_bt" href="hubs/{{ _id }}" class="pop_bt details">{{_ "popup.details" }}</a>
+                {{/if}}
               </div>
             </div>
             {{/with}}

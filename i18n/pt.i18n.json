@@ -72,6 +72,13 @@
       }
     }
   },
+  "popup": {
+    "origin": "Origem",
+    "reach": "Alcance",
+    "purpose": "Propósito",
+    "details": "Detalhes",
+    "financer": "Financiador"
+  },
   "hubs": {
     "intro": "Os hubs são organismos - institucionalizados ou não - que desenvolvem ações e funcionam como emissores dos sinais de inovação. Considerando que o sinal é o indicador prioritário desse mapeamento, a classificação dos hubs pretende evidenciar os atores que estão criando e executando esses sinais e suas configurações. Para que sejam observados foram classificados a partir de dois critérios: a natureza da sua constituição e se é um financiador ou não.",
     "natures": "Naturezas"

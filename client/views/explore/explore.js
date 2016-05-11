@@ -597,34 +597,42 @@ Template.explore.helpers({
     return d;
   },
   getOrigins: function() {
+    var language = TAPi18n.getLanguage();
     var ids = this.placesOfOrigin;
     var origins = Origins
                     .find({ _id: { $in: ids }})
                     .map(function(item){
-                      return item.pt
+                      return item[language]
                     });
 
     if (origins.length > 0) return origins.join(', ')
     else return '';
   },
   getIncidencyTypes: function() {
+    var language = TAPi18n.getLanguage();
     var ids = this.incidencyTypes
     var types = IncidencyTypes
                   .find({ _id: { $in: ids }})
                   .map(function(type){
-                    return type.pt
+                    return type[language]
                   });
     if (types.length > 0) {
       return types.join(', ')
     } else return '';
   },
   getReach: function(id) {
+    var language = TAPi18n.getLanguage();
     var reach = IncidencyReachs.findOne(this.incidencyReach);
-    return reach.pt;
+    return reach[language];
   },
   getPurpose: function(id) {
+    var language = TAPi18n.getLanguage();
     var purpose = Purposes.findOne(this.purpose);
-    return purpose.pt;
+    return purpose[language];
+  },
+  getDescription: function() {
+    var language = TAPi18n.getLanguage();
+    return this["description_"+language];
   },
   hubControlOn: function() {
     if (Template.instance().currentContext.get() == 'hubs') {
@@ -655,5 +663,5 @@ Template.explore.helpers({
 Template.explore.events({
   "click #popup_x": function(event, template){
     template.showPopup.set(false);
-  },
+  }
 });
