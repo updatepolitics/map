@@ -65,6 +65,30 @@ Router.route("/signals", {
   }
 });
 
+Router.route('/signal/:_id', {
+  name: 'signal',
+  template: 'signalDetail',
+  waitOn: function(){
+    return [
+      Meteor.subscribe('signal', this.params._id),
+      Meteor.subscribe('hubs'),
+      Meteor.subscribe('origins'),
+      Meteor.subscribe('incidencyReachs'),
+      Meteor.subscribe('purposes'),
+      Meteor.subscribe('themes'),
+      Meteor.subscribe('methods'),
+      Meteor.subscribe('mechanisms'),
+      Meteor.subscribe('incidencyTypes')
+    ];
+  },
+  data: function(){
+    return Signals.findOne({
+      _id: this.params._id
+    });
+  }
+});
+
+
 /*
  * Explore route
  */

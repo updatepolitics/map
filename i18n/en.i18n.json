@@ -325,6 +325,11 @@
         "title": "Signals emitted by this hub"
       }
     },
+    "signals": {
+      "theme": "Theme",
+      "mechanisms": "Mechanisms",
+      "relatedHubs": "Related hubs"
+    },
     "moreInfo": "More info:"
   },
   "viewControl": {
@@ -338,6 +343,7 @@
   "placesOfOrigin": "Origin",
   "incidencyReach": "Reach",
   "mainThemes": "Themes",
+  "theme": "Theme",
   "mechanisms": "Mechanisms",
   "purpose": "Purpose",
   "incidencyTypes": "Incidency types",

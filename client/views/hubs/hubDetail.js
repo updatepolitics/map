@@ -10,8 +10,6 @@ Template.hubDetail.helpers({
   relatedSignals: function(){
     var hubId = this._id;
     var signals = Signals.find({parentHubs: {$in: [hubId]}});
-    console.log('signals');
-    console.log(signals);
     return signals;
   }
 });

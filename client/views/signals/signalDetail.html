@@ -1,0 +1,75 @@
+<template name="signalDetail">
+  <div id="container">
+    <div class="content light1">
+      <div class="sub_content">
+        <div id="initiative_ico" style="background-image: url('../layout/sig3.png');"></div>
+        <div class="content_title" id="initiative_title">{{ name }}</div>
+        <div id="initiative_info" class="info">
+          {{> signalTagline }}
+        </div>
+        <p class="text" id="initiative_description">{{ getDescription }}</p>
+      </div>
+    </div>
+    <div class="content light2">
+      <div class="sub_content">
+        <div class="content_title">{{_ "details.signals.theme" }}
+        </div>
+        <ul class="list">
+          {{#each getThemes }}
+            <li style="background-color: {{ color }};" class="box">
+              <div class="box_title">{{ title }}</div>
+              <p>{{ description }}</p>
+              <p class="examples"></p>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="content light1">
+      <div class="sub_content">
+        <div class="content_title">{{_ "details.signals.mechanisms" }}
+        </div>
+        <ul class="list">
+          {{#each getMechanisms }}
+            <li class="box off">
+              <div class="box_title">{{ title }}</div>
+              <p>{{ description }}</p>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="content light2">
+      <div class="sub_content">
+        <div class="content_title">{{_ "details.signals.relatedHubs" }}
+        </div>
+        <ul class="list">
+          {{#each getRelatedHubs}}
+            <li class="list_item hub">
+              <img src="../layout/plus_gray.png">
+              <div class="title"> {{ name }}
+              </div>
+              <div class="info">
+                {{> hubTagline }}
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="content light2">
+      <div class="sub_content">
+        <div class="content_title">{{_ "details.moreInfo" }}
+        </div>
+        <ul class="list">
+          <li class="link">{{ website }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</template>

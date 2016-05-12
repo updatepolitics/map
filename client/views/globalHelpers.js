@@ -164,7 +164,8 @@ Template.registerHelper("getNature", function(){
 
 Template.registerHelper("originsToString", function(){
   var language = TAPi18n.getLanguage();
-  var ids = this.placesOfOrigin;
+  var ids = this.placesOfOrigin || [];
+  
   var origins = Origins
     .find({ _id: { $in: ids }})
     .map(function(item){
