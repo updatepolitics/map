@@ -6,11 +6,21 @@ Template.appMenu.events({
     $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, 'swing');
   },
   "click .bt": function(event, template){
-    Router.go(this.route);
+    if (this.route)
+      Router.go(this.route);
   },
   "click .sub_bt": function(event, template){
     Router.go(this.route, {}, {hash: this.anchor});
   },
+  "click #medium": function(event) {
+    window.open('https://medium.com/update-politics', '_blank');
+  },
+  "click #twitter": function(event) {
+    window.open('https://twitter.com/update_politics', '_blank');
+  },
+  "click #github": function(event) {
+    window.open('https://github.com/updatepolitics', '_blank');
+  }
 });
 
 Template.appMenu.helpers({
