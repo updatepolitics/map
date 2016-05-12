@@ -1937,6 +1937,11 @@ footer{
     list-style: none;
 }
 
+.light2 .list_item{
+  background-color: #fff;
+  border: none;
+}
+
 .mobile
   .list_item{
     height: 70px;
@@ -1950,10 +1955,6 @@ footer{
         width: 50%;
         float: left;
     }
-
-.list_item:hover{
-  background-color: #edebed;
-}
 
 .title{
     font-family: 'Stardos Stencil';
@@ -1986,6 +1987,13 @@ footer{
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+
+
+.list_item
+    .title{
+      line-height: 28px;
+    }
+
 
 .mobile
   .list_item
@@ -2033,7 +2041,7 @@ footer{
 
 .content{
     width: 100%;
-    padding:100px 50px;
+    padding:80px 50px;
 }
 
 .light_bg
@@ -2061,15 +2069,30 @@ footer{
  }
 
 #initiative_title {
-    font-weight: 700;
- }
+   font-weight: 700;
+   font-family: 'Stardos Stencil';
+   text-transform: none;
+   font-size: 42px;
+   margin-top: 30px;
+   margin-bottom: 0;
+}
 
- #initiative_ico{
-   width: 100%;
-   height: 70px;
-   background-position: center;
-   background-repeat: no-repeat;
- }
+#initiative_description{
+ margin-top: 50px;
+}
+
+#initiative_url{
+ width: 100%;
+ text-align: center;
+ font-size: 14px;
+}
+
+#initiative_ico{
+  width: 100%;
+  height: 70px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 .mobile
   .content_title {
@@ -2279,6 +2302,24 @@ a:visited#popup_bt { color:#fff }
   font-size: 16px;
 }
 
+.sub_content .link{
+  width: 100%;
+  height: 90px;
+  line-height: 90px;
+  text-align: center;
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  background-image: url('../layout/popup.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-color: #262c38;
+  color: #fff;
+  cursor: pointer;
+
+}
+
 .content p{
     margin-bottom: 20px;
     font-size: 18px;
@@ -2298,8 +2339,8 @@ a:visited#popup_bt { color:#fff }
 }
 
 .content ul{
+  margin-left: 10px;
   margin-bottom: 20px;
-
 }
 
 .content .list{

@@ -1,0 +1,12 @@
+<template name="hubTagline">
+  <span class="bold"> {{_ "origin" }} </span>
+    {{ originsToString }} |
+  <span class="bold"> {{_ "reach" }} </span>
+    {{ reachToString }} |
+  <span class="bold"> {{_ "financer" }} </span>
+    {{#if isSponsor }}
+      {{_ "yes" }}
+    {{else}}
+      {{_ "no" }}
+    {{/if}}
+</template>

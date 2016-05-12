@@ -19,6 +19,11 @@ Router.route("/", {name: "home"});
 Router.route("/about", {name: "about"});
 Router.route("/mapping", { name: "mapping" });
 Router.route("/countries", {name: "countries"});
+
+/*
+ * Hubs routes
+ */
+
 Router.route("/hubs", {
   name: "hubs",
   waitOn: function() {
@@ -27,13 +32,35 @@ Router.route("/hubs", {
     ];
   }
 });
+
+Router.route("/hub/:_id", {
+  name: "hub",
+  template: "hubDetail",
+  waitOn: function(){
+    return [
+      Meteor.subscribe('origins'),
+      Meteor.subscribe('purposes'),
+      Meteor.subscribe('incidencyTypes'),
+      Meteor.subscribe('incidencyReachs'),
+      Meteor.subscribe('natures'),
+      Meteor.subscribe('signals'),
+      Meteor.subscribe('hub', this.params._id)
+    ]
+  },
+  data: function(){
+    return Hubs.findOne({
+      _id: this.params._id
+    });
+  }
+});
+
 Router.route("/signals", {
   name: "signals",
   waitOn: function() {
     return [
       Meteor.subscribe('themes'),
       Meteor.subscribe('mechanisms'),
-      Meteor.subscribe('purposes')      
+      Meteor.subscribe('purposes')
     ];
   }
 });
@@ -89,7 +116,7 @@ Router.route("/list", {
  */
 
 Router.plugin('ensureSignedIn', {
-  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'signals', 'explore', 'list']
+  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'hub', 'signals', 'signal', 'explore', 'list']
 });
 
 AccountsTemplates.configure({

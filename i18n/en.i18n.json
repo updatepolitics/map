@@ -319,14 +319,34 @@
      }
     }
   },
-  "placesOfOrigin": "Origem",
-  "incidencyReach": "Abrangência",
-  "mainThemes": "Temas",
-  "mechanisms": "Mecanismos",
-  "purpose": "Propósito",
-  "incidencyTypes": "Tipos de incidência",
-  "nature": "Natureza",
-  "isSponsor": "Financiador",
-  "technologyType": "Tecnologia",
-  "signals": "Signals"
+  "details": {
+    "hubs": {
+      "signals": {
+        "title": "Signals emitted by this hub"
+      }
+    },
+    "moreInfo": "More info:"
+  },
+  "viewControl": {
+    "hubs": "HUBS",
+    "signals": "SIGNALS",
+    "needHelp": "Need help?",
+    "filters": "Filters"
+  },
+  "reach": "Reach",
+  "origin": "Origin",
+  "placesOfOrigin": "Origin",
+  "incidencyReach": "Reach",
+  "mainThemes": "Themes",
+  "mechanisms": "Mechanisms",
+  "purpose": "Purpose",
+  "incidencyTypes": "Incidency types",
+  "type": "Type",
+  "nature": "Nature",
+  "isSponsor": "Financer",
+  "technologyType": "Technology",
+  "signals": "Signals",
+  "financer": "Financer",
+  "yes": "Yes",
+  "no": "No"
 }

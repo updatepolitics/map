@@ -76,6 +76,7 @@ Template.registerHelper("mechanismOptions", function(argument){
   });
 });
 
+
 /*
  * LABELS (from ids)
  */
@@ -141,4 +142,66 @@ Template.registerHelper("itemsCount", function(argument){
 
 Template.registerHelper("filterCount", function(argument){
   return Session.get('filterCount')[Session.get('currentContext')];
+});
+
+/*
+* Initiatives popups & details
+*/
+
+Template.registerHelper("getDescription", function(argument){
+  var language = TAPi18n.getLanguage();
+  return this["description_"+language];
+});
+
+Template.registerHelper("getNature", function(){
+  var language = TAPi18n.getLanguage();
+  var nature = Natures.findOne({_id: this.nature });
+  return {
+    title: nature[language],
+    description: nature['description_'+language]
+  };
+});
+
+Template.registerHelper("originsToString", function(){
+  var language = TAPi18n.getLanguage();
+  var ids = this.placesOfOrigin;
+  var origins = Origins
+    .find({ _id: { $in: ids }})
+    .map(function(item){
+      return item[language]
+    });
+
+  if (origins.length > 0) return origins.join(', ')
+  else return '';
+});
+
+Template.registerHelper("reachToString", function(){
+  var language = TAPi18n.getLanguage();
+  var reach = IncidencyReachs.findOne(this.incidencyReach);
+  return reach[language];
+});
+
+Template.registerHelper("natureToString", function(){
+  var language = TAPi18n.getLanguage();
+  var reach = IncidencyReachs.findOne(this.incidencyReach);
+  return reach[language];
+});
+
+Template.registerHelper("purposeToString", function(){
+  var language = TAPi18n.getLanguage();
+  var purpose = Purposes.findOne(this.purpose);
+  return purpose[language];
+});
+
+Template.registerHelper("incidencyTypesToString", function(){
+  var language = TAPi18n.getLanguage();
+  var ids = this.incidencyTypes
+  var types = IncidencyTypes
+                .find({ _id: { $in: ids }})
+                .map(function(type){
+                  return type[language]
+                });
+  if (types.length > 0) {
+    return types.join(', ')
+  } else return '';
 });

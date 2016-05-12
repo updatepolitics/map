@@ -596,44 +596,6 @@ Template.explore.helpers({
     d.visible = (d.depth == 2) ? true : false;
     return d;
   },
-  getOrigins: function() {
-    var language = TAPi18n.getLanguage();
-    var ids = this.placesOfOrigin;
-    var origins = Origins
-                    .find({ _id: { $in: ids }})
-                    .map(function(item){
-                      return item[language]
-                    });
-
-    if (origins.length > 0) return origins.join(', ')
-    else return '';
-  },
-  getIncidencyTypes: function() {
-    var language = TAPi18n.getLanguage();
-    var ids = this.incidencyTypes
-    var types = IncidencyTypes
-                  .find({ _id: { $in: ids }})
-                  .map(function(type){
-                    return type[language]
-                  });
-    if (types.length > 0) {
-      return types.join(', ')
-    } else return '';
-  },
-  getReach: function(id) {
-    var language = TAPi18n.getLanguage();
-    var reach = IncidencyReachs.findOne(this.incidencyReach);
-    return reach[language];
-  },
-  getPurpose: function(id) {
-    var language = TAPi18n.getLanguage();
-    var purpose = Purposes.findOne(this.purpose);
-    return purpose[language];
-  },
-  getDescription: function() {
-    var language = TAPi18n.getLanguage();
-    return this["description_"+language];
-  },
   hubControlOn: function() {
     if (Template.instance().currentContext.get() == 'hubs') {
       return 'on';

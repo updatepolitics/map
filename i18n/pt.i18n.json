@@ -319,14 +319,34 @@
      }
     }
   },
+  "details": {
+    "hubs": {
+      "signals": {
+        "title": "Sinais emitidos por esse hub"
+      }
+    },
+    "moreInfo": "Mais informações:"
+  },
+  "viewControl": {
+    "hubs": "HUBS",
+    "signals": "SINAIS",
+    "needHelp": "Precisa de ajuda?",
+    "filters": "Filtros"
+  },
+  "reach": "Alcance",
+  "origin": "Origem",
   "placesOfOrigin": "Origem",
   "incidencyReach": "Abrangência",
   "mainThemes": "Temas",
   "mechanisms": "Mecanismos",
   "purpose": "Propósito",
   "incidencyTypes": "Tipos de incidência",
+  "type": "Tipo",
   "nature": "Natureza",
   "isSponsor": "Financiador",
   "technologyType": "Tecnologia",
-  "signals": "Sinais"
+  "signals": "Sinais",
+  "financer": "Financiador",
+  "yes": "Sim",
+  "no": "Não"
 }

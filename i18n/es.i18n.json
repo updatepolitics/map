@@ -222,14 +222,34 @@
      }
     }
   },
-  "placesOfOrigin": "Origem",
-  "incidencyReach": "Abrangência",
+  "details": {
+    "hubs": {
+      "signals": {
+        "title": "Señales emitidas por este hub"
+      }
+    },
+    "moreInfo": "Más informaciones:"
+  },
+  "viewControl": {
+    "hubs": "HUBS",
+    "signals": "SEÑALES",
+    "needHelp": "Necesita ayuda?",
+    "filters": "Filters"
+  },
+  "reach": "Alcance",
+  "origin": "Origen",
+  "placesOfOrigin": "Origen",
+  "incidencyReach": "Alcance",
   "mainThemes": "Temas",
   "mechanisms": "Mecanismos",
   "purpose": "Propósito",
-  "incidencyTypes": "Tipos de incidência",
-  "nature": "Natureza",
+  "incidencyTypes": "Tipos de incidencia",
+  "type": "Tipo",
+  "nature": "Naturaleza",
   "isSponsor": "Financiador",
-  "technologyType": "Tecnologia",
-  "signals": "Señales"
+  "technologyType": "Tecnología",
+  "signals": "Señales",
+  "financer": "Financiador",
+  "yes": "Si",
+  "no": "No"
 }

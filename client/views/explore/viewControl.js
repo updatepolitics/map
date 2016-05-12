@@ -18,6 +18,10 @@ Template.viewControl.helpers({
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
     var context = exploreConfig.context;
     return exploreConfig.filterCount[context];
+  },
+  contextString: function(){
+    var context = JSON.parse(Session.get('exploreConfig')).context;
+    return TAPi18n.__('viewControl.'+context);
   }
 });
 

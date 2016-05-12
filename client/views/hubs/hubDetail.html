@@ -1,0 +1,58 @@
+<template name="hubDetail">
+  <div id="container">
+    <div class="content light1">
+      <div class="sub_content">
+        <div id="initiative_ico" style="background-image: url('../layout/hub3.png');"></div>
+        <div class="content_title" id="initiative_title">{{ name }}</div>
+        <div id="initiative_info" class="info">
+          {{> hubTagline }}
+        </div>
+        <p class="text" id="initiative_description">{{ getDescription }}</p>
+      </div>
+    </div>
+    <div class="content light2">
+      <div class="sub_content">
+        <div class="content_title">{{_ "nature" }}
+        </div>
+        <ul class="list">
+          {{#with getNature }}
+            <li style="background-color: rgb(218, 130, 120);" class="box">
+              <div class="box_title">{{ title }}</div>
+              <p>{{ description }}</p>
+            </li>
+          {{/with}}
+        </ul>
+      </div>
+    </div>
+    <div class="content light1">
+      <div class="sub_content">
+        <div class="content_title">{{_ "details.hubs.signals.title" }}
+        </div>
+        <ul class="list">
+          {{#each relatedSignals }}
+            <li class="list_item sig">
+              <img src="../layout/plus_gray.png">
+              <div class="title">{{ name }}
+              </div>
+              <div class="info">
+                {{> signalTagline}}
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="content light2">
+      <div class="sub_content">
+        <div class="content_title">{{_ "details.moreInfo" }}
+        </div>
+        <ul class="list">
+          <li class="link">{{ website }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</template>
