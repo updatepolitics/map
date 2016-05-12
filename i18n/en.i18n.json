@@ -338,6 +338,28 @@
     "needHelp": "Need help?",
     "filters": "Filters"
   },
+  "legend": {
+    "signals": {
+      "themes": "Themes",
+      "citizenParticipation": "Citizenship Participation",
+      "transparency": "Transparency",
+      "socialControl": "Social Control",
+      "govern2": "Govern 2.0",
+      "independentCommunication": "Independent Comunication",
+      "politicalCulture": "Political Culture"
+    },
+    "hubs": {
+      "nature": "Nature",
+      "companies": "Companies",
+      "parties": "Parties",
+      "ongs": "NGOs",
+      "multilateral": "Multilateral Organisms",
+      "informal": "Informal",
+      "constelations": "Constelations",
+      "govern": "Govern",
+      "academia": "Academia"
+    }
+  },
   "reach": "Reach",
   "origin": "Origin",
   "placesOfOrigin": "Origin",
