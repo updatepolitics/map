@@ -1,6 +1,6 @@
 {
   "home": {
-    "quote": "Um mapeamento do ecossistema de práticas políticas emergentes na América Latina que retrata os atores (hubs) e as práticas (sinais) que contribuem para a redução da distância entre a sociedade civil e o poder público.",
+    "quote": "Um mapeamento do ecossistema de práticas políticas emergentes na América Latina que retrata os hubs e sinais que contribuem para a redução da distância entre a sociedade civil e o poder público.",
     "buttons": {
       "intro": "Introdução",
       "explore": "Explorar"
@@ -25,11 +25,11 @@
     },
     "5": {
       "title": "A plataforma",
-      "text": "Para dar luz a esse ecossistema, desenvolveu-se uma classificação própria representada nesta plataforma digital. São 700 iniciativas mapeadas, de 21 países da América Latina. Para ter visão das precisa sobre as práticas, as informações foram separada em duas formas diferentes de visualização. A primeira é por meio dos Hubs - os atores do ecossistema. A segunda é por meio dos sinais - são as práticas e projetos realizados pelos hubs. "
+      "text": "Para dar luz a esse ecossistema, desenvolveu-se uma classificação própria representada nesta plataforma digital. São 700 iniciativas mapeadas, de 21 países da América Latina. Para ter uma visão precisa sobre as práticas, as informações foram separada em duas formas diferentes de visualização. A primeira é por meio dos Hubs - os atores do ecossistema. A segunda é por meio dos sinais - são as práticas e projetos realizados pelos hubs."
     },
     "6": {
       "title": "Hubs e sinais, os atores e as práticas do ecossistema",
-      "text": "Os hubs são organismos - institucionalizados ou não - que desenvolvem ações e funcionam como emissores dos sinais de inovação. Cada hub é capaz de realizar diversos sinais, os quais possuem métodos, abordagens e propósitos distintos. Olhar para os hubs sem especificar suas práticas e táticas de ação resultaria numa visão genérica e não ecossistêmica. Além disso, a observação a partir dos sinais permite compreender quais são as práticas mais utilizadas e de que maneira o ecossistema se desenvolve no sentido de reduzir a distância entre sociedade civil e poder público. "
+      "text": "Os hubs são organismos - institucionalizados ou não - que desenvolvem ações e funcionam como emissores dos sinais de inovação. Cada hub é capaz de realizar diversos sinais, os quais possuem métodos, abordagens e propósitos distintos. Olhar para os hubs sem especificar suas práticas e táticas de ação resultaria numa visão genérica e não ecossistêmica. Além disso, a observação a partir dos sinais permite compreender quais são as práticas mais utilizadas e de que maneira o ecossistema se desenvolve no sentido de reduzir a distância entre sociedade civil e poder público."
     },
     "7": {
       "title": "Explore e conheça o ecossistema",
@@ -81,7 +81,10 @@
   },
   "hubs": {
     "intro": "Os hubs são organismos - institucionalizados ou não - que desenvolvem ações e funcionam como emissores dos sinais de inovação. Considerando que o sinal é o indicador prioritário desse mapeamento, a classificação dos hubs pretende evidenciar os atores que estão criando e executando esses sinais e suas configurações. Para que sejam observados foram classificados a partir de dois critérios: a natureza da sua constituição e se é um financiador ou não.",
-    "natures": "Naturezas"
+    "natures": {
+      "title": "Naturezas",
+      "description": "A natureza de um hub está relacionada à essência de sua constituição e forma de organização. Aponta para a formalidade ou informalidade e tipo de atuação coletiva ou institucional."
+    }
   },
   "mappingPage": {
     "about": {
@@ -94,42 +97,84 @@
 
       <p>Iniciamos o mapeamento em junho de 2015, e chegamos a 700 iniciativas cadastradas em novembro do mesmo ano. Em janeiro de 2016 mais de 150 iniciativas deixaram de existir, o que demonstra a dinâmica altamente volátil desse campo. Ao mesmo tempo, a cada semana identificamos iniciativas recém criadas, que se somam a esta visão de ecossistema. A plataforma de visualização do mapeamento foi lançada em abril de 2016 e continua sendo atualizada diariamente pela equipe do Update.</p>"
     },
-  "methodology": {
-    "title": "Metodologia",
-    "text": "<p>A partir da hipóstese de que um novo ecossistema de participação políitica emerge na América Latina, realizamos ao longo de 10 meses uma pesquisa de caráter exploratório que mapeou indícios e evidências que contribuem para a criação de um Estado mais permeável e de uma cidadania mais ativa, onde as distâncias entre sociedade civil e poder público estão reduzidas. </p>
+    "methodology": {
+      "title": "Metodologia",
+      "text": "<p>A partir da hipóstese de que um novo ecossistema de participação políitica emerge na América Latina, realizamos ao longo de 10 meses uma pesquisa de caráter exploratório que mapeou indícios e evidências que contribuem para a criação de um Estado mais permeável e de uma cidadania mais ativa, onde as distâncias entre sociedade civil e poder público estão reduzidas.</p>
 
 
-    <p>Considerando a complexidade desse contexto, a ausência de bibliografia específica, o desconhecimento sobre a abrangência do campo e a relevância de estabelecer um processo laboratorial e permanente, optou-se pela realização de uma pesquisa de dados secundários, que coletou uma série de informações publicadas, sobretudo na internet, por organizações, grupos, iniciativas e indivíduos que estão experimentando novas formas de participação e incidência no campo politico.</p>
+      <p>Considerando a complexidade desse contexto, a ausência de bibliografia específica, o desconhecimento sobre a abrangência do campo e a relevância de estabelecer um processo laboratorial e permanente, optou-se pela realização de uma pesquisa de dados secundários, que coletou uma série de informações publicadas, sobretudo na internet, por organizações, grupos, iniciativas e indivíduos que estão experimentando novas formas de participação e incidência no campo politico.</p>
 
-    <p>Os critérios iniciais para o mapeamento foram: </p>
+      <p>Os critérios iniciais para o mapeamento foram:</p>
 
-    <ul>
-      <li class=\"list\">Geografia: iniciativas que se originam ou atuam diretamente na América Latina.</li>
-      <li class=\"list\">Temática: iniciativas que atuam em temas relacionados com a redução da distância entre sociedade civil e poder público - participação cidadã; transparência e accountability; controle social; cultura política; mídia independente; e governo 2.0. Estes temas estão explicados na Seção Sinais da plataforma.</li>
-    </ul>
+      <ul>
+        <li class=\"list\">Geografia: iniciativas que se originam ou atuam diretamente na América Latina.</li>
+        <li class=\"list\">Temática: iniciativas que atuam em temas relacionados com a redução da distância entre sociedade civil e poder público - participação cidadã; transparência; controle social; cultura política; mídia independente; e governo 2.0. Estes temas estão explicados na Seção Sinais da plataforma.</li>
+      </ul>
 
-    <p>A base de dados integra também informações coletadas por parceiros, tais como Sonho Brasileiro da Política, Civic Stack e Manifesto do Ecossistema Brasileiro da Participação Social, a partir das quais foram identificados graus variados de afinidade com a proposta deste mapeamento.</p>
+      <p>A base de dados integra também informações coletadas por parceiros, tais como <a href='http://www.sonhobrasileirodapolitica.com.br' target='_blank'>Sonho Brasileiro da Política</a>, <a href='http://www.civicstack.org' target='_blank'>Civic Stack</a> e <a href='http://meps.yolasite.com' target='_blank'>Manifesto do Ecossistema Brasileiro da Participação Social</a>, a partir das quais foram identificados graus variados de afinidade com a proposta deste mapeamento.</p>
 
-    <p>A partir da exploração livre dos dados, verificou-se a necessidade de criação de alguns critérios, como a poderação entre os países [o Brasil representa ⅓ da base de dados por sua dimensão geográfica e 21 países independentes e sob regime democrático foram contemplados] e a padronizacão da taxonomia, de tal forma que se assegurasse a observação precisa e consistente do campo. Utilizou-se ainda, como estratégia complementar, a realização de pequenos grupos de discussão com especialistas.</p>
+      <p>A partir da exploração livre dos dados, verificou-se a necessidade de criação de alguns critérios, como a poderação entre os países [o Brasil representa ⅓ da base de dados por sua dimensão geográfica e 21 países independentes e sob regime democrático foram contemplados] e a padronizacão da taxonomia, de tal forma que se assegurasse a observação precisa e consistente do campo. Utilizou-se ainda, como estratégia complementar, a realização de pequenos grupos de discussão com especialistas.</p>
 
-    <p>Os indícios e evidências identificados ao longo do processo de exploração foram denominados sinais e são os indicadores mais relevantes para esse mapeamento. Esses sinais são emitidos por múltiplos atores, os hubs, que também foram classificados para facilitar o entendimento e facilitar a construção de novas hipóteses.</p>
+      <p>Os indícios e evidências identificados ao longo do processo de exploração foram denominados sinais e são os indicadores mais relevantes para esse mapeamento. Esses sinais são emitidos por múltiplos atores, os hubs, que também foram classificados para facilitar o entendimento e facilitar a construção de novas hipóteses.</p>
 
-    <p>Essa plataforma, inédita e experimental, revela aproximadamente 700 hubs e sinais classificados a partir de critérios como:</p>
+      <p>Essa plataforma, inédita e experimental, revela aproximadamente 700 hubs e sinais classificados a partir de critérios como:</p>
 
-    <ul>
-      <li class=\"list\">Hubs: natureza, país, abrangência [local, nacional, regional e internacional] e se é financiador do ecossistema.</li>
+      <ul>
+        <li class=\"list\">Hubs: natureza, país, abrangência [local, nacional, regional e internacional] e se é financiador do ecossistema.</li>
 
-      <li class=\"list\">Sinais: país, abrangência [local, nacional, regional e internacional], tipo de tecnologia [social ou digital], propósito de impacto [empoderamento ou incidência] temática relacionada e tipo de mecanismo que utiliza [métodos ].
-    </li></ul>
+        <li class=\"list\">Sinais: país, abrangência [local, nacional, regional e internacional], tipo de tecnologia [social ou digital], propósito de impacto [empoderamento ou incidência] temática relacionada e tipo de mecanismo que utiliza [métodos ].
+      </li></ul>
 
 
-    <p>O objetivo, portanto, é olhar de forma ampla para esse ecossistema, identificando atores e práticas e facilitando a visualização da base de dados. Como desdobramentos, o Update prevê a realização de outros estudos para aprofundar as hipósteses formuladas nessa fase.</p>
+      <p>O objetivo, portanto, é olhar de forma ampla para esse ecossistema, identificando atores e práticas e facilitando a visualização da base de dados. Como desdobramentos, o Update prevê a realização de outros estudos para aprofundar as hipósteses formuladas nessa fase.</p>
 
-    <p>Esse mapeamento é uma amostra, de caráter exploratório, das iniciativas da América Latina. Não seria possível mapear todas as iniciativas por conta da natureza altamente dinâmica desse campo, ou seja, a velocidade que emergem, se transformam ou são descontinuadas. Além disso, existe uma forte influência do contexto social, político e econômico de cada país sobre as iniciativas que emergem nesses locais, tornando profundamente complexo o entendimento sobre as iniciativas mapeadas.</p>
+      <p>Esse mapeamento é uma amostra, de caráter exploratório, das iniciativas da América Latina. Não seria possível mapear todas as iniciativas por conta da natureza altamente dinâmica desse campo, ou seja, a velocidade que emergem, se transformam ou são descontinuadas. Além disso, existe uma forte influência do contexto social, político e econômico de cada país sobre as iniciativas que emergem nesses locais, tornando profundamente complexo o entendimento sobre as iniciativas mapeadas.</p>
 
-    <p>As informações apresentadas nos descritivos das iniciativas são originais da fonte, extraídas de sites, midias sociais e apresentações institucionais.</p>
+      <p>As informações apresentadas nos descritivos das iniciativas são originais da fonte, extraídas de sites, midias sociais e apresentações institucionais.</p>
 
-    "
+      "
+    },
+    "reach": {
+      "title": "Abrangência",
+      "text": "
+        <p>Os países independentes e democráticos na América Latina são compostos por 21 nacionalidades, sendo elas: Argentina, Bolívia, Brasil, Chile, Colômbia, Costa Rica, Cuba, Equador, El Salvador, Guatemala, Guiana Francesa, Haiti, Honduras, México, Panamá, Paraguay, Peru, República Dominicana, Suriname, Uruguai e Venezuela. Como o mapeamento se vale da pesquisa de dados secundários, há países que nesse primeiro esforço não foram contemplados por não possuírem sinais de fácil identificação na internet.</p>
+
+        <p>Ao classificar os hubs e sinais a partir de abrangência de sua atuação, compreendemos se foco prioritário do ecossistema está relacionado às esferas local, nacional, regional ou internacional. Sendo local quando a atuação se dá numa cidade, nacional quando atua em mais de duas cidades, regional se atua em mais de uma país da região e internacional se atua na América Latina e em alguma outra região do mundo.</p>
+      "
+    },
+    "team": {
+      "title": "Equipe",
+      "text": "
+        <p><b>Equipe Update</b>: Beatriz Pedreira, Caio Tendolini, Rafael Poço e Tulio Malaspina.</p>
+
+        <p><b>Carlota Mingolla</b> é pesquisadora, consultora, empreendedora e devota de São Jorge. Desde 2012 desenvolve estudos sobre comportamentos emergentes e projetos de inovação para empresas e organizações da sociedade civil.</p>
+
+        <p><b>Carolina Ayres</b> é mestre em História Social. Seu propósito é contribuir para que todas as pessoas vivam seu potencial. Fundadora da Humana, uma empresa que atua na área de desenvolvimento sustentável e processos de governança.</p>
+
+        <p><b>Isabela Lazdans</b> é relações públicas de formação e pesquisadora por vocação. Já trabalhou na área de comunicação e marketing, e tem nove anos de experiência em pesquisa. Curiosa, se interessa por qualquer tema que ainda não conheça. É fundadora da Inforama e realiza estudos sobre os mais diversos temas.</p>
+      "
+    },
+    "digitalPlatform": {
+      "title": "Plataforma digital",
+      "text": "
+
+        <p>A visualização e design do site foram concebidos por <a href='http://www.thomazrezende.com' target='_blank'>Thomaz Rezende</a> e a plataforma foi desenvolvida por <a href='http://github.com/vgeorge' target='_blank'><b>Vitor George</b>.</a></p>
+
+      "
+    },
+    "partners": {
+      "title": "Parceiros",
+      "text": "
+
+        <p>Além de recursos financeiros, o mapeamento do Update contou com a colaboração de parceiros que disponibilizaram bases de dados de pesquisa anteriores.</p>
+
+        <ul>
+          <li>Instituto Cidade Democrática</li>
+          <li>Democracia en Red</li>
+          <li>Sonho Brasileiro da Política</li>
+        </ul>
+
+      "
     }
   },
   "aboutPage": {
@@ -279,7 +324,7 @@
 
     <p class=\"text\">A separação do ecossistema nessas duas categorias [sinais e hubs] permite a análise mais precisa das ferramentas, táticas e estrátégias desse campo.</p>
 
-    <p class=\"text\">Para que os sinais sejam observados de maneira mais aprofundada, foram classificados a partir de alguns critérios: Tema, Mecanismo que utiliza [métodos e ferramentas], Tipo, Propósito [empoderamento ou incidência] e Tecnologia [ social ou digital].</p>
+    <p class=\"text\">Para que os sinais sejam observados de maneira mais aprofundada, foram classificados a partir de alguns critérios: Tema, Mecanismo que utiliza [métodos e ferramentas], Propósito [empoderamento ou incidência] e Tecnologia [social ou digital].</p>
     ",
     "types": {
       "title": "Tipo",
@@ -298,7 +343,7 @@
       "title": "Mecanismos",
       "intro": "<p class=\"text\">As práticas políticas atuais se mostram insuficientes para atender os anseios e demandas da sociedade atual. Portanto, compreender as ferramentas e estratégias do ecossistema possibilita entender a emergência de novas práticas e os possíveis caminhos para atualizar o sistema democrático na América Latina. Os mecanismos são conjuntos de métodos utilizados pelos sinais que evidenciam as táticas empregadas para impactar a realidade.</p>
 
-      <p class=\"text\">Para chegar à definição dos mecanismos, os métodos foram agrupados por afinidade a partir de suas caracteristicas em comum. Como recorte, determinou-se que cada sinal teria no minimo um mecanismo e no máximo três. Essa orientação tem como objetivo dar luz às estratégias centrais dos sinais, possibilitando uma compreensão mais precisa sobre o ecossistema.</p>
+      <p class=\"text\">Para chegar na definição dos mecanismos, os métodos foram agrupados por afinidade a partir de suas características em comum. Como recorte, determinou-se que cada sinal teria no mínimo um mecanismo e no máximo três. Essa orientação tem como objetivo dar luz às estratégias centrais dos sinais, possibilitando uma compreensão mais precisa sobre o ecossistema.</p>
 "
     },
     "purpose": {
@@ -311,7 +356,7 @@
               </p>",
      "empowerment": {
        "title": "Empoderamento",
-       "description": "São sinais cujo objeto é o cidadão. Promovem condições para que o cidadão desenvolva a cidadania e conheça, compreenda, analise e/ou questione o exercício do poder. O conhecimento sobre o papel social do cidadão - responsabilidades e direitos -  possibilita a emancipação individual e maior consciência coletiva. "
+       "description": "São sinais cujo objeto é o cidadão. Promovem condições para que o cidadão desenvolva a cidadania e conheça, compreenda, analise e/ou questione o exercício do poder. O conhecimento sobre o papel social do cidadão - responsabilidades e direitos -  possibilita a emacipação individual e maior consciência coletiva."
      },
      "incidency": {
        "title": "Incidência",
