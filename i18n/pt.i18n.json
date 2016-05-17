@@ -360,6 +360,10 @@
       "academia": "Academia"
     }
   },
+  "filterPanel": {
+    "removeFilters": "REMOVER FILTROS",
+    "noFilter": "NENHUM FILTRO ATIVO"
+  },
   "reach": "Alcance",
   "origin": "Origem",
   "placesOfOrigin": "Origem",

@@ -2,9 +2,9 @@
   <div id="filters">
   	<div id="filters_header">
       {{#if filterCount }}
-        <div id="trash">REMOVER FILTROS</div>
+        <div id="trash">{{_ "filterPanel.removeFilters"}} </div>
       {{else}}
-        <div id="trash" class="empty">NENHUM FILTRO ATIVADO</div>
+        <div id="trash" class="empty">{{_ "filterPanel.noFilter" }} </div>
       {{/if}}
       <div id="filters_x"></div>
   	</div>
@@ -18,11 +18,11 @@
           {{#each filterGroupOptions this }}
             {{#if selected}}
               <li class="filter selected" style="opacity: 1;">
-                {{ pt }}
+                {{ name }}
               </li>
             {{else}}
               <li class="filter" style="opacity: .3;">
-                {{ pt }}
+                {{ name }}
               </li>
             {{/if}}
           {{/each}}

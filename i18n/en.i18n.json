@@ -360,6 +360,10 @@
       "academia": "Academia"
     }
   },
+  "filterPanel": {
+    "removeFilters": "REMOVE FILTERS",
+    "noFilter": "NO ACTIVE FILTER"
+  },
   "reach": "Reach",
   "origin": "Origin",
   "placesOfOrigin": "Origin",

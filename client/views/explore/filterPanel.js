@@ -47,6 +47,7 @@ Template.filterPanel.helpers({
     return _.where(filters[id], {selected: true}).length;
   },
   filterGroupOptions: function(filterGroup) {
+    var language = TAPi18n.getLanguage();
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
     var filters = exploreConfig.filters.general;
     if (exploreConfig.context == 'signals')
@@ -56,6 +57,7 @@ Template.filterPanel.helpers({
 
     return _.map(_.keys(filters[filterGroup]), function(i){
       var option = filters[filterGroup][i];
+      option.name = option[language];
       option.filterGroup = filterGroup;
       return option;
     });

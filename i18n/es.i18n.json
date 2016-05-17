@@ -263,6 +263,10 @@
       "academia": "Academia"
     }
   },
+  "filterPanel": {
+    "removeFilters": "REMOVER FILTROS",
+    "noFilter": "NINGÚN FILTRO ACTIVADO"
+  },
   "reach": "Alcance",
   "origin": "Origen",
   "placesOfOrigin": "Origen",
