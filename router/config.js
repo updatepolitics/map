@@ -3,7 +3,8 @@
  */
 
 Router.configure({
-  layoutTemplate: 'appLayout'
+  layoutTemplate: 'appLayout',
+  trackPageView: true
 });
 
 /*
