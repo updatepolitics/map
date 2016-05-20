@@ -1,6 +1,5 @@
 Template.viewControl.onCreated(function(){
   Session.setDefault("showFilterPanel", false);
-  Session.setDefault("currentContext", 'signals');
   Session.setDefault("filterCount", {
     hubs: 0,
     signals: 0
@@ -9,10 +8,12 @@ Template.viewControl.onCreated(function(){
 
 Template.viewControl.helpers({
   signalControlOn: function() {
-    if (Session.get('currentContext') == 'signals') return 'on';
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    if (exploreConfig.context == 'signals') return 'on';
   },
   hubControlOn: function() {
-    if (Session.get('currentContext') == 'hubs') return 'on';
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    if (exploreConfig.context == 'hubs') return 'on';
   },
   filterCount: function () {
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
@@ -34,6 +35,11 @@ Template.viewControl.events({
   "click #control_hub": function(event, template){
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
     exploreConfig.context = 'hubs';
+    Session.set('exploreConfig', JSON.stringify(exploreConfig));
+  },
+  "click #mode": function(){
+    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
+    exploreConfig.chartView = !exploreConfig.chartView;
     Session.set('exploreConfig', JSON.stringify(exploreConfig));
   },
   "click #control_filters": function(event, template){
