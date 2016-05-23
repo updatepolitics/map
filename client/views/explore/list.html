@@ -12,16 +12,16 @@
         <div class="info">
           <span class="bold">{{_ "origin" }}</span> {{ originsLabel }}
           | <span class="bold">{{_ "reach" }}</span> {{ incidencyReachLabel }}
-          {{#if isSignalContext }}
+          {{#if purpose }}
             | <span class="bold">{{_ "purpose" }}</span> {{ purposeLabel }}
             | <span class="bold">{{_ "type" }}</span> {{ technologyType }}
           {{else}}
-              | <span class="bold">{{_ "financer" }}</span>
-              {{# if isSponsor }}
-                {{_ "yes" }}
-              {{else}}
-                {{_ "no" }}
-              {{/if }}
+            | <span class="bold">{{_ "financer" }}</span>
+            {{# if isSponsor }}
+              {{_ "yes" }}
+            {{else}}
+              {{_ "no" }}
+            {{/if }}
           {{/if}}
         </div>
       </li>

@@ -29,10 +29,6 @@ Template.list.helpers({
     var language = TAPi18n.getLanguage();
     return this.labels.incidencyReach[language];
   },
-  isSignalContext: function(){
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    return (exploreConfig.context == 'signals');
-  },
   listItems: function(){
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
     return exploreConfig[exploreConfig.context];
