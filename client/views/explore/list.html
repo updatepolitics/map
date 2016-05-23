@@ -10,17 +10,18 @@
       <li class="list_item sig"><img src="layout/plus_gray.png">
         <div class="title">{{ name }}</div>
         <div class="info">
-          <span class="bold">origem</span> {{ originNames }}
-          | <span class="bold">abrangência</span> {{ incidencyReachLabel }}
+          <span class="bold">{{_ "origin" }}</span> {{ originsLabel }}
+          | <span class="bold">{{_ "reach" }}</span> {{ incidencyReachLabel }}
           {{#if isSignalContext }}
-            | <span class="bold">propósito</span> {{ purposeLabel }}
-            {{#if incidencyTypes.length }}
-              | <span class="bold">tipo</span> {{ incidencyTypesLabel }}
-            {{/if}}
+            | <span class="bold">{{_ "purpose" }}</span> {{ purposeLabel }}
+            | <span class="bold">{{_ "type" }}</span> {{ technologyType }}
           {{else}}
-            {{# if isSponsor }}
-              | <span class="bold">apoiador</span>
-            {{/if }}
+              | <span class="bold">{{_ "financer" }}</span>
+              {{# if isSponsor }}
+                {{_ "yes" }}
+              {{else}}
+                {{_ "no" }}
+              {{/if }}
           {{/if}}
         </div>
       </li>
