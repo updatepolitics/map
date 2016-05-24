@@ -278,10 +278,10 @@ input:focus:-ms-input-placeholder {  opacity: 0}
 
 
 #home_newsletter{
-  width: 350px;
+  width: 505px;
   height: 45px;
   position: absolute;
-  bottom: 5%;
+  top: 85.7%;
   left: 0;
   right: 0;
   margin: auto;
@@ -293,7 +293,7 @@ input:focus:-ms-input-placeholder {  opacity: 0}
   width: 450px;
   height: 45px;
   position: absolute;
-  bottom: 40px;
+  bottom: 100px;
   left: 0;
   right: 0;
   margin: auto;

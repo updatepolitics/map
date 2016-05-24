@@ -381,5 +381,16 @@
   "financer": "Financer",
   "yes": "Yes",
   "no": "No",
-  "search": "Search"
+  "search": "Search",
+  "pleaseWait": "Please wait...",
+  "mailing": {
+    "signUp": "Sign up for our email newsletter",
+    "error": {
+      "InvalidEmail": "Invalid email address.",
+      "AlreadySubscribed": "Email already subscribed."
+    },
+    "success": {
+      "Subscribed": "Email address subscribed successfuly."
+    }
+  }
 }

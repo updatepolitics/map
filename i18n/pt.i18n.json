@@ -426,5 +426,16 @@
   "financer": "Financiador",
   "yes": "Sim",
   "no": "Não",
-  "search": "Busca"
+  "search": "Busca",
+  "pleaseWait": "Por favor, aguarde...",
+  "mailing": {
+    "signUp": "Cadastre seu e-mail na nossa newsletter",
+    "error": {
+      "InvalidEmail": "Endereço de email inválido.",
+      "AlreadySubscribed": "Endereço de email já cadastrado."
+    },
+    "success": {
+      "Subscribed": "Endereço de email cadastrado com sucesso."
+    }
+  }
 }

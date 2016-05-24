@@ -284,5 +284,16 @@
   "financer": "Financiador",
   "yes": "Si",
   "no": "No",
-  "search": "Búsqueda"
+  "search": "Búsqueda",
+  "pleaseWait": "Un momento, por favor...",
+  "mailing": {
+    "signUp": "Cadastre su dirección de correo en nuestra newsletter",
+    "error": {
+      "InvalidEmail": "La dirección de correo és inválida.",
+      "AlreadySubscribed": "La dirección de correo ya existe."
+    },
+    "success": {
+      "Subscribed": "La dirección de correo fue cadastrada con suceso."
+    }
+  }
 }
