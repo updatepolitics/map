@@ -144,7 +144,7 @@ Template.explore.onCreated(function() {
   exploreConfig.filters = filters;
 
   /*
-   * Set labels
+   * Set labels for current language
    */
 
   exploreConfig.signals = exploreConfig.signals.map(function(signal){
@@ -170,6 +170,9 @@ Template.explore.onCreated(function() {
       signal.labels.placesOfOrigin.es = originsEs.join(', ');
       signal.labels.placesOfOrigin.pt = originsPt.join(', ');
     }
+
+    signal.visible = true;
+
     return signal;
   });
 
@@ -195,6 +198,9 @@ Template.explore.onCreated(function() {
       hub.labels.placesOfOrigin.es = originsEs.join(', ');
       hub.labels.placesOfOrigin.pt = originsPt.join(', ');
     }
+
+    hub.visible = true;
+
     return hub;
   });
 
