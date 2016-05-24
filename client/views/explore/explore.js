@@ -151,6 +151,7 @@ Template.explore.onCreated(function() {
     signal.labels = {};
     signal.labels.purpose = exploreConfig.filters.signals.purpose[signal.purpose];
     signal.labels.incidencyReach = exploreConfig.filters.general.incidencyReach[signal.incidencyReach];
+    signal.labels.technologyType = exploreConfig.filters.signals.technologyType[signal.technologyType];
     signal.labels.placesOfOrigin = {
       en: '',
       es: '',

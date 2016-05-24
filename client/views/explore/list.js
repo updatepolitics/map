@@ -53,6 +53,10 @@ Template.list.helpers({
     var language = TAPi18n.getLanguage();
     return this.labels.incidencyReach[language];
   },
+  technologyTypeLabel: function(){
+    var language = TAPi18n.getLanguage();
+    return this.labels.technologyType[language];
+  },
   listItems: function(){
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
     return exploreConfig[exploreConfig.context];
