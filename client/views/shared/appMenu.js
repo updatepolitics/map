@@ -9,8 +9,33 @@ Template.appMenu.events({
     if (this.route)
       Router.go(this.route);
   },
+  "mouseover .bt": function(event, template){
+    var message;
+    switch (event.currentTarget.id) {
+      case "email":
+        message = "Email (comunicacao@updatepolitics.cc)";
+        break;
+      case "medium":
+        message = "Medium (https://medium.com/update-politics)";
+        break;
+      case "twitter":
+        message = "Twitter (https://twitter.com/update_politics)";
+        break;
+      case "github":
+        message = "Github (https://github.com/updatepolitics";
+        break;
+    }
+
+    $("#contact_name").html(message);
+  },
+  "mouseout .bt": function(event, template){
+    $("#contact_name").html("");
+  },
   "click .sub_bt": function(event, template){
     Router.go(this.route, {}, {hash: this.anchor});
+  },
+  "click #email": function(event) {
+    window.open('mailto:comunicacao@updatepolitics.cc');
   },
   "click #medium": function(event) {
     window.open('https://medium.com/update-politics', '_blank');
