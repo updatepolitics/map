@@ -11,20 +11,9 @@ Template.list.onRendered(function(){
   Template.instance().$('#list').css({ marginTop:bar_h+40, marginBottom:bar_h});
 
   $('#search_str').on('input', _.debounce(function(){
+    var searchStr = $("#search_str").val();
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var searchStr = $("#search_str").val().toUpperCase();
-
-    exploreConfig.signals = _.map(exploreConfig.signals, function(i){
-      if (i.name.toUpperCase().indexOf(searchStr) > -1) i.visible = true;
-      else i.visible = false;
-      return i;
-    });
-
-    exploreConfig.hubs = _.map(exploreConfig.hubs, function(i){
-      if (i.name.toUpperCase().indexOf(searchStr) > -1) i.visible = true;
-      else i.visible = false;
-      return i;
-    });
+    exploreConfig.searchStr = searchStr;
 
     if (searchStr == "") $("#search_x").hide();
     else $("#search_x").show();
@@ -59,6 +48,16 @@ Template.list.helpers({
   },
   listItems: function(){
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    return exploreConfig[exploreConfig.context];
+    var items = exploreConfig[exploreConfig.context];
+    var searchStr = exploreConfig.searchStr;
+
+    // filter matching items
+    if (searchStr) {
+      searchStr = searchStr.toUpperCase();
+      return _.map(items, function(i){
+        if (i.visible && !(i.name.toUpperCase().indexOf(searchStr) > -1)) i.visible = false;
+        return i;
+      });
+    } else return items;
   }
 });

@@ -54,6 +54,7 @@ Template.explore.onCreated(function() {
 
   var signals = [];
   Signals.find({}, {
+    sort: { name: 1},
     fields: {
       name: 1,
       placesOfOrigin: 1,
@@ -71,6 +72,7 @@ Template.explore.onCreated(function() {
 
   var hubs = [];
   Hubs.find({}, {
+    sort: { name: 1},
     fields: {
       name: 1,
       placesOfOrigin: 1,

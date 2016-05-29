@@ -85,6 +85,7 @@ Template.filterPanel.events({
     event.preventDefault();
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
     var context = exploreConfig.context;
+    var query = exploreConfig.query || {};
 
     var self = this;
 
@@ -93,21 +94,83 @@ Template.filterPanel.events({
     if (self.selected) {
       self.selected = false;
       target.removeClass('selected').css({opacity: 0.3 });
+
+      query[self.filterGroup] = _.without(query[self.filterGroup], self._id);
+      if (query[self.filterGroup].length == 0) delete query[self.filterGroup];
     } else {
       self.selected = true;
       target.addClass('selected').css({opacity: 1 });
+      if (!query[self.filterGroup]) query[self.filterGroup] = [];
+      query[self.filterGroup].push(self._id);
     }
 
-    // check if filter is context specific
+    // filter is context specific
     if (exploreConfig.filters[context][self.filterGroup]) {
       exploreConfig.filters[context][self.filterGroup][self._id].selected = self.selected;
       exploreConfig.filterCount[context] += self.selected ? 1 : -1;
+      var filtercount = exploreConfig.filterCount[context];
+
+    // filter is for general context
     } else {
       exploreConfig.filters['general'][self.filterGroup][self._id].selected = self.selected;
       exploreConfig.filterCount['hubs'] += self.selected ? 1 : -1;
       exploreConfig.filterCount['signals'] += self.selected ? 1 : -1;
     }
 
+    // Build signal query
+
+    if (exploreConfig.filterCount['signals'] > 0) {
+      var signalQuery = {};
+      if (query.placesOfOrigin) signalQuery.placesOfOrigin = {$in: query.placesOfOrigin};
+      if (query.incidencyReach) signalQuery.incidencyReach = {$in: query.incidencyReach};
+      if (query.mainThemes) signalQuery.mainThemes = {$in: query.mainThemes};
+      if (query.purpose) signalQuery.purpose = {$in: query.purpose};
+      if (query.technologyType) signalQuery.technologyType = {$in: query.technologyType};
+      if (query.mechanisms) {
+        signalQuery.methods = {
+          $in: Methods
+                .find({mechanism: {$in: query['mechanisms']}}, {fields: {_id: true}})
+                .map(function(i) {return i._id} )
+        }
+      }
+      var signalIds = Signals
+        .find(signalQuery, {fields: {_id: true}})
+        .map(function(i) {return i._id} );
+
+      exploreConfig.signals = _.map(exploreConfig.signals, function(i){
+        i.visible = _.contains(signalIds, i._id);
+        return i;
+      })
+    } else {
+      exploreConfig.signals = _.map(exploreConfig.signals, function(i){
+        i.visible = true;
+        return i;
+      })
+    }
+
+    if (exploreConfig.filterCount['hubs'] > 0) {
+      var hubQuery = {};
+      if (query.placesOfOrigin) hubQuery.placesOfOrigin = {$in: query.placesOfOrigin};
+      if (query.incidencyReach) hubQuery.incidencyReach = {$in: query.incidencyReach};
+      if (query.nature) hubQuery.nature = {$in: query.nature};
+      if (query.isSponsor) hubQuery.isSponsor = {$in: query.isSponsor};
+
+      var hubIds = Hubs
+        .find(hubQuery, {fields: {_id: true}})
+        .map(function(i) {return i._id} );
+
+      exploreConfig.hubs = _.map(exploreConfig.hubs, function(i){
+        i.visible = _.contains(hubIds, i._id);
+        return i;
+      })
+    } else {
+      exploreConfig.hubs = _.map(exploreConfig.hubs, function(i){
+        i.visible = true;
+        return i;
+      })
+    }
+
+    exploreConfig.query = query;
     Session.set('exploreConfig', JSON.stringify(exploreConfig));
   },
   "click #filters_x": function(event, template) {
