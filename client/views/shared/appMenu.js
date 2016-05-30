@@ -87,6 +87,8 @@ Template.appMenu.helpers({
         "purpose"
       ]
     }, {
+      route: 'register'
+    }, {
       route: 'about',
       anchors: [
         "intro",

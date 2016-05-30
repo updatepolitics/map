@@ -1,0 +1,24 @@
+<template name="register">
+  <div id="container">
+    <div id="intro" class="content light1">
+			<div class="sub_content">
+				<div class="content_title">{{_ 'register.title' }}</div>
+				<p class="text">{{_ 'register.intro' }}</p>
+			</div>
+		</div>
+
+    <div id="download" class="content light2">
+			<div class="sub_content">
+				<form id="register_form">
+					<input id="name" placeholder="{{_ 'name' }}" name="name" type="text">
+					<input id="email" placeholder="{{_ 'email'}}" name="email" type="text">
+					<input id="city" placeholder="{{_ 'city' }}" name="city" type="text">
+					<input id="country" placeholder="{{_ 'country' }}" name="country" type="text">
+					<input id="website" placeholder="{{_ 'website' }}" name="website" type="text" class="url">
+					<textarea id="description" placeholder="{{_ 'register.description' }}"></textarea>
+					<div id="send_register">{{_ 'send' }}</div>
+				</form>
+			</div>
+		</div>
+  </div>
+</template>

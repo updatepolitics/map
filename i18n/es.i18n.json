@@ -43,7 +43,8 @@
       "mapping": "Mapeamento",
       "about": "Sobre",
       "hubs": "Hubs",
-      "signals": "Señales"
+      "signals": "Señales",
+      "register": "Registre su iniciativa"
     },
     "sub_items": {
       "mapping": {
@@ -295,5 +296,22 @@
     "success": {
       "Subscribed": "La dirección de correo fue cadastrada con suceso."
     }
-  }
+  },
+  "register": {
+    "title": "Registre una iniciativa",
+    "intro": "Envie informaciones sobre su iniciativa en el formulário abajo.",
+    "description": "Describa su iniciativa",
+    "sending": "Enviando...",
+    "emailMissing": "Por favor, informe su correo electrónico",
+    "emailInvalid": "Por favor, informe un correo electrónico válido",
+    "descriptionMissing": "Por favor, describa su iniciativa",
+    "success": "Iniciativa registrada con suceso",
+    "error": "Error al enviar iniciativa"
+  },
+  "name": "Nombre",
+  "email": "Email",
+  "city": "Ciudad",
+  "country": "País",
+  "website": "Website",
+  "send": "Enviar"
 }

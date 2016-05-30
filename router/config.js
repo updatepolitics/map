@@ -20,6 +20,7 @@ Router.route("/", {name: "home"});
 Router.route("/about", {name: "about"});
 Router.route("/mapping", { name: "mapping" });
 Router.route("/countries", {name: "countries"});
+Router.route("/register", {name: "register"});
 
 /*
  * Hubs routes
@@ -141,7 +142,19 @@ Router.route("/list", {
  */
 
 Router.plugin('ensureSignedIn', {
-  except: ['home', 'admin', 'about', 'mapping', 'hubs', 'hub', 'signals', 'signal', 'explore', 'list']
+  except: [
+    'home',
+    'admin',
+    'about',
+    'register',
+    'mapping',
+    'hubs',
+    'hub',
+    'signals',
+    'signal',
+    'explore',
+    'list'
+  ]
 });
 
 AccountsTemplates.configure({

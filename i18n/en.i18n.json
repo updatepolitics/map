@@ -43,7 +43,8 @@
       "mapping": "Mapping",
       "about": "About",
       "hubs": "Hubs",
-      "signals": "Signals"
+      "signals": "Signals",
+      "register": "Send your initiative"
     },
     "sub_items": {
       "mapping": {
@@ -392,5 +393,22 @@
     "success": {
       "Subscribed": "Email address subscribed successfuly."
     }
-  }
+  },
+  "register": {
+    "title": "Register an initiative",
+    "intro": "Tell us about your initiative at the form bellow.",
+    "description": "Describe your initiative",
+    "sending": "Sending...",
+    "emailMissing": "Please, inform your email",
+    "emailInvalid": "Please, inform an valid email",
+    "descriptionMissing": "Please, describe your initiative",
+    "success": "Initiative registered successfuly",
+    "error": "Error while sending initiative"
+  },
+  "name": "Name",
+  "email": "Email",
+  "city": "City",
+  "country": "Country",
+  "website": "Website",
+  "send": "Send"
 }

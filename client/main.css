@@ -889,6 +889,7 @@ footer{
   background-repeat: no-repeat;
   margin-top: 10px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 #send_register:hover{

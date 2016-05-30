@@ -40,6 +40,7 @@ fastclick@1.0.9
 flemay:less-autoprefixer@1.2.0
 gadicohen:headers@0.0.31
 geojson-utils@1.0.6
+gfk:mailgun-api@1.1.0
 hot-code-push@1.0.2
 html-tools@1.0.7
 htmljs@1.0.7
