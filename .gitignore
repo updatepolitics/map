@@ -20,3 +20,5 @@ node_modules
 npm-debug.log
 client-src/js/service.js
 *#
+settings.json
+pm2-update.json
