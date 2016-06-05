@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "csv": "^0.4.6",
+    "csv-stringify": "^1.0.4",
     "graceful-fs": "^4.1.3"
   }
 }

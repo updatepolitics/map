@@ -43,8 +43,8 @@ Template.register.events({
     var mailBody =
       'Nome: ' + name + '\n' +
       'Email: ' + email + '\n' +
-      'Cidade:' + city + '\n' +
-      'País:' + country + '\n' +
+      'Cidade: ' + city + '\n' +
+      'País: ' + country + '\n' +
       'Descrição: \n\n' + description;
 
     if (validForm) {

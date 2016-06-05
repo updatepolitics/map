@@ -21,6 +21,7 @@ Router.route("/about", {name: "about"});
 Router.route("/mapping", { name: "mapping" });
 Router.route("/countries", {name: "countries"});
 Router.route("/register", {name: "register"});
+Router.route("/download", {name: "download"});
 
 /*
  * Hubs routes
@@ -147,6 +148,7 @@ Router.plugin('ensureSignedIn', {
     'admin',
     'about',
     'register',
+    'download',
     'mapping',
     'hubs',
     'hub',
