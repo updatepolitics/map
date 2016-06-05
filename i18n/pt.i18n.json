@@ -44,6 +44,7 @@
       "about": "Sobre",
       "hubs": "Hubs",
       "signals": "Sinais",
+      "download": "Download",
       "register": "Registre sua iniciativa"
     },
     "sub_items": {
@@ -455,5 +456,14 @@
   "city": "Cidade",
   "country": "País",
   "website": "Website",
-  "send": "Enviar"
+  "send": "Enviar",
+  "downloadPage": {
+    "title": "Baixe os dados",
+    "intro": "O banco de dados completo deste mapeamento está disponível para download sob a licença Creative Commons Attribution 4.0 International (CC BY 4.0). Esta licença permite a qualquer pessoa distribuir, remixar, adaptar e criar a partir do nosso trabalho, mesmo para fins comerciais, desde que seja dado o crédito à criação original.",
+    "fullDatabase": "BANCO DE DADOS COMPLETO",
+    "csvFormatCompacted": "Formato CSV (Compactado)",
+    "csvFormat": "Formato CSV",
+    "hubs": "HUBS",
+    "signals": "SINAIS"
+  }
 }

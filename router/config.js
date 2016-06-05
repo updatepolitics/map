@@ -159,6 +159,10 @@ Router.plugin('ensureSignedIn', {
   ]
 });
 
+/*
+* Auth layout
+*/
+
 AccountsTemplates.configure({
   defaultLayout: 'authLayout',
   onLogoutHook: function() {
@@ -170,3 +174,69 @@ AccountsTemplates.configureRoute('signIn', {
   path: '/admin',
   redirect: '/admin/hubs'
 });
+
+/*
+* Download data
+*/
+
+Router.route('/download/update.zip', function () {
+  var self = this;
+
+  Meteor.call('updateDataZip', function(err, csvFiles) {
+    if (err) return console.log(err);
+
+    // Create zip
+    var zip = new JSZip();
+
+    // Add a file to the zip
+    _.each(csvFiles, function(file){
+      zip.file(file.filename, file.content);
+    });
+
+    // Generate zip stream
+    var output = zip.generate({
+      type:        "nodebuffer",
+      compression: "DEFLATE"
+    });
+
+    // Set headers
+    self.response.setHeader("Content-Type", "application/octet-stream");
+    self.response.setHeader("Content-disposition", "attachment; filename=update.zip");
+    self.response.writeHead(200);
+
+    // Send content
+    self.response.end(output);
+  });
+}, {where: 'server'});
+
+Router.route('/download/hubs.csv', function () {
+  var self = this;
+
+  Meteor.call('hubsCsv', function(err, csv) {
+    if (err) return console.log(err);
+
+    // Set headers
+    self.response.setHeader("Content-Type", "text/plain;charset=utf-8");
+    self.response.setHeader("Content-disposition", "attachment; filename=hubs.csv");
+    self.response.writeHead(200);
+
+    // Send content
+    self.response.end(csv);
+  });
+}, {where: 'server'});
+
+Router.route('/download/signals.csv', function () {
+  var self = this;
+
+  Meteor.call('signalsCsv', function(err, csv) {
+    if (err) return console.log(err);
+
+    // Set headers
+    self.response.setHeader("Content-Type", "text/plain;charset=utf-8");
+    self.response.setHeader("Content-disposition", "attachment; filename=signals.csv");
+    self.response.writeHead(200);
+
+    // Send content
+    self.response.end(csv);
+  });
+}, {where: 'server'});

@@ -2352,6 +2352,8 @@ a:visited#popup_bt { color:#fff }
 }
 
 .download_bt{
+  display: inline-block;
+  text-decoration: none;
   width: 100%;
   background: #f00;
   padding: 25px 30px;
@@ -2367,6 +2369,7 @@ a:visited#popup_bt { color:#fff }
 }
 
 .download_bt:hover{
+  text-decoration: none;  
   background-color:#262c38;
 }
 

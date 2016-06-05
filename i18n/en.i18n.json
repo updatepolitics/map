@@ -44,6 +44,7 @@
       "about": "About",
       "hubs": "Hubs",
       "signals": "Signals",
+      "download": "Download",
       "register": "Send your initiative"
     },
     "sub_items": {
@@ -402,5 +403,14 @@
   "city": "City",
   "country": "Country",
   "website": "Website",
-  "send": "Send"
+  "send": "Send",
+  "downloadPage": {
+    "title": "DOWNLOAD THE DATA",
+    "intro": "The full database of this mapping is available for download under the Creative Commons Attribution 4.0 International (CC BY 4.0). This license allows anyone to distribute, remix, adapt and create from our work, even for commercial purposes, provided they give us credit for the original creation.",
+    "fullDatabase": "FULL DATABASE",
+    "csvFormatCompacted": "CSV Format (Compacted)",
+    "csvFormat": "CSV Format",
+    "hubs": "HUBS",
+    "signals": "SIGNALS"
+  }
 }
