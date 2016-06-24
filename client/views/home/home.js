@@ -171,7 +171,7 @@ Template.home.helpers({
 
 Template.home.events({
   "click #explore": function(event, template){
-     Router.go('explore');
+     Router.go('map');
   },
   "click #about": function(event, template){
     $(curtain).fadeIn(duration);

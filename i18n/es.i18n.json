@@ -39,7 +39,8 @@
   "menu": {
     "items": {
       "home": "Inicio",
-      "explore": "Explorar Mapa",
+      "map": "Explorar Mapa",
+      "list": "Explorar Lista",
       "mapping": "Mapeamento",
       "about": "Sobre",
       "hubs": "Hubs",

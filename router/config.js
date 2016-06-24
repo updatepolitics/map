@@ -96,7 +96,7 @@ Router.route('/signal/:_id', {
  * Explore route
  */
 
-Router.route("/explore", {
+Router.route("/explore/map", {
   loadingTemplate: 'loading',
   waitOn: function() {
     return [
@@ -113,14 +113,14 @@ Router.route("/explore", {
       Meteor.subscribe('purposes')
     ];
   },
-  name: "explore"
+  name: "map"
 });
 
 /*
  * List route
  */
 
-Router.route("/list", {
+Router.route("/explore/list", {
   waitOn: function() {
     return [
       Meteor.subscribe('themes'),
@@ -154,7 +154,7 @@ Router.plugin('ensureSignedIn', {
     'hub',
     'signals',
     'signal',
-    'explore',
+    'map',
     'list'
   ]
 });

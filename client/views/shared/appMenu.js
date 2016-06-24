@@ -64,7 +64,9 @@ Template.appMenu.helpers({
     return [{
       route: 'home'
     }, {
-      route: 'explore'
+      route: 'map'
+    }, {
+      route: 'list'
     }, {
       route: 'mapping',
       anchors: [
