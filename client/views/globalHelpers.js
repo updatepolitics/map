@@ -81,6 +81,14 @@ Template.registerHelper("mechanismOptions", function(argument){
  * MAP & LIST helpers
  */
 
+Template.registerHelper("isSignalContext", function(argument){
+
+  // get context from session
+  var context = Session.get('currentContext');
+
+  // check if context is signals, return true if context is not defined
+  return (!context || context == 'signals');
+});
 
 Template.registerHelper("itemsCount", function(argument){
   return Session.get('itemsCount');
@@ -91,12 +99,28 @@ Template.registerHelper("itemsCount", function(argument){
 */
 
 Template.registerHelper("filterCount", function(argument){
-  return Session.get('filterCount')[Session.get('currentContext')];
+  var filterCount = JSON.parse(Session.get('filterCount'));
+  var context = Session.get("currentContext");
+  return filterCount[context];
+});
+
+Template.registerHelper("filterGroups", function(){
+  var context = Session.get("currentContext");
+  var filters = JSON.parse(Session.get('filters'));
+
+  // get filter for current context
+  var currentFilters = _.extend( filters['general'], filters[context]);
+
+  return _.keys(currentFilters);
 });
 
 /*
 * Initiatives popups & details
 */
+
+Template.registerHelper("showPopup", function(argument){
+  return Session.get('showPopup');
+});
 
 Template.registerHelper("getDescription", function(argument){
   var language = TAPi18n.getLanguage();
@@ -142,17 +166,4 @@ Template.registerHelper("purposeToString", function(){
   var language = TAPi18n.getLanguage();
   var purpose = Purposes.findOne(this.purpose);
   return purpose[language];
-});
-
-Template.registerHelper("incidencyTypesToString", function(){
-  var language = TAPi18n.getLanguage();
-  var ids = this.incidencyTypes
-  var types = IncidencyTypes
-                .find({ _id: { $in: ids }})
-                .map(function(type){
-                  return type[language]
-                });
-  if (types.length > 0) {
-    return types.join(', ')
-  } else return '';
 });

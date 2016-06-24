@@ -242,14 +242,12 @@ function refreshMap(template, filters) {
   			})
   			.on('click', function(d){
           if (!dragging()) {
-            var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-            exploreConfig.showPopup = true;
-            exploreConfig.popupContent = {
+            Session.set('popupContent', JSON.stringify({
               node: d.node,
               depth: d.depth,
               visible: d.visible
-            };
-            Session.set('exploreConfig', JSON.stringify(exploreConfig));
+            }));
+            Session.set('showPopup', true);
           }
   			})
   		 	// .transition().duration(1000)
@@ -326,7 +324,7 @@ function applyFilters(filters) {
 
 
 
-Template.chart.onRendered(function(){
+Template.map.onRendered(function(){
   svg_map_area = d3.select('#map')
     .append('svg')
     .attr('id', 'svg_map_area');
@@ -425,28 +423,22 @@ Template.chart.onRendered(function(){
 });
 
 
-Template.chart.helpers({
-  signalContext: function(){
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    return (exploreConfig.context == 'signals') ? true : false;
-  }
-});
+Template.map.helpers({
+  mapUpdateTrigger: function(){
 
-Template.chart.helpers({
-  changeContext: function(){
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var filters = exploreConfig.filters.general;
-    var currentContext = exploreConfig.context;
+    // load config
+    var context = Session.get('currentContext');
+    var filters = JSON.parse(Session.get('filters'));
+    filters = _.extend(filters['general'], filters[context]);
 
-    if (currentContext == 'signals') {
-      filters = _.extend(filters, exploreConfig.filters.signals);
-      getSignalData();
-    } else {
-      filters = _.extend(filters, exploreConfig.filters.hubs);
-      getHubData();
-    }
+    // update data
+    if (context == 'signals') getSignalData();
+    else getHubData();
 
+    // update map
     refreshMap(Template.instance(), filters);
-    return currentContext;
+
+    // trigger update
+    return new Date();
   }
 });

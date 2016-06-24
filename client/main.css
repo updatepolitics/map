@@ -2032,7 +2032,7 @@ footer{
     background-image: url("../layout/hub2.png");
 }
 
-.list_item.sig{
+.list_item.signal{
     background-image: url("../layout/sig2.png");
 }
 
@@ -2369,7 +2369,7 @@ a:visited#popup_bt { color:#fff }
 }
 
 .download_bt:hover{
-  text-decoration: none;  
+  text-decoration: none;
   background-color:#262c38;
 }
 

@@ -17,50 +17,30 @@ Template.filterPanel.helpers({
 
     return Session.get('resize');
   },
-  filterCount: function () {
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var context = exploreConfig.context;
-    return exploreConfig.filterCount[context];
-  },
-  filterGroups: function() {
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var filters = exploreConfig.filters.general;
-    var currentContext = exploreConfig.context;
-    if (currentContext == 'signals') {
-      filters = _.extend(filters, exploreConfig.filters.signals);
-    } else {
-      filters = _.extend(filters, exploreConfig.filters.hubs);
-    }
+  filterGroupCount: function(filterGroup) {
+    var context = Session.get('currentContext');
+    var filters = JSON.parse(Session.get('filters'));
 
-    return _.keys(filters);
-  },
-  filterGroupCount: function(id) {
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var filters = exploreConfig.filters.general;
-    var currentContext = exploreConfig.context;
-    if (currentContext == 'signals') {
-      filters = _.extend(filters, exploreConfig.filters.signals);
-    } else {
-      filters = _.extend(filters, exploreConfig.filters.hubs);
-    }
+    filters = _.extend(filters['general'], filters[context]);
 
-    return _.where(filters[id], {selected: true}).length;
+    return _.where(filters[filterGroup], {selected: true}).length;
   },
   filterGroupOptions: function(filterGroup) {
     var language = TAPi18n.getLanguage();
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var filters = exploreConfig.filters.general;
-    if (exploreConfig.context == 'signals')
-      filters = _.extend(filters, exploreConfig.filters.signals);
-    else
-      filters = _.extend(filters, exploreConfig.filters.hubs);
 
-    return _.map(_.keys(filters[filterGroup]), function(i){
-      var option = filters[filterGroup][i];
-      option.name = option[language];
-      option.filterGroup = filterGroup;
-      return option;
-    });
+    // get filters for current context
+    var context = Session.get('currentContext');
+    var filters = JSON.parse(Session.get('filters'));
+    filters = _.extend(filters['general'], filters[context]);
+
+    // check if filtergroup is defined for current filters
+    if (filters[filterGroup])
+      return _.map(_.keys(filters[filterGroup]), function(i){
+        var option = filters[filterGroup][i];
+        option.name = option[language];
+        option.filterGroup = filterGroup;
+        return option;
+      });
   }
 });
 
@@ -74,104 +54,45 @@ Template.filterPanel.events({
     var lis = ul.children();
     var height = 30 + lis.length * filter_h;
     if (ul.height() > 0) {
+      target.css({ backgroundImage: 'url(../layout/plus_white.png)'});
       ul.animate({height: 0 }, dur);
-      target.css({ backgroundImage: 'url(layout/plus_white.png)'});
     } else {
+      target.css({ backgroundImage: 'url(../layout/minus_white.png)'});
       ul.animate({height: height }, dur);
-      target.css({ backgroundImage: 'url(layout/minus_white.png)'});
     }
   },
   "click .filter": function(event, template) {
-    event.preventDefault();
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var context = exploreConfig.context;
-    var query = exploreConfig.query || {};
-
     var self = this;
+    event.preventDefault();
+
+    var context = Session.get('currentContext');
+    var filters = JSON.parse(Session.get('filters'));
+    var filterCount = JSON.parse(Session.get('filterCount'));
 
     var target = $(event.target);
 
     if (self.selected) {
       self.selected = false;
       target.removeClass('selected').css({opacity: 0.3 });
-
-      query[self.filterGroup] = _.without(query[self.filterGroup], self._id);
-      if (query[self.filterGroup].length == 0) delete query[self.filterGroup];
     } else {
       self.selected = true;
       target.addClass('selected').css({opacity: 1 });
-      if (!query[self.filterGroup]) query[self.filterGroup] = [];
-      query[self.filterGroup].push(self._id);
     }
 
     // filter is context specific
-    if (exploreConfig.filters[context][self.filterGroup]) {
-      exploreConfig.filters[context][self.filterGroup][self._id].selected = self.selected;
-      exploreConfig.filterCount[context] += self.selected ? 1 : -1;
-      var filtercount = exploreConfig.filterCount[context];
+    if (filters[context][self.filterGroup]) {
+      filters[context][self.filterGroup][self._id].selected = self.selected;
+      filterCount[context] += self.selected ? 1 : -1;
 
     // filter is for general context
     } else {
-      exploreConfig.filters['general'][self.filterGroup][self._id].selected = self.selected;
-      exploreConfig.filterCount['hubs'] += self.selected ? 1 : -1;
-      exploreConfig.filterCount['signals'] += self.selected ? 1 : -1;
+      filters['general'][self.filterGroup][self._id].selected = self.selected;
+      filterCount['hubs'] += self.selected ? 1 : -1;
+      filterCount['signals'] += self.selected ? 1 : -1;
     }
 
-    // Build signal query
-
-    if (exploreConfig.filterCount['signals'] > 0) {
-      var signalQuery = {};
-      if (query.placesOfOrigin) signalQuery.placesOfOrigin = {$in: query.placesOfOrigin};
-      if (query.incidencyReach) signalQuery.incidencyReach = {$in: query.incidencyReach};
-      if (query.mainThemes) signalQuery.mainThemes = {$in: query.mainThemes};
-      if (query.purpose) signalQuery.purpose = {$in: query.purpose};
-      if (query.technologyType) signalQuery.technologyType = {$in: query.technologyType};
-      if (query.mechanisms) {
-        signalQuery.methods = {
-          $in: Methods
-                .find({mechanism: {$in: query['mechanisms']}}, {fields: {_id: true}})
-                .map(function(i) {return i._id} )
-        }
-      }
-      var signalIds = Signals
-        .find(signalQuery, {fields: {_id: true}})
-        .map(function(i) {return i._id} );
-
-      exploreConfig.signals = _.map(exploreConfig.signals, function(i){
-        i.visible = _.contains(signalIds, i._id);
-        return i;
-      })
-    } else {
-      exploreConfig.signals = _.map(exploreConfig.signals, function(i){
-        i.visible = true;
-        return i;
-      })
-    }
-
-    if (exploreConfig.filterCount['hubs'] > 0) {
-      var hubQuery = {};
-      if (query.placesOfOrigin) hubQuery.placesOfOrigin = {$in: query.placesOfOrigin};
-      if (query.incidencyReach) hubQuery.incidencyReach = {$in: query.incidencyReach};
-      if (query.nature) hubQuery.nature = {$in: query.nature};
-      if (query.isSponsor) hubQuery.isSponsor = {$in: query.isSponsor};
-
-      var hubIds = Hubs
-        .find(hubQuery, {fields: {_id: true}})
-        .map(function(i) {return i._id} );
-
-      exploreConfig.hubs = _.map(exploreConfig.hubs, function(i){
-        i.visible = _.contains(hubIds, i._id);
-        return i;
-      })
-    } else {
-      exploreConfig.hubs = _.map(exploreConfig.hubs, function(i){
-        i.visible = true;
-        return i;
-      })
-    }
-
-    exploreConfig.query = query;
-    Session.set('exploreConfig', JSON.stringify(exploreConfig));
+    Session.set('filters', JSON.stringify(filters))
+    Session.set('filterCount', JSON.stringify(filterCount))
   },
   "click #filters_x": function(event, template) {
     event.stopImmediatePropagation();
@@ -188,10 +109,9 @@ Template.filterPanel.events({
     Session.set('showFilterPanel', showFilterPanel);
   },
   "click #trash": function(event, template) {
-    event.stopImmediatePropagation();
+    event.preventDefault();
 
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var filters = exploreConfig.filters;
+    var filters = JSON.parse(Session.get('filters'));
 
     _.each(_.keys(filters), function (type) {
       _.each(_.keys(filters[type]), function(group){
@@ -201,9 +121,11 @@ Template.filterPanel.events({
       })
     })
 
-    exploreConfig.filters = filters;
-
-    Session.set('exploreConfig', JSON.stringify(exploreConfig));
+    Session.set('filters', JSON.stringify(filters));
+    Session.set('filterCount', JSON.stringify({
+      signals: 0,
+      hubs: 0
+    }));
 
   }
 });

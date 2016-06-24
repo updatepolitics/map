@@ -1,0 +1,114 @@
+<template name="map">
+
+  {{> legend }}
+  {{> zoomControl }}
+
+  <div id="tooltip">
+    <div id="tooltip_title"></div>
+    <div id="tooltip_value"></div>
+  </div>
+
+
+  <!-- legend -->
+  {{#if isSignalContext }}
+    <div id="legends" style="height: 170px;">
+       <div id="legends_x"></div>
+       <ul class="legend_list" id="legend_sig" style="left: 0px;">
+          <div class="legend_title" id="legend_sig_title">{{_ "legend.signals.themes" }}</div>
+          <li class="legend">
+             <div class="color" style="background: rgb(173, 204, 143);"></div>
+             <div class="lb">{{_ "legend.signals.citizenParticipation" }}</div>
+          </li>
+          <li class="legend">
+             <div class="color" style="background: rgb(125, 202, 163);"></div>
+             <div class="lb">{{_ "legend.signals.transparency" }}</div>
+          </li>
+          <li class="legend">
+             <div class="color" style="background: rgb(80, 196, 190);"></div>
+             <div class="lb">{{_ "legend.signals.socialControl" }}</div>
+          </li>
+          <li class="legend">
+             <div class="color" style="background: rgb(59, 185, 212);"></div>
+             <div class="lb">{{_ "legend.signals.govern2" }}</div>
+          </li>
+          <li class="legend">
+             <div class="color" style="background: rgb(92, 171, 223);"></div>
+             <div class="lb">{{_ "legend.signals.independentCommunication" }}</div>
+          </li>
+          <li class="legend">
+             <div class="color" style="background: rgb(138, 153, 215);"></div>
+             <div class="lb">{{_ "legend.signals.politicalCulture" }}</div>
+          </li>
+       </ul>
+       <ul class="legend_list" id="legend_hub">
+          <div class="legend_title" id="legend_hub_title"></div>
+       </ul>
+    </div>
+  {{else}}
+    <div id="legends" style="height: 210px;">
+     <div id="legends_x"></div>
+     <ul class="legend_list" id="legend_sig">
+        <div class="legend_title" id="legend_sig_title"></div>
+     </ul>
+     <ul class="legend_list" id="legend_hub" style="left: 0px;">
+        <div class="legend_title" id="legend_hub_title">{{_ "legend.hubs.nature" }}</div>
+        <li class="legend">
+           <div class="color" style="background: rgb(216, 125, 125);"></div>
+           <div class="lb">{{_ "legend.hubs.companies" }}</div>
+        </li>
+        <li class="legend">
+           <div class="color" style="background: rgb(218, 130, 120);"></div>
+           <div class="lb">{{_ "legend.hubs.parties" }}</div>
+        </li>
+        <li class="legend">
+           <div class="color" style="background: rgb(218, 136, 116);"></div>
+           <div class="lb">{{_ "legend.hubs.ongs" }}</div>
+        </li>
+        <li class="legend">
+           <div class="color" style="background: rgb(217, 142, 112);"></div>
+           <div class="lb">{{_ "legend.hubs.multilateral" }}</div>
+        </li>
+        <li class="legend">
+           <div class="color" style="background: rgb(216, 148, 110);"></div>
+           <div class="lb">{{_ "legend.hubs.informal" }}</div>
+        </li>
+        <li class="legend">
+           <div class="color" style="background: rgb(213, 155, 108);"></div>
+           <div class="lb">{{_ "legend.hubs.constelations" }}</div>
+        </li>
+        <li class="legend">
+           <div class="color" style="background: rgb(210, 161, 108);"></div>
+           <div class="lb">{{_ "legend.hubs.govern" }}</div>
+        </li>
+        <li class="legend">
+           <div class="color" style="background: rgb(206, 168, 109);"></div>
+           <div class="lb">{{_ "legend.hubs.academia" }}</div>
+        </li>
+     </ul>
+    </div>
+  {{/if}}
+
+  <div id="map_container">
+    <div id="map"></div>
+  </div>
+
+  <div style="display: none;">
+    {{ mapUpdateTrigger }}
+  </div>
+
+
+  {{# if showPopup }}
+    {{> initiativePopup }}
+  {{/if}}
+
+  <!-- FILTERS  -->
+
+  {{> filterPanel }}
+
+  <div id="curtain"></div>
+
+  <!-- CONTROLS -->
+
+  {{> viewControl }}
+
+</template>

@@ -8,34 +8,25 @@ Template.viewControl.onCreated(function(){
 
 Template.viewControl.helpers({
   signalControlOn: function() {
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    if (exploreConfig.context == 'signals') return 'on';
+    var context = Session.get('currentContext');
+    if (context == 'signals') return 'on';
   },
   hubControlOn: function() {
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    if (exploreConfig.context == 'hubs') return 'on';
-  },
-  filterCount: function () {
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    var context = exploreConfig.context;
-    return exploreConfig.filterCount[context];
+    var context = Session.get('currentContext');
+    if (context == 'hubs') return 'on';
   },
   contextString: function(){
-    var context = JSON.parse(Session.get('exploreConfig')).context;
+    var context = Session.get('currentContext');
     return TAPi18n.__('viewControl.'+context);
   }
 });
 
 Template.viewControl.events({
   "click #control_sig": function(event, template){
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    exploreConfig.context = 'signals';
-    Session.set('exploreConfig', JSON.stringify(exploreConfig));
+    Session.set('currentContext', 'signals')
   },
   "click #control_hub": function(event, template){
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    exploreConfig.context = 'hubs';
-    Session.set('exploreConfig', JSON.stringify(exploreConfig));
+    Session.set('currentContext', 'hubs')
   },
   "click #mode": function(){
     var exploreConfig = JSON.parse(Session.get('exploreConfig'));
