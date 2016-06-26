@@ -29,9 +29,10 @@ Template.viewControl.events({
     Session.set('currentContext', 'hubs')
   },
   "click #mode": function(){
-    var exploreConfig = JSON.parse(Session.get('exploreConfig'));
-    exploreConfig.chartView = !exploreConfig.chartView;
-    Session.set('exploreConfig', JSON.stringify(exploreConfig));
+    if (Router.current().route.getName() == 'list') 
+      Router.go('map');
+    else
+      Router.go('list');
   },
   "click #control_filters": function(event, template){
     event.stopImmediatePropagation();
