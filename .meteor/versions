@@ -7,6 +7,7 @@ aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.5
+amplify@1.0.0
 autoupdate@1.2.10
 babel-compiler@6.8.3
 babel-runtime@0.1.9
@@ -110,6 +111,7 @@ tap:i18n-db@0.4.0
 templating@1.1.12
 templating-tools@1.0.4
 tracker@1.0.14
+u2622:persistent-session@0.4.4
 udondan:jszip@2.4.0_1
 ui@1.0.11
 underscore@1.0.9

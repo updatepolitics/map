@@ -5,6 +5,10 @@ Meteor.startup(function(){
   Session.set('showPopup', false);
   Session.set('searchStr', '');
 
+  // set user language
+  var language = Session.get('language');
+  if (language) TAPi18n.setLanguage(language);
+
   // init filter count
   Session.set('filterCount', JSON.stringify({
     signals: 0,
