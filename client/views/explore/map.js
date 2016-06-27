@@ -325,8 +325,17 @@ Template.map.onRendered(function(){
   svg_map = svg_map_area
     .append('g')
 
-  getSignalData();
-  refreshMap(self);
+
+  // load config
+  var context = Session.get('currentContext');
+  var filters = JSON.parse(Session.get('filters'));
+  filters = _.extend(filters['general'], filters[context]);
+
+  // update data
+  if (context == 'signals') getSignalData();
+  else getHubData();
+
+  refreshMap(self, filters);
 
   win_w = $(window).width();
   win_h = $(window).height();
