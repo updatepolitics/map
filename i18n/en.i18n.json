@@ -147,6 +147,7 @@
       "text": "<p>The 21st century presents new demands and possibilities for politics.</p><p>According to Yochai Benkler, author of The Wealth of Networks: How Social Production Transforms Markets and Freedom, we are experiencing a transition from the industrial society to an interconnected society. In the field of politics, this transformation presents itself in the possibility of a more participative democracy. Moisés Naim, author The End of Power: From Boardrooms to Battlefields and Churches to States, Why Being in Charge Isn't What It Used To Be, says that we are seeing the rise of an overwhelming wave of political innovation in the world, which equates to the disruptive character observed in other economic and social sectors and which has the ability of recovering people's faith in democratic institutions.</p><p>The need for this reinvention is presented in the form of a global crisis of representativeness, evidenced by the financial crisis of 2008. Since then, we have seen hundreds of protests happening around the world, which represent the symptoms of such crisis.</p><p>It is also possible to observe another crisis, an institutional one, manifested in the hardship of institutions to give vent to the collective desires of individuals. In this sense, political parties have lost the capacity to attract people to move forward with their constructions, and even NGOs and social movements, which began to cater to this shortage in the last twenty years, have increasingly felt the same difficulty.</p><p>As background for the institutional and representativeness crisis, we observed a dangerous issue - the lack of positive references. This difficulty in finding possible solutions for challenges experienced in the twenty-first century and lack of references pushes citizens away from the construction of alternatives and prolongs the institutional and representativeness crises.</p><p>However, if we look carefully at the global scenario, we can observe the rise of a field that points to new possibilities – the field of emerging political practices. This field acts in the frontier of democratic processes, expanding the limits of interaction possibilities between citizen and the State.</p><p>Those who act in the field of political innovation are developing experiments all over the world, in different ways and contexts and with different objectives. We see these experiments indicating possible paths to update the politics of the twenty-first century. Thus, carefully understanding this field allows for a more clear visualization of the paths to overcome the representativeness and institutional crises and the creation of references to leverage this overwhelming wave of political transformation.</p>"
     },
     "team": {
+      "title": "Update team",
       "beatriz": " is a social scientist. She has eleven years of experience in public and political innovation. She was the co-director for the Sonho Brasileiro da Política research (Brazilian Dream of Politics) and the Jogo da Política project (The Game of Politics), which is a methodology of political education for young people.",
       "caio": " is an economist and an enthusiast of collective projects with positive impact in the society. He was part of the Fora do Eixo network (Off-Axis), cofounded Toque no Brasil (Play in Brazil), the Wings for Change channel (Brazilian crowdfunding site), and the political party Rede Sustentabilidade (Sustainability Network).",
       "rafael": " is a lawyer and an activist for socioenvironmental and democracy strengthening causes. He worked for the Department of Justice and NGOs and has always acted in collective advocacy, sustainability, and citizenship promotion projects. He recently worked as an advisor for Marina Silva in her 2014 presidential campaign.",
@@ -173,14 +174,14 @@
       </ul>
     ",
     "transparency": "
-    <div class=\"content_title\">Transparência</div>
+    <div class=\"content_title\">Transparency</div>
 
     <div class=\"subtitle\">2015</div>
     <table>
 
       <tbody><tr>
         <td>
-          <b>RECEITAS</b>
+          <b>REVENUE</b>
         </td>
         <td>
           <b>283,139.00</b>
@@ -189,7 +190,7 @@
 
       <tr>
         <td>
-          Organizações sociais
+          Social organizations
         </td>
         <td>
           138,139.00
@@ -198,7 +199,7 @@
 
       <tr>
         <td>
-          Doações pessoas físicas
+          Donation from individuals
         </td>
         <td>
           145,000.00
@@ -207,7 +208,7 @@
 
       <tr>
         <td>
-          <b>DESPESAS</b>
+          <b>EXPENSES</b>
         </td>
         <td>
           <b>293,573.12</b>
@@ -216,7 +217,7 @@
 
       <tr>
         <td>
-          Despesas institucionais
+          Institutional expenses
         </td>
         <td>
           107,110.00
@@ -225,7 +226,7 @@
 
       <tr>
         <td>
-          Despesas com pesquisa e tecnologia
+          Research and Technology
         </td>
         <td>
           143,619.65
@@ -234,7 +235,7 @@
 
       <tr>
         <td>
-          Despesas com viagens e eventos
+          Travel and events
         </td>
         <td>
           10,044.46
@@ -243,7 +244,7 @@
 
       <tr>
         <td>
-          Aluguel de escritório
+          Office rent
         </td>
         <td>
           18,649.01
@@ -252,7 +253,7 @@
 
       <tr>
         <td>
-          Taxas administrativas
+          Administrative fees
         </td>
         <td>
           14,150.00
@@ -261,14 +262,17 @@
 
       <tr>
         <td>
-          <b>RESULTADO DO EXERCÍCIO</b>
+          <b>FY RESULT</b>
         </td>
         <td>
-          <b>10,434.12</b>
+          <b>(10,434.12)</b>
         </td>
       </tr>
     </tbody></table>
-    "
+    ",
+    "collaborators": {
+      "title": "Collaborators"
+    }
   },
   "signalsPage": {
     "title": "Signals",

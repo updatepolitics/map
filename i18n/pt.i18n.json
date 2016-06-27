@@ -197,6 +197,7 @@
         "
     },
     "team": {
+      "title": "Equipe do Update",
       "beatriz": " é cientista social. Tem onze anos de experiência em inovação pública e política. Recentemente foi co-realizadora da pesquisa Sonho Brasileiro da Política e do projeto Jogo da Política, uma metodologia de educação política para jovens.",
       "caio": " é economista e apaixonado por projetos coletivos de impacto positivo na sociedade. Participou da rede Fora do Eixo, co-fundou o Toque no Brasil, o Canal Wings for Change, o Instituto Companheiros do Txai e o partido Rede Sustentabilidade.",
       "rafael": " é advogado e ativista de causas socioambientais e do fortalecimento da democracia. Trabalhou no Ministério Público, em organizações não-governamentais e sempre atuou em projetos coletivos de defesa de direitos, promoção da sustentabilidade e da cidadania. Recentemente foi assessor de Marina Silva na campanha presidencial de 2014.",
@@ -318,7 +319,10 @@
         </td>
       </tr>
     </tbody></table>
-    "
+    ",
+    "collaborators": {
+      "title": "Colaboradores"
+    }
   },
   "signalsPage": {
     "title": "Sinais",

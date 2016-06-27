@@ -153,6 +153,7 @@
         "
     },
     "team": {
+      "title": "Equipo del Update",
       "beatriz": " es científica social. Posee 11 años de experiencia en innovación pública y política. Recientemente fue co-realizadora de la investigación Sonho Brasileiro da Política (Sueño Brasileño de la Política) y del proyecto Jogo da Política, uma metodologia de educação política para jovens (Juego de la Política, una metodología de educación para jóvenes).",
       "caio": " es economista y apasionado por proyectos colectivos de impacto positivo en la sociedad. Participó de la red Fora do Eixo (Fuera de Eje), co-fundó Toque no Brasil (Toque en Brasil), el Canal Wings for Change (Alas para un Cambio), el Instituto Companheiros do Txai (Compañeros de Txai) y el partido Rede Sustentabilidade (Red Sostenibilidad).",
       "rafael": " es abogado y activista de causas socioambientales y de fortalecimiento de la democracia. Trabajó en el Ministerio Público, en organizaciones no gubernamentales y siempre actuó en proyectos colectivos de defensa de derechos, promoción de la sostenibilidad y de la ciudadanía. Recientemente fue asesor de Marina Silva en la campaña presidencial de 2014.",
@@ -177,7 +178,10 @@
         <li>Instituto PDR</li>
         <li>Open Society Foundation</li>
       </ul>
-    "
+    ",
+    "collaborators": {
+      "title": "Colaboradores"
+    }
   },
   "signalsPage": {
     "title": "Señales",
