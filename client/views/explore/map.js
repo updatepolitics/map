@@ -221,13 +221,8 @@ function refreshMap(template, filters) {
                 d.circle
                   .attr('opacity', .1)
               }
-
-
             }
           }
-
-
-
   			})
   			.style('cursor', 'pointer')
   			.on('mouseover', function(d){
@@ -242,12 +237,10 @@ function refreshMap(template, filters) {
   			})
   			.on('click', function(d){
           if (!dragging()) {
-            Session.set('popupContent', JSON.stringify({
-              node: d.node,
-              depth: d.depth,
-              visible: d.visible
-            }));
-            Session.set('showPopup', true);
+            if (d.depth == 2) {
+              Session.set('popupContent', JSON.stringify(d.node));
+              Session.set('showPopup', true);
+            }
           }
   			})
   		 	// .transition().duration(1000)

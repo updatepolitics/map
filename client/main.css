@@ -2028,11 +2028,11 @@ footer{
     font-weight: 900;
 }
 
-.list_item.hub{
+.list_item.hubs{
     background-image: url("../layout/hub2.png");
 }
 
-.list_item.signal{
+.list_item.signals{
     background-image: url("../layout/sig2.png");
 }
 

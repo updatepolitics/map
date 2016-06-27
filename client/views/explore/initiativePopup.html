@@ -1,39 +1,34 @@
 <template name="initiativePopup">
   {{# with popupContent }}
-    {{#if visible }}
-      {{#with node }}
-
-        <div id="popup" style="height: '40%';">
-          <div id="popup_nav">
-            <div id="popup_x"></div>
+    <div id="popup" style="height: '40%';">
+      <div id="popup_nav">
+        <div id="popup_x"></div>
+      </div>
+        <div id="popup_content">
+          <div class="title">{{ name }}</div>
+          <div class="info">
+            <span class="bold">{{_ "popup.origin" }}</span> {{ originsLabel }} |
+            <span class="bold">{{_ "popup.reach" }}</span> {{ incidencyReachLabel }}
+            {{# if purpose }}
+              | <span class="bold">{{_ "popup.purpose" }}</span> {{ purposeLabel }}
+            {{/if}}
+            {{# if incidencyType }}
+              | <span class="bold">{{_ "popup.type" }}</span> {{ incidencyType }}
+            {{/if }}
+            {{# if isSponsor }}
+              | <span class="bold">{{_ "popup.financer" }}</span>
+            {{/if }}
           </div>
-            <div id="popup_content">
-              <div class="title">{{ name }}</div>
-              <div class="info">
-                <span class="bold">{{_ "popup.origin" }}</span> {{ originsToString }} |
-                <span class="bold">{{_ "popup.reach" }}</span> {{ reachToString }}
-                {{# if purpose }}
-                  | <span class="bold">{{_ "popup.purpose" }}</span> {{ purposeToString }}
-                {{/if}}
-                {{# if incidencyType }}
-                  | <span class="bold">{{_ "popup.type" }}</span> {{ incidencyTypesToString }}
-                {{/if }}
-                {{# if isSponsor }}
-                  | <span class="bold">{{_ "popup.financer" }}</span>
-                {{/if }}
-              </div>
-              <div class="about mt40">
-                {{ getDescription }}
-              </div>
-              <a id="popup_bt" href="{{ website }}" target="_blank" class="pop_bt link">WEBSITE</a>
-              {{#if isSignalContext }}
-                <a id="popup_bt" href="signal/{{ _id }}" class="pop_bt details">{{_ "popup.details" }}</a>
-              {{else}}
-                <a id="popup_bt" href="hub/{{ _id }}" class="pop_bt details">{{_ "popup.details" }}</a>
-              {{/if}}
-            </div>
+          <div class="about mt40">
+            {{ getDescription }}
           </div>
-          {{/with}}
-        {{/if}}
-      {{/with}}
+          <a id="popup_bt" href="{{ website }}" target="_blank" class="pop_bt link">WEBSITE</a>
+          {{#if isSignalContext }}
+            <a id="popup_bt" href="/signal/{{ _id }}" class="pop_bt details">{{_ "popup.details" }}</a>
+          {{else}}
+            <a id="popup_bt" href="/hub/{{ _id }}" class="pop_bt details">{{_ "popup.details" }}</a>
+          {{/if}}
+        </div>
+      </div>
+  {{/with}}
 </template>

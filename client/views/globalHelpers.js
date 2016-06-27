@@ -167,3 +167,33 @@ Template.registerHelper("purposeToString", function(){
   var purpose = Purposes.findOne(this.purpose);
   return purpose[language];
 });
+
+
+/*
+ * Labels from denormalization
+ */
+
+Template.registerHelper("originsLabel", function(){
+  var language = TAPi18n.getLanguage();
+  return this.labels[language].placesOfOrigin;
+});
+
+Template.registerHelper("purposeLabel", function(){
+  var language = TAPi18n.getLanguage();
+  return this.labels[language].purpose;
+});
+
+Template.registerHelper("incidencyReachLabel", function(){
+  var language = TAPi18n.getLanguage();
+  return this.labels[language].incidencyReach;
+});
+
+Template.registerHelper("incidencyTypeLabel", function(){
+  var language = TAPi18n.getLanguage();
+  return this.labels[language].incidencyType;
+});
+
+Template.registerHelper("technologyTypeLabel", function(){
+  var language = TAPi18n.getLanguage();
+  return this.labels[language].technologyType;
+});

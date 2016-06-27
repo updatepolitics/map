@@ -63,26 +63,26 @@ Template.infiniteList.helpers({
     if (context == 'signals') {
       items = Signals.find(query, {
         sort: { name: 1},
-        limit: 50,
+        limit: 100,
         fields: {
           name: 1,
-          placesOfOrigin: 1,
-          incidencyReach: 1,
-          purpose: 1,
-          technologyType: 1,
+          description_en: 1,
+          description_es: 1,
+          description_pt: 1,
+          website: 1,
           labels: 1
         }
       }).fetch();
     } else {
       items = Hubs.find(query, {
         sort: { name: 1},
-        limit: 50,
+        limit: 100,        
         fields: {
           name: 1,
-          placesOfOrigin: 1,
-          incidencyReach: 1,
-          nature: 1,
-          isSponsor: 1,
+          description_en: 1,
+          description_es: 1,
+          description_pt: 1,
+          website: 1,
           labels: 1
         }
       }).fetch();
