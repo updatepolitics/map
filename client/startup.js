@@ -1,5 +1,14 @@
 Meteor.startup(function(){
 
+  var isMobile =
+    navigator.userAgent.match(/Android/i) ||
+    navigator.userAgent.match(/BlackBerry/i) ||
+    navigator.userAgent.match(/iPhone|iPad|iPod/i) ||
+    navigator.userAgent.match(/Opera Mini/i) ||
+    navigator.userAgent.match(/IEMobile/i);
+
+  Session.set('isMobile', isMobile);
+
   // set defaults
   Session.set('currentContext', 'signals');
   Session.set('showPopup', false);

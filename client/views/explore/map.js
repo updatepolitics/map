@@ -425,6 +425,14 @@ Template.map.onRendered(function(){
 });
 
 
+Template.map.onCreated(function(){
+  if (Session.get('isMobile')) {
+    initial_scale = 2;
+  } else {
+    initial_scale = 5;
+  }
+});
+
 Template.map.helpers({
   mapUpdateTrigger: function(){
 
