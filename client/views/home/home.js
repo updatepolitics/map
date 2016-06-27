@@ -3,6 +3,9 @@ var duration = 350;
 var svg_map_area;
 var svg_map;
 
+var rotation;
+var rotationDelay;
+
 var modalPages = [
   {
     title: "A Democracia na América Latina do séc XXI",
@@ -151,10 +154,22 @@ Template.home.onRendered(function (){
 
   createMap();
 
+  var win_w = $( window ).width();
+  var win_h = $( window ).height();
+
+  var rot = 0;
+  rotation = setTimeout( function(){
+    rotationDelay = setInterval(function(){
+      rot += 0.02;
+      svg_map.attr('transform', 'translate(' + win_w/2 + ', ' + win_h/2 + ') rotate(' + rot + ')');
+    },10)
+  }, 0);
 });
 
 Template.home.onDestroyed(function (){
   $('#update_logo').show()
+  clearInterval(rotation);
+  clearTimeout(rotationDelay);
 });
 
 Template.home.helpers({
