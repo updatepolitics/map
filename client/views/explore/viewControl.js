@@ -18,6 +18,16 @@ Template.viewControl.helpers({
   contextString: function(){
     var context = Session.get('currentContext');
     return TAPi18n.__('viewControl.'+context);
+  },
+  signalModeIconDiv: function(){
+    var currentView = Router.current().route.getName();
+    if (currentView == 'map') return 'selected';
+    else return '';
+  },
+  hubsModeIconDiv: function(){
+    var currentView = Router.current().route.getName();
+    if (currentView == 'list') return 'selected';
+    else return '';
   }
 });
 
@@ -29,7 +39,7 @@ Template.viewControl.events({
     Session.set('currentContext', 'hubs')
   },
   "click #mode": function(){
-    if (Router.current().route.getName() == 'list') 
+    if (Router.current().route.getName() == 'list')
       Router.go('map');
     else
       Router.go('list');
