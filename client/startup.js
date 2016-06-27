@@ -3,6 +3,7 @@ Meteor.startup(function(){
   // set defaults
   Session.set('currentContext', 'signals');
   Session.set('showPopup', false);
+  Session.set('searchStr', '');
 
   // init filter count
   Session.set('filterCount', JSON.stringify({

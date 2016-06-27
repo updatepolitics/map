@@ -1,0 +1,36 @@
+<template name="list">
+
+  <div id="search">
+    <input type="text" id="search_str" tabindex="-1" placeholder="{{_ "search" }}"/>
+    <div id="search_x" style="display: none;"></div>
+  </div>
+
+  <!-- LIST -->
+
+  <div id="list">
+    {{> infiniteList }}
+  </div>
+
+  <!-- POPUP  -->
+
+  {{# if showPopup }}
+    {{> initiativePopup }}
+  {{/if}}
+
+  <!-- FILTERS  -->
+
+  {{> filterPanel }}
+
+  <div id="curtain"></div>
+
+  <!-- CONTROLS -->
+
+  {{> viewControl }}
+
+</template>
+
+<template name="infiniteList">
+  {{#each listItems}}
+      {{> listItem}}
+  {{/each}}
+</template>

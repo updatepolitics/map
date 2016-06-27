@@ -123,17 +123,10 @@ Router.route("/explore/map", {
 Router.route("/explore/list", {
   waitOn: function() {
     return [
-      Meteor.subscribe('themes'),
-      Meteor.subscribe('natures'),
-      Meteor.subscribe('incidencyReachs'),
-      Meteor.subscribe('incidencyTypes'),
-      Meteor.subscribe('origins'),
-      Meteor.subscribe('mechanisms'),
       Meteor.subscribe('methods'),
-      Meteor.subscribe('purposes'),
       Meteor.subscribe('signals'),
-      Meteor.subscribe('hubs'),
-    ];
+      Meteor.subscribe('hubs')
+    ]
   },
   name: "list"
 });
