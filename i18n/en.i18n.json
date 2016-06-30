@@ -394,7 +394,7 @@
   },
   "register": {
     "title": "Register an initiative",
-    "intro": "<p>Despite the effort to map as many initiatives as possible, many are not included in this version of the platform. We provide this space to request the registration of initiatives that are seen as part of this ecosystem. Given the complexity of classification and for being an ecosystem with specific clippings, this measure is necessary to preserve the categorization of information.</p>",
+    "intro": "Despite the effort to map as many initiatives as possible, many are not included in this version of the platform. We provide this space to request the registration of initiatives that are seen as part of this ecosystem. Given the complexity of classification and for being an ecosystem with specific clippings, this measure is necessary to preserve the categorization of information.",
     "description": "Describe your initiative",
     "sending": "Sending...",
     "emailMissing": "Please, inform your email",
