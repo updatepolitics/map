@@ -32,6 +32,7 @@ Template.appMenu.events({
     $("#contact_name").html("");
   },
   "click .sub_bt": function(event, template){
+    $(window).scrollTop();
     Router.go(this.route, {}, {hash: this.anchor});
   },
   "click #email": function(event) {
