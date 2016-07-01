@@ -90,6 +90,9 @@ input:focus:-ms-input-placeholder {  opacity: 0}
     min-height: 100%;
 }
 
+b, strong {
+  font-weight: bold;
+}
 
 
 /* ////////////////////////// MENU ////////////////////////// */
