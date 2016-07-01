@@ -22,11 +22,15 @@ Meteor.methods({
           'true': {
             _id: true,
             pt: 'Sim',
+            es: 'Sí',
+            en: 'Yes',
             selected: false
           },
           'false': {
             _id: false,
             pt: 'Não',
+            es: 'No',
+            en: 'No',
             selected: false
           }
         }
