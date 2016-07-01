@@ -68,13 +68,15 @@ var pack = d3.layout.pack()
  */
 
 function getSignalData() {
+  var language = TAPi18n.getLanguage();
+
   data.children = Themes.find({}).map(function(theme){
     var group = {
       id: theme._id,
       color: theme.color,
       node: theme,
-      label: theme.pt,
-      name: theme.pt,
+      label: theme[language],
+      name: theme[language],
       children: []
     }
 
@@ -98,6 +100,7 @@ function getSignalData() {
 }
 
 function getHubData() {
+  var language = TAPi18n.getLanguage();
 
   data = {};
 
@@ -106,8 +109,8 @@ function getHubData() {
       id: nature._id,
       color: nature.color,
       node: nature,
-      label: nature.pt,
-      name: nature.pt,
+      label: nature[language],
+      name: nature[language],
       children: []
     }
 
