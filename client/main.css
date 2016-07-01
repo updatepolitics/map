@@ -669,24 +669,10 @@ footer{
         top: 16px;
     }
 
-#cur_lang{
-  position: absolute;
-  right: 25px;
-  top: 25px;
-  display: table;
-  text-transform: uppercase;
-}
-
-.mobile
-  #cur_lang{
-    right: 12px;
-    top: 12px;
-  }
-
 #language{
     position: absolute;
     right: 25px;
-    top: -30px;
+    top: 25px;
     display: table;
 }
 

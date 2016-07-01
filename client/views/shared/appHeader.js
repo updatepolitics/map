@@ -10,12 +10,6 @@ Template.appHeader.events({
   "click .lang": function(event) {
     TAPi18n.setLanguage(this.id);
     Session.setPersistent('language', this.id);
-    $(language).animate({top:-30}, dur/2);
-    $(cur_lang).animate({top:25}, dur/2);
-  },
-  "click #cur_lang": function(event) {
-    $(language).animate({top:25}, dur/2);
-    $(cur_lang).animate({top:-30}, dur/2);
   }
 });
 
