@@ -69,7 +69,7 @@
       "signals": {
         "intro": "Introduction",
         "tech": "Techonology",
-        "themes": "Themes",
+        "themes": "Topics",
         "purpose": "Purpose",
         "mechanisms": "Mechanisms"
       }
@@ -325,7 +325,7 @@
       }
     },
     "signals": {
-      "theme": "Theme",
+      "theme": "Topics",
       "mechanisms": "Mechanisms",
       "relatedHubs": "Related hubs"
     },
@@ -339,7 +339,7 @@
   },
   "legend": {
     "signals": {
-      "themes": "Themes",
+      "themes": "Topics",
       "citizenParticipation": "Citizenship Participation",
       "transparency": "Transparency",
       "socialControl": "Social Control",
@@ -367,8 +367,8 @@
   "origin": "Origin",
   "placesOfOrigin": "Origin",
   "incidencyReach": "Reach",
-  "mainThemes": "Themes",
-  "theme": "Theme",
+  "mainThemes": "Topics",
+  "theme": "Topic",
   "mechanisms": "Mechanisms",
   "purpose": "Purpose",
   "incidencyTypes": "Incidency types",
