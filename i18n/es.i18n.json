@@ -328,5 +328,23 @@
     "csvFormat": "Formato CSV",
     "hubs": "HUBS",
     "signals": "SEÑALES"
+  },
+  "mapHelp": {
+    "1": {
+      "title":"HUBS",
+      "text": "Al hacer clic en este botón usted verá los Hubs, organismos - institucionalizados o no - que desarrollan acciones y actuan como \"emisores\" de las señales de nuevas prácticas políticas. La vista de los Hubs muestra quales son los actores que están creando y ejecutando estas señales. Para verlas, se puede filtrar los resultados por país, alcance y la naturaleza de su constitución y si es un donante o no."
+    },
+    "2": {
+      "title":"SEÑALES",
+      "text": "Al hacer clic en este botón podrás ver las señales, que son pistas y evidencias de las prácticas políticas que reducen la distancia entre la sociedad civil y el gobierno. Ellas son realizadas por múltiples actores en el ecosistema, que, en este mapeo, llamamos de Hubs. Para verlas, se puede filtrar los resultados por país, alcance, tema, mecanismo, propósito y tecnología."
+    },
+    "3": {
+      "title":"FILTRAR RESULTADOS",
+      "text": "Los filtros permiten al usuario explorar los resultados del mapeo a partir de múltiples combinaciones de las clasificaciones, de ambos Hubs y Señales. Los filtros se suman y dan la posibilidad de crear recortes específicos en el ecosistema. La elección de filtros producen  distintos resultados en la representación gráfica de la plataforma."
+    },
+    "4": {
+      "title":"CAMBIAR EL MODO DE EXIBICIÓN",
+      "text": "Hay dos maneras de conocer los resultados del mapeo. La primera es una representación gráfica donde hay una visión sistémica, amplio y visual del ecosistema. La segunda contiene información más detalladas acerca de cada iniciativa que conforman los filtros seleccionados."
+    }
   }
 }

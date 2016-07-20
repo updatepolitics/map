@@ -1,5 +1,9 @@
 <template name="map">
 
+  {{#if mapHelpIsOpen }}
+    {{> mapHelp }}
+  {{/if}}
+
   {{> legend }}
   {{> zoomControl }}
 

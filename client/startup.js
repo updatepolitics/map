@@ -13,6 +13,7 @@ Meteor.startup(function(){
   Session.set('currentContext', 'signals');
   Session.set('showPopup', false);
   Session.set('searchStr', '');
+  Session.set('mapHelpIsOpen', 'false');
 
   // set user language
   var language = Session.get('language');

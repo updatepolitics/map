@@ -57,5 +57,9 @@ Template.viewControl.events({
     }
 
     Session.set('showFilterPanel', showFilterPanel);
+  },
+  "click #help_bt": function(event) {
+    // toggle map help
+    Session.set('mapHelpIsOpen', !Session.get('mapHelpIsOpen') );
   }
 });

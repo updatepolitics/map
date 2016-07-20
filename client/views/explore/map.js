@@ -437,6 +437,9 @@ Template.map.onCreated(function(){
 });
 
 Template.map.helpers({
+  mapHelpIsOpen: function(){
+    return Session.get('mapHelpIsOpen');
+  },
   mapUpdateTrigger: function(){
 
     // load config

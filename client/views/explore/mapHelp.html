@@ -1,0 +1,23 @@
+<template name="mapHelp">
+
+  <div id="help" class="modal">
+    <div id="help_box" class="modal_box">
+      <div id="help_nav" class="modal_nav">
+        <img id="help_x" class="modal_x" src="../layout/curtain_x.png"/>
+        <img id="help_next" class="modal_next" src="../layout/arrow_r.png"/>
+        <img id="help_prev" class="modal_prev" src="../layout/arrow_l.png"/>
+        <div id="help_nav_pos" class="modal_pos" >{{ step }} / 4</div>
+      </div>
+      <div id="help_title" class="modal_title">{{_ pageTitle }}</div>
+      <div id="help_text" class="modal_text">{{_ pageText }}</div>
+    </div>
+    <div id="help_frame">
+      <div class="frame" ></div>
+      <div class="left" ></div>
+      <div class="right" ></div>
+      <div class="top" ></div>
+      <div class="bottom" ></div>
+    </div>
+  </div>
+
+</template>

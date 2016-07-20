@@ -417,5 +417,23 @@
     "csvFormat": "CSV Format",
     "hubs": "HUBS",
     "signals": "SIGNALS"
+  },
+  "mapHelp": {
+    "1": {
+      "title":"HUBS",
+      "text": "By clicking this button you will see the Hubs, which are organisms - institutionalized or not - to develop actions and act as \"emitters\" of the Signals of new political practices. The view from the Hubs shows which are the actors who are creating and running these Signals. To see them, you can filter the results by country, reach and nature of its constitution and if it is a financer or not."
+    },
+    "2": {
+      "title": "SIGNALS",
+      "text": "By clicking this button you will see the signs, clues and evidence of political practices that reduce the distance between civil society and the government. They are performed by multiple actors in the ecosystem, which, in this mapping, we call Hubs. To see them, you can filter the results by country, reach, theme, mechanism, purpose and technology."
+    },
+    "3": {
+      "title": "FILTER RESULTS",
+      "text": "Filters allow the user to explore the results of the mapping from multiple combinations of classifications of both Hubs as Signals. The filters add up and give the possibility to create specific clippings about this ecosystem. The choice of filters produce different results on the graphical representation."
+    },
+    "4": {
+      "title": "CHANGE EXIBITION MODE",
+      "text": "There are two ways to know the results of the mapping. The first is a graphical representation where there is a systemic, broad and visual ecosystem. The second contains more detailed information about each initiative that makes up the selected filters."
+    }
   }
 }
