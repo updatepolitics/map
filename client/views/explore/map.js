@@ -7,16 +7,6 @@ function reachToRadius(reach) {
   return 3 * Math.sqrt(level / Math.PI);
 }
 
-function setTooltip(title, val, color){
-  if(title){
-    $(tooltip_title).html(title);
-    $(tooltip_value).html(val);
-    $(tooltip).css({background:color}).show();
-  }else{
-    $(tooltip).hide();
-  }
-}
-
 var delta_drag = 3;
 var drag1 = [];
 var drag2 = [];
@@ -229,14 +219,24 @@ function refreshMap(template, filters) {
   			})
   			.style('cursor', 'pointer')
   			.on('mouseover', function(d){
-  				if(d.depth == 2){
-  					setTooltip(d.group, d.node.name, d.color);
-  				} else if(d.depth == 1) {
-  					setTooltip(d.label, '', d.color);
+  				if ( d.depth == 2 ){
+            Session.set({
+              tooltipIsOpen: true,
+              tooltipTitle: d.group,
+              tooltipSubtitle: d.node.name,
+              tooltipColor: d.color
+            });
+  				} else if ( d.depth == 1 ) {
+            Session.set({
+              tooltipIsOpen: true,
+              tooltipTitle: d.label,
+              tooltipSubtitle: '',
+              tooltipColor: d.color
+            });
   				}
   			})
   			.on('mouseout', function(d){
-  				setTooltip(false);
+          Session.set('tooltipIsOpen', false);
   			})
   			.on('click', function(d){
           if (!dragging()) {
@@ -257,8 +257,6 @@ function refreshMap(template, filters) {
 function applyFilters(filters) {
 
   if (!filters) return;
-  console.log('applyFilters');
-  console.log(filters);
 
   var selectedFilters = {};
   var fields = _.keys(filters);
@@ -284,9 +282,6 @@ function applyFilters(filters) {
   }
 
   fields = _.keys(selectedFilters);
-
-  console.log('selectedFilters');
-  console.log(selectedFilters);
 
   // if map has been drawn
   if (svg_map) {
@@ -348,9 +343,17 @@ Template.map.onRendered(function(){
    */
 
   $(window).mousemove(function( event ){
-    mouse_x = event.clientX - $(tooltip).width()/2 - 30;
-    mouse_y = event.clientY - 60;
-    $(tooltip).css({ left:mouse_x, top:mouse_y });
+    // only set tooltip when there is mousemove event
+    // otherwise can't get mouse position
+    if (Session.get('tooltipIsOpen')) {
+      mouse_x = event.clientX - $(tooltip).width()/2 - 30;
+      mouse_y = event.clientY - 60;
+      $(tooltip).css({
+        left: mouse_x,
+        top: mouse_y
+      });
+      Session.set('tooltipIsPositioned', true);
+    }
   });
 
   /*
@@ -438,9 +441,28 @@ Template.map.onCreated(function(){
 
 Template.map.onRendered(function(){
   Session.set('mapHelpIsOpen', false);
+  Session.set('tooltipIsOpen', false);
+  Session.set('tooltipIsPositioned', false);
+});
+
+Template.map.onDestroyed(function(){
+  // remove event trigger for tooltip
+  $(window).off("mousemove");
 });
 
 Template.map.helpers({
+  tooltipTitle: function() {
+    return Session.get('tooltipTitle') || "";
+  },
+  tooltipSubtitle: function() {
+    return Session.get('tooltipSubtitle') || "";
+  },
+  tooltipStyle: function() {
+    if (Session.get('tooltipIsPositioned') && Session.get('tooltipIsOpen'))
+      return 'display: block; background: ' + Session.get('tooltipColor') + ';'
+    else
+      return 'display: none;';
+  },
   mapHelpIsOpen: function(){
     return Session.get('mapHelpIsOpen');
   },

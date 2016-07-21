@@ -7,11 +7,10 @@
   {{> legend }}
   {{> zoomControl }}
 
-  <div id="tooltip">
-    <div id="tooltip_title"></div>
-    <div id="tooltip_value"></div>
+  <div id="tooltip" style="{{ tooltipStyle }}">
+    <div id="tooltip_title">{{ tooltipTitle }}</div>
+    <div id="tooltip_subtitle">{{ tooltipSubtitle }}</div>
   </div>
-
 
   <!-- legend -->
   {{#if isSignalContext }}
