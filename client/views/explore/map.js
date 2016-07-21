@@ -436,6 +436,10 @@ Template.map.onCreated(function(){
   }
 });
 
+Template.map.onRendered(function(){
+  Session.set('mapHelpIsOpen', false);
+});
+
 Template.map.helpers({
   mapHelpIsOpen: function(){
     return Session.get('mapHelpIsOpen');
