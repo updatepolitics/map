@@ -27,9 +27,9 @@ function dragging() {
 function resize_explore(){
 
 	// $(popup_content).height($(popup).height() - 150);
-	$(map_container).height(win_h - bar_h);
-	$(filters).height(win_h - bar_h - 40);
-	$(filters_list).height(win_h - bar_h - 97);
+	// $(map_container).height(win_h - bar_h);
+	// $(filters).height(win_h - bar_h - 40);
+	// $(filters_list).height(win_h - bar_h - 97);
 
 }
 

@@ -1,0 +1,241 @@
+
+
+/*/////////////////////////////// desktop / tablet ///////////////////////////////*/
+
+
+@media screen and (min-width: 800px) {
+
+	#header{
+		height: 80px;
+	}
+
+	#fake_header{
+		height: 80px;
+	}
+
+	#update_logo{
+		width: 100px;
+		height: 18px;
+		top: 32px;
+	}
+
+	#menu{
+		width: 400px;
+	}
+
+	#menu_bt{
+		top: 15px;
+		left: 15px;
+	}
+
+	#menu_close{
+		top: 15px;
+		left: 15px;
+	}
+
+	#menu_bts{
+		top: 100px;
+		left: 35px;
+		font-size: 20px;
+	}
+
+	#contact{
+		bottom: 15px;
+		width: 100%;
+		height: 50px;
+	}
+
+
+	#language{
+		right: 25px;
+		top: 25px;
+	}
+
+	.lang{
+		width: 30px;
+		height: 30px;
+	}
+
+	#update_logo_home{
+		width:80%;
+		max-width: 800px;
+	}
+
+	#quotes{
+		width: 650px;
+		font-size: 20px;
+		line-height: 30px;
+	}
+
+	#home_newsletter{
+		width: 505px;
+		height: 45px;
+		top: 85.7%;
+	}
+
+	.home_bt{
+		width: 250px;
+		height: 68px;
+		padding: 25px 40px;
+		font-size: 16px;
+		bottom: 15%;
+		text-align: center;
+	}
+
+	#search{
+		height: 40px;
+		top: 80px;
+	}
+
+	#list{
+		margin: 120px 0;
+	}
+
+	.list_item{
+		padding-top: 25px;
+		height: 90px;
+	}
+
+	.title{
+		font-size: 28px;
+		margin-bottom: 5px;
+		width: 80%;
+	}
+
+	.list_item img{
+		position: absolute;
+		right: 0;
+		top: 20px;
+	}
+
+	.list_item
+	.info{
+		font-size: 12px;
+		width: 90%;
+	}
+
+	#control{
+		height: 80px;
+	}
+
+	#control_center{
+		width: 350px;
+	}
+
+	.control{
+		width: 80px;
+		background-size: auto;
+		font-size: 11px;
+	}
+
+	.control_lb{
+		bottom: 12px;
+	}
+
+	#mode{
+		width: 190px;
+	}
+
+	.mode{
+		width: 30px;
+	}
+
+	#mode_lb{
+		bottom: 15px;
+		font-size: 22px;
+	}
+
+	#help_bt{
+		left: 15px;
+	}
+
+	#filters_counter{
+		top: 15px;
+		right:15px;
+	}
+
+	#zoom_control{
+		right: 35px;
+	}
+
+	/* legend */
+
+	#popup_content{
+		font-size: 18px;
+		line-height: 24px;
+		padding: 0 50px;
+	}
+
+	#popup_content
+	.about{
+		margin-top: 30px;
+		text-align: left;
+	}
+
+	#popup_content
+	.title{
+		overflow: hidden;
+		text-overflow: inherit;
+		white-space: normal;
+		font-size: 28px;
+		line-height: 30px;
+		width: 90%;
+	}
+
+
+	.pop_bt{
+	  width: 47%;
+		padding: 15px 40px;
+		bottom: 20px;
+	}
+
+	.info{
+		margin-top: 20px;
+	}
+
+	/* legend */
+
+	#legends{
+		position: absolute;
+		width: 250px;
+		left: 30px;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		z-index: 20;
+		height: 210px;
+	}
+
+	.legend_list{
+		top: 30px;
+		bottom:0;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: -300px;
+	}
+
+	#legends_x{
+		display: none;
+	}
+
+	#legend_bts{
+		display: none;
+	}
+
+	/* modal */
+
+	.modal_pos{
+		font-size: 30px;
+	}
+
+	.modal_box{
+		width: 50%;
+		height: 50%;
+	}
+
+	.modal_nav{
+		margin-bottom: 20px;
+	}
+
+}

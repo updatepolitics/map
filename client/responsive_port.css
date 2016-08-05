@@ -1,0 +1,269 @@
+
+
+/*/////////////////////////////// mobile portraid ///////////////////////////////*/
+
+
+@media screen and (max-width: 500px) {
+
+	#header{
+		height: 60px;
+	}
+
+	#fake_header{
+		height: 60px;
+	}
+
+	#update_logo{
+		width: 80px;
+		height: 18px;
+		top: 22px;
+	}
+
+	#menu{
+		width: 80%;
+		left: -80%;
+	}
+
+	#menu_bt{
+		top: 5px;
+		left: 5px;
+	}
+
+	#menu_close{
+		top: 5px;
+		left: 5px;
+	}
+
+	#menu_bts{
+		top: 60px;
+		left: 25px;
+		font-size: 18px;
+	}
+
+	#contact{
+		bottom: 15px;
+		width: 100%;
+		height: 50px;
+	}
+
+	#contact_name{
+		display: none;
+	}
+
+	#language{
+		right: 10px;
+		top: 15px;
+	}
+
+	.lang{
+		width: 25px;
+		height: 25px;
+	}
+
+	#update_logo_home{
+		width: 60%;
+	}
+
+	#home_newsletter{
+		width: 96%;
+		height: 45px;
+		bottom: 12%;
+	}
+
+	#quotes{
+		font-size: 16px;
+		width: 90%;
+		line-height: 18px;
+	}
+
+	.home_bt{
+		font-size: 12px;
+		padding: 20px;
+		width: 48%;
+		height: 54px;
+		bottom: 1%;
+		background-size: 50px;
+	}
+
+	#about{
+		text-align: left;
+	}
+
+	#explore{
+		text-align: right;
+	}
+
+	#search{
+		height: 30px;
+		background-size: 50px;
+		top: 60px;
+	}
+
+	#list{
+		margin: 90px 0;
+	}
+
+	.list_item{
+		height: 70px;
+		background-size: 50px;
+		padding-top: 15px;
+	}
+
+	.title{
+		font-size: 20px;
+		margin-bottom: 0;
+		width: 70%;
+	}
+
+	.list_item img{
+		position: absolute;
+		right: 5px;
+		top: 15px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.list_item
+	.info{
+		font-size: 11px;
+		width: 70%;
+	}
+
+	#control{
+		height: 60px;
+	}
+
+	#control_center{
+		width: 210px;
+	}
+
+	.control{
+		width: 50px;
+		background-size: 50px;
+		text-align: center;
+	}
+
+	.control_lb{
+		bottom: 7px;
+	}
+
+	#mode{
+		width: 110px;
+	}
+
+	.mode{
+		width: 25px;
+	}
+
+	#mode_lb{
+		font-size: 16px;
+		bottom: 5px;
+	}
+
+	#help_bt {
+		left: 0;
+		background-size: 55px;
+	}
+
+	#filters_counter{
+		top: 5px;
+		right:5px;
+		font-size: 8px;
+		height: 13px;
+	}
+
+	#zoom_control{
+		right: 15px;
+	}
+
+	#popup_content
+	.about{
+		margin-top: 10px;
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	#popup_content .info{
+		font-size: 12px;
+		line-height: 18px;
+	}
+
+	#popup_content{
+		padding: 0 10px;
+	}
+
+	.pop_bt{
+		background-size: 40px;
+	  width: 42%;
+		padding: 5px 20px;
+		bottom: 10px;
+	}
+
+	.info{
+		margin-top: 10px;
+	}
+
+	/* legend */
+
+
+	#legends{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		z-index: 200;
+		left: 0;
+		top: 0;
+		pointer-events: all;
+		margin: auto;
+		/* remover para ajustar o clique no legend_bts */
+		display: none;
+	}
+
+	.legend_list{
+		position: relative;
+		left: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		width: 100%;
+		height: 100%;
+	}
+
+
+	#legends_x{
+		display: block;
+		width: 50px;
+		height: 50px;
+		position: absolute;;
+		top: 3px;
+		right: 20px;
+		background-image: url("../layout/x.png");
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 20;
+	}
+
+	/* modal */
+
+
+	.modal_pos{
+		font-size: 24px;
+	}
+
+	.modal_title{
+		padding: 0 20px;
+		font-size: 18px;
+		line-height:22px;
+	}
+
+	.modal_box{
+		width: 100%;
+		height: 100%;
+	}
+
+	.modal_nav{
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+
+}

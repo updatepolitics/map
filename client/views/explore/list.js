@@ -6,7 +6,7 @@ Template.list.onRendered(function(){
   var bar_h = 80;
 
   $('body').addClass('light_bg');
-  Template.instance().$('#list').css({ marginTop:bar_h+40, marginBottom:bar_h});
+  // Template.instance().$('#list').css({ marginTop:bar_h+40, marginBottom:bar_h});
 
   $('#search_str').on('input', _.debounce(function(){
     var searchStr = $("#search_str").val();
@@ -76,7 +76,7 @@ Template.infiniteList.helpers({
     } else {
       items = Hubs.find(query, {
         sort: { name: 1},
-        limit: 100,        
+        limit: 100,
         fields: {
           name: 1,
           description_en: 1,

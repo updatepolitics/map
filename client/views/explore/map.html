@@ -14,7 +14,12 @@
 
   <!-- legend -->
   {{#if isSignalContext }}
-    <div id="legends" style="height: 170px;">
+
+    <div id="legend_bts">
+			<div class='legend_bt' id="legend_sig_bt"></div>
+		</div>
+
+    <div id="legends" >
        <div id="legends_x"></div>
        <ul class="legend_list" id="legend_sig" style="left: 0px;">
           <div class="legend_title" id="legend_sig_title">{{_ "legend.signals.themes" }}</div>
@@ -48,7 +53,12 @@
        </ul>
     </div>
   {{else}}
-    <div id="legends" style="height: 210px;">
+
+    <div id="legend_bts">
+			<div class='legend_bt' id="legend_hub_bt"></div>
+		</div>
+
+    <div id="legends" >
      <div id="legends_x"></div>
      <ul class="legend_list" id="legend_sig">
         <div class="legend_title" id="legend_sig_title"></div>

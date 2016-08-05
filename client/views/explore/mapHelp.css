@@ -40,18 +40,11 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    left: 15px;
     cursor: pointer;
     background-repeat: no-repeat;
     background-image: url("../layout/help.png");
     background-position: center;
 }
-
-.mobile
-    #help_bt {
-        left: 0;
-        background-size: 50px;
-    }
 
 /* modal help */
 
