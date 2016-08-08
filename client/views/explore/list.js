@@ -6,7 +6,6 @@ Template.list.onRendered(function(){
   var bar_h = 80;
 
   $('body').addClass('light_bg');
-  // Template.instance().$('#list').css({ marginTop:bar_h+40, marginBottom:bar_h});
 
   $('#search_str').on('input', _.debounce(function(){
     var searchStr = $("#search_str").val();
@@ -16,6 +15,8 @@ Template.list.onRendered(function(){
 
     Session.set('searchStr', searchStr);
   }, 200) );
+
+  Session.set('searchStr', '');
 });
 
 Template.list.onDestroyed(function(){
@@ -63,7 +64,6 @@ Template.infiniteList.helpers({
     if (context == 'signals') {
       items = Signals.find(query, {
         sort: { name: 1},
-        limit: 100,
         fields: {
           name: 1,
           description_en: 1,
@@ -76,7 +76,6 @@ Template.infiniteList.helpers({
     } else {
       items = Hubs.find(query, {
         sort: { name: 1},
-        limit: 100,
         fields: {
           name: 1,
           description_en: 1,
@@ -87,6 +86,8 @@ Template.infiniteList.helpers({
         }
       }).fetch();
     }
+
+    Session.set('selectedCount', items.length);
 
     return items;
   }

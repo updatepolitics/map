@@ -4,6 +4,8 @@ Template.viewControl.onCreated(function(){
     hubs: 0,
     signals: 0
   });
+  Session.setDefault('selectedCount', Signals.find({}, { field: ['_id'] }).count());
+
 });
 
 Template.viewControl.helpers({
@@ -28,6 +30,9 @@ Template.viewControl.helpers({
     var currentView = Router.current().route.getName();
     if (currentView == 'list') return 'selected';
     else return '';
+  },
+  selectedCount: function(){
+    return Session.get('selectedCount');
   }
 });
 
