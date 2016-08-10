@@ -238,6 +238,13 @@
 		margin-bottom: 20px;
 	}
 
+	#initiative_ico{
+	  height: 70px;
+	}
+
+	#initiative_title {
+		font-size: 42px;
+	}
 
 	#filters{
 		top: 20px;
@@ -258,6 +265,26 @@
 
 	.content_title {
 		margin-bottom: 100px;
+	}
+
+	.staff img{
+		width: 150px;
+		height: 150px;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	#staff li{
+		padding-left: 180px;
+	}
+
+
+	#circles{
+		top: -70px;
+		left: 0;
+		font-size: 11px;
+		height: 50px;
 	}
 
 }

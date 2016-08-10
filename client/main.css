@@ -230,14 +230,6 @@ b, strong {
 
 
 
-.land
-#contact
-.bt{
-  display: block;
-  background-size: contain;
-}
-
-
 #email{ background-image: url('../layout/email.png') }
 #medium{ background-image: url('../layout/medium.png') }
 #twitter{ background-image: url('../layout/twitter.png') }
@@ -473,14 +465,14 @@ footer{
   top: 0;
   width: 100%;
   z-index: 8;
-}
-
-.dark_bg
-#header{
   background: #262c38;
 }
 
-.dark_bg
+.no_bg
+#header{
+  background: none;
+}
+
 hr{
   background: #fff;
 }
@@ -508,11 +500,6 @@ hr{
   background-image: url('../layout/menu_dark.png');
 }
 
-.mobile
-#menu_bt{
-  top: 0;
-  left: 5px;
-}
 
 #update_logo{
   position: absolute;
@@ -530,12 +517,6 @@ hr{
 .light_bg
 #update_logo{
   background-image: url('../layout/update_dark.png');
-}
-
-.mobile
-#update_logo{
-  width: 80px;
-  top: 16px;
 }
 
 #language{
@@ -899,25 +880,13 @@ hr{
 
 #circles{
   position: absolute;
-  top: -70px;
-  left: 0;
   right: 0;
   margin: 0 auto;
-  font-size: 11px;
   font-weight: 600;
   width: 100px;
-  height: 50px;
   background-image: url('../layout/circles.png');
   background-position: center;
   background-repeat: no-repeat;
-}
-
-.mobile
-#circles{
-  left: 0;
-  top: -53px;
-  font-size: 10px;
-  height: 47px;
 }
 
 #circles_in{
@@ -1025,11 +994,6 @@ hr{
   display: table;
 }
 
-.mobile
-#filters_header{
-  height: 50px;
-}
-
 #filters_list{
   position: absolute;
   top: 57px;
@@ -1038,9 +1002,6 @@ hr{
   overflow: auto;
 }
 
-.mobile #filters{
-  width: 90%;
-}
 
 /* Track */
 #filters_list::-webkit-scrollbar-track {
@@ -1097,11 +1058,12 @@ hr{
 }
 
 .filter{
-  width: 100%;
+  font-size: 13px;
   padding: 6px 0 6px 30px;
   margin-left: 25px;
+  background-size: 12px;
+  width: 100%;
   text-transform: uppercase;
-  font-size: 13px;
   font-weight: 300;
   border-radius: 12px;
   cursor: pointer;
@@ -1110,14 +1072,6 @@ hr{
   top:15px
 }
 
-.mobile
-.filter{
-  font-size: 11px;
-  line-height: 14px;
-  padding: 3px 0 3px 25px;
-  margin-left: 15px;
-  background-size: 12px;
-}
 
 .filter:hover{
   opacity: 1;
@@ -1162,13 +1116,6 @@ hr{
   cursor: pointer;
 }
 
-.mobile
-#trash{
-  height: 50px;
-  background-size: 50px;
-  padding-left:50px;
-}
-
 #trash:hover {
   background-color: #2a303c;
 }
@@ -1200,11 +1147,6 @@ hr{
 
 #filters_x:hover {
   background-color: #2a303c;
-}
-
-.mobile
-#filters_x{
-  width: 50px;
 }
 
 
@@ -1355,10 +1297,6 @@ hr{
   cursor: pointer;
 }
 
-.mobile
-#zoom_control{
-  right: 12px;
-}
 
 #zoom_in{
   width: 35px;
@@ -1411,11 +1349,6 @@ hr{
   background-color: #fff;
 }
 
-.mobile #list_header{
-  top: 50px;
-  height: 30px;
-}
-
 #list_header_title{
   background-image: url("../layout/list.png");
   background-repeat: no-repeat;
@@ -1448,10 +1381,6 @@ hr{
   bottom: 0;
   margin: 0;
   outline: 0;
-}
-
-.mobile #search_str{
-  font-size: 12px;
 }
 
 ::-webkit-input-placeholder {
@@ -1585,7 +1514,6 @@ hr{
   font-weight: 700;
   font-family: 'Stardos Stencil';
   text-transform: none;
-  font-size: 42px;
   margin-top: 30px;
   margin-bottom: 0;
 }
@@ -1602,9 +1530,9 @@ hr{
 
 #initiative_ico{
   width: 100%;
-  height: 70px;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .mobile
@@ -1898,32 +1826,11 @@ a:visited#popup_bt { color:#fff }
 
 #staff li{
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   position: relative;
-  padding-left: 180px;
   min-height: 150px;
 }
 
-.port
-.staff{
-  padding-left: 0;
-}
-
-.staff img{
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 150px;
-  height: 150px;
-}
-
-.port
-.staff img{
-  width: 100%;
-  height: auto;
-  position: relative;
-  margin-bottom: 15px;
-}
 
 .staff_about{
   font-size: 18px;

@@ -210,6 +210,10 @@
 		height: 100%;
 	}
 
+	#initiative_title {
+		font-size: 32px;
+	}
+
 	/* legend */
 
 
@@ -275,15 +279,34 @@
 
 	/* texts */
 
-  .box{
-    padding: 20px 30px;
-  }
+	.box{
+		padding: 20px 30px;
+	}
 
 	.content{
-	  padding:60px 30px;
+		padding:60px 30px;
 	}
 
 	.content_title {
 		margin-bottom: 60px;
 	}
+
+	.staff img{
+		width: 100%;
+		height: auto;
+		position: relative;
+		margin-bottom: 15px;
+	}
+
+	#staff li{
+		padding-left: 0px;
+	}
+
+	#circles{
+		left: 0;
+		top: -53px;
+		font-size: 10px;
+		height: 47px;
+	}
+
 }
