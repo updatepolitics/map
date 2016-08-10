@@ -184,7 +184,7 @@
 
 
 	.pop_bt{
-	  width: 47%;
+		width: 47%;
 		padding: 15px 40px;
 		bottom: 20px;
 	}
@@ -240,10 +240,24 @@
 
 
 	#filters{
-		  top: 20px;
-		  width: 350px;
-		  right: -350px;
-			height: calc(100% - 120px);
-	  }
+		top: 20px;
+		width: 350px;
+		right: -350px;
+		height: calc(100% - 120px);
+	}
+
+	/* texts */
+
+	.box{
+		padding: 30px 50px;
+	}
+
+	.content{
+		padding:80px 50px;
+	}
+
+	.content_title {
+		margin-bottom: 100px;
+	}
 
 }

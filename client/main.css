@@ -122,6 +122,8 @@ b, strong {
 
 #menu_bts{
   font-weight: 300;
+  height: calc(100% - 60px);
+  width: calc(100% - 30px);
   position: absolute;
   overflow: auto;
 }
@@ -1554,7 +1556,6 @@ hr{
 
 .content{
   width: 100%;
-  padding:80px 50px;
 }
 
 .light_bg
@@ -1577,7 +1578,6 @@ hr{
   font-weight: 100;
   width: 100%;
   text-align: center;
-  margin-bottom: 100px;
   text-transform: uppercase;
 }
 
@@ -1676,7 +1676,6 @@ hr{
 
 .box{
   font-size: 18px;
-  padding: 30px 50px;
   color: #fff;
   line-height: 22px;
   margin-bottom: 1px;
@@ -1849,7 +1848,6 @@ a:visited#popup_bt { color:#fff }
 }
 
 .content ul{
-  margin-left: 10px;
   margin-bottom: 20px;
 }
 

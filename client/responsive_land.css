@@ -22,7 +22,7 @@
   #menu{
     width: 68%;
     left: -68%;
-  } 
+  }
 
   #menu_bt{
     top: 5px;
@@ -262,7 +262,6 @@
     font-size: 24px;
   }
 
-
   .modal_title{
     padding: 0 20px;
     font-size: 18px;
@@ -279,5 +278,19 @@
     margin-bottom: 0;
   }
 
+  /* texts */
+
+  .box{
+    padding: 20px 30px;
+  }
+
+  .content{
+    padding:60px 50px;
+  }
+
+
+  .content_title {
+    margin-bottom: 60px;
+  }
 
 }

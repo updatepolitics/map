@@ -194,21 +194,21 @@
 
 	.pop_bt{
 		background-size: 40px;
-	  width: 42%;
+		width: 42%;
 		padding: 5px 20px;
 		bottom: 10px;
 	}
 
 	.info{
 		margin-top: 10px;
-	} 
+	}
 
-  #filters{
-    top: 0;
-    width: 80%;
-    right: -80%;
-    height: 100%;
-  }
+	#filters{
+		top: 0;
+		width: 80%;
+		right: -80%;
+		height: 100%;
+	}
 
 	/* legend */
 
@@ -273,4 +273,17 @@
 	}
 
 
+	/* texts */
+
+  .box{
+    padding: 20px 30px;
+  }
+
+	.content{
+	  padding:60px 30px;
+	}
+
+	.content_title {
+		margin-bottom: 60px;
+	}
 }
