@@ -12,8 +12,8 @@ Template.filterPanel.helpers({
   resize: function(){
     var height = $(window).height();
 
-    $('#filters').height(height - 80 - 40);
-  	$('#filters_list').height(height - 80 - 97);
+    // $('#filters').height(height - 80 - 40);
+  	$('#filters_list').height( $('#filters').height() - 57 );
 
     return Session.get('resize');
   },
@@ -101,11 +101,11 @@ Template.filterPanel.events({
     var showFilterPanel = !Session.get('showFilterPanel');
 
     if (showFilterPanel) {
-      target.animate({ right: 20}, 350);
+      target.animate({ right: 0}, 350);
     } else {
-      target.animate({ right: -350}, 350);
+      target.animate({ right: (-1 * $('#filters').width()) }, 350);
     }
-
+    
     Session.set('showFilterPanel', showFilterPanel);
   },
   "click #trash": function(event, template) {

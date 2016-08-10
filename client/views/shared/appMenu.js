@@ -1,9 +1,9 @@
 Template.appMenu.events({
   "click #menu_close": function(event, template){
-    $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, 'swing');
+    $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, '');
   },
   "mouseleave #menu": function(event, template){
-    $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, 'swing');
+    $('#menu').animate({left: (-1 * $('#menu').width() )}, 350, '');
   },
   "click .bt": function(event, template){
     if (this.route)

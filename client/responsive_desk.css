@@ -238,4 +238,12 @@
 		margin-bottom: 20px;
 	}
 
+
+	#filters{
+		  top: 20px;
+		  width: 350px;
+		  right: -350px;
+			height: calc(100% - 120px);
+	  }
+
 }

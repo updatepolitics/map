@@ -20,10 +20,9 @@
   }
 
   #menu{
-    width: 80%;
-    left: -80%;
-  }
-
+    width: 68%;
+    left: -68%;
+  } 
 
   #menu_bt{
     top: 5px;
@@ -183,6 +182,13 @@
     right: 15px;
   }
 
+  #filters{
+    top: 0;
+    width: 68%;
+    right: -68%;
+    height: 100%;
+  }
+
   /* popup */
 
   #popup_content
@@ -206,10 +212,10 @@
   }
 
   .pop_bt{
-	  width: 45%;
-		padding: 5px 20px;
-		bottom: 10px;
-	}
+    width: 45%;
+    padding: 5px 20px;
+    bottom: 10px;
+  }
 
   /* legend */
 

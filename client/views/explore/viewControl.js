@@ -56,9 +56,9 @@ Template.viewControl.events({
     var showFilterPanel = !Session.get('showFilterPanel');
 
     if (showFilterPanel) {
-      target.animate({ right: 20}, 350);
+      target.animate({ right: 0}, 350);
     } else {
-      target.animate({ right: -350}, 350);
+      target.animate({ right: (-1 * $('#filters').width()) }, 350);
     }
 
     Session.set('showFilterPanel', showFilterPanel);

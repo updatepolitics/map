@@ -1008,9 +1008,6 @@ hr{
 
 #filters{
   position: fixed;
-  top: 20px;
-  right: -100%;
-  width: 350px;
   z-index: 11;
   background-color: #2b3240;
 }
