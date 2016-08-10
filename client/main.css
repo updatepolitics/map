@@ -277,13 +277,12 @@ footer{
   height: 100%;
   border: none;
   font-size: 14px;
-  padding-left: 15px;
-  padding-right: 50px;
+  padding: 0 15px;
   outline: none;
   text-align: center;
 }
 
-#home_newsletter #newsletter_email { background: none; }
+#home_newsletter #newsletter_email { background: rgba(255,255,255,.1); }
 #footer_newsletter #newsletter_email { background: #2b3240; }
 
 #send_newsletter{
