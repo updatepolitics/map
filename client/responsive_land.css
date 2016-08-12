@@ -29,6 +29,19 @@
     left: 5px;
   }
 
+
+  	.initiative_back{
+  		left: 20px;
+  		bottom: 20px;
+  		padding: 15px;
+  		font-size: 12px;
+  	}
+
+  #menu_bts{
+    width: calc(100% - 30px);
+    padding-bottom: 20px;
+  }
+
   #menu_close{
     top: 5px;
     left: 5px;
@@ -194,7 +207,7 @@
   }
 
   #initiative_title {
-		font-size: 32px;
+    font-size: 32px;
   }
 
   /* popup */

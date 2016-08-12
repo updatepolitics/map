@@ -123,7 +123,6 @@ b, strong {
 #menu_bts{
   font-weight: 300;
   height: calc(100% - 60px);
-  width: calc(100% - 30px);
   position: absolute;
   overflow: auto;
 }
@@ -1510,6 +1509,13 @@ hr{
   text-transform: uppercase;
 }
 
+.initiative_back{
+  position: fixed;
+  background: #262c38;
+  font-weight: 300;
+  cursor: pointer;
+}
+
 #initiative_title {
   font-weight: 700;
   font-family: 'Stardos Stencil';
@@ -1647,6 +1653,7 @@ hr{
   font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
+  line-height: 24px;
 }
 
 .item{
