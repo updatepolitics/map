@@ -139,6 +139,8 @@ Template.home.onCreated(function(){
 });
 
 Template.home.onRendered(function (){
+  $('body').addClass('no_bg');
+
   $('#update_logo').hide()
 
   $(map).css({backgroundSize:'100%'});
@@ -167,6 +169,7 @@ Template.home.onRendered(function (){
 });
 
 Template.home.onDestroyed(function (){
+  $('body').removeClass('no_bg');  
   $('#update_logo').show()
   clearInterval(rotation);
   clearTimeout(rotationDelay);
