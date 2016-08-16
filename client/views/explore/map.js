@@ -24,7 +24,7 @@ Template.map.onCreated(function(){
 });
 
 Template.map.onRendered(function(){
-  $('#map').addClass('no_bg');
+  $('body').addClass('no_bg');
 
   var instance = this;
 
@@ -383,7 +383,7 @@ Template.map.onRendered(function(){
 }); // end onRendered
 
 Template.map.onDestroyed(function(){
-  $('#map').removeClass('no_bg');
+  $('body').removeClass('no_bg');
   // remove event trigger for tooltip
   $(window).off("mousemove");
 });
