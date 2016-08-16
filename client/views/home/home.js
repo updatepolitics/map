@@ -192,8 +192,13 @@ Template.home.events({
      Router.go('map');
   },
   "click #about": function(event, template){
+    // fade in
     $(curtain).fadeIn(duration);
     $(modal_home).fadeIn(duration);
+
+    // fade out
+    $(header).fadeOut(duration);
+    $(home_newsletter).fadeOut(duration);
     $(update_logo_home).fadeOut(duration);
     $(quotes).fadeOut(duration);
     $(credit).fadeOut(duration);
@@ -201,8 +206,13 @@ Template.home.events({
     $(explore).fadeOut(duration);
   },
   "click #modal_home_x": function(event, template) {
+    // fade out
     $(curtain).fadeOut(duration);
   	$(modal_home).fadeOut(duration);
+
+    // fade in
+    $(header).fadeIn(duration);
+    $(home_newsletter).fadeIn(duration);
   	$(update_logo_home).fadeIn(duration);
   	$(quotes).fadeIn(duration);
   	$(credit).fadeIn(duration);
