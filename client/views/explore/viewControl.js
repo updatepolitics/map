@@ -33,6 +33,13 @@ Template.viewControl.helpers({
   },
   selectedCount: function(){
     return Session.get('selectedCount');
+  },
+  filterCountOpacity: function(){
+    var filterCount = JSON.parse(Session.get('filterCount'));
+    var context = Session.get("currentContext");
+
+    if (filterCount[context] > 0) return 1;
+    else return 0.3;
   }
 });
 

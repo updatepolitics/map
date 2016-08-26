@@ -17,6 +17,15 @@ Template.filterPanel.helpers({
 
     return Session.get('resize');
   },
+  filterGroupOpacity: function(filterGroup) {
+    var context = Session.get('currentContext');
+    var filters = JSON.parse(Session.get('filters'));
+
+    filters = _.extend(filters['general'], filters[context]);
+
+    var count = _.where(filters[filterGroup], {selected: true}).length;
+    return (count > 0 ? 1 : 0.3);
+  },
   filterGroupCount: function(filterGroup) {
     var context = Session.get('currentContext');
     var filters = JSON.parse(Session.get('filters'));
@@ -93,6 +102,7 @@ Template.filterPanel.events({
 
     Session.set('filters', JSON.stringify(filters))
     Session.set('filterCount', JSON.stringify(filterCount))
+
   },
   "click #filters_x": function(event, template) {
     event.stopImmediatePropagation();
