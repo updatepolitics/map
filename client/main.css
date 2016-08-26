@@ -1641,13 +1641,6 @@ hr{
   background: #fff;
 }
 
-.box:hover{
-  background-image: url('../layout/next.png');
-}
-.box.off:hover{
-  background-image: none;
-}
-
 .box_title{
   font-size: 20px;
   font-weight: 700;
