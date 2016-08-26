@@ -17,5 +17,8 @@ Template.hubDetail.helpers({
 Template.hubDetail.events({
   "click .list": function(event, template){
     window.open(this.website, '_blank');
+  },
+  "click .initiative_back": function(event, template){
+    history.back();
   }
 });
