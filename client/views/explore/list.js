@@ -92,3 +92,10 @@ Template.infiniteList.helpers({
     return items;
   }
 });
+
+Template.list.events({
+  "click #search_x": function(){
+    $("#search_str").val('');
+    Session.set('searchStr', '');
+  }
+});
