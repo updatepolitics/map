@@ -197,3 +197,9 @@ Template.registerHelper("technologyTypeLabel", function(){
   var language = TAPi18n.getLanguage();
   return this.labels[language].technologyType;
 });
+
+ Template.registerHelper("translatedProperty", function(property){
+   var language = TAPi18n.getLanguage();
+
+   if (property == 'name') return this[language];
+ });

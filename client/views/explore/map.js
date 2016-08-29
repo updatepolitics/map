@@ -88,9 +88,9 @@ Template.map.onRendered(function(){
    * Variables & Configs
    */
 
-  var scale = 5;
+  instance.scale = 5;
+  instance.zoom_limits = [1,30];
   var zoom_factor = 1.5;
-  var zoom_limits = [1,30];
   var dur = instance.dur;
   var dur2 = instance.dur2;
   var svg_map_area;
@@ -113,6 +113,8 @@ Template.map.onRendered(function(){
 
   instance.svg_map = svg_map_area
     .append('g')
+
+  instance.circlesCoordinates = {};
 
   win_w = $(window).width();
   win_h = $(window).height();
@@ -140,31 +142,31 @@ Template.map.onRendered(function(){
    */
 
   instance.zoom = d3.behavior.zoom()
-  		.scaleExtent(zoom_limits)
+  		.scaleExtent(instance.zoom_limits)
   		.center([win_w/2,win_h/2])
   		.on("zoom", function(){
         instance.svg_map.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-      	scale = d3.event.scale;
+      	instance.scale = d3.event.scale;
       })
   		.translate([win_w/2,win_h/2])
-  		.scale(scale);
+  		.scale(instance.scale);
 
   function center_group(c) {
 
   	var target = map_data[c];
 
-  	scale = win_w/target.r/5;
-  	if(scale > zoom_limits[1]) scale = zoom_limits[1];
+  	instance.scale = win_w/target.r/5;
+  	if( instance.scale > instance.zoom_limits[1]) instance.scale = instance.zoom_limits[1];
 
-  	var center_x = win_w/2 - ((target.x-50)*scale );
-  	var center_y = win_h/2 - ((target.y-50)*scale );
+  	var center_x = win_w/2 - ((target.x-50) * instance.scale );
+  	var center_y = win_h/2 - ((target.y-50) * instance.scale );
 
-  	instance.zoom.translate([ center_x, center_y ]).scale(scale).event(instance.svg_map.transition().duration(dur2));
+  	instance.zoom.translate([ center_x, center_y ]).scale(instance.scale).event(instance.svg_map.transition().duration(dur2));
   }
 
   function zoomed() {
   	instance.svg_map.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-  	scale = d3.event.scale;
+  	instance.scale = d3.event.scale;
   }
 
   instance.svg_map.on( "mousedown", function(){
@@ -183,21 +185,21 @@ Template.map.onRendered(function(){
 	svg_map_area.on("MozMousePixelScroll.zoom", null);
 
 	$(zoom_in).on('click', function(){
-		if(scale < zoom_limits[1]){
-			scale *= zoom_factor;
-			instance.zoom.scale(scale).event(instance.svg_map.transition().duration(dur));
+		if ( instance.scale < instance.zoom_limits[1] ){
+			instance.scale *= zoom_factor;
+			instance.zoom.scale(instance.scale).event(instance.svg_map.transition().duration(dur));
 		}
 	});
 
 	$(zoom_out).on('click', function(){
-		if(scale > zoom_limits[0]){
-			scale = scale/zoom_factor;
-			instance.zoom.scale(scale).event(instance.svg_map.transition().duration(dur));
+		if (instance.scale > instance.zoom_limits[0]){
+			instance.scale = instance.scale / zoom_factor;
+			instance.zoom.scale(instance.scale).event(instance.svg_map.transition().duration(dur));
 		}
 	});
 
-  instance.zoom.translate([win_w/2,win_h/2]).scale(scale).event(instance.svg_map);
-  instance.svg_map.attr("transform","translate( "+win_w/2+", "+win_h/2+" ) scale(" + scale + ")");
+  instance.zoom.translate([win_w/2,win_h/2]).scale(instance.scale).event(instance.svg_map);
+  instance.svg_map.attr("transform","translate( "+win_w/2+", "+win_h/2+" ) scale(" + instance.scale + ")");
 
   svg_map_area.call(instance.zoom);
 
@@ -357,6 +359,8 @@ Template.map.onRendered(function(){
                   d.circle.attr('opacity', .1)
                 }
               }
+            } else if (d.depth == 1) {
+              instance.circlesCoordinates[d.id] = _.pick(d, 'r', 'x', 'y');
             }
     			})
     			.style('cursor', 'pointer')
@@ -419,11 +423,43 @@ Template.map.helpers({
   },
   mapHelpIsOpen: function(){
     return Session.get('mapHelpIsOpen');
+  },
+  legendList: function(){
+    var context = Session.get('currentContext');
+    var language = TAPi18n.getLanguage();
+    var sortBy = {};
+    sortBy[language] = 1;
+
+    if (context == 'signals')
+      return Themes.find({}, {sort: sortBy});
+    else
+      return Natures.find({}, {sort: sortBy});
   }
 }); // end helpers
 
 Template.map.events({
   "click #zoom_ext": function(event, template){
     template.centerMap();
+  },
+  "click .legend": function(event, template) {
+    var self = this;
+    var target = template.circlesCoordinates[self._id];
+
+    var win_w = $(window).width();
+    var win_h = $(window).height();
+    var scale = win_w / target.r / 5;
+    var zoom_limits = template.zoom_limits;
+    var dur2 = template.dur2;
+
+  	if ( scale > zoom_limits[1] ) scale = zoom_limits[1];
+
+  	var center_x = win_w/2 - (( target.x - 50) * scale );
+  	var center_y = win_h/2 - (( target.y - 50) * scale );
+
+  	template.zoom
+      .translate([ center_x, center_y ])
+      .scale(scale)
+      .event(template.svg_map.transition().duration(dur2));
+
   }
 });
