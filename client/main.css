@@ -1202,6 +1202,41 @@ hr{
   height: 100%;
 }
 
+#legends{
+    height: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    left: 30px;
+    z-index: 1;
+}
+
+.mobile #legends{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(33,39,51,.9);
+  z-index: 200;
+  left: 0;
+  top: 0;
+  pointer-events: all;
+}
+
+.mobile
+    #legends_x{
+        display: block;
+        width: 50px;
+        height: 50px;
+        position: absolute;;
+        top: 3px;
+        right: 20px;
+        background-image: url("../layout/x.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 20;
+    }
+
 #legend_bts{
   position: absolute;
   left: 15px;

@@ -461,5 +461,22 @@ Template.map.events({
       .scale(scale)
       .event(template.svg_map.transition().duration(dur2));
 
+  },
+  "click #legend_bts": function(event, template){
+
+    // set legend height
+    var itemsCount;
+    if (Session.get('currentContext') == 'signals')
+      itemsCount = template.themes.count();
+    else
+      itemsCount = template.natures.count();
+    $(legends).height(50 + itemsCount * 20 );
+
+    // open legend
+    $(legends).fadeIn(template.dur);
+  },
+  "click #legends_x": function(event, template) {
+    // close legend
+    $(legends).fadeOut(template.dur);
   }
 });
