@@ -82,10 +82,15 @@ Template.map.onCreated(function(){
 });
 
 Template.map.onRendered(function(){
-  $('body').addClass('no_bg');
-  $(document.body).addClass('mobile');
 
   var instance = this;
+
+  // remove background
+  $('body').addClass('no_bg');
+
+  // set mobile class
+  if (Session.get('isMobile'))
+    $(document.body).addClass('mobile');
 
   /*
    * Reset view when rendered
