@@ -104,27 +104,49 @@ b, strong {
 
 
 #menu{
-  background: #1c212b;
-  height: 100%;
-  position: fixed;
-  left: -400px;
-  top: 0;
-  z-index: 11;
+    background: #1c212b;
+    width: 400px;
+    height: 100%;
+    position: fixed;
+    left: -400px;
+    top: 0;
+    z-index: 11;
 }
 
+.mobile
+    #menu{
+        width: 80%;
+        left: -80%;
+    }
+
 #menu_close{
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  background-image: url('../layout/x.png');
-  cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-image: url('../layout/x.png');
+    cursor: pointer;
+}
+
+.mobile #menu_close{
+  top: 0;
+  left: 5px;
 }
 
 #menu_bts{
+  font-size: 20px;
   font-weight: 300;
-  height: calc(100% - 60px);
   position: absolute;
+  top: 100px;
+  left: 35px;
   overflow: auto;
+}
+
+.mobile #menu_bts{
+  top: 70px;
+  left: 20px;
+  font-size: 18px;
 }
 
 #menu_bts::-webkit-scrollbar {
@@ -181,37 +203,50 @@ b, strong {
 }
 
 #contact_name, #footer_contact_name{
-  width: 90%;
+  width: 100%;
   height: 25px;
   position: absolute;
-  bottom: 80px;
+  bottom: 15px;
   font-size: 14px;
   text-align: center;
-  left: 5%;
+  left: 0;
 }
 
 #footer_contact_name{
-  top: 25px;
+  top: 45px;
 }
 
 #contact{
-  position: absolute;
-  text-align: center;
-  font-size: 0;
-  line-height: 0;
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
 }
 
 #footer_contact{
-  position: absolute;
-  top: 50px;
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  font-size: 0;
-  line-height: 0;
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
 }
 
 
+.land
+  #contact{
+    top: 0;
+    height: 200px;
+    margin: auto;
+    right: 20px;
+    width: 50px;
+    font-size: 0;
+    line-height: 0;
+  }
 
 #contact .bt, footer .bt{
   display: inline-block;
@@ -224,9 +259,20 @@ b, strong {
 }
 
 #contact .bt:hover, footer .bt:hover{
-  opacity: .3;
+      opacity: .3;
+    }
+
+
+.mobile #contact_name, .mobile #footer_contact_name{
+  display: none;
 }
 
+.land
+    #contact
+        .bt{
+            display: block;
+            background-size: contain;
+        }
 
 
 #email{ background-image: url('../layout/email.png') }

@@ -11,9 +11,9 @@ Template.map.onCreated(function(){
   instance.dur2 = 550;
 
   if (Session.get('isMobile')) {
-    instance.initial_scale = 2;
+    instance.scale = instance.initial_scale = 2;
   } else {
-    instance.initial_scale = 5;
+    instance.scale = instance.initial_scale = 5;
   }
 
   instance.themes = Themes.find({});
@@ -88,7 +88,6 @@ Template.map.onRendered(function(){
    * Variables & Configs
    */
 
-  instance.scale = 5;
   instance.zoom_limits = [1,30];
   var zoom_factor = 1.5;
   var dur = instance.dur;
