@@ -43,12 +43,47 @@ Template.map.onCreated(function(){
       );
   }
 
+  instance.onResize = function() {
 
 
+    var isMobile = Session.get('isMobile');
+    var dbody = document.body;
+  	instance.win_w = $( window ).width();
+  	instance.win_h = $( window ).height();
+
+    if (isMobile)
+      bar_h = 50;
+    else
+      bar_h = 80;
+
+    if (isMobile) {
+      if (instance.win_w < instance.win_h) {
+        $(dbody).addClass('port');
+        $(dbody).removeClass('land');
+        $(menu_bts).css({height: instance.win_h - 180, width: instance.win_w * 0.8 - 20});
+      } else {
+        $(dbody).removeClass('port');
+        $(dbody).addClass('land');
+        $(menu_bts).css({height: instance.win_h - 80, width: '75%' });
+      }
+
+      if (!menu.open)
+        $(menu).css({left: -instance.win_w*0.8 });
+    } else {
+      if (instance.win_w > 1200)
+        $(dbody).addClass('layout2');
+      else
+        $(dbody).removeClass('layout2');
+    }
+
+    instance.centerMap();
+
+  }
 });
 
 Template.map.onRendered(function(){
   $('body').addClass('no_bg');
+  $(document.body).addClass('mobile');
 
   var instance = this;
 
@@ -62,7 +97,7 @@ Template.map.onRendered(function(){
   /*
    * Center map triggered after window resize
    */
-  $(window).on('resize.centerMap', instance.centerMap );
+  $(window).on('resize', instance.onResize );
 
   /*
    * Helper functions
@@ -403,7 +438,7 @@ Template.map.onDestroyed(function(){
   $('body').removeClass('no_bg');
   // remove event trigger for tooltip
   $(window).off("mousemove");
-  $(window).off('resize.centerMap');
+  $(window).off('resize');
 
 });
 
