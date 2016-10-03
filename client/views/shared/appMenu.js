@@ -72,7 +72,11 @@ Template.appMenu.helpers({
       route: 'mapping',
       anchors: [
         "about",
-        "methodology"
+        "methodology",
+        "coverage",
+        "team",
+        "digital-platform",
+        "partners"
       ]
     }, {
       route: 'hubs',

@@ -39,7 +39,8 @@
   "menu": {
     "items": {
       "home": "Início",
-      "explore": "Explorar Mapa",
+      "map": "Explorar Mapa",
+      "list": "Explorar Lista",
       "mapping": "Mapeamento",
       "about": "Sobre",
       "hubs": "Hubs",
@@ -50,7 +51,9 @@
     "sub_items": {
       "mapping": {
         "about": "Sobre",
-        "methodology": "Metodologia"
+        "methodology": "Metodologia",
+        "coverage": "Abrangência",
+        "team": "Equipe"
       },
       "about": {
         "intro": "Sobre o Update",
@@ -332,7 +335,7 @@
     <p class=\"text\">Para que os sinais sejam observados de maneira mais aprofundada, foram classificados a partir de alguns critérios: Tema, Mecanismo que utiliza [métodos e ferramentas], Propósito [empoderamento ou incidência] e Tecnologia [social ou digital].</p>
     ",
     "types": {
-      "title": "Tipo",
+      "title": "Tipos de tecnologia",
       "intro": "Ao se falar de inovação política, pensamos automaticamente em tecnologia. Porém, ao mapear o ecossistema, faz-se necessário separar as tecnologias digitais das tecnologias sociais.",
       "social": "Tecnologias sociais são processos, metodologias ou práticas utilizadas nos sinais de inovação política que não se centram no digital.",
       "digital": "Tecnologias digitais são aplicações, plataformas ou práticas dependentes dos meios digitais como ferramenta das ações propostas."

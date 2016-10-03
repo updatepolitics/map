@@ -51,7 +51,11 @@
     "sub_items": {
       "mapping": {
         "about": "About",
-        "methodology": "Methodology"
+        "methodology": "Methodology",
+        "coverage": "Coverage",
+        "team": "Team",
+        "digital-platform": "Digital platform",
+        "partners": "Partners"
       },
       "about": {
         "intro": "About Update",
@@ -68,7 +72,7 @@
       },
       "signals": {
         "intro": "Introduction",
-        "tech": "Techonology",
+        "tech": "Technology",
         "themes": "Topics",
         "purpose": "Purpose",
         "mechanisms": "Mechanisms"
@@ -282,7 +286,7 @@
     <p class=\"text\">So that signals can be observed in a more profound way, they were categorized based on the following criteria: Topic, Mechanism used [methods and tools], Purpose [empowerment or incidence] and Technology [social or digital].</p>
     ",
     "types": {
-      "title": "Techonology",
+      "title": "Technology types",
       "intro": "When talking about political innovation, we automatically think of technology. However, when mapping the ecosystem, it is necessary to think about digital technology separately from social technology.",
       "social": "Social technologies are processes, methodologies or practices used in signals of political innovation that are not centered on the digital environment.",
       "digital": "Digital technologies are apps, platforms or practices that rely on digital medias as tools for the proposed action."

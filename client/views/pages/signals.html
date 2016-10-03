@@ -2,9 +2,10 @@
 
   <div id="container">
     <div id="fake_header"></div>
-    <div class="content light1">
+
+    <div id="intro" class="content light1">
       <div class="sub_content">
-        <div class="content_title" id="intro">
+        <div class="content_title">
           {{_ "signalsPage.title" }}
         </div>
 
@@ -12,7 +13,8 @@
 
       </div>
     </div>
-    <div class="content light2" id="tech">
+
+    <div id="tech" class="content light2">
       <div class="sub_content">
         <div class="content_title">{{_ "signalsPage.types.title" }}</div>
         <p class="text">{{_ "signalsPage.types.intro" }}</p>
@@ -22,10 +24,11 @@
         <p class="text">{{_ "signalsPage.types.digital" }}</p>
       </div>
     </div>
+
     <div id="lists">
-      <div class="content light1">
+      <div id="themes" class="content light1">
         <div class="sub_content">
-          <div class="content_title" id="themes">{{_ "signalsPage.themes.title" }}</div>
+          <div class="content_title">{{_ "signalsPage.themes.title" }}</div>
           {{{_ "signalsPage.themes.intro" }}}
           <ul class="list">
             {{#each themesList }}
@@ -38,9 +41,10 @@
           </ul>
         </div>
       </div>
-      <div class="content light2">
+
+      <div id="mechanisms" class="content light2">
         <div class="sub_content">
-          <div class="content_title" id="mechanisms">{{_ "signalsPage.mechanisms.title" }}</div>
+          <div class="content_title">{{_ "signalsPage.mechanisms.title" }}</div>
 
           {{{_ "signalsPage.mechanisms.intro" }}}
           <ul class="list">
@@ -55,7 +59,8 @@
         </div>
       </div>
     </div>
-    <div class="content light1" id="purpose">
+    
+    <div id="purpose" class="content light1">
       <div class="sub_content">
         <div class="content_title">{{_ "signalsPage.purpose.title" }}</div>
         {{{_ "signalsPage.purpose.intro" }}}
