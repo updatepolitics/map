@@ -12,6 +12,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "bcrypt": "^1.0.2",
     "csv": "^0.4.6",
     "csv-stringify": "^1.0.4",
     "graceful-fs": "^4.1.3"

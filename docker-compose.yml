@@ -1,0 +1,14 @@
+version: '2'
+services:
+  app:
+    build: .
+    links:
+      - mongo
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/update-politics
+  mongo:
+    image: mongo
+    ports:
+      - 27018:27017
