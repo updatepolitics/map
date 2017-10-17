@@ -19,6 +19,7 @@ Router.route("/", { name: "home" });
 
 Router.route("/about", { name: "about" });
 Router.route("/mapping", { name: "mapping" });
+Router.route("/tendencies", { name: "tendencies" });
 Router.route("/countries", { name: "countries" });
 Router.route("/register", { name: "register" });
 Router.route("/download", { name: "download" });
@@ -138,6 +139,7 @@ Router.plugin("ensureSignedIn", {
     "admin",
     "about",
     "register",
+    "tendencies",
     "download",
     "mapping",
     "hubs",

@@ -79,6 +79,8 @@ Template.appMenu.helpers({
         "partners"
       ]
     }, {
+      route: 'tendencies'
+    }, {
       route: 'hubs',
       anchors: [
           'intro',

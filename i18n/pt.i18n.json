@@ -42,6 +42,7 @@
       "map": "Explorar Mapa",
       "list": "Explorar Lista",
       "mapping": "Mapeamento",
+      "tendencies": "Tendências",
       "about": "Sobre",
       "hubs": "Hubs",
       "signals": "Sinais",
@@ -537,6 +538,21 @@
     "descriptionMissing": "Por favor, descreva sua iniciativa",
     "success": "Iniciativa registrada com sucesso",
     "error": "Erro ao enviar iniciativa"
+  },
+  "tendencies": {
+    "title": "Tendências de inovação",
+    "text": "<p class=\"text\">Após dez meses de mergulho no processo de mapeamento das iniciativas apresentadas nesta plataforma, nossa equipe percebeu que haviam informações e análises que não cabiam numa taxonomia comum e decidimos ir além, aprofundando o olhar e buscando encontrar novas perspectivas que ampliassem o entendimento sobre o campo de inovação política e seu futuro. </p >
+
+    <p class=\"text\">A partir das análises feitas foi possível perceber que existem quatro macro tendências que estão impulsionando a transformação na política na América Latina. Essas quatro macro tendências se desenvolvem, cada uma, a partir de três micro tendências que contribuem para a existência e fortalecimento dessa mudança.</p >
+
+    <p class=\"text\">A apresentação e os vídeos abaixo ajudam a compreender quais são as tendências encontradas e citam exemplos de iniciativas que estão contribuindo para a existência desses movimentos. Caso tenha interesse em levar o Update para seu evento, entre em contato pelo email comunicacao@updatepolitics.cc.</p >
+
+    <ul>
+      <li>Apresentação: <a href=\"https://drive.google.com/open?id=0B6XcDFHK0v-TWk84WWJia2JRaWc\" target=\"_blank\">inglês</a>, <a href=\"https://drive.google.com/open?id=0B6XcDFHK0v-TWk84WWJia2JRaWc\" target=\"_blank\">português;</a></li>
+      <li>Vídeos: <a href=\"https://vimeo.com/181217394\" target=\"_blank\">inglês</a>, <a href=\" https://vimeo.com/181339627\" target=\"_blank\">português</a>, <a href=\"https://vimeo.com/181339141\" target=\"_blank\">espanhol</a>;</li>
+    </ul>
+
+    "
   },
   "name": "Nome",
   "email": "Email",
