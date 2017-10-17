@@ -228,99 +228,180 @@
     "transparency": "
     <div class=\"content_title\">Transparência</div>
 
-    <div class=\"subtitle\">2015</div>
     <table>
 
-      <tbody><tr>
-        <td>
-          <b>RECEITAS</b>
-        </td>
-        <td>
-          <b>283,139.00</b>
-        </td>
-      </tr>
+      <thead>
+        <tr>
+          <th>
+          </th>
+          <th>
+            2015
+          </th>
+          <th>
+            2016
+          </th>
+        </tr>
+      </thead>
 
-      <tr>
-        <td>
-          Organizações sociais
-        </td>
-        <td>
-          138,139.00
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>
+            <b>RECEITAS</b>
+          </td>
+          <td>
+            <b>283,139.00</b>
+          </td>
+          <td>
+            <b>464.871,00</b>
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Doações pessoas físicas
-        </td>
-        <td>
-          145,000.00
-        </td>
-      </tr>
+        <tr>
+          <td>
+            Fundações internacionais
+          </td>
+          <td>
+            38.139,00
+          </td>
+          <td>
+            323.725,00
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          <b>DESPESAS</b>
-        </td>
-        <td>
-          <b>293,573.12</b>
-        </td>
-      </tr>
+        <tr>
+          <td>
+            Fundações nacionais
+          </td>
+          <td>
+            100.000,00
+          </td>
+          <td>
+            141.146,00
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Despesas institucionais
-        </td>
-        <td>
-          107,110.00
-        </td>
-      </tr>
+        <tr>
+          <td>
+            Doações de indivíduos
+          </td>
+          <td>
+            145.000,00
+          </td>
+          <td>
+            0,00
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Despesas com pesquisa e tecnologia
-        </td>
-        <td>
-          143,619.65
-        </td>
-      </tr>
+        <tr>
+          <td>
+            Outras receitas
+          </td>
+          <td>
+            0,00
+          </td>
+          <td>
+            0,00
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Despesas com viagens e eventos
-        </td>
-        <td>
-          10,044.46
-        </td>
-      </tr>
+        <tr>
+          <td>
+            <b>DESPESAS</b>
+          </td>
+          <td>
+            <b>293,573.12</b>
+          </td>
+          <td>
+            <b>445.133,97</b>
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Aluguel de escritório
-        </td>
-        <td>
-          18,649.01
-        </td>
-      </tr>
+        <tr>
+          <td>
+            Prestação de serviços
+          </td>
+          <td>
+            139.155,00
+          </td>
+          <td>
+            296.596,00
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Taxas administrativas
-        </td>
-        <td>
-          14,150.00
-        </td>
-      </tr>
+        <tr>
+          <td>
+            Treinamento e eventos
+          </td>
+          <td>
+            10.044,40
+          </td>
+          <td>
+            30.229,12
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          <b>RESULTADO DO EXERCÍCIO</b>
-        </td>
-        <td>
-          <b>10,434.12</b>
-        </td>
-      </tr>
-    </tbody></table>
+        <tr>
+          <td>
+            Comunicação
+          </td>
+          <td>
+            40.255,00
+          </td>
+          <td>
+            12.680,00
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Tecnologia
+          </td>
+          <td>
+            40.700,00
+          </td>
+          <td>
+            23.000,00
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Consultorias
+          </td>
+          <td>
+            30.619,65
+          </td>
+          <td>
+            26.109,85
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Despesas administrativas
+          </td>
+          <td>
+            32.799,01
+          </td>
+          <td>
+            56.519,00
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <b>Resultado do exercício</b>
+          </td>
+          <td>
+            <b>(10.434,12)</b>
+          </td>
+          <td>
+            <b>9.302,91</b>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
     ",
     "collaborators": {
       "title": "Colaboradores"
