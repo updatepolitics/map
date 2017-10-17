@@ -1566,6 +1566,23 @@ hr{
   padding: 3px;
 }
 
+#transparency th {
+  color: #fff !important;
+  border-color: #262c38 !important;
+  padding: 13px 20px !important;
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+}
+
+#transparency td {
+  text-align: center;
+}
+
+#transparency td:nth-child(1) {
+  text-align: left;
+}
+
 .mt40{
   margin-top:40px;
 }
