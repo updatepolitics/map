@@ -197,7 +197,7 @@
     <tbody>
       <tr>
         <td>
-          <b>RECEITAS</b>
+          <b>INCOME</b>
         </td>
         <td>
           <b>283,139.00</b>
@@ -209,7 +209,7 @@
 
       <tr>
         <td>
-          Fundações internacionais
+          International Foundations
         </td>
         <td>
           38.139,00
@@ -221,7 +221,7 @@
 
       <tr>
         <td>
-          Fundações nacionais
+          National Foundations
         </td>
         <td>
           100.000,00
@@ -233,7 +233,7 @@
 
       <tr>
         <td>
-          Doações de indivíduos
+          Individual Donors
         </td>
         <td>
           145.000,00
@@ -245,7 +245,7 @@
 
       <tr>
         <td>
-          Outras receitas
+          Others
         </td>
         <td>
           0,00
@@ -257,7 +257,7 @@
 
       <tr>
         <td>
-          <b>DESPESAS</b>
+          <b>EXPENDITURES</b>
         </td>
         <td>
           <b>293,573.12</b>
@@ -269,7 +269,7 @@
 
       <tr>
         <td>
-          Prestação de serviços
+          Service Suppliers
         </td>
         <td>
           139.155,00
@@ -281,7 +281,7 @@
 
       <tr>
         <td>
-          Treinamento e eventos
+          Trainings and Events
         </td>
         <td>
           10.044,40
@@ -293,7 +293,7 @@
 
       <tr>
         <td>
-          Comunicação
+          Communication
         </td>
         <td>
           40.255,00
@@ -305,7 +305,7 @@
 
       <tr>
         <td>
-          Tecnologia
+          Technology
         </td>
         <td>
           40.700,00
@@ -317,7 +317,7 @@
 
       <tr>
         <td>
-          Consultorias
+          Consultancy
         </td>
         <td>
           30.619,65
@@ -329,7 +329,7 @@
 
       <tr>
         <td>
-          Despesas administrativas
+          Administrative costs
         </td>
         <td>
           32.799,01
@@ -341,7 +341,7 @@
 
       <tr>
         <td>
-          <b>Resultado do exercício</b>
+          <b>Net Income</b>
         </td>
         <td>
           <b>(10.434,12)</b>
@@ -487,6 +487,21 @@
     "descriptionMissing": "Please, describe your initiative",
     "success": "Initiative registered successfuly",
     "error": "Error while sending initiative"
+  },
+  "tendencies": {
+    "title": "Innovation Trends",
+    "text": "<p class=\"text\">After spending ten months of immersed in the process of mapping the initiatives presented in this platform, our team realized that there was information and analysis that did not fit into a common taxonomy and we decided to go further, looking deeply and seeking new perspectives that would broaden our understanding of the political innovation field and its future. </p >
+
+  <p class=\"text\">From those analyzes it was possible to perceive that there are four macro trends which are driving the transformation in politics in Latin America. These four macro trends evolve from three micro-trends that contribute to the existence and strengthening of this change.</p >
+
+  <p class=\"text\">The presentation and videos below help you to understand what the trends are and also mention examples of initiatives that are contributing to the existence of these movements. If you are interested in having Institute Update in your event, do not hesitate on contacting us through comunicacao@updatepolitics.cc</p >
+
+  <ul>
+    <li>Presentations: <a href=\"https://drive.google.com/open?id=0B6XcDFHK0v-TWk84WWJia2JRaWc\" target=\"_blank\">english</a>, <a href=\"https://drive.google.com/open?id=0B6XcDFHK0v-TWk84WWJia2JRaWc\" target=\"_blank\">portuguese;</a></li>
+    <li>Videos: <a href=\"https://vimeo.com/181217394\" target=\"_blank\">english</a>, <a href=\" https://vimeo.com/181339627\" target=\"_blank\">portuguese</a>, <a href=\"https://vimeo.com/181339141\" target=\"_blank\">spanish</a>;</li>
+  </ul>
+
+  "
   },
   "name": "Name",
   "email": "Email",
