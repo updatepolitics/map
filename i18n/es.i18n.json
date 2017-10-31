@@ -495,6 +495,21 @@
     "success": "Iniciativa registrada con suceso",
     "error": "Error al enviar iniciativa"
   },
+  "tendencies": {
+    "title": "Tendencias en inovación",
+    "text": "<p class=\"text\">Después de diez meses in al fondo en el proceso de mapeo de las iniciativas presentadas en esta plataforma, nuestro equipo percibó que había informaciones y análisis que no cabían en una taxonomía comúm y decidimos ir más allá, profundizando la mirada y buscando encontrar nuevas perspectivas que amplían el entendimiento sobre el campo de innovación política y su futuro.</p >
+
+      <p class=\"text\">A partir de los análisis hechos fue posible percibir que existen cuatro macro tendencias que están impulsando la transformación en la política en América Latina. Esas cuatro macro tendencias se desarrollan cada una a partir de tres micro tendencias que contribuyen a la existencia y fortalecimiento de ese cambio.</p >
+
+      <p class=\"text\">La presentación y los vídeos a continuación ayudan a comprender cuáles son las tendencias encontradas y citan ejemplos de iniciativas que están contribuyendo a la existencia de esos movimientos. Si tiene interés en llevar la actualización a su evento, póngase en contacto con el correo electrónico comunicacao@updatepolitics.cc.</p >
+
+    <ul>
+      <li>Presentaciones: <a href=\"https://drive.google.com/open?id=0B6XcDFHK0v-TWk84WWJia2JRaWc\" target=\"_blank\">inglés</a>, <a href=\"https://drive.google.com/open?id=0B6XcDFHK0v-TWk84WWJia2JRaWc\" target=\"_blank\">portugues;</a></li>
+      <li>Videos: <a href=\"https://vimeo.com/181217394\" target=\"_blank\">inglés</a>, <a href=\" https://vimeo.com/181339627\" target=\"_blank\">portugues</a>, <a href=\"https://vimeo.com/181339141\" target=\"_blank\">español</a>;</li>
+    </ul>
+
+    "
+  },
   "name": "Nombre",
   "email": "Email",
   "city": "Ciudad",
