@@ -182,13 +182,14 @@
       </ul>
     ",
     "transparency": "
-    <div class=\"content_title\">Transparência</div>
+    <div class=\"content_title\">TRANSPARENCIA</div>
 
     <table>
 
       <thead>
         <tr>
           <th>
+            (valores en BRL)
           </th>
           <th>
             2015
@@ -202,7 +203,7 @@
       <tbody>
         <tr>
           <td>
-            <b>RECEITAS</b>
+            <b>INGRESOS</b>
           </td>
           <td>
             <b>283,139.00</b>
@@ -214,7 +215,7 @@
 
         <tr>
           <td>
-            Fundações internacionais
+            Fundaciones internacionales
           </td>
           <td>
             38.139,00
@@ -226,7 +227,7 @@
 
         <tr>
           <td>
-            Fundações nacionais
+            Fundaciones nacionales
           </td>
           <td>
             100.000,00
@@ -238,7 +239,7 @@
 
         <tr>
           <td>
-            Doações de indivíduos
+            Donaciones de individuos
           </td>
           <td>
             145.000,00
@@ -250,7 +251,7 @@
 
         <tr>
           <td>
-            Outras receitas
+            Otros ingresos
           </td>
           <td>
             0,00
@@ -262,7 +263,7 @@
 
         <tr>
           <td>
-            <b>DESPESAS</b>
+            <b>GASTOS</b>
           </td>
           <td>
             <b>293,573.12</b>
@@ -274,7 +275,7 @@
 
         <tr>
           <td>
-            Prestação de serviços
+            Prestación de servicios
           </td>
           <td>
             139.155,00
@@ -286,7 +287,7 @@
 
         <tr>
           <td>
-            Treinamento e eventos
+            Trenamientos y eventos
           </td>
           <td>
             10.044,40
@@ -298,7 +299,7 @@
 
         <tr>
           <td>
-            Comunicação
+            Comunicación
           </td>
           <td>
             40.255,00
@@ -310,7 +311,7 @@
 
         <tr>
           <td>
-            Tecnologia
+            Tecnología
           </td>
           <td>
             40.700,00
@@ -322,7 +323,7 @@
 
         <tr>
           <td>
-            Consultorias
+            Consultorías
           </td>
           <td>
             30.619,65
@@ -334,7 +335,7 @@
 
         <tr>
           <td>
-            Despesas administrativas
+            Gastos administrativos
           </td>
           <td>
             32.799,01
@@ -346,7 +347,7 @@
 
         <tr>
           <td>
-            <b>Resultado do exercício</b>
+            <b>Resultado del ejercício</b>
           </td>
           <td>
             <b>(10.434,12)</b>
