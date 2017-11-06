@@ -1,1 +1,1 @@
-FROM jshimko/meteor-launchpad:v2.2.0
+FROM jshimko/meteor-launchpad:v2.2.2

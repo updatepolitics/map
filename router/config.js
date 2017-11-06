@@ -18,6 +18,7 @@ Router.route("/", { name: "home" });
  */
 
 Router.route("/about", { name: "about" });
+Router.route("/subscribe", { name: "subscribe" });
 Router.route("/mapping", { name: "mapping" });
 Router.route("/tendencies", { name: "tendencies" });
 Router.route("/countries", { name: "countries" });
@@ -141,6 +142,7 @@ Router.plugin("ensureSignedIn", {
     "register",
     "tendencies",
     "download",
+    "subscribe",
     "mapping",
     "hubs",
     "hub",

@@ -44,6 +44,7 @@
       "mapping": "Mapeamento",
       "tendencies": "Tendências",
       "about": "Sobre",
+      "subscribe": "Inscreva-se",
       "hubs": "Hubs",
       "signals": "Sinais",
       "download": "Download",
@@ -91,6 +92,22 @@
       "title": "Naturezas",
       "description": "A natureza de um hub está relacionada à essência de sua constituição e forma de organização. Aponta para a formalidade ou informalidade e tipo de atuação coletiva ou institucional."
     }
+  },
+  "signUpPage": {
+    "intro": {
+      "title": "O Instituto Update é um Think & Do Tank de inovação política na América Latina que busca estimular um novo paradigma político do século XXI."
+    },
+    "form": {
+      "title": "Aqui você encontra ideias e pessoas que estão transformando a política",
+      "text": "<p>Toda semana enviamos um email com um resumo das coisas mais potentes que estamos descobrindo pelo mundo. Inscreva-se gratuitamente:</p>"
+    },
+    "about": {
+      "text": "
+        <p>Em 2016 o Instituto Update lançou o mapeamento mais abrangente sobre as iniciativas de inovação política na América Latina e identificou 12 tendências de comportamento político na região. Atualmente nossos pesquisadores estão viajando 11 países da América Latina e conhecendo de perto as lideranças que estão transformando a política. São cidadãos, ativistas, empresários e políticos que estão usando todo seu potencial para criar soluções para os desafios políticos do século 21.</p>
+        <p>Acompanhe o dia a dia do Instituto Update pelo <a href=\"https://www.facebook.com/institutoupdate/\" target=\"_blank\">Facebook</a>, <a href=\"https://www.instagram.com/institutoupdate\" target=\"_blank\">Instagram</a> ou <a href=\"https://twitter.com/Update_Politics\" target=\"_blank\">Twitter.</a></p>"
+    },
+    "inputPlaceholder": "Informe seu e-mail",
+    "subscribe": "Inscrever-se"
   },
   "mappingPage": {
     "about": {
@@ -527,11 +544,11 @@
   "mailing": {
     "signUp": "Cadastre seu e-mail na nossa newsletter",
     "error": {
-      "InvalidEmail": "Endereço de email inválido.",
-      "AlreadySubscribed": "Endereço de email já cadastrado."
+      "InvalidEmail": "Endereço de email inválido, aguarde...",
+      "AlreadySubscribed": "Endereço de email já cadastrado, aguarde..."
     },
     "success": {
-      "Subscribed": "Endereço de email cadastrado com sucesso."
+      "Subscribed": "Endereço de email cadastrado com sucesso, aguarde..."
     }
   },
   "register": {

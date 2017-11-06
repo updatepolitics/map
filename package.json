@@ -2,7 +2,10 @@
   "name": "update-politics",
   "description": "Update Politics Website",
   "version": "0.1.0",
-  "author": "Vitor George <vitor.george@aparabolica.com.br>",
+  "author": {
+    "name": "Vitor George",
+    "email": "vitor.george@aparabolica.com.br"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/updatepolitics/website"
@@ -12,7 +15,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "babel-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0",
+    "bcrypt": "^1.0.3",
     "csv": "^0.4.6",
     "csv-stringify": "^1.0.4",
     "graceful-fs": "^4.1.3"

@@ -1,0 +1,33 @@
+<template name="subscribe">
+
+  <div id="container" class="dark1">
+
+    <div id="fake_header"></div>
+
+    <div id="about" class="content light1">
+      <div class="sub_content">
+        <div class="content_title">{{_ "signUpPage.intro.title" }}</div>
+      </div>
+    </div>
+
+    <div id="methodology" class="content light2">
+      <div class="sub_content">
+        <div class="content_title">{{_ "signUpPage.form.title"}}</div>
+        {{{_ "signUpPage.form.text" }}}
+      </div>
+      <form id="send_email_form">
+        <input id="user_email" placeholder="{{_ "signUpPage.inputPlaceholder" }}" />
+        <div id="send_email">{{{_ "signUpPage.subscribe" }}}</div>
+      </form>
+    </div>
+
+    <div id="coverage" class="content light1">
+      <div class="sub_content">
+        {{{_ "signUpPage.about.text" }}}
+      </div>
+    </div>
+
+  </div>
+
+
+</template>

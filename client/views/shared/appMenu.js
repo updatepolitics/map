@@ -98,6 +98,8 @@ Template.appMenu.helpers({
     }, {
       route: 'register'
     }, {
+      route: 'subscribe'
+    }, {
       route: 'download'
     }, {
       route: 'about',
