@@ -44,6 +44,7 @@
       "mapping": "Mapeamento",
       "tendencies": "Tendencias",
       "about": "Sobre",
+      "subscribe": "Inscríbase",
       "hubs": "Hubs",
       "signals": "Señales",
       "download": "Descarga",
@@ -88,6 +89,22 @@
   "hubs": {
     "intro": "Los hubs son organismos - institucionalizados o no - que desarrollan acciones y funcionan como emisores de las señales de innovación. Considerando que la señal es el indicador prioritario de ese levantamiento, la clasificación de los hubs pretende evidenciar los actores que están creando y ejecutando esas señales y sus configuraciones. Para que sean observados fueron clasificados a partir de dos criterios: la naturaleza de su constitución y si es un financiador o no.",
     "natures": "Naturalezas"
+  },
+  "signUpPage": {
+    "intro": "
+      <p>
+        Em 2016 o Instituto Update lançou o mapeamento mais abrangente sobre as iniciativas de inovação política na América Latina e identificou doze tendências de comportamento político na região. Atualmente nossos pesquisadores estão visitando países da América Latina e conhecendo de perto as lideranças que estão transformando a política. São cidadãos, ativistas, empresários e políticos que estão usando todo seu potencial para criar soluções para os desafios políticos do século 21.
+      </p>
+      <p>
+        Acompanhe o dia a dia do Instituto Update pelo <a href=\"https://www.facebook.com/institutoupdate/\" target=\"_blank\">Facebook</a>, <a href=\"https://www.instagram.com/institutoupdate\" target=\"_blank\">Instagram</a> ou <a href=\"https://twitter.com/Update_Politics\" target=\"_blank\">Twitter.</a>
+      </p>
+    ",
+    "form": {
+      "title": "Aqui você encontra ideias e pessoas que estão transformando a política",
+      "text": "<p>Toda semana enviamos um email com um resumo das coisas mais potentes que estamos descobrindo pelo mundo. Inscreva-se gratuitamente:</p>"
+    },
+    "inputPlaceholder": "Informe seu e-mail",
+    "subscribe": "Inscrever-se"
   },
   "mappingPage": {
     "about": {
